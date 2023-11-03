@@ -31,7 +31,6 @@ dependencies:
   animate_do: ^3.1.2
   card_swiper: ^3.0.1
   curved_navigation_bar: ^1.0.3
-  
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.0
@@ -61,6 +60,7 @@ flutter:
     - assets/Images/
     - assets/Images/offers/
     - assets/Images/categories/
+    - assets/fonts/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -70,6 +70,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: CustomFont
+      fonts:
+        - asset: fonts/Agbalumo-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

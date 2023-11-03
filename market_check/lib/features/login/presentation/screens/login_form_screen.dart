@@ -139,12 +139,13 @@ class _LogInForm extends StatelessWidget {
           SizedBox(
             height: ScreenSize.height(context) * 0.04,
           ),
-          const LoginCustomButton(
+          const FilledCustomButton(
               //validator: true,
               text: 'Ingresar',
               horizontalSize: 85,
               verticalSize: 16,
-              color: Color.fromARGB(255, 12, 172, 241),
+              color: AppColors.whiteBg,
+              bgColor: AppColors.appColor2,
               route: '/home'),
         ],
       ),

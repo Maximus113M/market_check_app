@@ -12,22 +12,26 @@ class FontStyles {
   static const double sp12 = .032;
   static const double sp10 = .026;
 
-  static TextStyle heading0(BuildContext context, Color color) => TextStyle(
-        color: color,
-        fontSize: ScreenSize.width(context) * sp40,
-        fontWeight: FontWeight.w600,
-      );
+  static TextStyle heading0(
+    BuildContext context,
+    Color color,
+  ) =>
+      TextStyle(
+          color: color,
+          fontSize: ScreenSize.width(context) * sp40,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'CustomFont');
 
   static TextStyle heading1(BuildContext context, Color color) => TextStyle(
-        color: color,
-        fontSize: ScreenSize.width(context) * sp36,
-        fontWeight: FontWeight.w700,
-      );
+      color: color,
+      fontSize: ScreenSize.width(context) * sp36,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'CustomFont');
   static TextStyle heading2(BuildContext context, Color color) => TextStyle(
-        color: color,
-        fontSize: ScreenSize.width(context) * sp24,
-        fontWeight: FontWeight.w700,
-      );
+      color: color,
+      fontSize: ScreenSize.width(context) * sp24,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'CustomFont');
   static TextStyle subtitle1(BuildContext context, Color color) => TextStyle(
         color: color,
         fontSize: ScreenSize.width(context) * sp20,

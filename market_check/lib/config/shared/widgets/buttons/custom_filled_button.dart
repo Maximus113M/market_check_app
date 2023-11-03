@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/constans/font_styles.dart';
 
-class LoginCustomButton extends StatelessWidget {
+class FilledCustomButton extends StatelessWidget {
   final String text;
   final String route;
   final double horizontalSize;
   final double verticalSize;
   final Color color;
+  final Color bgColor;
   final bool? validator;
 
-  const LoginCustomButton({
+  const FilledCustomButton({
     super.key,
     required this.text,
     required this.horizontalSize,
     required this.verticalSize,
     required this.color,
+    required this.bgColor,
     required this.route,
     this.validator,
   });
@@ -24,9 +25,9 @@ class LoginCustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: () => context.push('/home'),
+      onPressed: () => context.push(route),
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(color),
+        backgroundColor: MaterialStatePropertyAll(bgColor),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -38,7 +39,7 @@ class LoginCustomButton extends StatelessWidget {
             vertical: verticalSize, horizontal: horizontalSize),
         child: Text(
           text,
-          style: FontStyles.bodyBold1(context, AppColors.whiteBg),
+          style: FontStyles.bodyBold1(context, color),
         ),
       ),
     );

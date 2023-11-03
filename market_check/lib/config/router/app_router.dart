@@ -37,6 +37,10 @@ final appRouter = GoRouter(
         name: OffersScreen.name,
         builder: (context, state) => const OffersScreen()),
     GoRoute(
+        path: "/offer-view",
+        name: OfferView.name,
+        builder: (context, state) => const OfferView()),
+    GoRoute(
         path: "/items",
         name: StoreItemsScreen.name,
         builder: (context, state) => const StoreItemsScreen()),

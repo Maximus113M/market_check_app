@@ -84,7 +84,7 @@ class _Slice extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: GestureDetector(
-                    onTap: () => context.push('/offers'),
+                    onTap: () => context.push('/offer-view'),
                     child: Image.asset(
                       offer.poster,
                       fit: BoxFit.cover,

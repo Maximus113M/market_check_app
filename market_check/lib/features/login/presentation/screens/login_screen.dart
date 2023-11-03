@@ -54,21 +54,23 @@ class LogInScreen extends StatelessWidget {
               SizedBox(
                 height: ScreenSize.height(context) * 0.13,
               ),
-              const LoginCustomButton(
+              const FilledCustomButton(
                 text: 'Ingresar',
                 horizontalSize: 85,
                 verticalSize: 16,
-                color: Color.fromARGB(255, 12, 172, 241),
+                color: AppColors.whiteBg,
+                bgColor: AppColors.appColor2,
                 route: '/login-form',
               ),
               const SizedBox(
                 height: 10,
               ),
-              const LoginCustomButton(
+              const FilledCustomButton(
                 text: 'Registrase',
                 horizontalSize: 75,
                 verticalSize: 16,
-                color: Colors.black87,
+                color: AppColors.whiteBg,
+                bgColor: Colors.black87,
                 route: '/login-form',
               ),
             ],
