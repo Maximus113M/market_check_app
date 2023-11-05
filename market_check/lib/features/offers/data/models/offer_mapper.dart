@@ -1,5 +1,5 @@
-import 'package:market_check/domain/entities/offer.dart';
-import 'package:market_check/infrastructure/models/marketcheck_db/offers_db_response.dart';
+import 'package:market_check/features/offers/domain/entities/offer.dart';
+import 'package:market_check/features/offers/data/models/offers_db_response.dart';
 
 class OfferMapper {
   static Offer offersReponseToEntity(OfferDB offerDb) => Offer(

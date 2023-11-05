@@ -1,7 +1,7 @@
-import 'package:market_check/domain/entities/store.dart';
 import 'package:market_check/json_from_db/json_data.dart';
-import 'package:market_check/infrastructure/mappers/store_mapper.dart';
-import 'package:market_check/infrastructure/models/marketcheck_db/stores_db_response.dart';
+import 'package:market_check/features/stores/domain/entities/store.dart';
+import 'package:market_check/features/stores/data/models/store_mapper.dart';
+import 'package:market_check/features/stores/data/models/stores_db_response.dart';
 
 abstract class StoreDatasource {
   Future<List<Store>> getStore();

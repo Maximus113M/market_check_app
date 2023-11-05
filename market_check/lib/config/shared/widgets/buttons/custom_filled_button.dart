@@ -9,7 +9,7 @@ class FilledCustomButton extends StatelessWidget {
   final double verticalSize;
   final Color color;
   final Color bgColor;
-  final bool? validator;
+  final Function? validator;
 
   const FilledCustomButton({
     super.key,

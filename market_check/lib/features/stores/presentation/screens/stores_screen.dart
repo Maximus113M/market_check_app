@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/domain/entities/store.dart';
-import 'package:market_check/presentation/providers/stores/stores_provider.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+import 'package:market_check/features/stores/domain/entities/store.dart';
+import 'package:market_check/presentation/providers/stores/stores_provider.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StoresScreen extends StatelessWidget {
   static const String name = "stores-screen";

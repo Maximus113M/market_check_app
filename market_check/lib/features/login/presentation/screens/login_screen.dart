@@ -48,9 +48,12 @@ class LogInScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text('Compras, Consultas, Listas y mucho más...',
-                  style: FontStyles.body1(context, AppColors.lightText),
-                  textAlign: TextAlign.center),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Text('Compras, Consultas, Listas y mucho más...',
+                    style: FontStyles.body1(context, AppColors.lightText),
+                    textAlign: TextAlign.center),
+              ),
               SizedBox(
                 height: ScreenSize.height(context) * 0.13,
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/domain/entities/store.dart';
-import 'package:market_check/infrastructure/models/marketcheck_db/stores_db_response.dart';
+
+import 'package:market_check/features/stores/domain/entities/store.dart';
+import 'package:market_check/features/stores/data/models/stores_db_response.dart';
 
 class StoreMapper {
   static Store storeResponseToEntity(StoreDB storeDB) {

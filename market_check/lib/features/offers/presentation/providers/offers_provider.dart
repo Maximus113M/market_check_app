@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:market_check/domain/entities/offer.dart';
+import 'package:market_check/features/offers/domain/entities/offer.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_repository_provider.dart';
 
 final getOffersProvider =

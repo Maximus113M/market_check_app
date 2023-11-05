@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/domain/entities/store.dart';
+import 'package:market_check/features/stores/domain/entities/store.dart';
 
 /*final List<String> stores = [
   "assets/Images/Almacenes_exito.png",

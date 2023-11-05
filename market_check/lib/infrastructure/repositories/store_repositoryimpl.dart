@@ -1,6 +1,6 @@
-import 'package:market_check/domain/entities/store.dart';
-import 'package:market_check/domain/repositories/store_datasource.dart';
-import 'package:market_check/infrastructure/datasources/storedb_datasource.dart';
+import 'package:market_check/features/stores/data/datasources/store_datasource.dart';
+import 'package:market_check/features/stores/domain/entities/store.dart';
+import 'package:market_check/features/stores/domain/repositories/store_datasource.dart';
 
 class StoreRepositoryImpl extends StoreRepository {
   //Instancia del StoreDBDatasource, donde se realiza el mappeo

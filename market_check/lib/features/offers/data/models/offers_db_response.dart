@@ -1,12 +1,3 @@
-/*
-import 'dart:convert';
-
-OffersDbResponse offersDbResponseFromJson(String str) =>
-    OffersDbResponse.fromJson(json.decode(str));
-
-String offersDbResponseToJson(OffersDbResponse data) =>
-    json.encode(data.toJson()); */
-
 class OffersDbResponse {
   final int totalResults;
   final ActiveDates activeDates;

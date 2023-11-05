@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:market_check/infrastructure/datasources/storedb_datasource.dart';
+import 'package:market_check/features/stores/data/datasources/store_datasource.dart';
 import 'package:market_check/infrastructure/repositories/store_repositoryimpl.dart';
 
 //Este repositorio es inmutable, solo lectura, proporciona las tiendas

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/constans/font_styles.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+import 'package:market_check/features/login/presentation/providers/login_form_provider.dart';
 
 class LogInFormScreen extends StatelessWidget {
   static const String name = 'login-form';
@@ -114,24 +116,36 @@ class _LogInFormView extends StatelessWidget {
   }
 }
 
-class _LogInForm extends StatelessWidget {
+class _LogInForm extends ConsumerWidget {
   const _LogInForm();
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    validateUser() {
+      String user = ref.read(validUser);
+      String password = ref.read(validPassword);
+      String userInput = ref.read(inputUser);
+      String passwordInput = ref.read(inputPassword);
+    }
+
     return Form(
       child: Column(
         children: [
-          const CustomTextFormField(
+          CustomTextFormField(
             label: 'Usuario',
             hint: 'Email@',
+            onChange: (p0) {
+              ref.read(inputUser.notifier).update((state) => p0);
+            },
           ),
           const SizedBox(
             height: 20,
           ),
-          const CustomTextFormField(
+          CustomTextFormField(
             label: 'Contraseña',
             obscureText: true,
+            onChange: (p0) {
+              ref.read(inputPassword.notifier).update((state) => p0);
+            },
           ),
           const SizedBox(
             height: 30,
@@ -139,8 +153,8 @@ class _LogInForm extends StatelessWidget {
           SizedBox(
             height: ScreenSize.height(context) * 0.04,
           ),
-          const FilledCustomButton(
-              //validator: true,
+          FilledCustomButton(
+              //    validator: validateUser(),
               text: 'Ingresar',
               horizontalSize: 85,
               verticalSize: 16,

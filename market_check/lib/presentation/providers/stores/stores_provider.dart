@@ -1,6 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:market_check/domain/entities/store.dart';
+import 'package:market_check/features/stores/domain/entities/store.dart';
 import 'package:market_check/presentation/providers/stores/stores_repository_provider.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getStoresProvider =
     StateNotifierProvider<StoreNotifier, List<Store>>((ref) {

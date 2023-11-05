@@ -1,7 +1,7 @@
-import 'package:market_check/domain/entities/offer.dart';
+import 'package:market_check/features/offers/domain/entities/offer.dart';
 import 'package:market_check/json_from_db/json_data.dart';
-import 'package:market_check/infrastructure/mappers/offer_mapper.dart';
-import 'package:market_check/infrastructure/models/marketcheck_db/offers_db_response.dart';
+import 'package:market_check/features/offers/data/models/offer_mapper.dart';
+import 'package:market_check/features/offers/data/models/offers_db_response.dart';
 
 abstract class OfferDatasource {
   Future<List<Offer>> getOffers();
