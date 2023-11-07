@@ -28,7 +28,10 @@ class StoresBody extends StatelessWidget {
           color: Colors.white),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 0.6),
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 5),
         itemCount: storeList.length,
         itemBuilder: (context, index) {
           return StoreItem(

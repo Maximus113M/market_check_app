@@ -7,6 +7,7 @@ class StoresProvider with ChangeNotifier {
   GetStoresUseCase getStoresUseCase;
   bool loadingStores = false;
   List<StoreEntity> storeList = [];
+  StoreEntity? currentStore;
 
   StoresProvider(this.getStoresUseCase);
 
@@ -16,5 +17,7 @@ class StoresProvider with ChangeNotifier {
     loadingStores = false;
 
     result.fold((l) => null, (r) => storeList = r);
+
+    currentStore = null;
   }
 }

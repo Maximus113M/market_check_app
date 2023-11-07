@@ -6,6 +6,7 @@ class StoreEntity {
   final String? caption; //It can be null
   final DateTime creationDate;
   final String poster;
+  final String posterLogo;
   final Color color;
   final List<StoreLocation> locations;
 
@@ -15,6 +16,7 @@ class StoreEntity {
     required this.caption,
     required this.creationDate,
     required this.poster,
+    required this.posterLogo,
     required this.color,
     required this.locations,
   });

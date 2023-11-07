@@ -5,6 +5,9 @@ import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dar
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
+import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
+import 'package:provider/provider.dart';
 
 class OfferView extends StatelessWidget {
   static const String name = '/offer-view';
@@ -23,6 +26,7 @@ class OfferBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final OfferEntity offer = context.read<OfferProvider>().currentOffer!;
     return Stack(
       children: [
         Column(
@@ -49,7 +53,7 @@ class OfferBody extends StatelessWidget {
                         bottomLeft: Radius.circular(40),
                         bottomRight: Radius.circular(40)),
                     child: Image.asset(
-                      AppAssets.offerReference,
+                      offer.poster,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -65,7 +69,7 @@ class OfferBody extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Promo 2 x 1',
+                            offer.name,
                             style: FontStyles.heading1(context, AppColors.text),
                           ),
                         ],
@@ -74,7 +78,7 @@ class OfferBody extends StatelessWidget {
                         children: [
                           const Icon(Icons.monetization_on_sharp),
                           Text(
-                            '128.000',
+                            offer.price.toString(),
                             style: FontStyles.heading3(
                                 context, AppColors.lightText),
                           ),

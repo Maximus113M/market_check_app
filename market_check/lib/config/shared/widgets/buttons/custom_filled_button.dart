@@ -5,7 +5,7 @@ import 'package:market_check/config/utils/constans/font_styles.dart';
 
 class FilledCustomButton extends StatelessWidget {
   final String text;
-  final String route;
+  final String? route;
   final double? horizontalSize;
   final double? verticalSize;
   final Color? color;
@@ -18,13 +18,13 @@ class FilledCustomButton extends StatelessWidget {
     this.verticalSize,
     this.color,
     this.bgColor,
-    required this.route,
+    this.route,
   });
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: () => context.push(route),
+      onPressed: () => route != null ? context.push(route!) : () {},
       style: ButtonStyle(
         backgroundColor:
             MaterialStatePropertyAll(bgColor ?? AppColors.blueButton),

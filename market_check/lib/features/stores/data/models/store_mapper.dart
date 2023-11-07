@@ -19,6 +19,7 @@ class StoreMapper {
         caption: storeDB.caption,
         creationDate: storeDB.creationDate,
         poster: storeDB.poster,
+        posterLogo: storeDB.posterLogo,
         color: Color.fromARGB(
             colorIndex[0], colorIndex[1], colorIndex[2], colorIndex[3]),
         locations:

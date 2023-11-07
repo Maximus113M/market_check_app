@@ -4,6 +4,7 @@ import 'package:market_check/features/offers/domain/repositories/offer_repositor
 import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
 import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
 import 'package:market_check/features/offers/data/repositories/offer_repository_impl.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -19,6 +20,11 @@ init() async {
 void registerProvider() {
   sl.registerFactory(
     () => OfferProvider(
+      sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => StoresProvider(
       sl(),
     ),
   );
