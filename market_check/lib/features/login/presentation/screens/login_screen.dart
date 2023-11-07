@@ -40,10 +40,10 @@ class LogInScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
               Text('Bienvenido a Market Check',
-                  style: FontStyles.heading1(context, AppColors.text),
+                  style: FontStyles.heading0(context, AppColors.text),
                   textAlign: TextAlign.center),
               const SizedBox(
                 height: 10,
@@ -51,16 +51,14 @@ class LogInScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Text('Compras, Consultas, Listas y mucho más...',
-                    style: FontStyles.body1(context, AppColors.lightText),
+                    style: FontStyles.body1(context, AppColors.lightText1),
                     textAlign: TextAlign.center),
               ),
               SizedBox(
-                height: ScreenSize.height(context) * 0.13,
+                height: ScreenSize.height(context) * 0.17,
               ),
               const FilledCustomButton(
                 text: 'Ingresar',
-                horizontalSize: 85,
-                verticalSize: 16,
                 color: AppColors.whiteBg,
                 bgColor: AppColors.appColor2,
                 route: '/login-form',
@@ -71,7 +69,6 @@ class LogInScreen extends StatelessWidget {
               const FilledCustomButton(
                 text: 'Registrase',
                 horizontalSize: 75,
-                verticalSize: 16,
                 color: AppColors.whiteBg,
                 bgColor: Colors.black87,
                 route: '/login-form',

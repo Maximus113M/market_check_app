@@ -60,7 +60,5 @@ final appRouter = GoRouter(
         path: "/settings",
         name: SettingsScreen.name,
         builder: (context, state) => const SettingsScreen()),
-
-    //TODO: Route to LogIn
   ],
 );

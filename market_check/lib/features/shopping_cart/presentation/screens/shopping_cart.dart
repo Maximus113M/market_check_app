@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
+import 'package:market_check/features/shopping_cart/presentation/widgets/custom_shopping_item.dart';
+import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+
+import 'package:provider/provider.dart';
+
 class ShoppingCart extends StatelessWidget {
   static const String name = 'shopping-cart';
   const ShoppingCart({super.key});
@@ -8,19 +15,88 @@ class ShoppingCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
+        toolbarHeight: 40,
+      ),
+      // title: const Text("Carrito"),
+      body: const ShoppingCartBody(),
+    );
+  }
+}
+
+class ShoppingCartBody extends StatelessWidget {
+  const ShoppingCartBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final shoppingCartList =
+        Provider.of<ShoppingCartProvider>(context).shoppingList;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Carrito de Compras',
+            style: FontStyles.heading2(context, AppColors.blueButton3),
           ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart, size: 30),
-            onPressed: () {},
+          Text(
+            '    ${shoppingCartProvider.shoppingItemsCount()} Productos agregados',
+            style: FontStyles.bodyBold1(context, AppColors.lightText),
           ),
-          const SizedBox(width: 10)
+          const SizedBox(
+            height: 5,
+          ),
+          const Divider(),
+          SizedBox(
+            height: ScreenSize.height(context) * 0.6,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              physics: const BouncingScrollPhysics(),
+              itemCount: shoppingCartList.length,
+              itemBuilder: (context, index) {
+                return CustomShoppingItem(
+                  item: shoppingCartList[index],
+                  index: index,
+                );
+              },
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Total',
+                  style: FontStyles.subtitle1(context, AppColors.text),
+                ),
+                const Spacer(),
+                const Icon(Icons.monetization_on_sharp),
+                Text(
+                  shoppingCartProvider.totalBuy.toString(),
+                  style: FontStyles.bodyBold1(context, AppColors.text),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FilledCustomButton(
+                  text: 'Finalizar Compra',
+                  horizontalSize: 25,
+                  verticalSize: 15,
+                  color: AppColors.whiteBg,
+                  bgColor: AppColors.blueButton,
+                  route: '/home'),
+            ],
+          )
         ],
-        title: const Text("Carrito"),
       ),
     );
   }

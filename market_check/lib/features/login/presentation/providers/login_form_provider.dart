@@ -1,12 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-final validUser = Provider<String>((ref) {
-  return 'Camilo@gmail.com';
-});
+class LoginProvider with ChangeNotifier {
+  String userInput = '';
+  String passwordInput = '';
 
-final validPassword = Provider<String>((ref) {
-  return '123456';
-});
-
-final inputUser = StateProvider<String>((ref) => '');
-final inputPassword = StateProvider<String>((ref) => '');
+  void validateUser({required BuildContext context, required String route}) {
+    if (userInput == 'Camilo@' && passwordInput == '123456') {
+      context.push(route);
+    }
+    null;
+  }
+}

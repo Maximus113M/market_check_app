@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
+import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/constans/font_styles.dart';
-import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/login/presentation/providers/login_form_provider.dart';
+
+import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class LogInFormScreen extends StatelessWidget {
   static const String name = 'login-form';
@@ -46,15 +48,16 @@ class _LogInFormView extends StatelessWidget {
                     width: 100,
                   ),
                   SizedBox(
-                    height: ScreenSize.height(context) * 0.02,
+                    height: ScreenSize.height(context) * 0.01,
                   ),
                   Text(
                     'Inicio de Sesión',
-                    style: FontStyles.heading1(context, AppColors.text),
+                    style: FontStyles.heading0(context, AppColors.text),
                   ),
                   Text(
                     'Que bueno verte de nuevo,\ncomencemos...',
                     style: FontStyles.bodyBold1(context, AppColors.lightText),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: ScreenSize.height(context) * 0.08,
@@ -101,7 +104,7 @@ class _LogInFormView extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   GestureDetector(
                       onTap: () {},
@@ -116,17 +119,11 @@ class _LogInFormView extends StatelessWidget {
   }
 }
 
-class _LogInForm extends ConsumerWidget {
+class _LogInForm extends StatelessWidget {
   const _LogInForm();
   @override
-  Widget build(BuildContext context, ref) {
-    validateUser() {
-      String user = ref.read(validUser);
-      String password = ref.read(validPassword);
-      String userInput = ref.read(inputUser);
-      String passwordInput = ref.read(inputPassword);
-    }
-
+  Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     return Form(
       child: Column(
         children: [
@@ -134,7 +131,7 @@ class _LogInForm extends ConsumerWidget {
             label: 'Usuario',
             hint: 'Email@',
             onChange: (p0) {
-              ref.read(inputUser.notifier).update((state) => p0);
+              context.read<LoginProvider>().userInput = p0;
             },
           ),
           const SizedBox(
@@ -144,20 +141,17 @@ class _LogInForm extends ConsumerWidget {
             label: 'Contraseña',
             obscureText: true,
             onChange: (p0) {
-              ref.read(inputPassword.notifier).update((state) => p0);
+              context.read<LoginProvider>().passwordInput = p0;
             },
           ),
           const SizedBox(
-            height: 30,
+            height: 70,
           ),
           SizedBox(
             height: ScreenSize.height(context) * 0.04,
           ),
-          FilledCustomButton(
-              //    validator: validateUser(),
+          const FilledCustomButton(
               text: 'Ingresar',
-              horizontalSize: 85,
-              verticalSize: 16,
               color: AppColors.whiteBg,
               bgColor: AppColors.appColor2,
               route: '/home'),

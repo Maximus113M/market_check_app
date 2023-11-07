@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 
 import 'package:go_router/go_router.dart';
@@ -74,7 +75,7 @@ class OfferBody extends StatelessWidget {
                           const Icon(Icons.monetization_on_sharp),
                           Text(
                             '128.000',
-                            style: FontStyles.heading2(
+                            style: FontStyles.heading3(
                                 context, AppColors.lightText),
                           ),
                         ],
@@ -135,60 +136,18 @@ class OfferBody extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: ScreenSize.height(context) * 0.57,
-          right: 30,
-          child: Container(
-            height: 40,
-            width: 108,
-            padding: const EdgeInsets.all(0),
-            decoration: BoxDecoration(
-              // border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey.shade300,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                    icon: const Icon(
-                      Icons.remove,
-                      color: AppColors.lightText,
-                      size: 18,
-                    ),
-                    onPressed: () {}),
-                Text(
-                  '1',
-                  style: FontStyles.bodyBold1(context, AppColors.text),
-                ),
-                IconButton.filled(
-                    style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(
-                        ContinuousRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      backgroundColor:
-                          const MaterialStatePropertyAll(Colors.black26),
-                    ),
-                    icon: const Icon(
-                      Icons.add,
-                      color: AppColors.whiteBg,
-                      size: 18,
-                    ),
-                    onPressed: () {}),
-              ],
-            ),
-          ),
-        ),
+            top: ScreenSize.height(context) * 0.57,
+            right: 30,
+            child: const AddRemoveButton(count: 1)),
         Positioned(
-          bottom: ScreenSize.height(context) * 0.07,
+          bottom: ScreenSize.height(context) * 0.04,
           left: ScreenSize.height(context) * 0.11,
-          child: FilledCustomButton(
+          child: const FilledCustomButton(
               text: 'Añadir al Carrito',
               horizontalSize: 22,
               verticalSize: 20,
               color: AppColors.whiteBg,
-              bgColor: Colors.blue.shade800,
+              bgColor: AppColors.blueButton,
               route: ''),
         ),
       ],

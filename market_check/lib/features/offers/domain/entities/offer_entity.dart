@@ -1,4 +1,4 @@
-class Offer {
+class OfferEntity {
   final bool active;
   final int storeId;
   final int id;
@@ -10,7 +10,7 @@ class Offer {
   final String description;
   final int price;
 
-  Offer({
+  OfferEntity({
     required this.active,
     required this.storeId,
     required this.id,

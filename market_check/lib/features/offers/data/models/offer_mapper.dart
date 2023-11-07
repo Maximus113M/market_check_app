@@ -1,8 +1,8 @@
-import 'package:market_check/features/offers/domain/entities/offer.dart';
+import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
 import 'package:market_check/features/offers/data/models/offers_db_response.dart';
 
 class OfferMapper {
-  static Offer offersReponseToEntity(OfferDB offerDb) => Offer(
+  static OfferEntity offersReponseToEntity(OfferDB offerDb) => OfferEntity(
         active: offerDb.active,
         storeId: offerDb.storeId,
         id: offerDb.id,

@@ -1,9 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:market_check/features/offers/domain/entities/offer.dart';
+/*import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_repository_provider.dart';
 
 final getOffersProvider =
-    StateNotifierProvider<OfferNotifier, List<Offer>>((ref) {
+    StateNotifierProvider<OfferNotifier, List<OfferEntity>>((ref) {
   final offers = ref.watch(offersRepositoryProvider).getOffers;
 
   return OfferNotifier(fetchMoreOffers: offers);
@@ -17,10 +17,10 @@ final getOffersProvider =
 });*/
 
 //Caso de uso, define cargar ofertas
-typedef OfferCallback = Future<List<Offer>> Function({int page});
+typedef OfferCallback = Future<List<OfferEntity>> Function({int page});
 
 //Provider Controller
-class OfferNotifier extends StateNotifier<List<Offer>> {
+class OfferNotifier extends StateNotifier<List<OfferEntity>> {
   OfferCallback fetchMoreOffers;
   bool isLoading = false;
 
@@ -44,10 +44,10 @@ class OfferNotifier extends StateNotifier<List<Offer>> {
     if (isLoading) return;
     isLoading = true;
 
-    final List<Offer> offers = await fetchMoreOffers();
+    final List<OfferEntity> offers = await fetchMoreOffers();
     state = [...state, ...offers];
 
     await Future.delayed(const Duration(milliseconds: 400));
     isLoading = false;
   }
-}
+}*/

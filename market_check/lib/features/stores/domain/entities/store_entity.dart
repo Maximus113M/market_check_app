@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Store {
+class StoreEntity {
   final int id;
   final String name;
   final String? caption; //It can be null
@@ -9,7 +9,7 @@ class Store {
   final Color color;
   final List<StoreLocation> locations;
 
-  Store({
+  StoreEntity({
     required this.id,
     required this.name,
     required this.caption,

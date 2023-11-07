@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:market_check/features/stores/domain/entities/store.dart';
+import 'package:market_check/features/stores/domain/entities/store_entity.dart';
 import 'package:market_check/features/stores/data/models/stores_db_response.dart';
 
 class StoreMapper {
-  static Store storeResponseToEntity(StoreDB storeDB) {
+  static StoreEntity storeResponseToEntity(StoreDB storeDB) {
     final String color = storeDB.color;
     List<String> colorSplit = color.split(',');
     List<int> colorIndex = [];
@@ -13,7 +13,7 @@ class StoreMapper {
       int number = int.parse(color);
       colorIndex.add(number);
     }
-    return Store(
+    return StoreEntity(
         id: storeDB.id,
         name: storeDB.name,
         caption: storeDB.caption,
