@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const whiteBg = Colors.white;
+  static const appColor = Color.fromARGB(255, 99, 201, 249);
+  static const appColor2 = Color.fromARGB(255, 12, 172, 241);
+  static const appColor3 = Color.fromARGB(255, 3, 168, 239);
+
   static const text = Colors.black;
-  static const lightText = Colors.black54;
+
+  static const lightText = Color.fromARGB(150, 0, 0, 0);
+  static const lightText1 = Color.fromARGB(130, 0, 0, 0);
+  static const lightText2 = Color.fromARGB(100, 0, 0, 0);
+
+  static const blueButton = Color.fromARGB(255, 21, 101, 192);
+  static const blueButton2 = Color.fromARGB(255, 38, 109, 191);
+  static const blueButton3 = Color.fromARGB(255, 55, 121, 197);
 
   static final gradientColors = [
     Colors.blue.shade900,

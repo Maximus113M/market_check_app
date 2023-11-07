@@ -1,20 +1,21 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/domain/entities/offer.dart';
+import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
 
 class OffersHorizontalListView extends StatefulWidget {
-  final List<Offer> offers;
+  final List<OfferEntity> offers;
   final String? title;
   final String? subtitle;
   final VoidCallback loadOffers;
 
-  const OffersHorizontalListView(
-      {super.key,
-      required this.offers,
-      required this.title,
-      required this.subtitle,
-      required this.loadOffers});
+  const OffersHorizontalListView({
+    super.key,
+    required this.offers,
+    required this.title,
+    required this.subtitle,
+    required this.loadOffers,
+  });
 
   @override
   State<OffersHorizontalListView> createState() =>
@@ -31,6 +32,7 @@ class _OffersHorizontalListViewState extends State<OffersHorizontalListView> {
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
         widget.loadOffers();
+        print('---------------------> Cargando...');
       }
     });
   }
@@ -67,7 +69,7 @@ class _OffersHorizontalListViewState extends State<OffersHorizontalListView> {
 }
 
 class _Slice extends StatelessWidget {
-  final Offer offer;
+  final OfferEntity offer;
   const _Slice({required this.offer});
 
   @override
@@ -84,7 +86,7 @@ class _Slice extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: GestureDetector(
-                    onTap: () => context.push('/offers'),
+                    onTap: () => context.push('/offer-view'),
                     child: Image.asset(
                       offer.poster,
                       fit: BoxFit.cover,

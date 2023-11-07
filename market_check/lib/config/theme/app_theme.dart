@@ -24,11 +24,11 @@ class AppTheme {
             'SelectedColor must be less or equal than ${colorList.length - 1}');
 
   ThemeData getThemeData() => ThemeData(
-        useMaterial3: true,
-        brightness: isDarkMode ? Brightness.dark : Brightness.light,
-        colorSchemeSeed: colorList[selectedColor],
-        appBarTheme: const AppBarTheme(centerTitle: false),
-      );
+      useMaterial3: true,
+      brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      colorSchemeSeed: colorList[selectedColor],
+      appBarTheme: const AppBarTheme(centerTitle: false),
+      fontFamily: 'CustomFont');
 
   //Funcion que crea una copia del estado anterior y pide los parametros opcionales al cambio
   AppTheme copyWith({int? selectedColor, bool? isDarkMode}) => AppTheme(
