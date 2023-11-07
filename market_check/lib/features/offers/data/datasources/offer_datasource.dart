@@ -1,10 +1,10 @@
-import 'package:market_check/domain/entities/offer.dart';
+import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
 import 'package:market_check/json_from_db/json_data.dart';
-import 'package:market_check/infrastructure/mappers/offer_mapper.dart';
-import 'package:market_check/infrastructure/models/marketcheck_db/offers_db_response.dart';
+import 'package:market_check/features/offers/data/models/offer_mapper.dart';
+import 'package:market_check/features/offers/data/models/offers_db_response.dart';
 
 abstract class OfferDatasource {
-  Future<List<Offer>> getOffers();
+  Future<List<OfferEntity>> getOffers();
 }
 
 class OffersDBDatasource extends OfferDatasource {
@@ -13,11 +13,11 @@ class OffersDBDatasource extends OfferDatasource {
   //
 
   //Function json to offer list
-  List<Offer> _jsonToOfferList(Map<String, dynamic> json) {
+  List<OfferEntity> _jsonToOfferList(Map<String, dynamic> json) {
     //Instancia json de la peticion http
     final offersDbResponse = OffersDbResponse.fromJson(json);
     //Se utiliza el mapper
-    final List<Offer> offers = offersDbResponse.results
+    final List<OfferEntity> offers = offersDbResponse.results
         //.where((offerDb) => offerDb.poster != '')
         .map((offerDb) => OfferMapper.offersReponseToEntity(offerDb))
         .toList();
@@ -25,7 +25,7 @@ class OffersDBDatasource extends OfferDatasource {
   }
 
   @override
-  Future<List<Offer>> getOffers({page = 1}) async {
+  Future<List<OfferEntity>> getOffers() async {
     //Instancia de json (can be http instance)
     final offers = offersJson;
     return _jsonToOfferList(offers);
