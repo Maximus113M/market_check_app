@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:market_check/config/router/app_router.dart';
-import 'package:market_check/config/theme/app_theme.dart';
+
+//import 'injection_container.dart' as di;
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme(selectedColor: 0, isDarkMode: false).getThemeData(),
+      //theme: AppTheme(selectedColor: 0, isDarkMode: false).getThemeData(),
     );
   }
 }
