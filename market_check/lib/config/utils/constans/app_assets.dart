@@ -7,4 +7,5 @@ class AppAssets {
   static String offerReference = 'assets/Images/offers/offer4.png';
   static String productReference = 'assets/Images/items/cafe.png';
   static String productReference2 = 'assets/Images/categories/meat2.png';
+  static String storeReference = 'assets/Images/stores/EXITO-poster.jpg';
 }

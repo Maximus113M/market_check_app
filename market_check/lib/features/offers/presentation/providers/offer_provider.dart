@@ -8,6 +8,7 @@ class OfferProvider with ChangeNotifier {
   GetOffersUseCase getOffersUseCase;
   bool loadingOffers = false;
   List<OfferEntity> offerList = [];
+  OfferEntity? currentOffer;
 
   OfferProvider(this.getOffersUseCase);
 
@@ -15,14 +16,16 @@ class OfferProvider with ChangeNotifier {
     loadingOffers = true;
     final result = await getOffersUseCase(NoParams());
     print("---------------------> ahhhhhhhhhhhhhhhhhhhhhhhhhh");
-
     result.fold(
       (l) => null,
       (r) => offerList = r,
     );
     notifyListeners();
     await Future.delayed(const Duration(seconds: 2));
+
     loadingOffers = false;
+    currentOffer = null;
+
     notifyListeners();
   }
 
