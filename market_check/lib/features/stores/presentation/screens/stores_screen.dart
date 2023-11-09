@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_body.dart';
+import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
+import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class StoresScreen extends StatelessWidget {
   static const String name = "stores-screen";
@@ -24,12 +27,22 @@ class StoresScreen extends StatelessWidget {
               bottom: Radius.circular(18),
             ),
           ),
-          title: const Text("Tiendas"),
+          title: Text(
+            "Tiendas",
+            style:
+                FontStyles.heading4(context, AppColors.text.withOpacity(0.8)),
+          ),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-            IconButton(
-                onPressed: () => context.push('/shopping-cart'),
-                icon: const Icon(Icons.shopping_cart))
+            CustomBadge(
+                icon: Icons.shopping_cart,
+                iconSize: 35,
+                route: '/shopping-cart',
+                color: AppColors.blueButton,
+                counter: context.read<ShoppingCartProvider>().getCount()),
+            const SizedBox(
+              width: 8,
+            ),
           ],
         ),
         body: const StoresBody(),

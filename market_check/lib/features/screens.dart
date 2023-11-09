@@ -8,5 +8,5 @@ export 'package:market_check/features/settings/setting_screen.dart';
 export 'package:market_check/features/shopping_cart/presentation/screens/shopping_cart.dart';
 export 'package:market_check/features/shopping_history/presentation/screens/shopping_history_screen.dart';
 export 'package:market_check/features/shopping_lists/presentation/screens/shopping_list_screen.dart';
-export 'package:market_check/features/store_items/presentation/screens/store_items_screen.dart';
+export 'package:market_check/features/store_categories/presentation/screens/store_categories_screen.dart';
 export 'package:market_check/features/stores/presentation/screens/stores_screen.dart';

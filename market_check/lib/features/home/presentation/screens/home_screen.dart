@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:market_check/config/utils/constans/app_colors.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
-import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
+import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
 import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
+import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_slideshow/stores_slideshow.dart';
 import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 
-import 'package:go_router/go_router.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:animate_do/animate_do.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String name = "home-screen";
+  final shoppingCartProvider = ShoppingCartProvider();
 
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +40,28 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               actions: [
-                IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    onPressed: () {
-                      context.push('/shopping-cart');
-                    }),
-                const SizedBox(width: 10)
+                CustomBadge(
+                  icon: Icons.shopify,
+                  iconSize: 35,
+                  counter: shoppingCartProvider.shoppingItemsCount(),
+                  color: AppColors.blueButton,
+                ),
+                const SizedBox(width: 2),
+                CustomBadge(
+                    route: '/shopping-cart',
+                    icon: Icons.shopping_cart_rounded,
+                    iconSize: 35,
+                    color: AppColors.blueButton,
+                    counter: shoppingCartProvider.shoppingItemsCount()),
+                const SizedBox(width: 8)
               ],
-              title: const Text('Market Check')),
-          body: const _HomeView(),
-          drawer: const SideMenu(),
+              title: Text(
+                'Market Check',
+                style:
+                    FontStyles.heading4(context, Colors.black.withOpacity(0.7)),
+              )),
+          body: const _HomeBody(),
+          drawer: SideMenu(scaffoldKey: scaffoldKey),
           bottomNavigationBar:
               const GoogleNavBar() //CurvedBottomNavigation() //CustomBottomNavigation(),
           ),
@@ -56,42 +69,40 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _HomeView extends StatefulWidget {
-  const _HomeView();
+class _HomeBody extends StatefulWidget {
+  const _HomeBody();
 
   @override
-  State<_HomeView> createState() => _HomeViewState();
+  State<_HomeBody> createState() => _HomeBodyState();
 }
 
-class _HomeViewState extends State<_HomeView> {
+class _HomeBodyState extends State<_HomeBody> {
+  late OfferProvider offersProvider;
+  late StoresProvider storesProvider;
+  bool isScreenLoaded = false;
   @override
-  void initState() {
-    super.initState();
-    context.read<OfferProvider>().loadOffers();
-    context.read<StoresProvider>().loadStores();
+  void didChangeDependencies() async {
+    if (isScreenLoaded) return;
+    isScreenLoaded = true;
+    storesProvider = Provider.of<StoresProvider>(context);
+    offersProvider = Provider.of<OfferProvider>(context);
+
+    await offersProvider.loadOffers(notify: false);
+    await storesProvider.loadStores(notify: false);
+    if (mounted) setState(() {});
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    //Tener cuidado, estudiar comportamiento xdxd
-    final getOffers = Provider.of<OfferProvider>(context);
-    final List<OfferEntity> offerList =
-        context.watch<OfferProvider>().offerList;
-    final List<StoreEntity> storeList =
-        context.watch<StoresProvider>().storeList;
-
-    final screenSize = MediaQuery.of(context).size;
-
-    final DateTime date = DateTime.now();
-
     return Container(
-      height: screenSize.height * 0.85,
-      width: screenSize.width,
-      padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+      height: ScreenSize.height * 0.85,
+      width: ScreenSize.width,
+      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
       margin: EdgeInsets.fromLTRB(
-        screenSize.width * 0.025,
+        ScreenSize.width * 0.025,
         13,
-        screenSize.width * 0.025,
+        ScreenSize.width * 0.025,
         0,
       ),
       decoration: const BoxDecoration(
@@ -100,118 +111,43 @@ class _HomeViewState extends State<_HomeView> {
             topRight: Radius.circular(20),
           ),
           color: Colors.white),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
-              child: Text(
-                "Supermercados",
-                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+      child: (storesProvider.storeList.isEmpty)
+          ? FadeIn(
+              child: Image.asset(
+                AppAssets.loadingImage,
+                fit: BoxFit.contain,
+                height: ScreenSize.height * 0.5,
+                width: ScreenSize.width,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
+                    child: Text(
+                      "Supermercados",
+                      style:
+                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  StoresSlideShow(stores: storesProvider.storeList),
+                  const SizedBox(height: 5),
+                  OffersHorizontalListView(
+                    title: "Ofertas Populares",
+                    subtitle: "6 Ofertas",
+                    offers: offersProvider.offerList.sublist(0, 6),
+                  ),
+                  OffersHorizontalListView(
+                    title: "Ofertas Noviembre",
+                    subtitle: "${offersProvider.offerList.length} Ofertas",
+                    offers: offersProvider.offerList.sublist(6, 19),
+                  ),
+                  const SizedBox(height: 10),
+                ],
               ),
             ),
-            StoresSlideShow(stores: storeList),
-            const SizedBox(height: 5),
-            OffersHorizontalListView(
-              title: "Ofertas Septiembre",
-              subtitle: "${offerList.length} Ofertas",
-              offers: offerList,
-              loadOffers: () => getOffers,
-            ),
-            OffersHorizontalListView(
-                title: "Promociones ${offerList.length}",
-                subtitle: "${date.weekday} - ${date.month.toString()}",
-                offers: offerList,
-                loadOffers: () => getOffers),
-            const SizedBox(height: 10),
-          ],
-        ),
-      ),
     );
   }
 }
-
-// class _HomeView extends ConsumerStatefulWidget {
-//   const _HomeView();
-
-//   @override
-//   _HomeViewState createState() => _HomeViewState();
-// }
-
-// class _HomeViewState extends ConsumerState<_HomeView> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     ref.read(getStoresProvider.notifier).loadStores();
-//     ref.read(getOffersProvider.notifier).loadOffers();
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final getStores = ref.watch(getStoresProvider);
-//     final getOffers = ref.watch(getOffersProvider);
-
-//     final screenSize = MediaQuery.of(context).size;
-
-//     final DateTime date = DateTime.now();
-
-//     return Container(
-//       height: screenSize.height * 0.85,
-//       width: screenSize.width,
-//       padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-//       margin: EdgeInsets.fromLTRB(
-//         screenSize.width * 0.025,
-//         13,
-//         screenSize.width * 0.025,
-//         0,
-//       ),
-//       decoration: const BoxDecoration(
-//           borderRadius: BorderRadius.only(
-//             topLeft: Radius.circular(20),
-//             topRight: Radius.circular(20),
-//           ),
-//           color: Colors.white),
-//       child: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             const Padding(
-//               padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
-//               child: Text(
-//                 "Supermercados",
-//                 style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//             StoresSlideShow(stores: getStores),
-//             const SizedBox(height: 5),
-//             OffersHorizontalListView(
-//               title: "Ofertas Septiembre",
-//               subtitle: "${getOffers.length} Ofertas",
-//               offers: getOffers,
-//               loadOffers: () => ref.read(getOffersProvider.notifier).loadOffers,
-//             ),
-//             OffersHorizontalListView(
-//                 title: "Promociones ${getOffers.length}",
-//                 subtitle: "${date.weekday} - ${date.month.toString()}",
-//                 offers: getOffers,
-//                 loadOffers: () =>
-//                     ref.read(getOffersProvider.notifier).loadOffers),
-//             OffersHorizontalListView(
-//                 title: "Ofertas Septiembre",
-//                 subtitle: "${getOffers.length} Ofertas",
-//                 offers: getOffers,
-//                 loadOffers: () =>
-//                     ref.read(getOffersProvider.notifier).loadOffers),
-//             const SizedBox(height: 10),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

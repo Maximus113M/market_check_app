@@ -19,15 +19,15 @@ class CustomShoppingItem extends StatelessWidget {
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
 
     return Container(
-      height: ScreenSize.height(context) * 0.15,
-      margin: const EdgeInsets.only(bottom: 5),
+      height: ScreenSize.height * 0.12,
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: AppColors.lightText.withOpacity(0.025)),
       child: Stack(
         children: [
           Positioned(
-            top: ScreenSize.height(context) * 0.055,
+            top: ScreenSize.height * 0.055,
             right: 2,
             child: AddRemoveButton(
               count: shoppingCartProvider.shoppingList[index].quanty,
@@ -43,7 +43,7 @@ class CustomShoppingItem extends StatelessWidget {
                 child: Image.asset(
                   item.image,
                   fit: BoxFit.cover,
-                  height: ScreenSize.height(context) * 0.125,
+                  height: ScreenSize.height * 0.125,
                 ),
               ),
               Column(
@@ -67,7 +67,7 @@ class CustomShoppingItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            left: ScreenSize.height(context) * 0.12,
+            left: ScreenSize.height * 0.12,
             bottom: 25,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

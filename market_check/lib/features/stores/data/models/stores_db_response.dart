@@ -63,7 +63,8 @@ class StoreDB {
   final DateTime creationDate;
   final String poster;
   final String posterLogo;
-  final String color;
+  final int color;
+  final int titleColor;
   final List<Location> locations;
 
   StoreDB({
@@ -74,6 +75,7 @@ class StoreDB {
     required this.poster,
     required this.posterLogo,
     required this.color,
+    required this.titleColor,
     required this.locations,
   });
 
@@ -85,6 +87,7 @@ class StoreDB {
         poster: json["poster"],
         posterLogo: json["poster-logo"],
         color: json["color"],
+        titleColor: json["title-color"],
         locations: List<Location>.from(
             json["locations"].map((x) => Location.fromJson(x))),
       );

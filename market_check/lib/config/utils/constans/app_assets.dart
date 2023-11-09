@@ -8,4 +8,5 @@ class AppAssets {
   static String productReference = 'assets/Images/items/cafe.png';
   static String productReference2 = 'assets/Images/categories/meat2.png';
   static String storeReference = 'assets/Images/stores/EXITO-poster.jpg';
+  static String loadingImage = 'assets/Images/jar-loading.gif';
 }

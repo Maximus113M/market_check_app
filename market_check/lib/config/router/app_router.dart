@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/features/stores/presentation/screens/store_view.dart';
 
@@ -24,7 +25,7 @@ final appRouter = GoRouter(
     GoRoute(
         path: "/home",
         name: HomeScreen.name,
-        builder: (context, state) => const HomeScreen()),
+        builder: (context, state) => HomeScreen()),
     GoRoute(
         path: "/shopping-cart",
         name: ShoppingCart.name,
@@ -46,9 +47,9 @@ final appRouter = GoRouter(
         name: OfferView.name,
         builder: (context, state) => const OfferView()),
     GoRoute(
-        path: "/items",
-        name: StoreItemsScreen.name,
-        builder: (context, state) => const StoreItemsScreen()),
+        path: "/store-categories",
+        name: StoreCategoriesScreen.name,
+        builder: (context, state) => const StoreCategoriesScreen()),
     GoRoute(
         path: "/lists",
         name: ShoppingListScreen.name,
@@ -65,5 +66,9 @@ final appRouter = GoRouter(
         path: "/settings",
         name: SettingsScreen.name,
         builder: (context, state) => const SettingsScreen()),
+    GoRoute(
+      path: "/scanner",
+      builder: (context, state) => const ScannerScreen(),
+    ),
   ],
 );

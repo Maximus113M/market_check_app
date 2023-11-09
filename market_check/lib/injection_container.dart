@@ -19,9 +19,7 @@ init() async {
 
 void registerProvider() {
   sl.registerFactory(
-    () => OfferProvider(
-      sl(),
-    ),
+    () => OfferProvider(),
   );
   sl.registerFactory(
     () => StoresProvider(

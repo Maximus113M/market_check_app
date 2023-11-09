@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class StoreEntity {
   final int id;
   final String name;
@@ -7,7 +5,8 @@ class StoreEntity {
   final DateTime creationDate;
   final String poster;
   final String posterLogo;
-  final Color color;
+  final int color;
+  final int titleColor;
   final List<StoreLocation> locations;
 
   StoreEntity({
@@ -18,6 +17,7 @@ class StoreEntity {
     required this.poster,
     required this.posterLogo,
     required this.color,
+    required this.titleColor,
     required this.locations,
   });
 }

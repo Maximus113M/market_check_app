@@ -23,6 +23,7 @@ class ShoppingItemEntity {
   }
 
   void decrementQuanty() {
+    if (quanty == 0) return;
     quanty--;
     total();
   }

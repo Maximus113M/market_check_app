@@ -26,7 +26,7 @@ class StoresSlideShow extends StatelessWidget {
       width: double.infinity,
       child: Swiper(
         viewportFraction: 0.54,
-        scale: 0.5,
+        scale: 0.7,
         autoplay: true,
         pagination: SwiperPagination(
             margin: const EdgeInsets.only(top: 0),
@@ -52,7 +52,10 @@ class _Slice extends StatelessWidget {
       child: FadeIn(
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset(storePoster)),
+            child: Image.asset(
+              storePoster,
+              fit: BoxFit.cover,
+            )),
       ),
     );
   }

@@ -15,11 +15,11 @@ class StoresBody extends StatelessWidget {
     final List<StoreEntity> storeList =
         context.read<StoresProvider>().storeList;
     return Container(
-      height: ScreenSize.height(context) * 0.85,
+      height: ScreenSize.height * 0.85,
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-      margin: EdgeInsets.fromLTRB(ScreenSize.width(context) * 0.02, 10,
-          ScreenSize.width(context) * 0.02, 0),
+      margin: EdgeInsets.fromLTRB(
+          ScreenSize.width * 0.02, 10, ScreenSize.width * 0.02, 0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),

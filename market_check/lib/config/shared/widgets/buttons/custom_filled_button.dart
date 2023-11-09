@@ -5,6 +5,7 @@ import 'package:market_check/config/utils/constans/font_styles.dart';
 
 class FilledCustomButton extends StatelessWidget {
   final String text;
+  final VoidCallback? action;
   final String? route;
   final double? horizontalSize;
   final double? verticalSize;
@@ -14,6 +15,7 @@ class FilledCustomButton extends StatelessWidget {
   const FilledCustomButton({
     super.key,
     required this.text,
+    this.action,
     this.horizontalSize,
     this.verticalSize,
     this.color,
@@ -24,10 +26,14 @@ class FilledCustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: () => route != null ? context.push(route!) : () {},
+      onPressed: () => action != null
+          ? {action!()}
+          : route != null
+              ? context.push(route!)
+              : () {},
       style: ButtonStyle(
         backgroundColor:
-            MaterialStatePropertyAll(bgColor ?? AppColors.blueButton),
+            MaterialStatePropertyAll(bgColor ?? AppColors.blueButton1),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

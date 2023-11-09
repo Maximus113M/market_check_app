@@ -11,14 +11,12 @@ class OffersHorizontalListView extends StatefulWidget {
   final List<OfferEntity> offers;
   final String? title;
   final String? subtitle;
-  final VoidCallback loadOffers;
 
   const OffersHorizontalListView({
     super.key,
     required this.offers,
     required this.title,
     required this.subtitle,
-    required this.loadOffers,
   });
 
   @override
@@ -34,10 +32,7 @@ class _OffersHorizontalListViewState extends State<OffersHorizontalListView> {
     super.initState();
     scrollController.addListener(() {
       if ((scrollController.position.pixels + 200) >=
-          scrollController.position.maxScrollExtent) {
-        widget.loadOffers();
-        print('---------------------> Cargando...');
-      }
+          scrollController.position.maxScrollExtent) {}
     });
   }
 
@@ -80,48 +75,51 @@ class _Slice extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
 
-    return GestureDetector(
-      onTap: () {
-        context.read<OfferProvider>().currentOffer = offer;
-        context.push('/offer-view');
-      },
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 0.5, vertical: 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 170, //190
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    offer.poster,
-                    fit: BoxFit.cover,
-                    width: 115, //135 orginal size
+    return Hero(
+      tag: '${offer.id}',
+      child: GestureDetector(
+        onTap: () {
+          context.read<OfferProvider>().currentOffer = offer;
+          context.push('/offer-view');
+        },
+        child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 0.5, vertical: 5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 170, //190
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      offer.poster,
+                      fit: BoxFit.cover,
+                      width: 115, //135 orginal size
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              SizedBox(
-                  width: 120, //140
-                  child: Column(
-                    children: [
-                      Text(offer.name,
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                          maxLines: 1),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.attach_money_outlined,
-                                size: 18, color: Colors.yellow.shade800),
-                            Text('${offer.price}   ',
-                                style: textStyle.bodyMedium, maxLines: 1)
-                          ])
-                    ],
-                  )),
-            ],
-          )),
+                const SizedBox(height: 5),
+                SizedBox(
+                    width: 120, //140
+                    child: Column(
+                      children: [
+                        Text(offer.name,
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                            maxLines: 1),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.attach_money_outlined,
+                                  size: 18, color: Colors.yellow.shade800),
+                              Text('${offer.price}   ',
+                                  style: textStyle.bodyMedium, maxLines: 1)
+                            ])
+                      ],
+                    )),
+              ],
+            )),
+      ),
     );
   }
 }

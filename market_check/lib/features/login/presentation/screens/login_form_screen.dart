@@ -48,7 +48,7 @@ class _LogInFormView extends StatelessWidget {
                     width: 100,
                   ),
                   SizedBox(
-                    height: ScreenSize.height(context) * 0.01,
+                    height: ScreenSize.height * 0.01,
                   ),
                   Text(
                     'Inicio de Sesión',
@@ -60,10 +60,10 @@ class _LogInFormView extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: ScreenSize.height(context) * 0.08,
+                    height: ScreenSize.height * 0.08,
                   ),
                   SizedBox(
-                    height: ScreenSize.height(context) * 0.02,
+                    height: ScreenSize.height * 0.02,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
@@ -76,7 +76,7 @@ class _LogInFormView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: ScreenSize.width(context) * 0.25,
+                        width: ScreenSize.width * 0.25,
                         child: const Divider(
                           thickness: 2,
                         ),
@@ -86,7 +86,7 @@ class _LogInFormView extends StatelessWidget {
                         child: Text('O'),
                       ),
                       SizedBox(
-                        width: ScreenSize.width(context) * 0.25,
+                        width: ScreenSize.width * 0.25,
                         child: const Divider(
                           thickness: 2,
                         ),
@@ -148,7 +148,7 @@ class _LogInForm extends StatelessWidget {
             height: 70,
           ),
           SizedBox(
-            height: ScreenSize.height(context) * 0.04,
+            height: ScreenSize.height * 0.04,
           ),
           const FilledCustomButton(
               text: 'Ingresar',

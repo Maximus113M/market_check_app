@@ -9,6 +9,7 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -55,7 +56,7 @@ class LogInScreen extends StatelessWidget {
                     textAlign: TextAlign.center),
               ),
               SizedBox(
-                height: ScreenSize.height(context) * 0.17,
+                height: ScreenSize.height * 0.17,
               ),
               const FilledCustomButton(
                 text: 'Ingresar',

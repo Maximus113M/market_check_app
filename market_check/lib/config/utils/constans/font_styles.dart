@@ -19,83 +19,83 @@ class FontStyles {
   ) =>
       TextStyle(
           color: color,
-          fontSize: ScreenSize.width(context) * sp40,
+          fontSize: ScreenSize.width * sp40,
           fontWeight: FontWeight.w700,
           fontFamily: 'CustomFont');
 
   static TextStyle heading1(BuildContext context, Color color) => TextStyle(
       color: color,
-      fontSize: ScreenSize.width(context) * sp36,
+      fontSize: ScreenSize.width * sp36,
       fontWeight: FontWeight.w700,
       fontFamily: 'CustomFont');
 
   static TextStyle heading2(BuildContext context, Color color) => TextStyle(
       color: color,
-      fontSize: ScreenSize.width(context) * sp32,
+      fontSize: ScreenSize.width * sp32,
       fontWeight: FontWeight.w700,
       fontFamily: 'CustomFont');
 
   static TextStyle heading3(BuildContext context, Color color) => TextStyle(
       color: color,
-      fontSize: ScreenSize.width(context) * sp24,
+      fontSize: ScreenSize.width * sp24,
       fontWeight: FontWeight.w700,
       fontFamily: 'CustomFont');
 
   static TextStyle heading4(BuildContext context, Color color) => TextStyle(
       color: color,
-      fontSize: ScreenSize.width(context) * sp22,
+      fontSize: ScreenSize.width * sp22,
       fontWeight: FontWeight.w700,
       fontFamily: 'CustomFont');
 
   static TextStyle subtitle1(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp20,
+        fontSize: ScreenSize.width * sp20,
         fontWeight: FontWeight.w600,
       );
 
   static TextStyle subtitle2(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp16,
+        fontSize: ScreenSize.width * sp16,
         fontWeight: FontWeight.w600,
       );
   static TextStyle body1(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp16,
+        fontSize: ScreenSize.width * sp16,
         fontWeight: FontWeight.w400,
       );
   static TextStyle body2(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp14,
+        fontSize: ScreenSize.width * sp14,
         fontWeight: FontWeight.w400,
       );
   static TextStyle body3(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp12,
+        fontSize: ScreenSize.width * sp12,
         fontWeight: FontWeight.w400,
       );
   static TextStyle bodyBold1(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp16,
+        fontSize: ScreenSize.width * sp16,
         fontWeight: FontWeight.w600,
       );
   static TextStyle bodyBold2(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp14,
+        fontSize: ScreenSize.width * sp14,
         fontWeight: FontWeight.w600,
       );
   static TextStyle bodyBold3(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp12,
+        fontSize: ScreenSize.width * sp12,
         fontWeight: FontWeight.w600,
       );
   static TextStyle caption(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp10,
+        fontSize: ScreenSize.width * sp10,
         fontWeight: FontWeight.w400,
       );
   static TextStyle captionBold(BuildContext context, Color color) => TextStyle(
         color: color,
-        fontSize: ScreenSize.width(context) * sp10,
+        fontSize: ScreenSize.width * sp10,
         fontWeight: FontWeight.w600,
       );
 }

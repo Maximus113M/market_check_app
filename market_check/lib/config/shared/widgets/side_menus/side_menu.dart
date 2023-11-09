@@ -4,12 +4,9 @@ import 'package:market_check/config/menus/side_menu_items.dart';
 
 class SideMenu extends StatefulWidget {
   //Argumento solicitado para establecer la ruta de vuelta por defecto - DESACTIVADO by now
-  //final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const SideMenu({
-    super.key,
-    /*required this.scaffoldKey*/
-  });
+  const SideMenu({super.key, required this.scaffoldKey});
 
   @override
   State<SideMenu> createState() => _SideMenuState();

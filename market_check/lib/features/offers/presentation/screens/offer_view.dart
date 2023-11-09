@@ -34,7 +34,7 @@ class OfferBody extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: ScreenSize.height(context) * 0.55,
+                  height: ScreenSize.height * 0.55,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       color: AppColors.whiteBg,
@@ -48,13 +48,16 @@ class OfferBody extends StatelessWidget {
                             blurRadius: 8,
                             offset: Offset(5, 5))
                       ]),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40)),
-                    child: Image.asset(
-                      offer.poster,
-                      fit: BoxFit.cover,
+                  child: Hero(
+                    tag: '${offer.id}',
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                      child: Image.asset(
+                        offer.poster,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -124,7 +127,7 @@ class OfferBody extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: ScreenSize.height(context) * 0.51,
+          top: ScreenSize.height * 0.51,
           right: 5,
           child: IconButton.filled(
             style: ButtonStyle(
@@ -140,18 +143,18 @@ class OfferBody extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: ScreenSize.height(context) * 0.57,
+            top: ScreenSize.height * 0.57,
             right: 30,
             child: const AddRemoveButton(count: 1)),
         Positioned(
-          bottom: ScreenSize.height(context) * 0.04,
-          left: ScreenSize.height(context) * 0.11,
+          bottom: ScreenSize.height * 0.04,
+          left: ScreenSize.height * 0.11,
           child: const FilledCustomButton(
               text: 'Añadir al Carrito',
               horizontalSize: 22,
               verticalSize: 20,
               color: AppColors.whiteBg,
-              bgColor: AppColors.blueButton,
+              bgColor: AppColors.blueButton1,
               route: ''),
         ),
       ],

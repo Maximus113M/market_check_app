@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:market_check/config/shared/widgets/side_menus/side_menu.dart';
+//import 'package:market_check/config/shared/widgets/side_menus/side_menu.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Row(children: [
-          const SideMenu(),
+          //SideMenu(scaffoldKey: ),
           Text(title, style: textStyles.titleLarge),
           const Spacer(),
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
