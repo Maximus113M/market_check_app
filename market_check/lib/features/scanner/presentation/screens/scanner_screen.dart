@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:market_check/features/shopping_cart/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
@@ -12,16 +15,23 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class ScannerScreenState extends State<ScannerScreen> {
-  String _scanBarcode = '...';
+  String _scanBarcode = '';
+  late ShoppingCartProvider shoppingCartProvider;
+  bool isScreenLoaded = false;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() async {
+    if (isScreenLoaded) return;
+    isScreenLoaded = true;
+    shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+
+    if (mounted) setState(() {});
+    super.didChangeDependencies();
   }
 
   Future<void> startBarcodeScanStream() async {
     FlutterBarcodeScanner.getBarcodeStreamReceiver(
-            '#ff6666', 'Cancel', true, ScanMode.BARCODE)!
+            '#ff6666', 'Cancelar', true, ScanMode.BARCODE)!
         .listen((barcode) => print(barcode));
   }
 
@@ -30,7 +40,7 @@ class ScannerScreenState extends State<ScannerScreen> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+          '#ff6666', 'Cancelar', true, ScanMode.QR);
       print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -52,8 +62,16 @@ class ScannerScreenState extends State<ScannerScreen> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+          '#ff6666', 'Cancelar', true, ScanMode.BARCODE);
       print(barcodeScanRes);
+      if (int.parse(barcodeScanRes) > 0) {
+        shoppingCartProvider.shoppingList.add(
+          ShoppingItemEntity(
+              name: 'Desodorante Guillette',
+              image: 'assets/Images/items/gillette.jpg',
+              price: 7000),
+        );
+      }
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -80,7 +98,9 @@ class ScannerScreenState extends State<ScannerScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                        onPressed: () => scanBarcodeNormal(),
+                        onPressed: () => {
+                              scanBarcodeNormal(),
+                            },
                         child: const Text('Escanea el Codigo')),
                     ElevatedButton(
                         onPressed: () => scanQR(),
