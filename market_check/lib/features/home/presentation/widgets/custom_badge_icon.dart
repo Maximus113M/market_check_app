@@ -51,7 +51,7 @@ class CustomBadge extends StatelessWidget {
                   backgroundColor: Colors.red,
                   child: Text(
                     '$counter',
-                    style: FontStyles.caption(context, AppColors.whiteBg),
+                    style: FontStyles.caption(AppColors.white),
                   ),
                 ),
               )

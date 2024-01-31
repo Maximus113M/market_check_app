@@ -30,7 +30,7 @@ class StoresScreen extends StatelessWidget {
           title: Text(
             "Tiendas",
             style:
-                FontStyles.heading4(context, AppColors.text.withOpacity(0.8)),
+                FontStyles.heading4(AppColors.text.withOpacity(0.8)),
           ),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),

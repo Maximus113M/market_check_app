@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/utils/constans/app_assets.dart';
 //import 'package:market/config/theme/app_theme.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+import 'package:go_router/go_router.dart';
+import 'package:market_check/config/utils/screen_size.dart';
+
+class HomeScreen1 extends StatelessWidget {
+  const HomeScreen1({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -14,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: const AssetImage('assets/background/carro.png'),
+            image: AssetImage(AppAssets.backgroundHome),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 const Color(0xFF486174).withOpacity(0.2), BlendMode.dstATop),
@@ -26,28 +31,41 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: size.width * 0.1, vertical: size.height * 0.2),
-              child: Image.asset('assets/logos/logoVertical.png'),
+              child: Image.asset(AppAssets.logoVertical),
             ),
             const SizedBox(height: 80),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => context.pushReplacement("/login-form"),
               style: ButtonStyle(
                 padding: MaterialStatePropertyAll(
                   EdgeInsets.symmetric(
                       horizontal: size.height * 0.1,
-                      vertical: size.width * 0.03
-                      ),
+                      vertical: size.width * 0.03),
                 ),
               ),
-              child: const Text('Iniciar Sesión', style: TextStyle(fontSize: 20),),
+              child: const Text(
+                'Iniciar Sesión',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('No tienes cuenta?', style: TextStyle(color: Colors.white),),
-                SizedBox(width: 8,),
-                Text('Registrate', style: TextStyle(color: AppColors.appSecondary),)
+                const Text(
+                  'No tienes cuenta?',
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                GestureDetector(
+                  onTap: () => context.push("/register"),
+                  child: const Text(
+                    'Registrate',
+                    style: TextStyle(color: AppColors.appSecondary),
+                  ),
+                )
               ],
             )
           ],

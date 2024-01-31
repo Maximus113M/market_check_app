@@ -37,7 +37,7 @@ class OfferBody extends StatelessWidget {
                   height: ScreenSize.height * 0.55,
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                      color: AppColors.whiteBg,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(50),
                         bottomRight: Radius.circular(50),
@@ -73,7 +73,7 @@ class OfferBody extends StatelessWidget {
                         children: [
                           Text(
                             offer.name,
-                            style: FontStyles.heading1(context, AppColors.text),
+                            style: FontStyles.heading1(AppColors.text),
                           ),
                         ],
                       ),
@@ -83,7 +83,7 @@ class OfferBody extends StatelessWidget {
                           Text(
                             offer.price.toString(),
                             style: FontStyles.heading3(
-                                context, AppColors.lightText),
+                                AppColors.lightText),
                           ),
                         ],
                       ),
@@ -153,7 +153,7 @@ class OfferBody extends StatelessWidget {
               text: 'Añadir al Carrito',
               horizontalSize: 22,
               verticalSize: 20,
-              color: AppColors.whiteBg,
+              color: AppColors.white,
               bgColor: AppColors.blueButton1,
               route: ''),
         ),

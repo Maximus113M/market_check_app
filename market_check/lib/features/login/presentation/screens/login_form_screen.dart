@@ -18,7 +18,7 @@ class LogInFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
         child: Scaffold(
-          backgroundColor: AppColors.appPrimary,
+      backgroundColor: AppColors.appPrimary,
       body: _LogInFormView(),
     ));
   }
@@ -30,29 +30,22 @@ class _LogInFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: IconButton(
-                  onPressed: () => context.pop(),
-                  icon: const Icon(Icons.arrow_back_ios)),
-            ),
-            Image.asset('assets/Images/logos/logoVertical.png'),
-            const SizedBox(height: 15,),
-            
-                  const  _LogInForm(),
-                 
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  
-                ],
-              ),
-            )
-    );
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.1),
+            child: Image.asset(AppAssets.logoVertical),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const _LogInForm(),
+          
+        ],
+      ),
+    ));
   }
 }
 
@@ -62,18 +55,18 @@ class _LogInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.whiteBg,
-        borderRadius: BorderRadius.circular(20)
-      ),
+      margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
+      decoration: const BoxDecoration(
+          color: AppColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       child: Form(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: ScreenSize.height*0.05, vertical: ScreenSize.width * 0.1),
+          padding: EdgeInsets.symmetric(
+              horizontal: ScreenSize.height * 0.03,
+              vertical: ScreenSize.width * 0.1),
           child: Column(
             children: [
               CustomTextFormField(
-                label: 'Usuario',
-                hint: 'Email@',
+                label: 'Email',
                 onChange: (p0) {
                   context.read<LoginProvider>().userInput = p0;
                 },
@@ -89,53 +82,21 @@ class _LogInForm extends StatelessWidget {
                 },
               ),
               const SizedBox(
-                height: 70,
+                height: 30,
               ),
               SizedBox(
-                height: ScreenSize.height * 0.04,
+                height: ScreenSize.height * 0.02,
               ),
               const FilledCustomButton(
-                  text: 'Ingresar',
-                  color: AppColors.whiteBg,
-                  bgColor: AppColors.appColor2,
+                  text: 'Iniciar Sesión',
+                  color: AppColors.appPrimary,
+                  bgColor: AppColors.appSecondary,
                   route: '/home'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: ScreenSize.width * 0.25,
-                        child: const Divider(
-                          thickness: 2,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text('O'),
-                      ),
-                      SizedBox(
-                        width: ScreenSize.width * 0.25,
-                        child: const Divider(
-                          thickness: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Ingresa con '),
-                      Image.asset(
-                        AppAssets.googleLogo,
-                        width: 30,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () {},
-                      child: const Text('¿Olvidaste la contraseña?')),
+              const SizedBox(
+                height: 9,
+              ),
+              GestureDetector(
+                  onTap: () {}, child: const Text('¿Olvidaste la contraseña?', style: TextStyle(color: AppColors.appPrimary),)),
             ],
           ),
         ),

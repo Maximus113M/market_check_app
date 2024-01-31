@@ -24,7 +24,6 @@ class StoreCategoriesScreen extends StatelessWidget {
         title: Text(
           "Categorias",
           style: FontStyles.heading3(
-            context,
             Color(currentStore!.titleColor),
           ),
         ),

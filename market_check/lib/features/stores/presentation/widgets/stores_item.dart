@@ -62,7 +62,7 @@ class StoreItem extends StatelessWidget {
               width: ScreenSize.width * 0.35,
               child: Text(
                 store.caption ?? '',
-                style: FontStyles.body2(context, AppColors.text),
+                style: FontStyles.body2(AppColors.text),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -77,7 +77,7 @@ class StoreItem extends StatelessWidget {
   Text _buildStoreName(BuildContext context) {
     return Text(
       store.name,
-      style: FontStyles.subtitle1(context, AppColors.text),
+      style: FontStyles.subtitle1(AppColors.text),
       maxLines: 2,
       textAlign: TextAlign.center,
     );

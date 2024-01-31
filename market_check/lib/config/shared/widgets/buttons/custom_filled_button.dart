@@ -36,7 +36,7 @@ class FilledCustomButton extends StatelessWidget {
             MaterialStatePropertyAll(bgColor ?? AppColors.blueButton1),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
       ),
@@ -45,7 +45,7 @@ class FilledCustomButton extends StatelessWidget {
             vertical: verticalSize ?? 18, horizontal: horizontalSize ?? 85),
         child: Text(
           text,
-          style: FontStyles.bodyBold1(context, color ?? AppColors.whiteBg),
+          style: FontStyles.bodyBold0( color ?? AppColors.white),
         ),
       ),
     );

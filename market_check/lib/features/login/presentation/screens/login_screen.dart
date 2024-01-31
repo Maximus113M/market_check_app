@@ -9,7 +9,7 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.init(context);
+    //ScreenSize.init(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -44,7 +44,7 @@ class LogInScreen extends StatelessWidget {
                 height: 40,
               ),
               Text('Bienvenido a Market Check',
-                  style: FontStyles.heading0(context, AppColors.text),
+                  style: FontStyles.heading0(AppColors.text),
                   textAlign: TextAlign.center),
               const SizedBox(
                 height: 10,
@@ -52,7 +52,7 @@ class LogInScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Text('Compras, Consultas, Listas y mucho más...',
-                    style: FontStyles.body1(context, AppColors.lightText1),
+                    style: FontStyles.body1(AppColors.lightText1),
                     textAlign: TextAlign.center),
               ),
               SizedBox(
@@ -60,7 +60,7 @@ class LogInScreen extends StatelessWidget {
               ),
               const FilledCustomButton(
                 text: 'Ingresar',
-                color: AppColors.whiteBg,
+                color: AppColors.white,
                 bgColor: AppColors.appColor2,
                 route: '/login-form',
               ),
@@ -70,7 +70,7 @@ class LogInScreen extends StatelessWidget {
               const FilledCustomButton(
                 text: 'Registrase',
                 horizontalSize: 75,
-                color: AppColors.whiteBg,
+                color: AppColors.white,
                 bgColor: Colors.black87,
                 route: '/login-form',
               ),

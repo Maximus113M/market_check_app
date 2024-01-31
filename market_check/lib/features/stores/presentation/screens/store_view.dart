@@ -35,7 +35,7 @@ class StoreView extends StatelessWidget {
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
-                color: AppColors.whiteBg),
+                color: AppColors.white),
             child: Column(
               children: [
                 SizedBox(
@@ -44,7 +44,7 @@ class StoreView extends StatelessWidget {
                       : ScreenSize.height * 0.08,
                   child: Text(
                     store.name,
-                    style: FontStyles.heading1(context, AppColors.text),
+                    style: FontStyles.heading1(AppColors.text),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -69,7 +69,7 @@ class StoreView extends StatelessWidget {
                           title: Text(
                             'Puntos de Venta',
                             style:
-                                FontStyles.bodyBold1(context, AppColors.text),
+                                FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra nuestro punto mas cercano.'),
@@ -84,7 +84,7 @@ class StoreView extends StatelessWidget {
                           title: Text(
                             'Categorias',
                             style:
-                                FontStyles.bodyBold1(context, AppColors.text),
+                                FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra por categoria el producto que deseas.'),
@@ -99,7 +99,7 @@ class StoreView extends StatelessWidget {
                           ),
                           title: Text('Escanea',
                               style: FontStyles.bodyBold1(
-                                  context, AppColors.text)),
+                                  AppColors.text)),
                           subtitle: const Text(
                               '¡Consulta lo productos antes de llevarlos!'),
                           trailing:
