@@ -18,6 +18,7 @@ class LogInFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.appPrimary,
       body: _LogInFormView(),
     ));
   }
@@ -39,39 +40,65 @@ class _LogInFormView extends StatelessWidget {
                   onPressed: () => context.pop(),
                   icon: const Icon(Icons.arrow_back_ios)),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Image.asset(
-                    AppAssets.userLogo,
-                    width: 100,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.01,
-                  ),
-                  Text(
-                    'Inicio de Sesión',
-                    style: FontStyles.heading0(context, AppColors.text),
-                  ),
-                  Text(
-                    'Que bueno verte de nuevo,\ncomencemos...',
-                    style: FontStyles.bodyBold1(context, AppColors.lightText),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.08,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.02,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: _LogInForm(),
-                  ),
+            Image.asset('assets/Images/logos/logoVertical.png'),
+            const SizedBox(height: 15,),
+            
+                  const  _LogInForm(),
+                 
                   const SizedBox(
                     height: 15,
                   ),
+                  
+                ],
+              ),
+            )
+    );
+  }
+}
+
+class _LogInForm extends StatelessWidget {
+  const _LogInForm();
+  @override
+  Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.whiteBg,
+        borderRadius: BorderRadius.circular(20)
+      ),
+      child: Form(
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: ScreenSize.height*0.05, vertical: ScreenSize.width * 0.1),
+          child: Column(
+            children: [
+              CustomTextFormField(
+                label: 'Usuario',
+                hint: 'Email@',
+                onChange: (p0) {
+                  context.read<LoginProvider>().userInput = p0;
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
+                label: 'Contraseña',
+                obscureText: true,
+                onChange: (p0) {
+                  context.read<LoginProvider>().passwordInput = p0;
+                },
+              ),
+              const SizedBox(
+                height: 70,
+              ),
+              SizedBox(
+                height: ScreenSize.height * 0.04,
+              ),
+              const FilledCustomButton(
+                  text: 'Ingresar',
+                  color: AppColors.whiteBg,
+                  bgColor: AppColors.appColor2,
+                  route: '/home'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -109,53 +136,9 @@ class _LogInFormView extends StatelessWidget {
                   GestureDetector(
                       onTap: () {},
                       child: const Text('¿Olvidaste la contraseña?')),
-                ],
-              ),
-            )
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class _LogInForm extends StatelessWidget {
-  const _LogInForm();
-  @override
-  Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
-    return Form(
-      child: Column(
-        children: [
-          CustomTextFormField(
-            label: 'Usuario',
-            hint: 'Email@',
-            onChange: (p0) {
-              context.read<LoginProvider>().userInput = p0;
-            },
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextFormField(
-            label: 'Contraseña',
-            obscureText: true,
-            onChange: (p0) {
-              context.read<LoginProvider>().passwordInput = p0;
-            },
-          ),
-          const SizedBox(
-            height: 70,
-          ),
-          SizedBox(
-            height: ScreenSize.height * 0.04,
-          ),
-          const FilledCustomButton(
-              text: 'Ingresar',
-              color: AppColors.whiteBg,
-              bgColor: AppColors.appColor2,
-              route: '/home'),
-        ],
       ),
     );
   }

@@ -6,6 +6,9 @@ class AppColors {
   static const appColor2 = Color.fromARGB(255, 12, 172, 241);
   static const appColor3 = Color.fromARGB(255, 3, 168, 239);
   //static const appColor4 = Color.fromARGB(255, 9, 161, 232);
+  static const appPrimary = Color(0xFF083754);
+  static const appSecondary = Color(0xFFfcc407);
+  static const appGray = Color(0xFFb3b2b2);
 
   static const text = Colors.black;
 
