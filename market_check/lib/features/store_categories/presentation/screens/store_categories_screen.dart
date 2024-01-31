@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/menus/menu_categories.dart';
-import 'package:market_check/config/utils/constans/font_styles.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 
@@ -24,11 +24,10 @@ class StoreCategoriesScreen extends StatelessWidget {
         title: Text(
           "Categorias",
           style: FontStyles.heading3(
-            context,
-            Color(currentStore!.titleColor),
+            AppColors.text,
           ),
         ),
-        backgroundColor: Color(currentStore.color),
+        backgroundColor: Colors.grey,
         elevation: 1,
         shadowColor: const Color.fromARGB(255, 0, 0, 0),
       ),

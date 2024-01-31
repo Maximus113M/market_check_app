@@ -12,70 +12,49 @@ class LogInScreen extends StatelessWidget {
     ScreenSize.init(context);
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 70,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(6, 8))
-                        ]),
-                    child: Image.asset(
-                      AppAssets.optionalLogoImage,
-                      height: 200,
-                      width: 200,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Text('Bienvenido a Market Check',
-                  style: FontStyles.heading0(context, AppColors.text),
+        backgroundColor: const Color(0xFF083754),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Image.asset(
+              AppAssets.logoVertical,
+              height: ScreenSize.height * 0.4,
+            ),
+            Text('Bienvenido a Market Check',
+                style: FontStyles.heading0(AppColors.textwhite),
+                textAlign: TextAlign.center),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Text('Compras, Consultas, Listas y mucho más...',
+                  style: FontStyles.body1(AppColors.lightTextWhite),
                   textAlign: TextAlign.center),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Text('Compras, Consultas, Listas y mucho más...',
-                    style: FontStyles.body1(context, AppColors.lightText1),
-                    textAlign: TextAlign.center),
-              ),
-              SizedBox(
-                height: ScreenSize.height * 0.17,
-              ),
-              const FilledCustomButton(
-                text: 'Ingresar',
-                color: AppColors.whiteBg,
-                bgColor: AppColors.appColor2,
-                route: '/login-form',
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const FilledCustomButton(
-                text: 'Registrase',
-                horizontalSize: 75,
-                color: AppColors.whiteBg,
-                bgColor: Colors.black87,
-                route: '/login-form',
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: ScreenSize.height * 0.08,
+            ),
+            const FilledCustomButton(
+              text: 'Ingresar',
+              color: AppColors.white,
+              bgColor: AppColors.yellowButton,
+              route: '/login-form',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const FilledCustomButton(
+              text: 'Registrase',
+              horizontalSize: 75,
+              color: AppColors.white,
+              bgColor: AppColors.grayButton,
+              route: '/login-form',
+            ),
+          ],
         ),
       ),
     );

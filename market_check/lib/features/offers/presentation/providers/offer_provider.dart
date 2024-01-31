@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:market_check/config/use_case/use_case.dart';
-import 'package:market_check/features/offers/data/datasources/offer_datasource.dart';
-import 'package:market_check/features/offers/data/repositories/offer_repository_impl.dart';
-import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
+import 'package:market_check/features/offers/data/datasources/offers_datasource.dart';
+import 'package:market_check/features/offers/data/repositories/offers_repository_impl.dart';
+import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
 
 class OfferProvider with ChangeNotifier {
   OfferRepositoryImpl offerRepository =
-      OfferRepositoryImpl(OffersDBDatasource());
+      OfferRepositoryImpl(OffersDatasourceImpl());
 
   late GetOffersUseCase getOffersUseCase;
   bool loadingOffers = false;
-  List<OfferEntity> offerList = [];
-  OfferEntity? currentOffer;
+  List<OfferModel> offerList = [];
+  OfferModel? currentOffer;
 
   // OfferProvider(this.getOffersUseCase);
 

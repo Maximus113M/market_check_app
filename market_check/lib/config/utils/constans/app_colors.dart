@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const whiteBg = Colors.white;
-  static const appColor = Color.fromARGB(255, 99, 201, 249);
-  static const appColor2 = Color.fromARGB(255, 12, 172, 241);
-  static const appColor3 = Color.fromARGB(255, 3, 168, 239);
+  static const white = Colors.white;
+  static const Color unfocused = Color.fromRGBO(146, 146, 157, 1);
+  static const Color success = Color.fromRGBO(225, 253, 16, 1);
+  static const Color successText = Color.fromARGB(255, 1, 189, 33);
+  static const Color warning = Colors.orange;
+  static const Color error = Color.fromRGBO(177, 0, 15, 1);
+  static const Color errorText = Color.fromARGB(255, 244, 67, 54);
+  static const Color disabled = Color.fromRGBO(204, 204, 204, 1);
   //static const appColor4 = Color.fromARGB(255, 9, 161, 232);
 
   static const text = Colors.black;
+  static const textwhite = Colors.white;
 
+  static const lightTextWhite = Color.fromARGB(149, 254, 252, 252);
   static const lightText = Color.fromARGB(150, 0, 0, 0);
   static const lightText1 = Color.fromARGB(130, 0, 0, 0);
   static const lightText2 = Color.fromARGB(100, 0, 0, 0);
 
+ 
+
+
   static const blueButton = Color.fromARGB(255, 0, 92, 196);
+  static const yellowButton = Color.fromARGB(255, 252, 196, 1);
+  static const grayButton = Color.fromARGB(255, 179, 178, 178);
   static const blueButton1 = Color.fromARGB(255, 21, 101, 192);
   static const blueButton2 = Color.fromARGB(255, 38, 109, 191);
   static const blueButton3 = Color.fromARGB(255, 55, 121, 197);

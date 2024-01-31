@@ -12,7 +12,7 @@ class EndShoppingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.whiteBg,
+      backgroundColor: AppColors.white,
       insetAnimationCurve: Curves.bounceIn,
       child: SingleChildScrollView(
         child: Padding(
@@ -21,21 +21,21 @@ class EndShoppingDialog extends StatelessWidget {
             children: [
               Text(
                 'Ya casi es tuyo!',
-                style: FontStyles.heading2(context, AppColors.blueButton1),
+                style: FontStyles.heading2(AppColors.blueButton1),
               ),
               const Divider(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Text(
                   'Ve a la caja mas cercana con el siguiente codigo para finalizar tu compra.',
-                  style: FontStyles.body2(context, AppColors.lightText),
+                  style: FontStyles.body2(AppColors.lightText),
                   textAlign: TextAlign.center,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(code,
-                    style: FontStyles.heading0(context, AppColors.appColor3)),
+                    style: FontStyles.heading0(AppColors.blueButton)),
               ),
               const Divider(),
               const SizedBox(

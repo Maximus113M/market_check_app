@@ -57,7 +57,6 @@ class CustomShoppingItem extends StatelessWidget {
                       item.name,
                       maxLines: 2,
                       style: FontStyles.bodyBold2(
-                        context,
                         AppColors.text,
                       ),
                     ),
@@ -73,7 +72,7 @@ class CustomShoppingItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Text(
                 '\$${item.totalPrice}',
-                style: FontStyles.bodyBold1(context, AppColors.lightText),
+                style: FontStyles.bodyBold1(AppColors.lightText),
               ),
             ),
           ),

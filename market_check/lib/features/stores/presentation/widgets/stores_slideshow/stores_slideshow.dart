@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 
 /*final List<String> stores = [
   "assets/Images/Almacenes_exito.png",
@@ -13,7 +13,7 @@ import 'package:market_check/features/stores/domain/entities/store_entity.dart';
 ];*/
 
 class StoresSlideShow extends StatelessWidget {
-  final List<StoreEntity> stores;
+  final List<StoreModel> stores;
 
   const StoresSlideShow({super.key, required this.stores});
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 class StoreItem extends StatelessWidget {
-  final StoreEntity store;
+  final StoreModel store;
 
   const StoreItem({
     super.key,
@@ -46,7 +46,7 @@ class StoreItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  store.posterLogo,
+                  store.logo,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -61,8 +61,8 @@ class StoreItem extends StatelessWidget {
             SizedBox(
               width: ScreenSize.width * 0.35,
               child: Text(
-                store.caption ?? '',
-                style: FontStyles.body2(context, AppColors.text),
+                store.description ?? '',
+                style: FontStyles.body2(AppColors.text),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 textAlign: TextAlign.center,
@@ -77,7 +77,7 @@ class StoreItem extends StatelessWidget {
   Text _buildStoreName(BuildContext context) {
     return Text(
       store.name,
-      style: FontStyles.subtitle1(context, AppColors.text),
+      style: FontStyles.subtitle1(AppColors.text),
       maxLines: 2,
       textAlign: TextAlign.center,
     );

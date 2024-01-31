@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+import 'package:market_check/features/offers/data/models/offer_model.dart';
+import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
-import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
 import 'package:provider/provider.dart';
 
 class OfferView extends StatelessWidget {
@@ -26,7 +25,7 @@ class OfferBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OfferEntity offer = context.read<OfferProvider>().currentOffer!;
+    final OfferModel offer = context.read<OfferProvider>().currentOffer!;
     return Stack(
       children: [
         Column(
@@ -37,7 +36,7 @@ class OfferBody extends StatelessWidget {
                   height: ScreenSize.height * 0.55,
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                      color: AppColors.whiteBg,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(50),
                         bottomRight: Radius.circular(50),
@@ -55,7 +54,7 @@ class OfferBody extends StatelessWidget {
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(40)),
                       child: Image.asset(
-                        offer.poster,
+                        offer.image,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -73,7 +72,7 @@ class OfferBody extends StatelessWidget {
                         children: [
                           Text(
                             offer.name,
-                            style: FontStyles.heading1(context, AppColors.text),
+                            style: FontStyles.heading1(AppColors.text),
                           ),
                         ],
                       ),
@@ -82,8 +81,7 @@ class OfferBody extends StatelessWidget {
                           const Icon(Icons.monetization_on_sharp),
                           Text(
                             offer.price.toString(),
-                            style: FontStyles.heading3(
-                                context, AppColors.lightText),
+                            style: FontStyles.heading3(AppColors.lightText),
                           ),
                         ],
                       ),
@@ -153,7 +151,7 @@ class OfferBody extends StatelessWidget {
               text: 'Añadir al Carrito',
               horizontalSize: 22,
               verticalSize: 20,
-              color: AppColors.whiteBg,
+              color: AppColors.white,
               bgColor: AppColors.blueButton1,
               route: ''),
         ),

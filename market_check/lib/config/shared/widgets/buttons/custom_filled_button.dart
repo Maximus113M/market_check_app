@@ -45,7 +45,7 @@ class FilledCustomButton extends StatelessWidget {
             vertical: verticalSize ?? 18, horizontal: horizontalSize ?? 85),
         child: Text(
           text,
-          style: FontStyles.bodyBold1(context, color ?? AppColors.whiteBg),
+          style: FontStyles.bodyBold1(color ?? AppColors.white),
         ),
       ),
     );

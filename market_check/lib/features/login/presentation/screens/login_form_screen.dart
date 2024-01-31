@@ -18,6 +18,7 @@ class LogInFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
         child: Scaffold(
+      backgroundColor: Color(0xFF083754),
       body: _LogInFormView(),
     ));
   }
@@ -30,91 +31,23 @@ class _LogInFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: IconButton(
-                  onPressed: () => context.pop(),
-                  icon: const Icon(Icons.arrow_back_ios)),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Image.asset(
-                    AppAssets.userLogo,
-                    width: 100,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.01,
-                  ),
-                  Text(
-                    'Inicio de Sesión',
-                    style: FontStyles.heading0(context, AppColors.text),
-                  ),
-                  Text(
-                    'Que bueno verte de nuevo,\ncomencemos...',
-                    style: FontStyles.bodyBold1(context, AppColors.lightText),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.08,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height * 0.02,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: _LogInForm(),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: ScreenSize.width * 0.25,
-                        child: const Divider(
-                          thickness: 2,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text('O'),
-                      ),
-                      SizedBox(
-                        width: ScreenSize.width * 0.25,
-                        child: const Divider(
-                          thickness: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Ingresa con '),
-                      Image.asset(
-                        AppAssets.googleLogo,
-                        width: 30,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () {},
-                      child: const Text('¿Olvidaste la contraseña?')),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+              onPressed: () => context.pop(),
+              icon: const Icon(Icons.arrow_back_ios),
+              color: Colors.white),
+          Image.asset(
+            AppAssets.logoVertical,
+            height: ScreenSize.height * 0.4,
+          ),
+          SizedBox(
+            height: ScreenSize.height * 0.02,
+          ),
+          const _LogInForm(),
+        ],
+      )),
     );
   }
 }
@@ -124,38 +57,83 @@ class _LogInForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
-    return Form(
-      child: Column(
-        children: [
-          CustomTextFormField(
-            label: 'Usuario',
-            hint: 'Email@',
-            onChange: (p0) {
-              context.read<LoginProvider>().userInput = p0;
-            },
+    return Container(
+      width: double.infinity,
+      height: ScreenSize.height * 0.5,
+      decoration: BoxDecoration(
+          color: Colors.white, 
+          borderRadius: BorderRadius.circular(20)
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextFormField(
-            label: 'Contraseña',
-            obscureText: true,
-            onChange: (p0) {
-              context.read<LoginProvider>().passwordInput = p0;
-            },
-          ),
-          const SizedBox(
-            height: 70,
-          ),
-          SizedBox(
-            height: ScreenSize.height * 0.04,
-          ),
-          const FilledCustomButton(
-              text: 'Ingresar',
-              color: AppColors.whiteBg,
-              bgColor: AppColors.appColor2,
-              route: '/home'),
-        ],
+      child: Form(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05, vertical: ScreenSize.height *0.05),
+              child: CustomTextFormField(
+                label: 'Usuario',
+                hint: 'Email@',
+                onChange: (p0) {
+                  context.read<LoginProvider>().userInput = p0;
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05,),
+              child: CustomTextFormField(
+                label: 'Contraseña',
+                obscureText: true,
+                onChange: (p0) {
+                  context.read<LoginProvider>().passwordInput = p0;
+                },
+              ),
+            ),
+            SizedBox(
+              height: ScreenSize.height * 0.04,
+            ),
+            const FilledCustomButton(
+                text: 'Iniciar Sesión',
+                horizontalSize: 50,
+                color: AppColors.white,
+                bgColor: AppColors.yellowButton,
+                route: '/home'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: ScreenSize.width * 0.25,
+                  child: const Divider(
+                    thickness: 2,
+                  ),
+                ),
+                /*const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text('O'),
+                ),*/
+                SizedBox(
+                  width: ScreenSize.width * 0.25,
+                  child: const Divider(
+                    thickness: 2,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                /*const Text('Ingresa con '),
+                Image.asset(
+                  AppAssets.googleLogo,
+                  width: 30,
+                ),*/
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            GestureDetector(
+                onTap: () {}, child: const Text('¿Olvidaste la contraseña?')),
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_item.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 
@@ -12,7 +12,7 @@ class StoresBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<StoreEntity> storeList =
+    final List<StoreModel> storeList =
         context.read<StoresProvider>().storeList;
     return Container(
       height: ScreenSize.height * 0.85,

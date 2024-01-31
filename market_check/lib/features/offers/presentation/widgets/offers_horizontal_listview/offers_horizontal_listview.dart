@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
+import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:animate_do/animate_do.dart';
 
 class OffersHorizontalListView extends StatefulWidget {
-  final List<OfferEntity> offers;
+  final List<OfferModel> offers;
   final String? title;
   final String? subtitle;
 
@@ -68,7 +68,7 @@ class _OffersHorizontalListViewState extends State<OffersHorizontalListView> {
 }
 
 class _Slice extends StatelessWidget {
-  final OfferEntity offer;
+  final OfferModel offer;
   const _Slice({required this.offer});
 
   @override
@@ -92,7 +92,7 @@ class _Slice extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      offer.poster,
+                      offer.image,
                       fit: BoxFit.cover,
                       width: 115, //135 orginal size
                     ),

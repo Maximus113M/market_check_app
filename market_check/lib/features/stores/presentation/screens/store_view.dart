@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class StoreView extends StatelessWidget {
   static const String name = 'store-view';
@@ -11,7 +13,7 @@ class StoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StoreEntity store = context.read<StoresProvider>().currentStore!;
+    final StoreModel store = context.read<StoresProvider>().currentStore!;
 
     return Scaffold(
       body: Stack(
@@ -35,7 +37,7 @@ class StoreView extends StatelessWidget {
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
                 ),
-                color: AppColors.whiteBg),
+                color: AppColors.white),
             child: Column(
               children: [
                 SizedBox(
@@ -44,7 +46,7 @@ class StoreView extends StatelessWidget {
                       : ScreenSize.height * 0.08,
                   child: Text(
                     store.name,
-                    style: FontStyles.heading1(context, AppColors.text),
+                    style: FontStyles.heading1(AppColors.text),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -68,8 +70,7 @@ class StoreView extends StatelessWidget {
                           ),
                           title: Text(
                             'Puntos de Venta',
-                            style:
-                                FontStyles.bodyBold1(context, AppColors.text),
+                            style: FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra nuestro punto mas cercano.'),
@@ -83,8 +84,7 @@ class StoreView extends StatelessWidget {
                           ),
                           title: Text(
                             'Categorias',
-                            style:
-                                FontStyles.bodyBold1(context, AppColors.text),
+                            style: FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra por categoria el producto que deseas.'),
@@ -98,8 +98,7 @@ class StoreView extends StatelessWidget {
                             size: 30,
                           ),
                           title: Text('Escanea',
-                              style: FontStyles.bodyBold1(
-                                  context, AppColors.text)),
+                              style: FontStyles.bodyBold1(AppColors.text)),
                           subtitle: const Text(
                               '¡Consulta lo productos antes de llevarlos!'),
                           trailing:

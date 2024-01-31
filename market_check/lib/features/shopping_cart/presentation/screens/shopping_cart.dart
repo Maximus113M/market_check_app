@@ -47,11 +47,11 @@ class ShoppingCartBody extends StatelessWidget {
             children: [
               Text(
                 'Carrito de Compras',
-                style: FontStyles.heading2(context, AppColors.blueButton3),
+                style: FontStyles.heading2(AppColors.blueButton3),
               ),
               Text(
                 '    ${shoppingCartProvider.shoppingItemsCount()} Productos agregados',
-                style: FontStyles.bodyBold1(context, AppColors.lightText),
+                style: FontStyles.bodyBold1(AppColors.lightText),
               ),
               const SizedBox(
                 height: 5,
@@ -80,13 +80,13 @@ class ShoppingCartBody extends StatelessWidget {
                   children: [
                     Text(
                       'Total',
-                      style: FontStyles.subtitle1(context, AppColors.text),
+                      style: FontStyles.subtitle1(AppColors.text),
                     ),
                     const Spacer(),
                     const Icon(Icons.monetization_on_sharp),
                     Text(
                       shoppingCartProvider.totalBuy.toString(),
-                      style: FontStyles.bodyBold1(context, AppColors.text),
+                      style: FontStyles.bodyBold1(AppColors.text),
                     )
                   ],
                 ),
@@ -101,7 +101,7 @@ class ShoppingCartBody extends StatelessWidget {
                     text: 'Finalizar Compra',
                     horizontalSize: 25,
                     verticalSize: 15,
-                    color: AppColors.whiteBg,
+                    color: AppColors.white,
                     bgColor: AppColors.blueButton1,
                     route: '/home',
                     action: () => {

@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
               title: Text(
                 'Market Check',
                 style:
-                    FontStyles.heading4(context, Colors.black.withOpacity(0.7)),
+                    FontStyles.heading4( Colors.black.withOpacity(0.7)),
               )),
           body: const _HomeBody(),
           drawer: SideMenu(scaffoldKey: scaffoldKey),
