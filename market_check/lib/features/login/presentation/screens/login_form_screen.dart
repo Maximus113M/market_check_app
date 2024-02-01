@@ -123,7 +123,7 @@ class _LogInForm extends StatelessWidget {
   const _LogInForm();
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
+    //final loginProvider = Provider.of<LoginProvider>(context);
     return Form(
       child: Column(
         children: [

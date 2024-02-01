@@ -25,11 +25,17 @@ final appRouter = GoRouter(
     GoRoute(
         path: "/home",
         name: HomeScreen.name,
-        builder: (context, state) => HomeScreen()),
+        builder: (context, state) {
+          print('-----------------> control');
+          return HomeScreen();
+        }),
     GoRoute(
         path: "/shopping-cart",
         name: ShoppingCart.name,
-        builder: (context, state) => const ShoppingCart()),
+        builder: (context, state) {
+          print('-----------------> shopping cart');
+          return const ShoppingCart();
+        }),
     GoRoute(
         path: "/stores",
         name: StoresScreen.name,

@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:market_check/config/use_case/use_case.dart';
-import 'package:market_check/features/offers/data/datasources/offer_datasource.dart';
-import 'package:market_check/features/offers/data/repositories/offer_repository_impl.dart';
 import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
+import 'package:market_check/features/offers/data/datasources/offer_datasource.dart';
 import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
+import 'package:market_check/features/offers/data/repositories/offer_repository_impl.dart';
 
 class OfferProvider with ChangeNotifier {
   OfferRepositoryImpl offerRepository =
