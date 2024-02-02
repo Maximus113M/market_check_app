@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 
 /*final List<String> stores = [
@@ -51,11 +52,14 @@ class _Slice extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 30),
       child: FadeIn(
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              storePoster,
-              fit: BoxFit.cover,
-            )),
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            storePoster,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) =>
+                Image.asset(AppAssets.loadingImage),
+          ),
+        ),
       ),
     );
   }

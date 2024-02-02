@@ -73,8 +73,6 @@ class _Slice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme;
-
     return Hero(
       tag: '${offer.id}',
       child: GestureDetector(
@@ -91,8 +89,8 @@ class _Slice extends StatelessWidget {
                   height: 170, //190
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      offer.image,
+                    child: Image.network(
+                      offer.imagePath,
                       fit: BoxFit.cover,
                       width: 115, //135 orginal size
                     ),
@@ -107,14 +105,15 @@ class _Slice extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w500),
                             maxLines: 1),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.attach_money_outlined,
-                                  size: 18, color: Colors.yellow.shade800),
-                              Text('${offer.price}   ',
-                                  style: textStyle.bodyMedium, maxLines: 1)
-                            ])
+                        /* Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.attach_money_outlined,
+                                size: 18, color: Colors.yellow.shade800),
+                            Text('${offer.price}   ',
+                                style: textStyle.bodyMedium, maxLines: 1)
+                          ],
+                        ),*/
                       ],
                     )),
               ],

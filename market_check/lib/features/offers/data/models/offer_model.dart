@@ -1,11 +1,11 @@
 class OfferModel {
   final int? id;
   final int state;
-  final DateTime dateStart;
-  final DateTime dateEnd;
+  final String dateStart; //Datetime
+  final String dateEnd; //Datetime
   final String name;
   final String description;
-  final int image;
+  final String imagePath;
   final int stock;
   final int storeId;
 
@@ -16,23 +16,23 @@ class OfferModel {
     required this.dateEnd,
     required this.name,
     required this.description,
-    required this.image,
+    required this.imagePath,
     required this.stock,
     required this.storeId,
   });
 
-  factory OfferModel.fromJson(json) => OfferModel(
+  factory OfferModel.fromJson(json, String imageUrl) => OfferModel(
         id: json["id"],
         state: json["estado"],
         dateStart: json["fecha_inicio"],
         dateEnd: json["fecha_fin"],
         name: json["nombre"],
         description: json["descripcion"],
-        image: json["imagen"],
+        imagePath: imageUrl,
         stock: json["numero_stock"],
         storeId: json["establecimiento_id"],
       );
-
+  //TODO: ELIMINAR?
   Map<String, dynamic> storeModelToJson() => {
         if (id != null) "id": id,
         "estado": state,
@@ -40,7 +40,7 @@ class OfferModel {
         "fecha_fin": dateEnd,
         "nombre": name,
         "descripcion": description,
-        "imagen": image,
+        "imagen": imagePath,
         "numero_stock": stock,
         "establecimiento_id": storeId,
       };

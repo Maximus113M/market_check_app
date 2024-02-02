@@ -5,10 +5,10 @@ class StoreModel {
   final String name;
   final String email;
   final String? description;
-  final int? color;
+  final String? color;
   final String poster;
   final String logo;
-  final List<StoreLocation> locations;
+  final String locations; //TODO: LIST<LOCATIONS>
 
   StoreModel({
     this.id,
@@ -23,21 +23,22 @@ class StoreModel {
     required this.locations,
   });
 
-  factory StoreModel.fromJson(json) => StoreModel(
+  factory StoreModel.fromJson(json, String imagePath, String logoPath) =>
+      StoreModel(
         id: json["id"],
         nit: json["Nit"],
         state: json["Estado"],
-        name: json["NombreEstblecimiento"],
+        name: json["NombreEstablecimiento"],
         email: json["CorreoEstablecimiento"],
         description: json["Lema"],
         color: json["ColorInterfaz"],
-        poster: json["Imagen"],
-        logo: json["Logo"],
+        poster: imagePath,
+        logo: logoPath,
         locations: json["DireccionEstablecimiento"],
       );
 
-      Map<String, dynamic>storeModelToJson()=>{
-        if(id != null) "id": id,
+  Map<String, dynamic> storeModelToJson() => {
+        if (id != null) "id": id,
         "Nit": nit,
         "Estado": state,
         "NombreEstblecimiento": name,
@@ -46,7 +47,7 @@ class StoreModel {
         "ColorInterfaz": color,
         "Imagen": poster,
         "Logo": logo,
-        "DireccionEstablecimiento": locations.first
+        "DireccionEstablecimiento": locations
       };
 }
 

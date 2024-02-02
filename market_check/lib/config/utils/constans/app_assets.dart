@@ -1,6 +1,7 @@
 class AppAssets {
   static String logoCar = 'assets/Images/logos/car.png';
   static String logoVertical = 'assets/Images/logos/logo-vertical.png';
+  static String logoHorizontal = 'assets/Images/logos/logoHorinzontal.PNG';
   static String logoFontWhite = 'assets/Images/logos/logo-blanco-removebg.png';
   static String logoPng = 'assets/Images/AppLogo.png';
   static String userLogo = 'assets/Images/userLogo.png';

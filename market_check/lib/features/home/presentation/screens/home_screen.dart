@@ -10,7 +10,6 @@ import 'package:market_check/features/stores/presentation/widgets/stores_slidesh
 import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 
 import 'package:provider/provider.dart';
-import 'package:animate_do/animate_do.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String name = "home-screen";
@@ -24,48 +23,13 @@ class HomeScreen extends StatelessWidget {
     //del menu lateral
     final scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomCenter,
-              colors: AppColors.gradientColors)),
-      child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(18),
-                ),
-              ),
-              actions: [
-                CustomBadge(
-                  icon: Icons.shopify,
-                  iconSize: 35,
-                  counter: shoppingCartProvider.shoppingItemsCount(),
-                  color: AppColors.blueButton,
-                ),
-                const SizedBox(width: 2),
-                CustomBadge(
-                    route: '/shopping-cart',
-                    icon: Icons.shopping_cart_rounded,
-                    iconSize: 35,
-                    color: AppColors.blueButton,
-                    counter: shoppingCartProvider.shoppingItemsCount()),
-                const SizedBox(width: 8)
-              ],
-              title: Text(
-                'Market Check',
-                style:
-                    FontStyles.heading4( Colors.black.withOpacity(0.7)),
-              )),
-          body: const _HomeBody(),
-          drawer: SideMenu(scaffoldKey: scaffoldKey),
-          bottomNavigationBar:
-              const GoogleNavBar() //CurvedBottomNavigation() //CustomBottomNavigation(),
-          ),
-    );
+    return Scaffold(
+        key: scaffoldKey,
+        body: const _HomeBody(),
+        drawer: SideMenu(scaffoldKey: scaffoldKey),
+        bottomNavigationBar:
+            const GoogleNavBar() //CurvedBottomNavigation() //CustomBottomNavigation(),
+        );
   }
 }
 
@@ -95,59 +59,72 @@ class _HomeBodyState extends State<_HomeBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: ScreenSize.height * 0.85,
-      width: ScreenSize.width,
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-      margin: EdgeInsets.fromLTRB(
-        ScreenSize.width * 0.025,
-        13,
-        ScreenSize.width * 0.025,
-        0,
-      ),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          color: Colors.white),
-      child: (storesProvider.storeList.isEmpty)
-          ? FadeIn(
-              child: Image.asset(
-                AppAssets.loadingImage,
-                fit: BoxFit.contain,
-                height: ScreenSize.height * 0.5,
-                width: ScreenSize.width,
-              ),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: ScreenSize.absoluteHeight * 0.01),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
-                    child: Text(
-                      "Supermercados",
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                  Icon(
+                    Icons.menu_sharp,
+                    size: ScreenSize.width * 0.1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Image.asset(
+                      AppAssets.logoHorizontal,
+                      width: ScreenSize.width * 0.62,
                     ),
                   ),
-                  StoresSlideShow(stores: storesProvider.storeList),
-                  const SizedBox(height: 5),
-                  OffersHorizontalListView(
-                    title: "Ofertas Populares",
-                    subtitle: "6 Ofertas",
-                    offers: offersProvider.offerList.sublist(0, 6),
+                  CustomBadge(
+                    icon: Icons.shopify,
+                    iconSize: ScreenSize.width * 0.1,
+                    counter: context
+                        .watch<ShoppingCartProvider>()
+                        .shoppingItemsCount(),
+                    color: AppColors.blueButton,
                   ),
-                  OffersHorizontalListView(
-                    title: "Ofertas Noviembre",
-                    subtitle: "${offersProvider.offerList.length} Ofertas",
-                    offers: offersProvider.offerList.sublist(6, 19),
-                  ),
-                  const SizedBox(height: 10),
+                  const SizedBox(width: 2),
+                  CustomBadge(
+                      route: '/shopping-cart',
+                      icon: Icons.shopping_cart_rounded,
+                      iconSize: ScreenSize.width * 0.1,
+                      color: AppColors.blueButton,
+                      counter: context
+                          .watch<ShoppingCartProvider>()
+                          .shoppingItemsCount()),
+                  const SizedBox(width: 8)
                 ],
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Text(
+                "Supermercados",
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+              ),
+            ),
+            StoresSlideShow(stores: storesProvider.storeList),
+            const SizedBox(height: 5),
+            OffersHorizontalListView(
+              title: "Ofertas Populares",
+              subtitle: "6 Ofertas",
+              offers: offersProvider.offerList,
+            ),
+            OffersHorizontalListView(
+              title: "Ofertas Noviembre",
+              subtitle: "${offersProvider.offerList.length} Ofertas",
+              offers: offersProvider.offerList,
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
     );
   }
 }

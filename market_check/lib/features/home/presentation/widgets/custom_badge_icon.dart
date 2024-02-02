@@ -39,7 +39,7 @@ class CustomBadge extends StatelessWidget {
               child: Icon(
                 icon,
                 size: iconSize,
-                color: color,
+                color: counter > 0 ? color : AppColors.unfocused,
               ),
             ),
             if (counter > 0)

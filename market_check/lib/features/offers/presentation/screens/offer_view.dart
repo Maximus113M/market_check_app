@@ -53,8 +53,8 @@ class OfferBody extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(40)),
-                      child: Image.asset(
-                        offer.image,
+                      child: Image.network(
+                        offer.imagePath,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -76,7 +76,7 @@ class OfferBody extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
+                      /* Row(
                         children: [
                           const Icon(Icons.monetization_on_sharp),
                           Text(
@@ -84,7 +84,7 @@ class OfferBody extends StatelessWidget {
                             style: FontStyles.heading3(AppColors.lightText),
                           ),
                         ],
-                      ),
+                      ),*/
                       const SizedBox(
                         height: 10,
                       ),
