@@ -27,7 +27,7 @@ class StoresScreenM extends StatelessWidget {
             hint: 'Buscar establecimiento',
           ),
         ),
-        const StoresListViewM(),
+        const Expanded(child: StoresListViewM()),
         ],
       ),
     );
