@@ -60,10 +60,12 @@ class _SignUpForm extends StatelessWidget {
                 SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Contraseña',
+                  obscureText: true,
                 ),
                 SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Nuevamente la contraseña',
+                  obscureText: true,
                 ),
                 SizedBox(height: 25),
                 FilledCustomButton(

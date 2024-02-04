@@ -4,6 +4,7 @@ import 'package:market_check/config/utils/utils.dart';
 class CustomTextFormField extends StatelessWidget {
   final String? label;
   final String? hint;
+  final IconData? icon;
   final String? errorMessage;
   final bool obscureText;
   final Function(String)? onChange;
@@ -16,7 +17,8 @@ class CustomTextFormField extends StatelessWidget {
       this.errorMessage,
       this.onChange,
       this.validator,
-      this.obscureText = false});
+      this.obscureText = false, 
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       obscureText: obscureText,
       decoration: InputDecoration(
+        prefixIcon: icon != null ? Icon(icon) : null,
         filled: true,
         fillColor: AppColors.appMainInput,
         enabledBorder: border,
@@ -40,11 +43,14 @@ class CustomTextFormField extends StatelessWidget {
             border.copyWith(borderSide: BorderSide(color: Colors.red.shade800)),
         isDense: true,
         label: label != null
-            ? Text(
-                label!,
-                style:
-                    const TextStyle(color: AppColors.appPrimary, fontSize: 16),
-              )
+            ? Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                  label!,
+                  style:
+                      const TextStyle(color: AppColors.appPrimary, fontSize: 16),
+                ),
+            )
             : null,
         errorText: errorMessage,
         hintText: hint,

@@ -91,7 +91,8 @@ class _LogInForm extends StatelessWidget {
                   text: 'Iniciar Sesión',
                   color: AppColors.appPrimary,
                   bgColor: AppColors.appSecondary,
-                  route: '/home'),
+                  verticalSize: 12,
+                  route: '/stores'),
               const SizedBox(
                 height: 9,
               ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 final DateTime date = DateTime.now();
 
 const List<Color> colorList = [
+  Color(0xFF083754),
   Colors.blue,
   Colors.yellow,
   Colors.green,
