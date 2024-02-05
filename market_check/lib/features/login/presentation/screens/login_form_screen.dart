@@ -17,45 +17,47 @@ class LogInFormScreen extends StatelessWidget {
     return const SafeArea(
         child: Scaffold(
       backgroundColor: AppColors.appPrimary,
-      body: _LogInFormView(),
+      body: _LogInFormScreenBody(),
     ));
   }
 }
 
-class _LogInFormView extends StatelessWidget {
-  const _LogInFormView();
+class _LogInFormScreenBody extends StatelessWidget {
+  const _LogInFormScreenBody();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.1),
-            child: Image.asset(AppAssets.logoVertical),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          const _LogInForm(),
-          
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.1),
+              child: Image.asset(AppAssets.logoVertical),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            _LogInForm(Provider.of<LoginProvider>(context)),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 
 class _LogInForm extends StatelessWidget {
-  const _LogInForm();
+  final LoginProvider loginProvider;
+  const _LogInForm(this.loginProvider);
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
     return Container(
       margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
       decoration: const BoxDecoration(
-          color: AppColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
       child: Form(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -63,10 +65,12 @@ class _LogInForm extends StatelessWidget {
               vertical: ScreenSize.width * 0.1),
           child: Column(
             children: [
+              Text(loginProvider.emailInput),
               CustomTextFormField(
                 label: 'Email',
-                onChange: (p0) {
-                  context.read<LoginProvider>().userInput = p0;
+                onChange: (emailValue) {
+                  loginProvider.emailInput= emailValue;
+                  print(loginProvider.emailInput); 
                 },
               ),
               const SizedBox(
@@ -75,8 +79,8 @@ class _LogInForm extends StatelessWidget {
               CustomTextFormField(
                 label: 'Contraseña',
                 obscureText: true,
-                onChange: (p0) {
-                  context.read<LoginProvider>().passwordInput = p0;
+                onChange: (passwordValue) {
+                  loginProvider.passwordInput = passwordValue;
                 },
               ),
               const SizedBox(
@@ -85,17 +89,23 @@ class _LogInForm extends StatelessWidget {
               SizedBox(
                 height: ScreenSize.height * 0.02,
               ),
-              const FilledCustomButton(
+               FilledCustomButton(
                   text: 'Iniciar Sesión',
                   color: AppColors.appPrimary,
                   bgColor: AppColors.appSecondary,
                   verticalSize: 12,
+                  action: () => loginProvider.validateUser(context),
                   route: '/stores'),
               const SizedBox(
                 height: 9,
               ),
               GestureDetector(
-                  onTap: () {}, child: const Text('¿Olvidaste la contraseña?', style: TextStyle(color: AppColors.appPrimary),)),
+                onTap: () {},
+                child: const Text(
+                  '¿Olvidaste la contraseña?',
+                  style: TextStyle(color: AppColors.appPrimary),
+                ),
+              ),
             ],
           ),
         ),

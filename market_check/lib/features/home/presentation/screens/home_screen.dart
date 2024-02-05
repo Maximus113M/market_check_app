@@ -4,8 +4,8 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
 import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_slideshow/stores_slideshow.dart';
 import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 

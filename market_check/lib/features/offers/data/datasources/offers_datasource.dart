@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
-import 'package:market_check/config/services/remote_service/remote_service.dart';
+import 'package:market_check/config/services/remote_service/remote_urls.dart';
 
 abstract class OffersDataSource {
   Future<List<OfferModel>> getOffers();
@@ -12,13 +12,13 @@ abstract class OffersDataSource {
 class OffersDatasourceImpl extends OffersDataSource {
   final dioOffers = Dio(
     BaseOptions(
-      baseUrl: RemoteService.emulatorOffersUrl,
+      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.offersUrl}",
     ),
   );
 
   final dioImages = Dio(
     BaseOptions(
-      baseUrl: RemoteService.emulatorImagesUrl,
+      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
     ),
   );
 
@@ -36,7 +36,7 @@ class OffersDatasourceImpl extends OffersDataSource {
               await dioImages.get('${offerJson["imagen"]}');
 
           return OfferModel.fromJson(
-              offerJson, "http://10.0.2.2:8000${dioImage.data["image_url"]}");
+              offerJson, "${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}");
         }).toList();
         offers = await Future.wait(futures);
       }

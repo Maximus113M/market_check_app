@@ -9,29 +9,29 @@ class StoresScreenM extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColors.appPrimary,
       body: Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: ScreenSize.height * 0.1),
-            child: Image.asset('assets/Images/logos/logoHorizontal.png',
-            height: ScreenSize.height * 0.09,),
+            child: Image.asset(
+              'assets/Images/logos/logoHorizontal.png',
+              height: ScreenSize.height * 0.09,
+            ),
           ),
           SizedBox(height: ScreenSize.height * 0.03),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CustomTextFormField(
-            icon: Icons.search,
-            hint: 'Buscar establecimiento',
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomTextFormField(
+              icon: Icons.search,
+              hint: 'Buscar establecimiento',
+              onChange: (p0) {},
+            ),
           ),
-        ),
-        const Expanded(child: StoresListViewM()),
+          const Expanded(child: StoresListViewM()),
         ],
       ),
     );
   }
 }
-
-

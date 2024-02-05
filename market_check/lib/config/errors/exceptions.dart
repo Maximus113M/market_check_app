@@ -14,9 +14,10 @@ class LocalException implements Exception {
 
 enum ExceptionType {
   splashException,
-  logInException,
   signUpException,
+  signInException,
   homeException,
   offersException,
   storesException,
+
 }

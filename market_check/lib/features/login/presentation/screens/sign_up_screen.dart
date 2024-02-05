@@ -14,9 +14,13 @@ class SignUpScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Padding(
-            padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.15, bottom: ScreenSize.absoluteHeight * 0.05),
-            child: Image.asset(AppAssets.logoHorizontal,
-            width: ScreenSize.width * 0.9,),
+            padding: EdgeInsets.only(
+                top: ScreenSize.absoluteHeight * 0.15,
+                bottom: ScreenSize.absoluteHeight * 0.05),
+            child: Image.asset(
+              AppAssets.logoHorizontal,
+              width: ScreenSize.width * 0.9,
+            ),
           ),
           const _SignUpForm()
         ]),
@@ -34,46 +38,53 @@ class _SignUpForm extends StatelessWidget {
       child: Container(
         height: ScreenSize.height * 0.67,
         decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))
-        ),
-        child:  Form(
+            color: AppColors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+        child: Form(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05).copyWith(top: ScreenSize.height * 0.05),
-            child: const Column(
+            padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05)
+                .copyWith(top: ScreenSize.height * 0.05),
+            child: Column(
               children: [
                 CustomTextFormField(
                   label: 'Nombre y Apellido',
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Número de documento',
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Celular',
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Correo electronico',
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Contraseña',
                   obscureText: true,
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextFormField(
                   label: 'Nuevamente la contraseña',
                   obscureText: true,
+                  onChange: (p0) {},
                 ),
-                SizedBox(height: 25),
-                FilledCustomButton(
+                 const SizedBox(height: 25),
+                const FilledCustomButton(
                   bgColor: AppColors.appSecondary,
                   color: AppColors.appPrimary,
                   verticalSize: 12,
                   text: 'Registrarse',
-                  )
+                )
               ],
             ),
           ),

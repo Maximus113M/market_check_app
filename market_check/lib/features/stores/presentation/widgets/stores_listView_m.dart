@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 
 import 'package:provider/provider.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/features/stores/domain/entities/store_entity.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 
 class StoresListViewM extends StatelessWidget {
@@ -11,7 +11,7 @@ class StoresListViewM extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    final List<StoreEntity> storeList =
+    final List<StoreModel> storeList =
         context.read<StoresProvider>().storeList;
     return Container(
       height: double.infinity,

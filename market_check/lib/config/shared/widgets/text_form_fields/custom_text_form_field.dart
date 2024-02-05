@@ -7,17 +7,17 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? icon;
   final String? errorMessage;
   final bool obscureText;
-  final Function(String)? onChange;
-  final String? Function(String?)? validator;
+  final Function(String) onChange;
+  final Function(String)? onComplete;
 
   const CustomTextFormField(
       {super.key,
       this.label,
       this.hint,
       this.errorMessage,
-      this.onChange,
-      this.validator,
-      this.obscureText = false, 
+      required this.onChange,
+      this.onComplete,
+      this.obscureText = false,
       this.icon});
 
   @override
@@ -27,8 +27,7 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
     return TextFormField(
-      onChanged: onChange,
-      validator: validator,
+      onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon) : null,
@@ -44,13 +43,13 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         label: label != null
             ? Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
                   label!,
-                  style:
-                      const TextStyle(color: AppColors.appPrimary, fontSize: 16),
+                  style: const TextStyle(
+                      color: AppColors.appPrimary, fontSize: 16),
                 ),
-            )
+              )
             : null,
         errorText: errorMessage,
         hintText: hint,
