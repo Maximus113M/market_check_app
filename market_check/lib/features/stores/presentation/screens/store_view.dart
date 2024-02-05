@@ -70,7 +70,8 @@ class StoreView extends StatelessWidget {
                           ),
                           title: Text(
                             'Puntos de Venta',
-                            style: FontStyles.bodyBold1(AppColors.text),
+                            style:
+                                FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra nuestro punto mas cercano.'),
@@ -84,7 +85,8 @@ class StoreView extends StatelessWidget {
                           ),
                           title: Text(
                             'Categorias',
-                            style: FontStyles.bodyBold1(AppColors.text),
+                            style:
+                                FontStyles.bodyBold1(AppColors.text),
                           ),
                           subtitle: const Text(
                               'Encuentra por categoria el producto que deseas.'),
@@ -98,7 +100,8 @@ class StoreView extends StatelessWidget {
                             size: 30,
                           ),
                           title: Text('Escanea',
-                              style: FontStyles.bodyBold1(AppColors.text)),
+                              style: FontStyles.bodyBold1(
+                                  AppColors.text)),
                           subtitle: const Text(
                               '¡Consulta lo productos antes de llevarlos!'),
                           trailing:

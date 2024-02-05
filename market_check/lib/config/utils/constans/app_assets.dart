@@ -12,4 +12,9 @@ class AppAssets {
   static String productReference2 = 'assets/Images/categories/meat2.png';
   static String storeReference = 'assets/Images/stores/EXITO-poster.jpg';
   static String loadingImage = 'assets/Images/jar-loading.gif';
+//--------------------------
+  static String logoHorizontal = 'assets/Images/logos/logoHorizontal.png';
+  static String logoVertical = 'assets/Images/logos/logoVertical.png';
+  static String backgroundHome = 'assets/Images/background/carro.png';
+
 }

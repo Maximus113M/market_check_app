@@ -1,7 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/home/presentation/screens/home_screen1.dart';
+import 'package:market_check/features/login/presentation/screens/sign_up_screen.dart';
 import 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/features/stores/presentation/screens/store_view.dart';
+import 'package:market_check/features/stores/presentation/screens/strore_screen_m.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -15,10 +18,9 @@ final appRouter = GoRouter(
               builder: (context, state) => const HomeScreen()),
         ]),*/
     GoRoute(
-      path: "/",
-      name: LogInScreen.name,
-      builder: (context, state) => const LogInScreen(),
-    ),
+        path: "/login",
+        name: LogInScreen.name,
+        builder: (context, state) => const LogInScreen()),
     GoRoute(
       path: "/login-form",
       name: LogInFormScreen.name,
@@ -35,10 +37,9 @@ final appRouter = GoRouter(
       builder: (context, state) => const ShoppingCart(),
     ),
     GoRoute(
-      path: "/stores",
-      name: StoresScreen.name,
-      builder: (context, state) => const StoresScreen(),
-    ),
+        path: "/stores",
+        name: StoresScreen.name,
+        builder: (context, state) => const StoresScreenM()),
     GoRoute(
       path: "/store-view",
       name: StoreView.name,
@@ -82,6 +83,14 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/scanner",
       builder: (context, state) => const ScannerScreen(),
+    ),
+    GoRoute(
+      path: "/",
+      builder: (context, state) => const HomeScreen1(),
+    ),
+    GoRoute(
+      path: "/register",
+      builder: (context, state) => const SignUpScreen(),
     ),
   ],
 );

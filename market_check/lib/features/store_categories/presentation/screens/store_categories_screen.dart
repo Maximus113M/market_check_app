@@ -24,7 +24,7 @@ class StoreCategoriesScreen extends StatelessWidget {
         title: Text(
           "Categorias",
           style: FontStyles.heading3(
-            AppColors.text,
+            Color(currentStore!.titleColor),
           ),
         ),
         backgroundColor: Colors.grey,

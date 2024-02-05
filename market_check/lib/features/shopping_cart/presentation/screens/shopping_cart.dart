@@ -47,7 +47,7 @@ class ShoppingCartBody extends StatelessWidget {
             children: [
               Text(
                 'Carrito de Compras',
-                style: FontStyles.heading2(AppColors.blueButton3),
+                style: FontStyles.heading2( AppColors.blueButton3),
               ),
               Text(
                 '    ${shoppingCartProvider.shoppingItemsCount()} Productos agregados',

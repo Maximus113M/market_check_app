@@ -81,7 +81,8 @@ class OfferBody extends StatelessWidget {
                           const Icon(Icons.monetization_on_sharp),
                           Text(
                             offer.price.toString(),
-                            style: FontStyles.heading3(AppColors.lightText),
+                            style: FontStyles.heading3(
+                                AppColors.lightText),
                           ),
                         ],
                       ),*/

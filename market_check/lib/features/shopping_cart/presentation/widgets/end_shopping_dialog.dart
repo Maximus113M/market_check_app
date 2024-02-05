@@ -35,7 +35,7 @@ class EndShoppingDialog extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(code,
-                    style: FontStyles.heading0(AppColors.blueButton)),
+                    style: FontStyles.heading0(AppColors.appColor3)),
               ),
               const Divider(),
               const SizedBox(

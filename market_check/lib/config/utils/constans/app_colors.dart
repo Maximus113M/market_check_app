@@ -9,7 +9,15 @@ class AppColors {
   static const Color error = Color.fromRGBO(177, 0, 15, 1);
   static const Color errorText = Color.fromARGB(255, 244, 67, 54);
   static const Color disabled = Color.fromRGBO(204, 204, 204, 1);
+  
+  static const appColor = Color.fromARGB(255, 99, 201, 249);
+  static const appColor2 = Color.fromARGB(255, 12, 172, 241);
+  static const appColor3 = Color.fromARGB(255, 3, 168, 239);
   //static const appColor4 = Color.fromARGB(255, 9, 161, 232);
+  static const appPrimary = Color(0xFF083754);
+  static const appSecondary = Color(0xFFfcc407);
+  static const appGray = Color(0xFFb3b2b2);
+  static const appMainInput = Color(0xFFD2D9DB);
 
   static const text = Colors.black;
   static const textwhite = Colors.white;

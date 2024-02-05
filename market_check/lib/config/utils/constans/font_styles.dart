@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
+
 class FontStyles {
   static const double sp40 = .100;
   static const double sp38 = .095;
