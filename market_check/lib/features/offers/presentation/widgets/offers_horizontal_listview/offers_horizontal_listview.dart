@@ -77,7 +77,7 @@ class _Slice extends StatelessWidget {
       tag: '${offer.id}',
       child: GestureDetector(
         onTap: () {
-          context.read<OfferProvider>().currentOffer = offer;
+          context.read<OffersProvider>().currentOffer = offer;
           context.push('/offer-view');
         },
         child: Container(

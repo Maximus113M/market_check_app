@@ -4,7 +4,7 @@ import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
-import 'package:market_check/features/login/presentation/providers/login_form_provider.dart';
+import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -39,7 +39,7 @@ class _LogInFormScreenBody extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            _LogInForm(Provider.of<LoginProvider>(context)),
+            _LogInForm(Provider.of<SignInProvider>(context)),
           ],
         ),
       ),
@@ -48,7 +48,7 @@ class _LogInFormScreenBody extends StatelessWidget {
 }
 
 class _LogInForm extends StatelessWidget {
-  final LoginProvider loginProvider;
+  final SignInProvider loginProvider;
   const _LogInForm(this.loginProvider);
   @override
   Widget build(BuildContext context) {

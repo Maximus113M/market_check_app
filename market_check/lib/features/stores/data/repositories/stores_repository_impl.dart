@@ -7,15 +7,15 @@ import 'package:market_check/features/stores/domain/repositories/store_repositor
 import 'package:dartz/dartz.dart';
 
 class StoresRepositoryImpl extends StoresRepository {
-  final StoresDataSourceImpl datasource;
+  final StoresDataSource storesDatasource;
 
-  StoresRepositoryImpl(this.datasource);
+  StoresRepositoryImpl({required this.storesDatasource});
 
   @override
   Future<Either<Failure, List<StoreModel>>> getStores() async {
     try {
       return Right(
-        await datasource.getStores(),
+        await storesDatasource.getStores(),
       );
     } on RemoteException catch (e) {
       return Left(

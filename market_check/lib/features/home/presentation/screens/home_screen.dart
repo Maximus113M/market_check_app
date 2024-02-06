@@ -41,7 +41,7 @@ class _HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<_HomeBody> {
-  late OfferProvider offersProvider;
+  late OffersProvider offersProvider;
   late StoresProvider storesProvider;
   bool isScreenLoaded = false;
   @override
@@ -49,7 +49,7 @@ class _HomeBodyState extends State<_HomeBody> {
     if (isScreenLoaded) return;
     isScreenLoaded = true;
     storesProvider = Provider.of<StoresProvider>(context);
-    offersProvider = Provider.of<OfferProvider>(context);
+    offersProvider = Provider.of<OffersProvider>(context);
 
     await offersProvider.loadOffers(notify: false);
     await storesProvider.loadStores(notify: false);

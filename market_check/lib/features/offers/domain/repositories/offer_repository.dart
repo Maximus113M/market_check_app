@@ -3,6 +3,6 @@ import 'package:market_check/features/offers/data/models/offer_model.dart';
 
 import 'package:dartz/dartz.dart';
 
-abstract class OfferRepository {
+abstract class OffersRepository {
   Future<Either<Failure, List<OfferModel>>> getOffers();
 }

@@ -5,9 +5,9 @@ import 'package:market_check/features/offers/data/datasources/offers_datasource.
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/domain/repositories/offer_repository.dart';
 
-class OfferRepositoryImpl extends OfferRepository {
+class OffersRepositoryImpl extends OffersRepository {
   final OffersDatasourceImpl offersDatasource;
-  OfferRepositoryImpl(this.offersDatasource);
+  OffersRepositoryImpl({required this.offersDatasource});
 
   @override
   Future<Either<Failure, List<OfferModel>>> getOffers() async {

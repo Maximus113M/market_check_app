@@ -10,7 +10,7 @@ class StoresProvider with ChangeNotifier {
   List<StoreModel> storeList = [];
   StoreModel? currentStore;
 
-  StoresProvider(this.getStoresUseCase);
+  StoresProvider({required this.getStoresUseCase});
 
   Future<void> loadStores({notify = true}) async {
     loadingStores = true;

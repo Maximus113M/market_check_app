@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/constans/in_app_notification.dart';
+
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/login/data/datasources/sign_in_data_source.dart';
+import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
-import 'package:market_check/features/login/data/repositories/sign_in_repository_impl.dart';
-import 'package:market_check/features/login/domain/repositories/sign_in_repsitory.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
-class LoginProvider with ChangeNotifier {
+import 'package:go_router/go_router.dart';
+
+class SignInProvider with ChangeNotifier {
   //TODO ARREGLAR AL USAR INYECCION DE DEPENDENCIAS
-  VerifyLogInUseCase verifyLogInUseCase = VerifyLogInUseCase(
-    signInRepostory: SignInRepositoryImpl(
-      signInDataSource: SignInDataSourceImpl(),
-    ),
-  );
+  final VerifyLogInUseCase verifyLogInUseCase;
   String emailInput = '';
   String passwordInput = '';
+
+  SignInProvider({required this.verifyLogInUseCase});
 
   void validateUser(BuildContext context) async {
     if (emailInput.trim().isEmpty ||
         !AppFuntions.emailRegExp.hasMatch(emailInput)) {
+      InAppNotification.showAppNotification(
+          context: context,
+          title: 'Email Invalido!',
+          message: 'El formato de correo ingresado no es valido',
+          type: NotificationType.error);
       return;
     }
     if (passwordInput.contains(" ") ||
         passwordInput.isEmpty ||
         passwordInput.length < 6) {
+      InAppNotification.showAppNotification(
+          context: context,
+          title: 'Contraseña Invalida!',
+          message:
+              'La contraseña no debe contener espacios y ser mayor de 5 digitos',
+          type: NotificationType.error);
       return;
     }
     print(passwordInput);

@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart';
 class GetStoresUseCase extends UseCase<List<StoreModel>, NoParams> {
   final StoresRepository storesRepository;
 
-  GetStoresUseCase(this.storesRepository);
+  GetStoresUseCase({required this.storesRepository});
 
   @override
   Future<Either<Failure, List<StoreModel>>> call(NoParams params) async =>
