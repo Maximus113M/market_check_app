@@ -11,8 +11,8 @@ class StoresListViewM extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    final List<StoreEntity> storeList =
-        context.read<StoresProvider>().storeList;
+    List<StoreEntity> storeList =  context.read<StoresProvider>().storeList;
+
     return Container(
       height: double.infinity,
       decoration: const BoxDecoration(
