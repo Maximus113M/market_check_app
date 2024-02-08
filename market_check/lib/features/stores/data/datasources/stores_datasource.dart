@@ -30,14 +30,14 @@ class StoresDataSourceImpl extends StoresDataSource {
       if (response.statusCode == 200) {
         final List<Future<StoreModel>> futuresStores =
             (response.data["stores"] as List).map((storeJson) async {
-          final Response dioImage =
+          /*final Response dioImage =
               await dioImages.get('${storeJson["Imagen"]}');
-          final Response dioLogo = await dioImages.get('${storeJson["Logo"]}');
+          final Response dioLogo = await dioImages.get('${storeJson["Logo"]}');*/
 
           return StoreModel.fromJson(
-              storeJson,
-              "${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}",
-              "${RemoteUrls.baseUrlMovilSena}${dioLogo.data["image_url"]}");
+              storeJson
+              /*"${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}",
+              "${RemoteUrls.baseUrlMovilSena}${dioLogo.data["image_url"]}"*/);
         }).toList();
         stores = await Future.wait(futuresStores);
       }

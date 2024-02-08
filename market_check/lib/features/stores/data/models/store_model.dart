@@ -23,7 +23,7 @@ class StoreModel {
     required this.locations,
   });
 
-  factory StoreModel.fromJson(json, String imagePath, String logoPath) =>
+  factory StoreModel.fromJson(json, /*String imagePath, String logoPath*/) =>
       StoreModel(
         id: json["id"],
         nit: json["Nit"],
@@ -32,8 +32,8 @@ class StoreModel {
         email: json["CorreoEstablecimiento"],
         description: json["Lema"],
         color: json["ColorInterfaz"],
-        poster: imagePath,
-        logo: logoPath,
+        poster: "${json["Imagen"]}",
+        logo: "${json["Logo"]}",
         locations: json["DireccionEstablecimiento"],
       );
 
@@ -41,7 +41,7 @@ class StoreModel {
         if (id != null) "id": id,
         "Nit": nit,
         "Estado": state,
-        "NombreEstblecimiento": name,
+        "NombreEstablecimiento": name,
         "CorreoEstablecimiento": email,
         "Lema": description,
         "ColorInterfaz": color,

@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/home/presentation/screens/home_screen1.dart';
-import 'package:market_check/features/login/presentation/screens/sign_up_screen.dart';
+import 'package:market_check/features/login/presentation/screens/signup/sign_up_screen.dart';
 import 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/features/stores/presentation/screens/store_view.dart';

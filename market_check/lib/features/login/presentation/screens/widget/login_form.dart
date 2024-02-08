@@ -1,55 +1,18 @@
 import 'package:flutter/material.dart';
-
-import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/config/utils/constans/app_assets.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
+import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 
-import 'package:provider/provider.dart';
-
-class LogInFormScreen extends StatelessWidget {
-  static const String name = 'login-form';
-  const LogInFormScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SafeArea(
-        child: Scaffold(
-      backgroundColor: AppColors.appPrimary,
-      body: _LogInFormScreenBody(),
-    ));
-  }
-}
-
-class _LogInFormScreenBody extends StatelessWidget {
-  const _LogInFormScreenBody();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.1),
-              child: Image.asset(AppAssets.logoVertical),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            _LogInForm(Provider.of<SignInProvider>(context)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _LogInForm extends StatelessWidget {
+class LogInForm extends StatelessWidget {
   final SignInProvider loginProvider;
-  const _LogInForm(this.loginProvider);
+  
+  const LogInForm({
+    super.key,
+    required this.loginProvider});
+
+
   @override
   Widget build(BuildContext context) {
     return Container(

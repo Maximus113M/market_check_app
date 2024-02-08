@@ -1,36 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/shared/widgets/shared_widgets.dart';
-import 'package:market_check/config/utils/constans/app_assets.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
+import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.appPrimary,
-      body: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: ScreenSize.absoluteHeight * 0.15,
-                bottom: ScreenSize.absoluteHeight * 0.05),
-            child: Image.asset(
-              AppAssets.logoHorizontal,
-              width: ScreenSize.width * 0.9,
-            ),
-          ),
-          const _SignUpForm()
-        ]),
-      ),
-    );
-  }
-}
-
-class _SignUpForm extends StatelessWidget {
-  const _SignUpForm();
+class SignUpForm extends StatelessWidget {
+  const SignUpForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +53,7 @@ class _SignUpForm extends StatelessWidget {
                   obscureText: true,
                   onChange: (p0) {},
                 ),
-                 const SizedBox(height: 25),
+                const SizedBox(height: 25),
                 const FilledCustomButton(
                   bgColor: AppColors.appSecondary,
                   color: AppColors.appPrimary,

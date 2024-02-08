@@ -1,6 +1,6 @@
 export 'package:market_check/features/home/presentation/screens/home_screen.dart';
-export 'package:market_check/features/login/presentation/screens/login_form_screen.dart';
-export 'package:market_check/features/login/presentation/screens/login_screen.dart';
+export 'package:market_check/features/login/presentation/screens/login/login_form_screen.dart';
+export 'package:market_check/features/login/presentation/screens/login/login_screen.dart';
 export 'package:market_check/features/offers/presentation/screens/offers_home_screen.dart';
 export 'package:market_check/features/offers/presentation/screens/offer_view.dart';
 export 'package:market_check/features/profile/presentation/screens/profile_screen.dart';
