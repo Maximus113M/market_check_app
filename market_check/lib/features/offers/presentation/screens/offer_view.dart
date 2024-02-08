@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
-import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
+import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class OfferBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OfferModel offer = context.read<OffersProvider>().currentOffer!;
+    final OfferModel offer = context.read<OfferssProvider>().currentOffer!;
     return Stack(
       children: [
         Column(

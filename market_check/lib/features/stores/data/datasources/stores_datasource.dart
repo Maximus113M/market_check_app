@@ -16,7 +16,7 @@ class StoresDataSourceImpl extends StoresDataSource {
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.storesUrl}",
     ),
   );
-  
+
   final dioImages = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
@@ -28,23 +28,14 @@ class StoresDataSourceImpl extends StoresDataSource {
       final response = await dioStores.get('');
       List<StoreModel> stores = [];
       if (response.statusCode == 200) {
-        final List<Future<StoreModel>> futuresStores =
-            (response.data["stores"] as List).map((storeJson) async {
-          final Response dioImage =
-              await dioImages.get('${storeJson["Imagen"]}');
-          final Response dioLogo = await dioImages.get('${storeJson["Logo"]}');
-
-          return StoreModel.fromJson(
-              storeJson,
-              "${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}",
-              "${RemoteUrls.baseUrlMovilSena}${dioLogo.data["image_url"]}");
+        stores =
+            (response.data["stores"] as List).map((storeJson) {
+          return StoreModel.fromJson(storeJson);
         }).toList();
-        stores = await Future.wait(futuresStores);
       }
-      print(stores);
       return stores;
     } catch (e) {
-      print("STORES $e" );
+      print("STORES $e");
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.storesException);

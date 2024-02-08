@@ -6,8 +6,10 @@ class OffersScreen extends StatelessWidget {
   static const String name = "offers-screen";
   const OffersScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(

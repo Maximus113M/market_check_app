@@ -5,10 +5,10 @@ packages:
     dependency: "direct main"
     description:
       name: animate_do
-      sha256: "77d67a1d9394d23106f8a3ca2a25b948ae35aeb134ff9d3cc80f085993765c72"
+      sha256: "8a9d0f91d066d5f86bd9de9455e5741e6bbb284b114c76375f01584065dd3da1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.1"
+    version: "3.3.3"
   another_flushbar:
     dependency: "direct main"
     description:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/features/offers/data/models/offer_model.dart';
-import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
+import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -77,7 +77,7 @@ class _Slice extends StatelessWidget {
       tag: '${offer.id}',
       child: GestureDetector(
         onTap: () {
-          context.read<OffersProvider>().currentOffer = offer;
+          context.read<OfferssProvider>().currentOffer = offer;
           context.push('/offer-view');
         },
         child: Container(

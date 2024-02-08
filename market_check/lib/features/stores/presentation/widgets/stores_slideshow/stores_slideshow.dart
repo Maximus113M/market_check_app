@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 
@@ -54,7 +55,7 @@ class _Slice extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
-            storePoster,
+            "${RemoteUrls.currentUrl.replaceAll('api/', '')}storage/images/$storePoster",
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) =>
                 Image.asset(AppAssets.loadingImage),

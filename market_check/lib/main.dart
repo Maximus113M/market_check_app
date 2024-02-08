@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
 import 'package:market_check/config/router/app_router.dart';
-import 'package:market_check/features/offers/presentation/providers/offer_provider.dart';
+import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
@@ -21,7 +21,7 @@ void main() async {
       ChangeNotifierProvider(
           create: (context) => StoresProvider(getStoresUseCase: sl())),
       ChangeNotifierProvider(
-          create: (context) => OffersProvider(getOffersUseCase: sl())),
+          create: (context) => OfferssProvider(getOffersUseCase: sl())),
       ChangeNotifierProvider(
         create: (context) => ShoppingCartProvider(),
       ),
