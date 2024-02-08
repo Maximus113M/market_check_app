@@ -10,11 +10,10 @@ class LogInFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-        child: Scaffold(
-      backgroundColor: AppColors.appPrimary,
-      body: LogInFormScreenBody(),
-    ));
+    return const Scaffold(
+          backgroundColor: AppColors.appPrimary,
+          body: LogInFormScreenBody(),
+        );
   }
 }
 

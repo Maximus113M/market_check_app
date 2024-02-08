@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/offers/presentation/screens/offer_bottoNavigation.dart';
+import 'package:market_check/features/offers/presentation/screens/offer_bottomNavigation.dart';
 
 class OfferScreeenM extends StatelessWidget {
   const OfferScreeenM({super.key});
