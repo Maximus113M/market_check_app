@@ -26,22 +26,9 @@ class StoresDataSourceImpl extends StoresDataSource {
       final response = await dioStores.get('');
       List<StoreModel> stores = [];
       if (response.statusCode == 200) {
-<<<<<<< HEAD
         stores =
             (response.data["stores"] as List).map((storeJson) {
           return StoreModel.fromJson(storeJson);
-=======
-        final List<Future<StoreModel>> futuresStores =
-            (response.data["stores"] as List).map((storeJson) async {
-          /*final Response dioImage =
-              await dioImages.get('${storeJson["Imagen"]}');
-          final Response dioLogo = await dioImages.get('${storeJson["Logo"]}');*/
-
-          return StoreModel.fromJson(
-              storeJson
-              /*"${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}",
-              "${RemoteUrls.baseUrlMovilSena}${dioLogo.data["image_url"]}"*/);
->>>>>>> 2f2914403582567560834e55338fdf2a22057b36
         }).toList();
       }
       return stores;
