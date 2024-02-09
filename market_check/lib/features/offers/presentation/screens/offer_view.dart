@@ -25,7 +25,7 @@ class OfferBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OfferModel offer = context.read<OfferssProvider>().currentOffer!;
+    final OfferModel offer = context.read<OffersProvider>().currentOffer!;
     return Stack(
       children: [
         Column(

@@ -17,11 +17,14 @@ void main() async {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
-          create: (context) => SignInProvider(verifyLogInUseCase: sl())),
+        create: (context) => SignInProvider(verifyLogInUseCase: sl()),
+      ),
       ChangeNotifierProvider(
-          create: (context) => StoresProvider(getStoresUseCase: sl())),
+        create: (context) => StoresProvider(getStoresUseCase: sl()),
+      ),
       ChangeNotifierProvider(
-          create: (context) => OfferssProvider(getOffersUseCase: sl())),
+        create: (context) => OffersProvider(getOffersUseCase: sl()),
+      ),
       ChangeNotifierProvider(
         create: (context) => ShoppingCartProvider(),
       ),

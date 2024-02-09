@@ -55,7 +55,7 @@ class _Slice extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
-            "${RemoteUrls.currentUrl.replaceAll('api/', '')}storage/images/$storePoster",
+            "${RemoteUrls.currentImagesUrl}$storePoster",
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) =>
                 Image.asset(AppAssets.loadingImage),

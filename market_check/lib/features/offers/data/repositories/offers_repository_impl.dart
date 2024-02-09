@@ -6,7 +6,7 @@ import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/domain/repositories/offer_repository.dart';
 
 class OffersRepositoryImpl extends OffersRepository {
-  final OffersDatasourceImpl offersDatasource;
+  final OffersDataSource offersDatasource;
   OffersRepositoryImpl({required this.offersDatasource});
 
   @override

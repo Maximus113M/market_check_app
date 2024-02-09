@@ -4,13 +4,13 @@ import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
 
-class OfferssProvider with ChangeNotifier {
+class OffersProvider with ChangeNotifier {
   final GetOffersUseCase getOffersUseCase;
   bool loadingOffers = false;
   List<OfferModel> offerList = [];
   OfferModel? currentOffer;
 
-  OfferssProvider({required this.getOffersUseCase});
+  OffersProvider({required this.getOffersUseCase});
 
   Future<void> loadOffers({bool notify = true}) async {
     

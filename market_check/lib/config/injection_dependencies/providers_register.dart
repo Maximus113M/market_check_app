@@ -16,7 +16,7 @@ void registerProviders() {
     ),
   );
   sl.registerLazySingleton(
-    () => OfferssProvider(
+    () => OffersProvider(
       getOffersUseCase: sl(),
     ),
   );

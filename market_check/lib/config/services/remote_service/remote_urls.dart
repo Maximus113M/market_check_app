@@ -10,4 +10,7 @@ class RemoteUrls {
   static const String offersUrl = "ofertas/";
 
   static const String currentUrl= baseUrlMovilSena;
+  
+  static String currentImagesUrl= "${currentUrl.replaceFirst('api/', '')}storage/images/";
+
 }

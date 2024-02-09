@@ -10,6 +10,9 @@ abstract class OffersDataSource {
 }
 
 class OffersDatasourceImpl extends OffersDataSource {
+
+  OffersDatasourceImpl();
+  
   final dioOffers = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.offersUrl}",

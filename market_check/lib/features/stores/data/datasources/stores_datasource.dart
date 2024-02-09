@@ -1,5 +1,3 @@
-//import 'package:market_check/json_from_db/json_data.dart';
-import 'package:flutter/material.dart';
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';

@@ -4,11 +4,11 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_slideshow/stores_slideshow.dart';
-import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 
 import 'package:provider/provider.dart';
 
@@ -42,7 +42,7 @@ class _HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<_HomeBody> {
-  //late OfferssProvider offersProvider;
+  late OffersProvider offersProvider;
   late StoresProvider storesProvider;
   bool isScreenLoaded = false;
   @override
@@ -50,9 +50,9 @@ class _HomeBodyState extends State<_HomeBody> {
     if (isScreenLoaded) return;
     isScreenLoaded = true;
     storesProvider = Provider.of<StoresProvider>(context);
-    //offersProvider = Provider.of<OfferssProvider>(context);
+    offersProvider = Provider.of<OffersProvider>(context);
 
-    //await offersProvider.loadOffers(notify: false);
+    await offersProvider.loadOffers(notify: false);
     await storesProvider.loadStores(notify: false);
     if (mounted) setState(() {});
     super.didChangeDependencies();
@@ -112,7 +112,7 @@ class _HomeBodyState extends State<_HomeBody> {
             ),
             StoresSlideShow(stores: storesProvider.storeList),
             const SizedBox(height: 5),
-          /* OffersHorizontalListView(
+          OffersHorizontalListView(
               title: "Ofertas Populares",
               subtitle: "6 Ofertas",
               offers: offersProvider.offerList,
@@ -121,7 +121,7 @@ class _HomeBodyState extends State<_HomeBody> {
               title: "Ofertas Noviembre",
               subtitle: "${offersProvider.offerList.length} Ofertas",
               offers: offersProvider.offerList,
-            ),*/
+            ),
             const SizedBox(height: 10),
           ],
         ),
