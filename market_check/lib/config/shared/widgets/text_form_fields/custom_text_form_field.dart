@@ -27,6 +27,9 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
     return TextFormField(
+      style: TextStyle(
+        height: ScreenSize.height * 0.001
+      ),
       onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
@@ -43,7 +46,7 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         label: label != null
             ? Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.symmetric(horizontal:15.0),
                 child: Text(
                   label!,
                   style: const TextStyle(

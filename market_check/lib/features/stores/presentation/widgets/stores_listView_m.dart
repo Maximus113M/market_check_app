@@ -44,9 +44,9 @@ class StoresListViewM extends StatelessWidget {
                       color: Colors.white,
                     ),
                     child: ListTile(
-                      leading: Icon(
+                      leading: const Icon(
                         Icons.store,
-                        color: const Color(0xFFF25B50),
+                        color: Color(0xFFF25B50),
                         size: 50,
                       ),
                       title: Text(stores.name),

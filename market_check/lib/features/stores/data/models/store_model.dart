@@ -40,7 +40,7 @@ class StoreModel {
         if (id != null) "id": id,
         "Nit": nit,
         "Estado": state,
-        "NombreEstblecimiento": name,
+        "NombreEstablecimiento": name,
         "CorreoEstablecimiento": email,
         "Lema": description,
         "ColorInterfaz": color,

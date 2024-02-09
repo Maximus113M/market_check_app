@@ -42,7 +42,7 @@ class _HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<_HomeBody> {
-  late OffersProvider offersProvider;
+  //late OffersProvider offersProvider;
   late StoresProvider storesProvider;
   bool isScreenLoaded = false;
   @override
@@ -50,9 +50,9 @@ class _HomeBodyState extends State<_HomeBody> {
     if (isScreenLoaded) return;
     isScreenLoaded = true;
     storesProvider = Provider.of<StoresProvider>(context);
-    offersProvider = Provider.of<OffersProvider>(context);
+    //offersProvider = Provider.of<OffersProvider>(context);
 
-    await offersProvider.loadOffers(notify: false);
+    //await offersProvider.loadOffers(notify: false);
     await storesProvider.loadStores(notify: false);
     if (mounted) setState(() {});
     super.didChangeDependencies();
@@ -112,15 +112,15 @@ class _HomeBodyState extends State<_HomeBody> {
             ),
             StoresSlideShow(stores: storesProvider.storeList),
             const SizedBox(height: 5),
-          OffersHorizontalListView(
+          const OffersHorizontalListView(
               title: "Ofertas Populares",
               subtitle: "6 Ofertas",
-              offers: offersProvider.offerList,
+              offers: [],
             ),
-            OffersHorizontalListView(
+            const OffersHorizontalListView(
               title: "Ofertas Noviembre",
-              subtitle: "${offersProvider.offerList.length} Ofertas",
-              offers: offersProvider.offerList,
+              subtitle: "Ofertas",
+              offers: [],
             ),
             const SizedBox(height: 10),
           ],
