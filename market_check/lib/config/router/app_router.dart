@@ -35,7 +35,7 @@ final appRouter = GoRouter(
     GoRoute(
         path: "/stores",
         name: StoresScreen.name,
-        builder: (context, state) => const OfferScreeenM()),//StoresScreenM()),
+        builder: (context, state) => const StoresScreenM()), //OfferScreeenM()),
     GoRoute(
       path: "/store-view",
       name: StoreView.name,

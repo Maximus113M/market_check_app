@@ -22,8 +22,7 @@ void main() async {
       ChangeNotifierProvider(
           create: (context) => StoresProvider(getStoresUseCase: sl())),
       ChangeNotifierProvider(
-        create: (context) => OfferProvider()),
-          //create: (context) => OffersProvider(getOffersUseCase: sl())),
+        create: (context) => OffersProvider(getOffersUseCase: sl())),
       ChangeNotifierProvider(
         create: (context) => ShoppingCartProvider(),
       ),
