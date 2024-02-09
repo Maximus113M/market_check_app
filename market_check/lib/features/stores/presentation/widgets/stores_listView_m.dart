@@ -13,6 +13,7 @@ class StoresListViewM extends StatelessWidget {
     
     final List<StoreModel> storeList =
         context.read<StoresProvider>().storeList;
+        
     return Container(
       height: double.infinity,
       decoration: const BoxDecoration(
@@ -47,7 +48,7 @@ class StoresListViewM extends StatelessWidget {
                       leading: const Icon(
                         Icons.store,
                         color: Color(0xFFF25B50),
-                        size: 50,
+                        size: 50, //Image.network("${RemoteUrls.currentImagesUrl}$storePoster")
                       ),
                       title: Text(stores.name),
                       trailing: const Icon(

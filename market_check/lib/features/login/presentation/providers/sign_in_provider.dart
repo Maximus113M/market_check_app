@@ -16,7 +16,7 @@ class SignInProvider with ChangeNotifier {
   SignInProvider({required this.verifyLogInUseCase});
 
   void validateUser(BuildContext context) async {
-    /*if (emailInput.trim().isEmpty ||
+    if (emailInput.trim().isEmpty ||
         !AppFuntions.emailRegExp.hasMatch(emailInput)) {
       InAppNotification.showAppNotification(
           context: context,
@@ -48,7 +48,7 @@ class SignInProvider with ChangeNotifier {
           context.push('/home');
         }
       },
-    );*/
+    );
     context.pushReplacement('/stores');
   }
   
