@@ -5,12 +5,17 @@ class User {
   final String email;
   final int rolId;
 
+  bool isPurchaseOpen;
+  int? purchasePin;
+
   User({
     required this.id,
     required this.name,
     required this.document,
     required this.email,
     required this.rolId,
+    this.isPurchaseOpen= false,
+    this.purchasePin,
   });
 
   factory User.fromJson(json) => User(

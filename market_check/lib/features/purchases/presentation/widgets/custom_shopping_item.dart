@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dart';
-import 'package:market_check/features/shopping_cart/domain/entities/shopping_item_entity.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
-import 'package:market_check/features/shopping_cart/domain/entities/shopping_item_entity.dart';
-import 'package:market_check/features/shopping_cart/presentation/widgets/end_shopping_dialog.dart';
+import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/presentation/widgets/end_shopping_dialog.dart';
 
 class ShoppingCartProvider with ChangeNotifier {
   List<ShoppingItemEntity> shoppingList = shoppingItems;

@@ -4,7 +4,7 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_body.dart';
 import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 
 import 'package:provider/provider.dart';
 

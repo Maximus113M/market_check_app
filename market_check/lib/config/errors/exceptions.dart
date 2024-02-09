@@ -19,5 +19,6 @@ enum ExceptionType {
   homeException,
   offersException,
   storesException,
-
+  purchasesException,
+  shoppingHistoryException,
 }

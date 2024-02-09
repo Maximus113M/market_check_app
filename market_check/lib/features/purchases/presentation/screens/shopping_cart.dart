@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
 import 'package:market_check/features/home/presentation/widgets/custom_badge_icon.dart';
-import 'package:market_check/features/shopping_cart/presentation/widgets/custom_shopping_item.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/purchases/presentation/widgets/custom_shopping_item.dart';
+import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:animate_do/animate_do.dart';

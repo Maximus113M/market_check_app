@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:market_check/features/shopping_cart/domain/entities/shopping_item_entity.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 import 'package:provider/provider.dart';
 
 class ScannerScreen extends StatefulWidget {
