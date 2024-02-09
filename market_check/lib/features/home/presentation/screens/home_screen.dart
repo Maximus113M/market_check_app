@@ -7,7 +7,7 @@ import 'package:market_check/features/offers/presentation/providers/offers_provi
 import 'package:market_check/features/offers/presentation/widgets/offers_horizontal_listview/offers_horizontal_listview.dart';
 
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:market_check/features/shopping_cart/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_slideshow/stores_slideshow.dart';
 
 import 'package:provider/provider.dart';

@@ -49,7 +49,7 @@ class SignInProvider with ChangeNotifier {
         }
       },
     );
-    context.pushReplacement('/stores');
+    //context.pushReplacement('/stores');
   }
   
   /* void onChangeEmail(String email){

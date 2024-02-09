@@ -8,6 +8,8 @@ class RemoteUrls {
   static const String storesUrl = "establecimiento/";
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";
+  static const String purchaseUrl = "new-purchase/";
+  static const String shoppingHistoryUrl = "mobile-app/";
 
   static const String currentUrl= baseUrlMovilSena;
   

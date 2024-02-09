@@ -4,4 +4,9 @@ class AuthService{
   static User? user;
   static String? token;
   static String? typeToken;
+
+  static Map<String, dynamic> headers= {
+      'Content-Type':'application/json',
+      'Authorization':'Bearer ${AuthService.token}'
+    };
 }
