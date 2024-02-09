@@ -13,8 +13,9 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.appPrimary,
       body: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          SizedBox(height: ScreenSize.height * 0.07),
+        child: Column(
+          children: [
+          SizedBox(height: ScreenSize.height * 0.06),
           Align(
             alignment: Alignment.topLeft,
             child: IconButton(
