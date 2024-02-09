@@ -11,7 +11,7 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: ScreenSize.height * 0.64,
+        height: ScreenSize.height * 0.65,
         decoration: const BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.only(
