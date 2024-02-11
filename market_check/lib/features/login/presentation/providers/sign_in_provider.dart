@@ -45,7 +45,7 @@ class SignInProvider with ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         if (r) {
-          context.push('/home');
+          context.push('/stores-m');
         }
       },
     );

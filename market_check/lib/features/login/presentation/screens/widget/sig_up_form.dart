@@ -60,6 +60,7 @@ class SignUpForm extends StatelessWidget {
                   verticalSize: 10,
                   horizontalSize: ScreenSize.height * 0.09,
                   text: 'Registrarse',
+                  route: "/login-form",
                 )
               ],
             ),

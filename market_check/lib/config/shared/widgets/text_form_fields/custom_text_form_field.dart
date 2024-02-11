@@ -46,7 +46,7 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         label: label != null
             ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal:15.0),
+                padding:  EdgeInsets.symmetric(horizontal:ScreenSize.absoluteHeight * 0.001),
                 child: Text(
                   label!,
                   style: const TextStyle(

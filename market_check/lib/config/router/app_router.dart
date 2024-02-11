@@ -1,5 +1,4 @@
 import 'package:market_check/features/screens.dart';
-import 'package:market_check/features/stores/presentation/screens/store_view.dart';
 import 'package:market_check/features/home/presentation/screens/home_screen1.dart';
 import 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -16,33 +15,39 @@ final appRouter = GoRouter(
               name: HomeScreen.name,
               builder: (context, state) => const HomeScreen()),
         ]),*/
-    GoRoute(
+    /*GoRoute(
         path: "/login",
         name: LogInScreen.name,
-        builder: (context, state) => const LogInScreen()),
+        builder: (context, state) => const LogInScreen()),*/
     GoRoute(
       path: "/login-form",
       name: LogInFormScreen.name,
       builder: (context, state) => const LogInFormScreen(),
     ),
-    GoRoute(
+    /*GoRoute(
       path: "/home",
       name: HomeScreen.name,
       builder: (context, state) => HomeScreen(),
-    ),
+    ),*/
     GoRoute(
       path: "/shopping-cart",
       name: ShoppingCart.name,
       builder: (context, state) => const ShoppingCart(),
     ),
     GoRoute(
-        path: "/stores",
-        name: StoresScreen.name,
-        builder: (context, state) => const StoresScreenM()), //OfferScreeenM()),
-    GoRoute(
+        path: "/stores-m",
+        name: StoresScreenM.name,
+        builder: (context, state) => const StoresScreenM()
+        ),
+    /*GoRoute(
       path: "/store-view",
       name: StoreView.name,
       builder: (context, state) => const StoreView(),
+    ),*/
+    GoRoute(
+      path: "/offers-m",
+      name: OfferScreeenM.name,
+      builder: (context, state) => const OfferScreeenM(),
     ),
     GoRoute(
       path: "/offers",

@@ -28,11 +28,11 @@ class LogInForm extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.height * 0.04,
-                vertical: ScreenSize.width * 0.05),
+                vertical: ScreenSize.width * 0.09),
             child: Column(
               children: [
-                Text(loginProvider.emailInput),
                 CustomTextFormField(
+                  icon: Icons.email_rounded,
                   label: 'Email',
                   onChange: (emailValue) {
                     loginProvider.emailInput= emailValue;
@@ -40,9 +40,10 @@ class LogInForm extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 CustomTextFormField(
+                  icon: Icons.lock,
                   label: 'Contraseña',
                   obscureText: true,
                   onChange: (passwordValue) {
@@ -61,7 +62,7 @@ class LogInForm extends StatelessWidget {
                     bgColor: AppColors.appSecondary,
                     verticalSize: 12,
                     action: () => loginProvider.validateUser(context),
-                    route: '/stores'),
+                    ),
                 const SizedBox(
                   height: 9,
                 ),

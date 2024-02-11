@@ -4,6 +4,7 @@ import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/offers/presentation/screens/offer_bottomNavigation.dart';
 
 class OfferScreeenM extends StatelessWidget {
+  static const name = "offers-m";
   const OfferScreeenM({super.key});
 
   @override
@@ -23,6 +24,7 @@ class OfferScreeenM extends StatelessWidget {
               ))
         ],
       ),
+
       bottomNavigationBar: const BottomMenu(),
     );
   }

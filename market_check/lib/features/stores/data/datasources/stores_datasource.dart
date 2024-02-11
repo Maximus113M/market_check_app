@@ -20,6 +20,7 @@ class StoresDataSourceImpl extends StoresDataSource {
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
     ),
   );
+
   @override
   Future<List<StoreModel>> getStores() async {
     try {
@@ -31,6 +32,7 @@ class StoresDataSourceImpl extends StoresDataSource {
           return StoreModel.fromJson(storeJson);
         }).toList();
       }
+      print(stores);
       return stores;
     } catch (e) {
       print("STORES $e");
