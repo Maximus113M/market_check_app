@@ -6,9 +6,11 @@ import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_listview_m.dart';
+import 'package:provider/provider.dart';
 
 class StoresScreenM extends StatelessWidget {
   static const String name = 'stores-m';
+  //final StoresProvider storesProvider;
   const StoresScreenM({super.key});
 
   @override
@@ -19,8 +21,10 @@ class StoresScreenM extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: ScreenSize.height * 0.1),
-            child: Image.asset(AppAssets.logoHorizontal,
-            height: ScreenSize.height * 0.09,),
+            child: Image.asset(
+              AppAssets.logoHorizontal,
+              height: ScreenSize.height * 0.09,
+            ),
           ),
           SizedBox(height: ScreenSize.height * 0.03),
           Padding(
@@ -31,13 +35,16 @@ class StoresScreenM extends StatelessWidget {
               onChange: (p0) {},
             ),
           ),
-          const Expanded(child: StoresListviewM()),
-
+          Expanded(
+            child: StoresListviewM(
+              storeList: context.watch<StoresProvider>().storeList,
+            ),
+          ),
           ElevatedButton(
-          onPressed: (){
-            context.push("/offers-m");
-          }, 
-          child: Text('Offers'))
+              onPressed: () {
+                context.push("/offers-m");
+              },
+              child: Text('Offers'))
         ],
       ),
     );

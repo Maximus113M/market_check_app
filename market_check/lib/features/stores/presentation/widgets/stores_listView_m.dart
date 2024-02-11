@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_listtitle.dart';
 
-import 'package:provider/provider.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-
 class StoresListviewM extends StatelessWidget {
-
-  const StoresListviewM({super.key});
+  final List<StoreModel> storeList;
+  const StoresListviewM({super.key, required this.storeList});
 
   @override
   Widget build(BuildContext context) {
-    
-    final List<StoreModel> storeList =
-        context.watch<StoresProvider>().storeList;
-    
     return Container(
       height: double.infinity,
       decoration: const BoxDecoration(

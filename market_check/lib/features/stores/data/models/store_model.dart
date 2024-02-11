@@ -6,8 +6,8 @@ class StoreModel {
   final String email;
   final String? description;
   final String? color;
-  final String poster;
-  final String logo;
+  final String? poster;
+  final String? logo;
   final String locations; //TODO: LIST<LOCATIONS>
 
   StoreModel({

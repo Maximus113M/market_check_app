@@ -11,13 +11,13 @@ abstract class StoresDataSource {
 class StoresDataSourceImpl extends StoresDataSource {
   final dioStores = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.storesUrl}",
+      baseUrl: "${RemoteUrls.baseUrlMovil}${RemoteUrls.storesUrl}",
     ),
   );
 
   final dioImages = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
+      baseUrl: "${RemoteUrls.baseUrlMovil}${RemoteUrls.imagesUrl}",
     ),
   );
 
@@ -27,8 +27,7 @@ class StoresDataSourceImpl extends StoresDataSource {
       final response = await dioStores.get('');
       List<StoreModel> stores = [];
       if (response.statusCode == 200) {
-        stores =
-            (response.data["stores"] as List).map((storeJson) {
+        stores = (response.data["stores"] as List).map((storeJson) {
           return StoreModel.fromJson(storeJson);
         }).toList();
       }

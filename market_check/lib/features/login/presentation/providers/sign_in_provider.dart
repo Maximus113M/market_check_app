@@ -6,6 +6,8 @@ import 'package:market_check/features/login/data/models/sign_in_data_model.dart'
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignInProvider with ChangeNotifier {
   //TODO ARREGLAR AL USAR INYECCION DE DEPENDENCIAS
@@ -45,13 +47,14 @@ class SignInProvider with ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         if (r) {
+          context.read<StoresProvider>().loadStores(notify: true);
           context.push('/stores-m');
         }
       },
     );
-    //context.pushReplacement('/stores');
+    //context.pushReplacement('/stores-m');
   }
-  
+
   /* void onChangeEmail(String email){
     emailInput = email;
     notifyListeners();
