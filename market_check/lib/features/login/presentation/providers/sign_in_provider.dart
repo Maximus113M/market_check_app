@@ -14,8 +14,14 @@ class SignInProvider with ChangeNotifier {
   final VerifyLogInUseCase verifyLogInUseCase;
   String emailInput = '';
   String passwordInput = '';
+  bool obscureText = true;
 
   SignInProvider({required this.verifyLogInUseCase});
+
+   void toggleObscureText() {
+    obscureText = !obscureText;
+    notifyListeners();
+  }
 
   void validateUser(BuildContext context) async {
     if (emailInput.trim().isEmpty ||
@@ -34,7 +40,7 @@ class SignInProvider with ChangeNotifier {
           context: context,
           title: 'Contraseña Invalida!',
           message:
-              'La contraseña no debe contener espacios y ser mayor de 5 digitos',
+              'La contraseña no debe contener espacios y debe ser mayor de 5 digitos',
           type: NotificationType.error);
       return;
     }

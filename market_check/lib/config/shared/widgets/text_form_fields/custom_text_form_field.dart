@@ -5,6 +5,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final String? hint;
   final IconData? icon;
+  final IconButton? suffixIcon;
+
   final String? errorMessage;
   final bool obscureText;
   final Function(String) onChange;
@@ -17,8 +19,10 @@ class CustomTextFormField extends StatelessWidget {
       this.errorMessage,
       required this.onChange,
       this.onComplete,
-      this.obscureText = false,
-      this.icon});
+      this.obscureText = true,
+      this.icon, 
+      this.suffixIcon, 
+});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +38,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon) : null,
+        suffixIcon: suffixIcon,
         filled: true,
         fillColor: AppColors.appMainInput,
         enabledBorder: border,

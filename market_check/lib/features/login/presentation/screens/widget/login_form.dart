@@ -8,11 +8,8 @@ import 'package:market_check/features/login/presentation/providers/sign_in_provi
 
 class LogInForm extends StatelessWidget {
   final SignInProvider loginProvider;
-  
-  const LogInForm({
-    super.key,
-    required this.loginProvider});
 
+  const LogInForm({super.key, required this.loginProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +32,8 @@ class LogInForm extends StatelessWidget {
                   icon: Icons.email_rounded,
                   label: 'Email',
                   onChange: (emailValue) {
-                    loginProvider.emailInput= emailValue;
-                    print(loginProvider.emailInput); 
+                    loginProvider.emailInput = emailValue;
+                    print(loginProvider.emailInput);
                   },
                 ),
                 const SizedBox(
@@ -44,8 +41,16 @@ class LogInForm extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   icon: Icons.lock,
+                  obscureText: loginProvider.obscureText,
+                  suffixIcon: IconButton(
+                    icon: loginProvider.obscureText
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
+                    onPressed: () {
+                      loginProvider.toggleObscureText();
+                    },
+                  ),
                   label: 'Contraseña',
-                  obscureText: true,
                   onChange: (passwordValue) {
                     loginProvider.passwordInput = passwordValue;
                   },
@@ -56,13 +61,13 @@ class LogInForm extends StatelessWidget {
                 SizedBox(
                   height: ScreenSize.height * 0.02,
                 ),
-                 FilledCustomButton(
-                    text: 'Iniciar Sesión',
-                    color: AppColors.appPrimary,
-                    bgColor: AppColors.appSecondary,
-                    verticalSize: 12,
-                    action: () => loginProvider.validateUser(context),
-                    ),
+                FilledCustomButton(
+                  text: 'Iniciar Sesión',
+                  color: AppColors.appPrimary,
+                  bgColor: AppColors.appSecondary,
+                  verticalSize: 12,
+                  action: () => loginProvider.validateUser(context),
+                ),
                 const SizedBox(
                   height: 9,
                 ),
@@ -71,7 +76,6 @@ class LogInForm extends StatelessWidget {
                   child: const Text(
                     '¿Olvidaste la contraseña?',
                     style: TextStyle(color: AppColors.appPrimary),
-                    
                   ),
                 ),
                 GestureDetector(
@@ -80,7 +84,9 @@ class LogInForm extends StatelessWidget {
                   },
                   child: const Text(
                     'Registrate',
-                    style: TextStyle(color: AppColors.appSecondary, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: AppColors.appSecondary,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

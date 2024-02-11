@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/utils/constans/font_styles.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_listtitle.dart';
 
@@ -20,7 +21,8 @@ class StoresListviewM extends StatelessWidget {
           const Center(
             child: Padding(
               padding: EdgeInsets.only(top: 30),
-              child: Text('Listado de establecimientos cercanos'),
+              child: Text('Listado de establecimientos cercanos', 
+              style: TextStyle(fontSize: 16)),
             ),
           ),
           Expanded(

@@ -20,15 +20,15 @@ class StoresScreenM extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: ScreenSize.height * 0.1),
+            padding: EdgeInsets.only(top: ScreenSize.height * 0.08),
             child: Image.asset(
               AppAssets.logoHorizontal,
               height: ScreenSize.height * 0.09,
             ),
           ),
-          SizedBox(height: ScreenSize.height * 0.03),
+          SizedBox(height: ScreenSize.height * 0.02),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: CustomTextFormField(
               icon: Icons.search,
               hint: 'Buscar establecimiento',
@@ -40,11 +40,7 @@ class StoresScreenM extends StatelessWidget {
               storeList: context.watch<StoresProvider>().storeList,
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                context.push("/offers-m");
-              },
-              child: Text('Offers'))
+          
         ],
       ),
     );
