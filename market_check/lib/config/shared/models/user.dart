@@ -21,7 +21,7 @@ class User {
   factory User.fromJson(json) => User(
       id: json["user"]["id"],
       name: json["user"]["name"],
-      document: json["user"]["documento"],
+      document: json["user"]["documento"].toString(),
       email: json["user"]["email"],
       rolId: json["user"]["rol_id"],
       );

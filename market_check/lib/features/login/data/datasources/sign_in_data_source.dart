@@ -5,10 +5,11 @@ import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 
 import 'package:dio/dio.dart';
+import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
 
 abstract class SignInDataSource {
   Future<bool> verifyLogIn(SignInDataModel signInData);
-  Future<String> signUp(User newUser);
+  Future<String> signUp(SignUpDataModel newUser);
 }
 
 class SignInDataSourceImpl extends SignInDataSource {
@@ -55,7 +56,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   }
 
   @override
-  Future<String> signUp(User newUser) async {
+  Future<String> signUp(SignUpDataModel newUser) async {
     try {
       final Response response =
           await dioLogIn.post('', data: newUser.userToJson());

@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? hint;
   final IconData? icon;
   final IconButton? suffixIcon;
+  final bool isNumeric;
 
   final String? errorMessage;
   final bool obscureText;
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
       this.obscureText = false,
       this.icon, 
       this.suffixIcon, 
+      this.isNumeric =  false, 
 });
 
   @override
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
     return TextFormField(
+      keyboardType: isNumeric ?TextInputType.number : null,
       style: TextStyle(
         height: ScreenSize.height * 0.001
       ),

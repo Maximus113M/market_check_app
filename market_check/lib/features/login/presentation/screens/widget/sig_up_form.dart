@@ -26,29 +26,45 @@ class SignUpForm extends StatelessWidget {
               children: [
                 CustomTextFormField(
                   label: 'Nombre y Apellido',
-                  onChange: (p0) {},
+                  onChange: (nameValue) {
+                    signUpProvider.names = nameValue;
+                    print(signUpProvider.names);
+                  },
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
+                  isNumeric: true,
                   label: 'Número de documento',
-                  onChange: (p0) {},
+                  onChange: (documentValue) {
+                    signUpProvider.document = documentValue;
+                    print(signUpProvider.document);
+                  },
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
                   label: 'Correo electronico',
-                  onChange: (p0) {},
+                  onChange: (emailValue) {
+                    signUpProvider.emailInput = emailValue;
+                    print(signUpProvider.emailInput);
+                  },
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
                   label: 'Contraseña',
                   obscureText: true,
-                  onChange: (p0) {},
+                  onChange: (passwordValue) {
+                    signUpProvider.passwordInput = passwordValue;
+                    print(signUpProvider.passwordInput);
+                  },
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
                   label: 'Nuevamente la contraseña',
                   obscureText: true,
-                  onChange: (p0) {},
+                  onChange: (confirmPassword) {
+                    signUpProvider.confirmPassword = confirmPassword;
+                    print(signUpProvider.confirmPassword);
+                  },
                 ),
                 const SizedBox(height: 45),
                 FilledCustomButton(
@@ -58,6 +74,7 @@ class SignUpForm extends StatelessWidget {
                   horizontalSize: ScreenSize.height * 0.09,
                   text: 'Registrarse',
                   route: "/login-form",
+                  action: ()=>signUpProvider.validateSingup(context),
                 )
               ],
             ),
