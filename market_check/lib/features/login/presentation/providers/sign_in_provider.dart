@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
+import 'package:market_check/features/login/domain/use_cases/sign_in_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
 import 'package:go_router/go_router.dart';
@@ -12,11 +13,16 @@ import 'package:provider/provider.dart';
 class SignInProvider with ChangeNotifier {
   //TODO ARREGLAR AL USAR INYECCION DE DEPENDENCIAS
   final VerifyLogInUseCase verifyLogInUseCase;
+  final SignUpUseCase signInUseCase;
+
   String emailInput = '';
   String passwordInput = '';
   bool obscureText = true;
+  String names = "";
+  int? document;
+  String confirmPassword = "";
 
-  SignInProvider({required this.verifyLogInUseCase});
+  SignInProvider({required this.signInUseCase, required this.verifyLogInUseCase});
 
    void toggleObscureText() {
     obscureText = !obscureText;
@@ -45,6 +51,7 @@ class SignInProvider with ChangeNotifier {
       return;
     }
     print(passwordInput);
+
     final SignInDataModel signInData =
         SignInDataModel(email: emailInput, password: passwordInput);
     final result = await verifyLogInUseCase(signInData);

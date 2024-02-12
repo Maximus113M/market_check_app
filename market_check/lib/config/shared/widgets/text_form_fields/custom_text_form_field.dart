@@ -19,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
       this.errorMessage,
       required this.onChange,
       this.onComplete,
-      this.obscureText = true,
+      this.obscureText = false,
       this.icon, 
       this.suffixIcon, 
 });

@@ -5,10 +5,10 @@ import 'package:market_check/features/login/domain/repositories/sign_in_repsitor
 
 import 'package:dartz/dartz.dart';
 
-class SignInUseCase extends UseCase<String, User> {
+class SignUpUseCase extends UseCase<String, User> {
   final SignInRepostory signInRepostory;
 
-  SignInUseCase({required this.signInRepostory});
+  SignUpUseCase({required this.signInRepostory});
 
   @override
   Future<Either<RemoteFailure, String>> call(User params) async {

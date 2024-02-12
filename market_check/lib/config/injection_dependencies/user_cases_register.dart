@@ -11,7 +11,7 @@ void registerUseCases() {
     ),
   );
   sl.registerLazySingleton(
-    () => SignInUseCase(
+    () => SignUpUseCase(
       signInRepostory: sl(),
     ),
   );
