@@ -20,5 +20,7 @@ class StoresProvider with ChangeNotifier {
     result.fold((l) => null, (r) => storeList = r);
     if (notify) notifyListeners();
     //currentStore = null;
+    
   }
+
 }

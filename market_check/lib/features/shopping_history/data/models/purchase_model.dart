@@ -6,9 +6,9 @@ class PurchaseModel{
   final DateTime fecha;
   final double total;
   final int estado;
-  final int establecimiento_id;
-  final int user_id;
-  final int seller_id;
+  final int establecimientoId;
+  final int userId;
+  final int sellerId;
 
   PurchaseModel({
     required this.id, 
@@ -16,9 +16,9 @@ class PurchaseModel{
     required this.fecha, 
     required this.total, 
     required this.estado, 
-    required this.establecimiento_id, 
-    required this.user_id, 
-    required this.seller_id,});
+    required this.establecimientoId, 
+    required this.userId, 
+    required this.sellerId,});
 
   factory PurchaseModel.fromJson(json)=>PurchaseModel(
     id: json["id"],
@@ -26,8 +26,8 @@ class PurchaseModel{
     fecha: json["fecha"], 
     total: json["total"], 
     estado: json["estado"], 
-    establecimiento_id: json["establecimiento_id"], 
-    user_id: json["user_id"], 
-    seller_id: json["seller_id"]
+    establecimientoId: json["establecimiento_id"], 
+    userId: json["user_id"], 
+    sellerId: json["seller_id"]
     );
 }

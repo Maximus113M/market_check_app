@@ -27,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
     return TextFormField(
+      keyboardType: TextInputType.number,
       style: TextStyle(
         height: ScreenSize.height * 0.001
       ),
