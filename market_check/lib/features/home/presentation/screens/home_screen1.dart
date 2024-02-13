@@ -57,13 +57,13 @@ class HomeScreen1 extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(
-                  width: 8,
+                  width: 10,
                 ),
                 GestureDetector(
                   onTap: () => context.push("/register"),
                   child: const Text(
                     'Registrate',
-                    style: TextStyle(color: AppColors.appSecondary),
+                    style: TextStyle(color: AppColors.appSecondary, fontSize: 15),
                   ),
                 )
               ],

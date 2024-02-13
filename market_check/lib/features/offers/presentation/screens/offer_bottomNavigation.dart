@@ -1,7 +1,5 @@
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/features/offers/providers/offers_provider.dart';
 
@@ -13,12 +11,12 @@ class BottomMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.5),
           blurRadius: 25,
-          offset: Offset(8, 20),
+          offset: const Offset(8, 20),
         ),
       ]),
       child: ClipRRect(
@@ -26,30 +24,21 @@ class BottomMenu extends StatelessWidget {
         child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: AppColors.appPrimary,
-            selectedItemColor: AppColors.appGray,
+            selectedItemColor: AppColors.appSecondary,
             unselectedItemColor: Colors.white,
-            items: [
+            items: const [
               BottomNavigationBarItem(
-                  icon: LottieBuilder.asset(
-                    AppAssets.iconoLottieHome,
-                    height: 20,
-                  ),
-                  label: 'inicio'),
+                icon: Icon(Icons.home_filled),
+                label: 'inicio',
+              ),
               BottomNavigationBarItem(
-                  icon: LottieBuilder.asset(AppAssets.iconoLottieStore, 
-                  //animate: context.watch<OfferProvider>().click, 
-                  height: 20,),
-                  label: 'Tiendas'
-                  ),
+                  icon: Icon(Icons.store),
+                  label: 'Tiendas'),
               BottomNavigationBarItem(
-                  icon: LottieBuilder.asset(AppAssets.iconoLottieList,
-                  //animate: context.watch<OfferProvider>().click,
-                  height: 20,),
+                  icon:  Icon(Icons.list),
                   label: 'Listas'),
               BottomNavigationBarItem(
-                  icon: LottieBuilder.asset(AppAssets.iconoLottieProfile,
-                  //animate: context.watch<OfferProvider>().click,
-                  height: 20,),
+                  icon: Icon(Icons.person),
                   label: 'Mi cuenta'),
             ]),
       ),

@@ -5,20 +5,26 @@ class CustomTextFormField extends StatelessWidget {
   final String? label;
   final String? hint;
   final IconData? icon;
+  final IconButton? suffixIcon;
+  final bool isNumeric;
+
   final String? errorMessage;
   final bool obscureText;
   final Function(String) onChange;
   final Function(String)? onComplete;
 
-  const CustomTextFormField(
-      {super.key,
-      this.label,
-      this.hint,
-      this.errorMessage,
-      required this.onChange,
-      this.onComplete,
-      this.obscureText = false,
-      this.icon});
+  const CustomTextFormField({
+    super.key,
+    this.label,
+    this.hint,
+    this.errorMessage,
+    required this.onChange,
+    this.onComplete,
+    this.obscureText = false,
+    this.icon,
+    this.suffixIcon,
+    this.isNumeric = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +33,13 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
     return TextFormField(
-      keyboardType: TextInputType.number,
-      style: TextStyle(
-        height: ScreenSize.height * 0.001
-      ),
+      keyboardType: isNumeric ? TextInputType.number : null,
+      style: TextStyle(height: ScreenSize.height * 0.001),
       onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon) : null,
+        suffixIcon: suffixIcon,
         filled: true,
         fillColor: AppColors.appMainInput,
         enabledBorder: border,
@@ -47,7 +52,8 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         label: label != null
             ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal:15.0),
+                padding: EdgeInsets.symmetric(
+                    horizontal: ScreenSize.absoluteHeight * 0.001),
                 child: Text(
                   label!,
                   style: const TextStyle(

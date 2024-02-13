@@ -4,7 +4,7 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 
 class LogInScreen extends StatelessWidget {
-  static const String name = 'login';
+  //static const String name = 'login';
   const LogInScreen({super.key});
 
   @override

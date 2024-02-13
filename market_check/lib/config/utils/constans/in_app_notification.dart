@@ -5,7 +5,8 @@ import 'package:market_check/config/utils/utils.dart';
 
 import 'package:another_flushbar/flushbar.dart';
 
-class InAppNotification {
+class 
+InAppNotification {
   static invalidEmailAndPassword({
     required BuildContext context,
   }) {
@@ -29,6 +30,19 @@ class InAppNotification {
         isDismissible: false);
   }
 
+  static void successfulSignUp({
+    required BuildContext context,
+  }) {
+    showAppNotification(
+        context: context,
+        title: 'Successful registration!',
+        message:
+            'Se envió una verificación a su correo, por favor verifiquela',
+        type: NotificationType.success,
+        isDismissible: false);
+  }
+
+
   static void serverFailure(
       {required BuildContext context, required String message}) {
     InAppNotification.showAppNotification(
@@ -38,6 +52,8 @@ class InAppNotification {
       type: NotificationType.error,
     );
   }
+
+ 
 
   static void showAppNotification(
       {required BuildContext context,

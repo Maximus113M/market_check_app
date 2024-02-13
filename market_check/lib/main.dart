@@ -17,7 +17,7 @@ void main() async {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
-        create: (context) => SignInProvider(verifyLogInUseCase: sl()),
+        create: (context) => sl<SignInProvider>()
       ),
       ChangeNotifierProvider(
         create: (context) => StoresProvider(getStoresUseCase: sl()),

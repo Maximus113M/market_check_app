@@ -1,8 +1,8 @@
 import 'package:market_check/config/errors/failures.dart';
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 import 'package:market_check/features/login/data/datasources/sign_in_data_source.dart';
+import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
 import 'package:market_check/features/login/domain/repositories/sign_in_repsitory.dart';
 
 import 'package:dartz/dartz.dart';
@@ -25,7 +25,7 @@ class SignInRepositoryImpl extends SignInRepostory {
   }
 
   @override
-  Future<Either<RemoteFailure, String>> signUp(User newUser) async {
+  Future<Either<RemoteFailure, String>> signUp(SignUpDataModel newUser) async {
     try {
       return Right(await signInDataSource.signUp(newUser));
     } on RemoteException catch (e) {

@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
+import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/login/presentation/screens/widget/sig_up_form.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -37,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
               width: ScreenSize.width * 0.85,
             ),
           ),
-          const SignUpForm()
+          SignUpForm(signUpProvider: Provider.of<SignInProvider>(context),)
         ]),
       ),
     );

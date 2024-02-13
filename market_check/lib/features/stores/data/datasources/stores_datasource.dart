@@ -20,6 +20,7 @@ class StoresDataSourceImpl extends StoresDataSource {
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
     ),
   );
+
   @override
   Future<List<StoreModel>> getStores() async {
     try {

@@ -8,6 +8,7 @@ void registerProviders() {
   sl.registerLazySingleton(
     () => SignInProvider(
       verifyLogInUseCase: sl(),
+      signUpUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(
