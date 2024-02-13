@@ -6,14 +6,17 @@ class RemoteUrls {
 
   static const String authUrl = "auth/login/";
   static const String signUpUrl = "auth/signup/";
+  
   static const String storesUrl = "establecimiento/";
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";
-  static const String productsUrl = "ofertas/";
+  static const String productsUrl = "productos/";
+
   static const String purchaseUrl = "new-purchase/";
+  
   static const String shoppingHistoryUrl = "mobile-app/";
 
-  static const String currentUrl = baseUrlMovil;
+  static const String currentUrl = baseUrlMovilSena;
 
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";

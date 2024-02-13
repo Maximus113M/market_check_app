@@ -30,8 +30,11 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final border = OutlineInputBorder(
-        borderRadius: BorderRadius.circular(40),
-        borderSide: BorderSide(color: AppColors.appMainInput.withOpacity(0.7)));
+      borderRadius: BorderRadius.circular(40),
+      borderSide: BorderSide(
+        color: AppColors.appMainInput.withOpacity(0.7),
+      ),
+    );
     return TextFormField(
       keyboardType: isNumeric ? TextInputType.number : null,
       style: TextStyle(height: ScreenSize.height * 0.001),

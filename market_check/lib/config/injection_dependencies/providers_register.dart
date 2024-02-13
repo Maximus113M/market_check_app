@@ -1,3 +1,4 @@
+import 'package:market_check/features/products/presentation/products_provider.dart';
 import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
@@ -19,6 +20,11 @@ void registerProviders() {
   sl.registerLazySingleton(
     () => OffersProvider(
       getOffersUseCase: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => ProductsProvider(
+      getStoreProductsUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

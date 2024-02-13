@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
 import 'package:market_check/config/router/app_router.dart';
+import 'package:market_check/features/products/presentation/products_provider.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
@@ -20,13 +21,16 @@ void main() async {
         create: (context) => sl<SignInProvider>()
       ),
       ChangeNotifierProvider(
-        create: (context) => StoresProvider(getStoresUseCase: sl()),
+        create: (context) => sl<StoresProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => OffersProvider(getOffersUseCase: sl()),
+        create: (context) => sl<OffersProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => ShoppingCartProvider(),
+        create: (context) => sl<ProductsProvider>(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<ShoppingCartProvider>(),
       ),
     ], child: const MyApp()),
   );

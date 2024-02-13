@@ -20,5 +20,6 @@ enum ExceptionType {
   offersException,
   storesException,
   purchasesException,
+  productsException,
   shoppingHistoryException,
 }

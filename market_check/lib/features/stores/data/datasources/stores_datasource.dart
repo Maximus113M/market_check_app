@@ -15,12 +15,6 @@ class StoresDataSourceImpl extends StoresDataSource {
     ),
   );
 
-  final dioImages = Dio(
-    BaseOptions(
-      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.imagesUrl}",
-    ),
-  );
-
   @override
   Future<List<StoreModel>> getStores() async {
     try {

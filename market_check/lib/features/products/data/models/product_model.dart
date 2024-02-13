@@ -2,8 +2,8 @@ class ProductModel {
   final int id;
   final int code;
   final int state;
-  final double currentPrice;
-  final double originalPrice;
+  final int currentPrice;
+  final int originalPrice;
   final String name;
   final String? description;
   final int stock;
