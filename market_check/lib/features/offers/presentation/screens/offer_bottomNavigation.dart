@@ -1,7 +1,5 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/features/offers/providers/offers_provider.dart';
 
 class BottomMenu extends StatelessWidget {
   const BottomMenu({

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/login/presentation/screens/widget/login_form.dart';
@@ -15,18 +14,8 @@ class LogInFormScreenBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-            onPressed: (){
-              context.pop();
-            },
-            icon: Icon(Icons.arrow_back_ios, size: ScreenSize.absoluteHeight * 0.03,),
-            color: AppColors.appSecondary,
-            ),
-          ),
             Padding(
-              padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.02),
+              padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.03),
               child: Image.asset(AppAssets.logoVertical),
             ),
             const SizedBox(

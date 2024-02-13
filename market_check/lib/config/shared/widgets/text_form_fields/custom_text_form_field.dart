@@ -40,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
       onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
         prefixIcon: icon != null ? Icon(icon) : null,
         suffixIcon: suffixIcon,
         filled: true,

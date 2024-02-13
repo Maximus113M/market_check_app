@@ -35,7 +35,7 @@ class HomeScreen1 extends StatelessWidget {
             ),
             const SizedBox(height: 80),
             ElevatedButton(
-              onPressed: () => context.push("/login-form"),
+              onPressed: () => context.pushReplacement("/login-form"),
               style: ButtonStyle(
                 padding: MaterialStatePropertyAll(
                   EdgeInsets.symmetric(

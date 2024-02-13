@@ -63,7 +63,7 @@ class SignInProvider with ChangeNotifier {
       (r) {
         if (r) {
           context.read<StoresProvider>().loadStores(notify: true);
-          context.push('/stores-m');
+          context.pushReplacement('/stores-m');
         }
       },
     );
@@ -101,7 +101,7 @@ class SignInProvider with ChangeNotifier {
             message: 'Registro Exitoso',
             type: NotificationType.success);
         await Future. delayed(const Duration(seconds: 2)).then(
-          (value) => context.push("/login-form"),
+          (value) => context.pushReplacement("/login-form"),
         );
       },
     );

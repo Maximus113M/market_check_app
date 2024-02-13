@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/features/login/presentation/screens/login/login_form_body_screen.dart';
@@ -10,9 +11,15 @@ class LogInFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
           backgroundColor: AppColors.appPrimary,
-          body: LogInFormScreenBody(),
+          appBar: AppBar( 
+            leading: IconButton(
+              onPressed: () => context.pop(),
+              icon:const Icon(Icons.arrow_back), color: AppColors.appSecondary,),
+            backgroundColor: AppColors.appPrimary,
+          ),
+          body: const LogInFormScreenBody(),
         );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/font_styles.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_listtitle.dart';
 
