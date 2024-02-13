@@ -18,5 +18,11 @@ class ProductsProvider extends ChangeNotifier {
       ),
       (r) => products = r,
     );
+    
   }
+
+  List<ProductModel> getProductByName(String name){
+    return products.where((product) => product.name.contains(name)).toList();
+  }
+
 }
