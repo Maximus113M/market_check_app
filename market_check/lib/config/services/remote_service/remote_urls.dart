@@ -5,7 +5,7 @@ class RemoteUrls {
 //"http://192.168.1.41:8000/api/";
 
   static const String authUrl = "auth/login/";
-  static const String signUpUrl = "auth/signup/";
+  static const String signUpUrl = "auth/mobile-app/";
   static const String storesUrl = "establecimiento/";
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";

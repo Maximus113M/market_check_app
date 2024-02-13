@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -18,7 +20,7 @@ class SignInDataSourceImpl extends SignInDataSource {
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.authUrl}",
     ),
   );
-  final Dio dioSignIn = Dio(
+  final Dio dioSignUp = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.signUpUrl}",
     ),
@@ -59,7 +61,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   Future<String> signUp(SignUpDataModel newUser) async {
     try {
       final Response response =
-          await dioLogIn.post('', data: newUser.userToJson());
+          await dioSignUp.post('', data: jsonEncode(newUser.userToJson()));
       print(response.data);
       return 'Registro exito, ya puedes Iniciar Sesión!';
     } on DioException catch (e) {

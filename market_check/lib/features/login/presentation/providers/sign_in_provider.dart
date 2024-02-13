@@ -74,7 +74,7 @@ class SignInProvider with ChangeNotifier {
     if (!validateInputName() ||
         !validateInputDocument() ||
         !validateInputEmail() ||
-        !validateInputPassword() ||
+        !validateInputPassword() || 
         !validateInputConfirmPassword()) {
       InAppNotification.showAppNotification(
           context: context,
@@ -92,16 +92,19 @@ class SignInProvider with ChangeNotifier {
 
     final result = await signUpUseCase(singUpData);
     result.fold(
-        (l) => InAppNotification.serverFailure(
-            context: context, message: l.message), (r) async {
-      InAppNotification.showAppNotification(
-          context: context,
-          title: 'Registro',
-          message: 'Registro Exitoso',
-          type: NotificationType.success);
-      await Future.delayed(const Duration(seconds: 2))
-          .then((value) => context.push('/login'));
-    });
+      (l) =>
+          InAppNotification.serverFailure(context: context, message: l.message),
+      (r) async {
+        InAppNotification.showAppNotification(
+            context: context,
+            title: 'Registro',
+            message: 'Registro Exitoso',
+            type: NotificationType.success);
+        await Future. delayed(const Duration(seconds: 2)).then(
+          (value) => context.push("/login-form"),
+        );
+      },
+    );
   }
 
   bool validateInputName() {
@@ -130,7 +133,7 @@ class SignInProvider with ChangeNotifier {
   bool validateInputConfirmPassword() {
     if (confirmPassword.contains(" ") ||
         confirmPassword.isEmpty ||
-        confirmPassword.length < 6 && passwordInput != confirmPassword) {
+        confirmPassword.length < 6 || passwordInput != confirmPassword) {
       return false;
     }
     return true;
