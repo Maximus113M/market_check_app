@@ -15,8 +15,8 @@ class LogInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: ScreenSize.absoluteHeight * 0.42,
-        margin: EdgeInsets.only(top: ScreenSize.height * 0.09),
+        height: ScreenSize.absoluteHeight * 0.46,
+        margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
         decoration: const BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.only(
@@ -37,7 +37,7 @@ class LogInForm extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 25,
                 ),
                 CustomTextFormField(
                   icon: Icons.lock,
@@ -65,7 +65,7 @@ class LogInForm extends StatelessWidget {
                   text: 'Iniciar Sesión',
                   color: AppColors.appPrimary,
                   bgColor: AppColors.appSecondary,
-                  verticalSize: 12,
+                  verticalSize: 13,
                   action: () => loginProvider.validateUser(context),
                 ),
                 const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
 
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
@@ -27,6 +28,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => ShoppingCartProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<MainProvider>()
       ),
     ], child: const MyApp()),
   );

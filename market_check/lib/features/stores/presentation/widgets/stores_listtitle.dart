@@ -22,7 +22,7 @@ class StoresListTile extends StatelessWidget {
           color: Colors.white,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: const EdgeInsets.all(1.0),
           child: ListTile(
             title: Text(storeModel.name),
             subtitle: Text(storeModel.description!),

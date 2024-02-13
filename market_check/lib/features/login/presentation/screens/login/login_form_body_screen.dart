@@ -14,9 +14,13 @@ class LogInFormScreenBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.03),
-              child: Image.asset(AppAssets.logoVertical),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.2),
+                child: Image.asset(AppAssets.logoVertical,
+                width: ScreenSize.width * 0.8,
+                ),
+              ),
             ),
             const SizedBox(
               height: 15,

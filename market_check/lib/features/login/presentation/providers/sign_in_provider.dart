@@ -63,7 +63,7 @@ class SignInProvider with ChangeNotifier {
       (r) {
         if (r) {
           context.read<StoresProvider>().loadStores(notify: true);
-          context.pushReplacement('/stores-m');
+          context.pushReplacement('/main');
         }
       },
     );

@@ -13,12 +13,7 @@ class LogInFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
           backgroundColor: AppColors.appPrimary,
-          appBar: AppBar( 
-            leading: IconButton(
-              onPressed: () => context.pop(),
-              icon:const Icon(Icons.arrow_back), color: AppColors.appSecondary,),
-            backgroundColor: AppColors.appPrimary,
-          ),
+          
           body: const LogInFormScreenBody(),
         );
   }
