@@ -11,13 +11,13 @@ abstract class StoresDataSource {
 class StoresDataSourceImpl extends StoresDataSource {
   final dioStores = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.storesUrl}",
+      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.storesUrl}",
     ),
   );
 
   final dioImages = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
+      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.imagesUrl}",
     ),
   );
 

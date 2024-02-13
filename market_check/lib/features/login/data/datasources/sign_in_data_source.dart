@@ -15,12 +15,12 @@ abstract class SignInDataSource {
 class SignInDataSourceImpl extends SignInDataSource {
   final Dio dioLogIn = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.authUrl}",
+      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.authUrl}",
     ),
   );
   final Dio dioSignIn = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.signUpUrl}",
+      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.signUpUrl}",
     ),
   );
 
