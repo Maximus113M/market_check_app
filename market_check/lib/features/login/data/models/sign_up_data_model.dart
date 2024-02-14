@@ -3,8 +3,10 @@ class SignUpDataModel{
   final int? document;
   final String email;
   final String password;
+  final int rolId;
 
   SignUpDataModel({
+    this.rolId = 4,
     required this.name, 
     required this.document, 
     required this.email, 
@@ -12,16 +14,19 @@ class SignUpDataModel{
     });
 
     factory SignUpDataModel.fromJson(json) =>SignUpDataModel(
-      name: json['names'], 
-      document: json['document'], 
-      email: json['emailInput'], 
-      password: json['password']);
+      name: json['name'], 
+      document: json['documento'], 
+      email: json['email'], 
+      password: json['password'],
+      rolId: json['rol_id'],
+      );
+      
 
     Map<String, dynamic> userToJson() => {
       "name": name,
-      "document": document,
+      "documento": document,
       "email": email,
-      "password": password
+      "password": password,
     };
 
 

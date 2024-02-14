@@ -1,8 +1,6 @@
+import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:market_check/features/screens.dart';
-import 'package:market_check/features/home/presentation/screens/home_screen1.dart';
-import 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/injection_container.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -23,6 +21,14 @@ final appRouter = GoRouter(
       path: "/login-form",
       name: LogInFormScreen.name,
       builder: (context, state) => const LogInFormScreen(),
+    ),
+    GoRoute(
+      path: "/register",
+      builder: (context, state) => const SignUpScreen(),
+    ),
+    GoRoute(
+      path: "/main",
+      builder: (context, state) => const MainScreen(),
     ),
     /*GoRoute(
       path: "/home",
@@ -92,10 +98,6 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/",
       builder: (context, state) => const HomeScreen1(),
-    ),
-    GoRoute(
-      path: "/register",
-      builder: (context, state) => const SignUpScreen(),
     ),
   ],
 );

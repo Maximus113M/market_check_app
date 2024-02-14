@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/constans/font_styles.dart';
-import 'package:market_check/features/products/presentation/products_provider.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores_listtitle.dart';
-import 'package:provider/provider.dart';
 
 class StoresListviewM extends StatelessWidget {
   final List<StoreModel> storeList;

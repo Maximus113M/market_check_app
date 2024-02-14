@@ -14,29 +14,26 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.appPrimary,
+      appBar: AppBar(
+        backgroundColor: AppColors.appPrimary,
+        leading: IconButton(
+          onPressed: ()=> context.pop(),
+          icon: const Icon(Icons.arrow_back,
+          color: AppColors.appSecondary
+          
+          ,)),
+      ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-          SizedBox(height: ScreenSize.height * 0.06),
-          Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              onPressed: () {
-                context.pop();
-              },
-              icon: Icon(Icons.arrow_back_ios_new,
-                  size: ScreenSize.absoluteHeight * 0.03),
-              color: AppColors.appSecondary,
-            ),
-          ),
+          children: [        
           Padding(
             padding: EdgeInsets.only(
-              top: ScreenSize.absoluteHeight * 0.05,
-              bottom: ScreenSize.absoluteHeight * 0.05,
+              top: ScreenSize.absoluteHeight * 0.04,
+              bottom: ScreenSize.absoluteHeight * 0.07,
             ),
             child: Image.asset(
               AppAssets.logoHorizontal,
-              width: ScreenSize.width * 0.85,
+              width: ScreenSize.width * 0.86,
             ),
           ),
           SignUpForm(signUpProvider: Provider.of<SignInProvider>(context),)
