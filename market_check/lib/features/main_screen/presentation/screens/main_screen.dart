@@ -10,6 +10,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: context.watch<MainProvider>().screenList[
         context.watch<MainProvider>().currentIndex],
+      
     );
   }
 }

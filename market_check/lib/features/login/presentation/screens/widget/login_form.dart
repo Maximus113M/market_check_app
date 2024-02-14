@@ -25,7 +25,7 @@ class LogInForm extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.height * 0.04,
-                vertical: ScreenSize.width * 0.09),
+                vertical: ScreenSize.width * 0.15),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -36,8 +36,8 @@ class LogInForm extends StatelessWidget {
                     print(loginProvider.emailInput);
                   },
                 ),
-                const SizedBox(
-                  height: 25,
+                 SizedBox(
+                  height: ScreenSize.absoluteHeight * 0.02 ,
                 ),
                 CustomTextFormField(
                   icon: Icons.lock,
@@ -59,7 +59,7 @@ class LogInForm extends StatelessWidget {
                   height: 30,
                 ),
                 SizedBox(
-                  height: ScreenSize.height * 0.02,
+                  height: ScreenSize.height * 0.015,
                 ),
                 FilledCustomButton(
                   text: 'Iniciar Sesión',
