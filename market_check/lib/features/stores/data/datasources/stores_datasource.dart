@@ -32,7 +32,7 @@ class StoresDataSourceImpl extends StoresDataSource {
         }).toList();
       }
       print(stores);
-      return stores;
+      return stores.where((store) => store.state !=0).toList();
     } catch (e) {
       print("STORES $e");
       throw RemoteException(

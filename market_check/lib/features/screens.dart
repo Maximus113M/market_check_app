@@ -13,4 +13,4 @@ export 'package:market_check/features/home/presentation/screens/home_screen1.dar
 export 'package:market_check/features/login/presentation/screens/signup/sign_up_screen.dart';
 export 'package:market_check/features/offers/presentation/screens/offer_view_m.dart';
 export 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
-export 'package:market_check/features/stores/presentation/screens/store_screen_m.dart';
+export 'package:market_check/features/stores/presentation/screens/stores/stores_screen_m.dart';
