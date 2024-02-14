@@ -77,8 +77,9 @@ class PurchasesDataSourceImpl extends PurchasesDataSource {
         registeredItems = (response.data['items'] as List)
             .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
             .toList();
+        print('getPurchaseProducts => ${response.data['items']}');
       }
-      print(response.data);
+
       return registeredItems;
     } catch (e) {
       throw RemoteException(

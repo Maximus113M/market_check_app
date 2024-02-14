@@ -9,7 +9,7 @@ import 'package:market_check/features/products/data/models/scanner_data_model.da
 
 abstract class ProductsDataSource {
   Future<List<ProductModel>> getStoreProducts(int storeId);
-  Future<ProductModel> getStoreProductByScanner(ScannerDataModel scannerData);
+  Future<ProductModel?> getStoreProductByScanner(ScannerDataModel scannerData);
 }
 
 class ProductsDataSourceImpl extends ProductsDataSource {
@@ -22,19 +22,19 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   @override
   Future<List<ProductModel>> getStoreProducts(int storeId) async {
     try {
-      final User? user = AuthService.user;
-      if (user == null) return [];
       List<ProductModel> products = [];
-      final Response response = await dioGetStoreProducts.get(
-        'store-products/$storeId',
-      );
-      if (response.statusCode == 200) {
-        products = (response.data["products"] as List)
-            .map((productJson) => ProductModel.fromJson(productJson))
-            .toList();
+      if (AuthService.user != null) {
+        final Response response = await dioGetStoreProducts.get(
+          'store-products/$storeId',
+        );
+        if (response.statusCode == 200) {
+          products = (response.data["products"] as List)
+              .map((productJson) => ProductModel.fromJson(productJson))
+              .toList();
+          return products.where((product) => product.state != 0).toList();
+        }
       }
-
-      return products.where((product) => product.state != 0).toList();
+      return [];
     } catch (e) {
       print(e);
       throw RemoteException(
@@ -44,8 +44,23 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   }
 
   @override
-  Future<ProductModel> getStoreProductByScanner(ScannerDataModel scannerData) {
-    // TODO: implement getStoreProductByScanner
-    throw UnimplementedError();
+  Future<ProductModel?> getStoreProductByScanner(
+      ScannerDataModel scannerData) async {
+    try {
+      if (AuthService.user != null) {
+        final Response response = await dioGetStoreProducts
+            .get('store-products/', data: scannerData.dataToJson());
+        if (response.statusCode == 200) {
+          return ProductModel.fromJson(response.data["product"]);
+        }
+      }
+
+      return null;
+    } catch (e) {
+      print(e);
+      throw RemoteException(
+          message: 'Ha ocurrido un error al scannear el producto.',
+          type: ExceptionType.purchasesException);
+    }
   }
 }
