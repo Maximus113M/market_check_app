@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
-import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/presentation/widgets/end_shopping_dialog.dart';
 
 class ShoppingCartProvider with ChangeNotifier {
-  List<ShoppingItemEntity> shoppingList = shoppingItems;
-  List<ShoppingItemEntity> pendingList = [];
+  List<PurchaseItemModel> shoppingList = [];
+  List<PurchaseItemModel> pendingList = [];
   double shoppingLimit = 0;
   double totalBuy = 0;
   int counter = 0;

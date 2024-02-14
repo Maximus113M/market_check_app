@@ -4,57 +4,59 @@ import 'package:market_check/config/services/remote_service/remote_urls.dart';
 
 import 'package:dio/dio.dart';
 import 'package:market_check/config/shared/models/user.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
+import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 
 abstract class PurchasesDataSource {
-  Future<bool> createNewPurchase(int storeId);
-  Future<bool> addProductToPurchase(List<ProductModel> products);
+  Future<bool> createNewPurchase(List<PurchaseItemModel> purchaseItems);
 
-  //Future<bool> addItemsToNewPurchase(List items);
-  
+  Future<void> addProductToPurchase(
+      PurchaseItemModel purchaseItem, int purchaseId);
 }
 
 class PurchasesDataSourceImpl extends PurchasesDataSource {
-  final Dio dioNewPurchase = Dio(
+  final Dio dioPurchaseBaseUrl = Dio(
     BaseOptions(
         baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.purchaseUrl}",
         headers: AuthService.headers),
   );
 
   @override
-  Future<bool> createNewPurchase(int storeId) async {
+  Future<bool> createNewPurchase(List<PurchaseItemModel> purchaseItems) async {
     try {
-      final User? user= AuthService.user;
+      final User? user = AuthService.user;
       if (user == null) return false;
-      final Response response =
-          await dioNewPurchase.post('', data: {'establecimiento_id': storeId});
-      final int pin= response.data["pin"];
-      
-      user.isPurchaseOpen= true;
-      user.purchasePin= pin;
+      if (purchaseItems.isNotEmpty) {
+        final Response response = await dioPurchaseBaseUrl.post('new-purchase/',
+            data: {'establecimiento_id': purchaseItems[0].product.storeId});
+        final int pin = response.data["pin"];
+        final int purchaseId = response.data["id"];
+        //FOREACH
+        for (var item in purchaseItems) {
+          await addProductToPurchase(item, purchaseId);
+        }
+        user.isPurchaseOpen = true;
+        user.purchasePin = pin;
 
-      return true;
+        return true;
+      }
+      return false;
     } catch (e) {
       throw RemoteException(
           message: 'Ha ocurrido un error al intentar crear la compra',
           type: ExceptionType.purchasesException);
     }
   }
-  
-  @override
-  Future<bool> addProductToPurchase(List<ProductModel> products) async{
-    // /{idCompra}/producto/{productoId}
-    try {
-      final User? user= AuthService.user;
-      if (user == null) return false;
-      final Response response =
-          await dioNewPurchase.get('/{idCompra}/producto/{productoId}', data: {'establecimiento_id': storeId});
-      final int pin= response.data["pin"];
-      
-      user.isPurchaseOpen= true;
-      user.purchasePin= pin;
 
-      return true;
+  @override
+  Future<void> addProductToPurchase(
+      PurchaseItemModel purchaseItem, int purchaseId) async {
+    try {
+      final User? user = AuthService.user;
+      if (user == null) return;
+      final Response response = await dioPurchaseBaseUrl.get(
+          '$purchaseId/producto/${purchaseItem.product.id}',
+          data: {'itemsCount': purchaseItem.quanty});
+      print(response);
     } catch (e) {
       throw RemoteException(
           message: 'Ha ocurrido un error al intentar crear la compra',

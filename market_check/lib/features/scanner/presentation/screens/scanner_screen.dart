@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -65,12 +65,12 @@ class ScannerScreenState extends State<ScannerScreen> {
           '#ff6666', 'Cancelar', true, ScanMode.BARCODE);
       print(barcodeScanRes);
       if (int.parse(barcodeScanRes) > 0) {
-        shoppingCartProvider.shoppingList.add(
-          ShoppingItemEntity(
+        /*shoppingCartProvider.shoppingList.add(
+          PurchaseItemModel(
               name: 'Desodorante Guillette',
               image: 'assets/Images/items/gillette.jpg',
               price: 7000),
-        );
+        );*/
       }
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';

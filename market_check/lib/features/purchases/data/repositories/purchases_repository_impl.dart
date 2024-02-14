@@ -1,18 +1,21 @@
-import 'package:dartz/dartz.dart';
-import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/errors/failures.dart';
+import 'package:market_check/config/errors/exceptions.dart';
+import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/data/datasources/purchases_data_source.dart';
 import 'package:market_check/features/purchases/domain/repositories/purchases_repository.dart';
+
+import 'package:dartz/dartz.dart';
 
 class PurchasesRepositoryImpl extends PurchasesRepository {
   final PurchasesDataSource purchasesDataSource;
 
   PurchasesRepositoryImpl({required this.purchasesDataSource});
   @override
-  Future<Either<RemoteFailure, bool>> createNewPurchase(int storeId) async {
+  Future<Either<RemoteFailure, bool>> createNewPurchase(
+      List<PurchaseItemModel> purchaseItems) async {
     try {
       return Right(
-        await purchasesDataSource.createNewPurchase(storeId),
+        await purchasesDataSource.createNewPurchase(purchaseItems),
       );
     } on RemoteException catch (e) {
       return Left(
@@ -22,4 +25,3 @@ class PurchasesRepositoryImpl extends PurchasesRepository {
     }
   }
 }
-

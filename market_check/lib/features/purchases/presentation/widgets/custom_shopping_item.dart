@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dart';
-import 'package:market_check/features/purchases/domain/entities/shopping_item_entity.dart';
+import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 
 import 'package:provider/provider.dart';
 
 class CustomShoppingItem extends StatelessWidget {
-  final ShoppingItemEntity item;
+  final PurchaseItemModel item;
   final int index;
 
   const CustomShoppingItem(
@@ -38,14 +38,14 @@ class CustomShoppingItem extends StatelessWidget {
           ),
           Row(
             children: [
-              ClipRRect(
+              /*ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   item.image,
                   fit: BoxFit.cover,
                   height: ScreenSize.height * 0.125,
                 ),
-              ),
+              ),*/
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +54,7 @@ class CustomShoppingItem extends StatelessWidget {
                     height: 90,
                     width: 140,
                     child: Text(
-                      item.name,
+                      item.product.name,
                       maxLines: 2,
                       style: FontStyles.bodyBold2(
                         AppColors.text,

@@ -26,10 +26,9 @@ class StoresDataSourceImpl extends StoresDataSource {
           return StoreModel.fromJson(storeJson);
         }).toList();
       }
-
       return stores.where((store) => store.state != 0).toList();
     } catch (e) {
-      print("STORES $e");
+      print("Stores Exception: $e");
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.storesException);
