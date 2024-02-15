@@ -10,7 +10,7 @@ class StoreContainerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StoreModel store = context.read<StoresProvider>().currentStore!;
+    final StoreModel store = context.watch<StoresProvider>().currentStore!;
     return Container(
       margin: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.3),
       padding: EdgeInsets.symmetric(

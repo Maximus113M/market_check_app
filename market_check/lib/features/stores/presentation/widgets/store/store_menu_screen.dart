@@ -33,7 +33,7 @@ class StoreMenuScreen extends StatelessWidget {
                 size: 35,
                 color: AppColors.appPrimary,
               ),
-              title: const Text('Ofertas y Categorias'),
+              title: const Text('Categorias'),
               subtitle: const Text('Explora nuestras ofertas y categorias'),
               trailing: IconButton(
                   onPressed: () {},
@@ -52,6 +52,24 @@ class StoreMenuScreen extends StatelessWidget {
               title: const Text('Escanea productos'),
               subtitle:
                   const Text('¡Consulta lo productos antes de llevarlos!'),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.arrow_circle_right_outlined,
+                  size: 30,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              leading: const Icon(
+                Icons.list_rounded,
+                size: 35,
+                color: AppColors.appPrimary,
+              ),
+              title: const Text('Crea tus listas'),
+              subtitle: const Text(
+                  'Encuentra en nuestros productos lo que necesitas'),
               trailing: IconButton(
                 onPressed: () {},
                 icon: const Icon(

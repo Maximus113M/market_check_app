@@ -17,6 +17,11 @@ class StoresListTile extends StatelessWidget {
       child: Container(
         height: 80,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(color: Colors.black.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(8, 10))
+          ],
           border: Border.all(
             color: Colors.grey,
           ),
