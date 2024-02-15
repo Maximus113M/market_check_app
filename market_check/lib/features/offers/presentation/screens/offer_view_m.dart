@@ -10,6 +10,9 @@ class OfferScreeenM extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+        ),
         title: Image.asset(
           AppAssets.logoHorizontalColor,
           width: ScreenSize.height * 0.7,
@@ -20,7 +23,9 @@ class OfferScreeenM extends StatelessWidget {
               icon: const Icon(
                 Icons.shopping_cart_rounded,
                 size: 40,
-              ))
+              ),
+              ),
+              
         ],
       ),
     );
