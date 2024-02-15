@@ -32,7 +32,7 @@ class SignInProvider with ChangeNotifier {
   }
 
   void validateUser(BuildContext context) async {
-    if (emailInput.trim().isEmpty ||
+  /*  if (emailInput.trim().isEmpty ||
         !AppFuntions.emailRegExp.hasMatch(emailInput)) {
       InAppNotification.showAppNotification(
           context: context,
@@ -62,11 +62,11 @@ class SignInProvider with ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         if (r) {
-          context.read<StoresProvider>().loadStores(notify: true);
+          context.read<StoresProvider>().loadStores(notify: true);*/
           context.pushReplacement('/main');
-        }
+   /*     }
       },
-    );
+    );*/
     //context.pushReplacement('/stores-m');
   }
 
