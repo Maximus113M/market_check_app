@@ -13,13 +13,11 @@ class StoreContainerScreen extends StatelessWidget {
     final StoreModel store = context.read<StoresProvider>().currentStore!;
     return Container(
       margin: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.3),
-      padding: EdgeInsets.symmetric(
-          vertical: ScreenSize.absoluteHeight * 0.03,
-          horizontal: ScreenSize.width * 0.05),
+      padding: EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.03, horizontal: ScreenSize.width * 0.05),
       decoration: BoxDecoration(
-          color: Colors.grey[350],
-          borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30))),
+        color: Colors.grey.shade300,
+        borderRadius: const BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30))
+      ),
       child: Column(
         children: [
           Text(store.name, style: const TextStyle(fontSize: 25)),

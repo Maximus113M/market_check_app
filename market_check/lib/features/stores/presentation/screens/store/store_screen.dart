@@ -16,12 +16,17 @@ class StoreScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
-            child: Image.network('${RemoteUrls.currentImagesUrl}${store.poster!}',
-            width: double.infinity,
-            height: ScreenSize.absoluteHeight * 0.4,
-            fit: BoxFit.cover),
-          ),
+          (store.poster == null)
+          ?Image.asset('assets/Images/stores/establecimiento-base.jpg',
+          width: double.infinity,
+          height: ScreenSize.absoluteHeight * 0.33,
+          fit: BoxFit.cover,
+          )
+          :Image.network('${RemoteUrls.currentImagesUrl}${store.poster!}',
+          width: double.infinity,
+          height: ScreenSize.absoluteHeight * 0.4,
+          fit: BoxFit.cover),
+
           const StoreContainerScreen(),
         ],
       ),

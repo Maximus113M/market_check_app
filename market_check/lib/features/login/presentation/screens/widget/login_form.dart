@@ -15,7 +15,7 @@ class LogInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: ScreenSize.absoluteHeight * 0.41,
+        height: ScreenSize.absoluteHeight * 0.43,
         margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
         decoration: const BoxDecoration(
             color: AppColors.white,
