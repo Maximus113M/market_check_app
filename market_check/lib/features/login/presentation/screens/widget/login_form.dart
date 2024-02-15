@@ -15,7 +15,7 @@ class LogInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: ScreenSize.absoluteHeight * 0.46,
+        height: ScreenSize.absoluteHeight * 0.41,
         margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
         decoration: const BoxDecoration(
             color: AppColors.white,
@@ -25,7 +25,7 @@ class LogInForm extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.height * 0.04,
-                vertical: ScreenSize.width * 0.15),
+                vertical: ScreenSize.width * 0.10),
             child: Column(
               children: [
                 CustomTextFormField(

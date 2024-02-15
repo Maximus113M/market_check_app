@@ -1,6 +1,7 @@
 import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -46,11 +47,11 @@ final appRouter = GoRouter(
         builder: (context, state) => const StoresScreenM(
             /* storesProvider: sl(),*/
             )),
-    /*GoRoute(
+    GoRoute(
       path: "/store-view",
-      name: StoreView.name,
-      builder: (context, state) => const StoreView(),
-    ),*/
+      name: StoreScreen.name,
+      builder: (context, state) => const StoreScreen(),
+    ),
     GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,

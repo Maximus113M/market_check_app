@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
+import 'package:market_check/features/main_screen/presentation/screens/widgets/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: context.watch<MainProvider>().screenList[
         context.watch<MainProvider>().currentIndex],
-      
+        bottomNavigationBar: const BottomMenu(),
     );
   }
 }
