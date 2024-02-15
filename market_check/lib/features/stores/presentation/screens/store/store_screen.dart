@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
-import 'package:market_check/config/utils/screen_size.dart';
+
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
+import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/store/store_container_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class StoreScreen extends StatelessWidget {
@@ -17,10 +19,9 @@ class StoreScreen extends StatelessWidget {
       body: Stack(
         children: [
           Image.network('${RemoteUrls.currentImagesUrl}${store.poster!}',
-          width: double.infinity,
-          height: ScreenSize.absoluteHeight * 0.4,
-          fit: BoxFit.cover),
-
+              width: double.infinity,
+              height: ScreenSize.absoluteHeight * 0.4,
+              fit: BoxFit.cover),
           const StoreContainerScreen(),
         ],
       ),

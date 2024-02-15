@@ -18,15 +18,17 @@ class StoresDataSourceImpl extends StoresDataSource {
   @override
   Future<List<StoreModel>> getStores() async {
     try {
-      final response = await dioStores.get('');
-
       List<StoreModel> stores = [];
+
+      final response = await dioStores.get('');
       if (response.statusCode == 200) {
         stores = (response.data["stores"] as List).map((storeJson) {
           return StoreModel.fromJson(storeJson);
         }).toList();
+        return stores.where((store) => store.state != 0).toList();
       }
-      return stores.where((store) => store.state != 0).toList();
+
+      return stores;
     } catch (e) {
       print("Stores Exception: $e");
       throw RemoteException(

@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? icon;
   final IconButton? suffixIcon;
   final bool isNumeric;
+  final TextEditingController? textController;
 
   final String? errorMessage;
   final bool obscureText;
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.suffixIcon,
     this.isNumeric = false,
+    this.textController,
   });
 
   @override
@@ -36,12 +38,14 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
     return TextFormField(
+      controller: textController,
       keyboardType: isNumeric ? TextInputType.number : null,
       style: TextStyle(height: ScreenSize.height * 0.001),
       onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
         prefixIcon: icon != null ? Icon(icon) : null,
         suffixIcon: suffixIcon,
         filled: true,

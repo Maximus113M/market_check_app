@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:provider/provider.dart';
+
+import 'package:go_router/go_router.dart';
 
 class StoresListTile extends StatelessWidget {
   final StoreModel storeModel;
@@ -54,24 +54,12 @@ class StoresListTile extends StatelessWidget {
                           color: Color(0xFFF25B50),
                         ),
                       ),
-
-                      /*Image.network(
-                        '${RemoteUrls.currentImagesUrl}${storeModel.logo!}',
-                        height: ScreenSize.absoluteHeight * 0.2,
-                        width: ScreenSize.width * 0.14,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress){
-                          if(loadingProgress)
-                        }
-                            
-                      ),*/
                     ),
                   ),
             trailing: IconButton(
               onPressed: () {
                 context.push("/offers-m");
               },
-              //Icons.arrow_forward_ios_outlined,
               icon: const Icon(
                 Icons.add_box_outlined,
                 size: 30,
