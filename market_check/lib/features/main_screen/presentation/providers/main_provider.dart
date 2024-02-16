@@ -14,7 +14,6 @@ class MainProvider extends ChangeNotifier {
     
     const OfferScreeenM(),
     const StoreScreen(),
-    //const ShoppingListScreen(),
     const ProfileScreen(),
   ];
 

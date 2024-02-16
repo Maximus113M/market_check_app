@@ -20,7 +20,7 @@ class RemoteUrls {
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovil;
+  static const String currentUrl = baseUrlMovilSena;
 
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";
