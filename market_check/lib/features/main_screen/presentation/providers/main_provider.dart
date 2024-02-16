@@ -14,7 +14,6 @@ class MainProvider extends ChangeNotifier {
       body: StoresScreenBody(),
     ),
     const OfferScreeenM(),
-    const StoreScreen(),
     ProfileScreen(
       profileProvider: sl(),
     ),
