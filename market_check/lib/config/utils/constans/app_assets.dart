@@ -16,7 +16,7 @@ class AppAssets {
 //--------------------------Profile
   static const String shopping = 'assets/Images/profile/shoppings.webp';
   static const String stores = 'assets/Images/profile/stores.jpeg';
-  static const String favoritesProducts = 'assets/Images/categories/lacteos.jpeg';
+  static const String favoritesProducts = 'assets/Images/categories/lacteos.png';
 
 
 

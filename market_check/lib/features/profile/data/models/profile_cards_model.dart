@@ -10,7 +10,7 @@ class ProfileCardsModel {
   });
 
   static List<ProfileCardsModel> profileCardsMenu = [
-    ProfileCardsModel(title: 'Compras', imagePath: AppAssets.shopping),
+    ProfileCardsModel(title: 'Historial\nDe Compra', imagePath: AppAssets.shopping),
     ProfileCardsModel(
         title: 'Tiendas Visitadas', imagePath: AppAssets.stores),
     ProfileCardsModel(
