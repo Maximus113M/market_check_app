@@ -6,7 +6,6 @@ class OfferModel {
   final String name;
   final String description;
   final String imagePath;
-  final int stock;
   final int storeId;
 
   OfferModel({
@@ -17,11 +16,10 @@ class OfferModel {
     required this.name,
     required this.description,
     required this.imagePath,
-    required this.stock,
     required this.storeId,
   });
 
-  factory OfferModel.fromJson(json, String imageUrl) => OfferModel(
+  factory OfferModel.fromJson(json) => OfferModel(
         id: json["id"],
         state: json["estado"],
         dateStart: json["fecha_inicio"],
@@ -29,7 +27,6 @@ class OfferModel {
         name: json["nombre"],
         description: json["descripcion"],
         imagePath: json["imagen"],
-        stock: json["numero_stock"],
         storeId: json["establecimiento_id"],
       );
   //TODO: ELIMINAR?
@@ -41,7 +38,6 @@ class OfferModel {
         "nombre": name,
         "descripcion": description,
         "imagen": imagePath,
-        "numero_stock": stock,
         "establecimiento_id": storeId,
       };
 }
