@@ -51,7 +51,7 @@ class StoresListTile extends StatelessWidget {
                       clipBehavior: Clip.hardEdge,
                       borderRadius: BorderRadius.circular(10),
                       child: FadeInImage(
-                        placeholder: AssetImage(AppAssets.loadingImage),
+                        placeholder: const AssetImage(AppAssets.loadingImage),
                         image: NetworkImage(
                           '${RemoteUrls.currentImagesUrl}${storeModel.logo!}',
                         ),

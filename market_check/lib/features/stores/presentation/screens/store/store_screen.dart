@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
@@ -16,6 +17,8 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final StoreModel store = context.read<StoresProvider>().currentStore!;
+    final int storeId = store.id!;
+    context.read<ProductsProvider>().getProductsByStore(context, storeId);
     return Scaffold(
       body: Stack(
         children: [

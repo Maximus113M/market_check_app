@@ -1,6 +1,6 @@
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 import 'package:market_check/injection_container.dart';
-import 'package:market_check/features/products/presentation/products_provider.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
