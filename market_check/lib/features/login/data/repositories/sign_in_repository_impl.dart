@@ -11,7 +11,7 @@ class SignInRepositoryImpl extends SignInRepostory {
   final SignInDataSource signInDataSource;
 
   SignInRepositoryImpl({required this.signInDataSource});
-  
+
   @override
   Future<Either<RemoteFailure, bool>> verifyLogIn(
       SignInDataModel signInData) async {
@@ -28,6 +28,17 @@ class SignInRepositoryImpl extends SignInRepostory {
   Future<Either<RemoteFailure, String>> signUp(SignUpDataModel newUser) async {
     try {
       return Right(await signInDataSource.signUp(newUser));
+    } on RemoteException catch (e) {
+      return Left(
+        RemoteFailure(message: e.message, type: ExceptionType.signInException),
+      );
+    }
+  }
+
+  @override
+  Future<Either<RemoteFailure, bool>> signOut() async {
+    try {
+      return Right(await signInDataSource.signOut());
     } on RemoteException catch (e) {
       return Left(
         RemoteFailure(message: e.message, type: ExceptionType.signInException),

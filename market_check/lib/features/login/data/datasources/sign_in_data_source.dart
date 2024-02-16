@@ -12,17 +12,13 @@ import 'package:market_check/features/login/data/models/sign_up_data_model.dart'
 abstract class SignInDataSource {
   Future<bool> verifyLogIn(SignInDataModel signInData);
   Future<String> signUp(SignUpDataModel newUser);
+  Future<bool> signOut();
 }
 
 class SignInDataSourceImpl extends SignInDataSource {
-  final Dio dioLogIn = Dio(
+  final Dio dioSignIn = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.authUrl}",
-    ),
-  );
-  final Dio dioSignUp = Dio(
-    BaseOptions(
-      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.signUpUrl}",
+      baseUrl: RemoteUrls.currentUrl,
     ),
   );
 
@@ -31,7 +27,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<bool> verifyLogIn(SignInDataModel signInData) async {
     try {
-      final Response response = await dioLogIn.post('',
+      final Response response = await dioSignIn.post(RemoteUrls.signInUrl,
           data: {"email": signInData.email, "password": signInData.password});
       print(response);
       print(response.data["user"]);
@@ -60,8 +56,8 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<String> signUp(SignUpDataModel newUser) async {
     try {
-      final Response response =
-          await dioSignUp.post('', data: jsonEncode(newUser.userToJson()));
+      final Response response = await dioSignIn.post(RemoteUrls.signUpUrl,
+          data: jsonEncode(newUser.userToJson()));
       print(response.data);
       return 'Registro exito, ya puedes Iniciar Sesión!';
     } on DioException catch (e) {
@@ -76,6 +72,23 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message: "Ocurrio un error al realizar el registro",
           type: ExceptionType.signInException);
+    }
+  }
+
+  @override
+  Future<bool> signOut() async {
+    try {
+      if (AuthService.user != null) {
+        dioSignIn.get(RemoteUrls.logOutUrl);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print(e);
+      throw RemoteException(
+        message: 'Ha ocurrido un error al cerrar la Sesion',
+        type: ExceptionType.signInException,
+      );
     }
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/use_case/use_case.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
+import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
@@ -12,9 +14,9 @@ import 'package:market_check/features/stores/presentation/providers/stores_provi
 import 'package:provider/provider.dart';
 
 class SignInProvider with ChangeNotifier {
-  //TODO ARREGLAR AL USAR INYECCION DE DEPENDENCIAS
   final VerifyLogInUseCase verifyLogInUseCase;
   final SignUpUseCase signUpUseCase;
+  final SignOutUseCase signOutUseCase;
 
   String emailInput = '';
   String passwordInput = '';
@@ -23,8 +25,11 @@ class SignInProvider with ChangeNotifier {
   String document = "";
   String confirmPassword = "";
 
-  SignInProvider(
-      {required this.signUpUseCase, required this.verifyLogInUseCase});
+  SignInProvider({
+    required this.signUpUseCase,
+    required this.verifyLogInUseCase,
+    required this.signOutUseCase,
+  });
 
   void toggleObscureText() {
     obscureText = !obscureText;
@@ -74,7 +79,7 @@ class SignInProvider with ChangeNotifier {
     if (!validateInputName() ||
         !validateInputDocument() ||
         !validateInputEmail() ||
-        !validateInputPassword() || 
+        !validateInputPassword() ||
         !validateInputConfirmPassword()) {
       InAppNotification.showAppNotification(
           context: context,
@@ -100,7 +105,7 @@ class SignInProvider with ChangeNotifier {
             title: 'Registro',
             message: 'Registro Exitoso',
             type: NotificationType.success);
-        await Future. delayed(const Duration(seconds: 2)).then(
+        await Future.delayed(const Duration(seconds: 2)).then(
           (value) => context.pushReplacement("/login-form"),
         );
       },
@@ -133,7 +138,8 @@ class SignInProvider with ChangeNotifier {
   bool validateInputConfirmPassword() {
     if (confirmPassword.contains(" ") ||
         confirmPassword.isEmpty ||
-        confirmPassword.length < 6 || passwordInput != confirmPassword) {
+        confirmPassword.length < 6 ||
+        passwordInput != confirmPassword) {
       return false;
     }
     return true;
@@ -143,4 +149,23 @@ class SignInProvider with ChangeNotifier {
     emailInput = email;
     notifyListeners();
   }*/
+
+  void logOut(BuildContext context) async {
+    final result = await signOutUseCase(NoParams());
+    result.fold((l) {
+      InAppNotification.serverFailure(context: context, message: l.message);
+    }, (r) async {
+      if (r) {
+        context.pushReplacement('/login');
+      } else {
+        InAppNotification.showAppNotification(
+            context: context,
+            title: 'Error!',
+            message: 'Credenciales Invalidas. Redireccionando.',
+            type: NotificationType.warning);
+        await Future.delayed(const Duration(seconds: 2))
+            .then((value) => context.pushReplacement('/login'));
+      }
+    });
+  }
 }
