@@ -12,9 +12,7 @@ class OffersProvider with ChangeNotifier {
 
   OffersProvider({required this.getOffersUseCase});
 
-  Future<void> loadOffers({bool notify = true}) async {
-    
-    
+  Future<void> loadOffers({bool notify = true}) async {    
     loadingOffers = true;
     final result = await getOffersUseCase(NoParams());
     print("---------------------> ahhhhhhhhhhhhhhhhhhhhhhhhhh");

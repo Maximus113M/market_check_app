@@ -28,7 +28,7 @@ class OfferModel {
         dateEnd: json["fecha_fin"],
         name: json["nombre"],
         description: json["descripcion"],
-        imagePath: imageUrl,
+        imagePath: json["imagen"],
         stock: json["numero_stock"],
         storeId: json["establecimiento_id"],
       );

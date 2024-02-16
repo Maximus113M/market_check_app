@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
+import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+import 'package:provider/provider.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key});
@@ -36,7 +39,10 @@ class StoreMenuScreen extends StatelessWidget {
               title: const Text('Categorias'),
               subtitle: const Text('Explora nuestras ofertas y categorias'),
               trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<OffersProvider>().loadOffers();
+                    context.push('/offers-m');
+                  },
                   icon: const Icon(
                     Icons.arrow_circle_right_outlined,
                     size: 30,
