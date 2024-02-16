@@ -24,6 +24,7 @@ class ProfileCards extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               boxShadow: AppShadows.mainShadow,
+              borderRadius: BorderRadius.circular(10)
             ),
             child: ClipRRect(
               borderRadius: BorderRadiusDirectional.circular(10),

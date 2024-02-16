@@ -28,18 +28,18 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: const Center(
               child: CircleAvatar(
-                radius: 55,
+                radius: 62,
                 backgroundImage: AssetImage(AppAssets.avatar),
               ),
             ),
           ),
           Text(
             AuthService.user!.name,
-            style: FontStyles.subtitle0(AppColors.text),
+            style: FontStyles.subtitle1(AppColors.text),
           ),
           Text(
             AuthService.user!.email,
-            style: FontStyles.body0(AppColors.unfocused),
+            style: FontStyles.body1(AppColors.unfocused),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
