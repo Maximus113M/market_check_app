@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 
 class OffersListview extends StatelessWidget {
@@ -32,17 +33,12 @@ class OfferListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 175,
-      height: 60,
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
+    return SizedBox(
+      child: Image.network('${RemoteUrls.currentImagesUrl}${offerModel.imagePath}',
+      width: 200,
+      height: 200,
+      fit: BoxFit.cover,
       ),
-      child: //Image.network('${RemoteUrls.currentImagesUrl}${offerModel.imagePath}'),
-      Text('hola como estas')
     );
   }
 }
