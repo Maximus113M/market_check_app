@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
+import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,25 +12,9 @@ class StoreMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(
-                Icons.location_on,
-                size: 35,
-                color: AppColors.appPrimary,
-              ),
-              title: const Text('Puntos de Venta'),
-              subtitle: const Text('Encuentra nuestro punto mas cercano.'),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.arrow_circle_right_outlined,
-                    size: 30,
-                  )),
-            ),
-            const SizedBox(height: 20),
             ListTile(
               leading: const Icon(
                 Icons.category_rounded,

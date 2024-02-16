@@ -27,7 +27,7 @@ class StoreContainerScreen extends StatelessWidget {
         children: [
           Text(
             store.name,
-            style: const TextStyle(fontSize: 25),
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 35),
           const StoreMenuScreen()

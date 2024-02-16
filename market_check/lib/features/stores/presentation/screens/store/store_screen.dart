@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
@@ -25,10 +26,20 @@ class StoreScreen extends StatelessWidget {
                   height: ScreenSize.absoluteHeight * 0.33,
                   fit: BoxFit.cover,
                 )
-              : Image.network('${RemoteUrls.currentImagesUrl}${store.poster!}',
-                  width: double.infinity,
-                  height: ScreenSize.absoluteHeight * 0.4,
-                  fit: BoxFit.cover),
+              : SizedBox(
+                height: ScreenSize.width * 0.7,
+                width: double.infinity, 
+                child: FadeInImage(
+                    placeholder: AssetImage(AppAssets.loadingImage),
+                    image: NetworkImage(
+                      '${RemoteUrls.currentImagesUrl}${store.poster!}',
+                    ),
+                    fit: BoxFit.cover,
+                    imageErrorBuilder: (context, error, stackTrace) => 
+                    Image.asset('assets/Images/stores/establecimiento-base.jpg',
+                    fit: BoxFit.cover,)
+                  ),
+              ),
           const StoreContainerScreen(),
         ],
       ),
