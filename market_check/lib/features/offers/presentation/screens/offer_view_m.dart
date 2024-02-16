@@ -12,8 +12,14 @@ class OfferScreeenM extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(),
-      body: OffersListview(
-        offerList: context.watch<OffersProvider>().offerList,
+      body: Column(
+        children: [
+          const SizedBox(height: 10), 
+          Text('Descuentos', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),),
+          OffersListview(
+            offerList: context.watch<OffersProvider>().offerList,
+          ),
+        ],
       ),
     );
   }
