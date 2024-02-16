@@ -18,12 +18,37 @@ class StoreScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.network('${RemoteUrls.currentImagesUrl}${store.poster!}',
-              width: double.infinity,
-              height: ScreenSize.absoluteHeight * 0.4,
-              fit: BoxFit.cover),
+          (store.poster == null)
+              ? Image.asset(
+                  'assets/Images/stores/establecimiento-base.jpg',
+                  width: double.infinity,
+                  height: ScreenSize.absoluteHeight * 0.33,
+                  fit: BoxFit.cover,
+                )
+              : SizedBox(
+                height: ScreenSize.width * 0.7,
+                width: double.infinity, 
+                child: FadeInImage(
+                    placeholder: const AssetImage(AppAssets.loadingImage),
+                    image: NetworkImage(
+                      '${RemoteUrls.currentImagesUrl}${store.poster!}',
+                    ),
+                    fit: BoxFit.cover,
+                    imageErrorBuilder: (context, error, stackTrace) => 
+                    Image.asset('assets/Images/stores/establecimiento-base.jpg',
+                    fit: BoxFit.cover,)
+                  ),
+              ),
           const StoreContainerScreen(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.pop(),
+        child: const Icon(
+          Icons.home,
+          size: 30,
+          color: AppColors.appPrimary,
+        ),
       ),
     );
   }

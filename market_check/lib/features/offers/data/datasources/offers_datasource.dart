@@ -10,20 +10,19 @@ abstract class OffersDataSource {
 }
 
 class OffersDatasourceImpl extends OffersDataSource {
-
   OffersDatasourceImpl();
-  
+
   final dioOffers = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.offersUrl}",
     ),
   );
 
-  final dioImages = Dio(
+  /* final dioImages = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
     ),
-  );
+  );*/
 
   @override
   Future<List<OfferModel>> getOffers() async {
@@ -31,20 +30,15 @@ class OffersDatasourceImpl extends OffersDataSource {
       final response = await dioOffers.get('mobile-app/');
       List<OfferModel> offers = [];
       if (response.statusCode == 200 || response.statusCode == 201) {
-        debugPrint("$response");
-
-        final List<Future<OfferModel>> futures =
-            (response.data["offers"] as List).map((offerJson) async {
-          final Response dioImage =
-              await dioImages.get('${offerJson["imagen"]}');
-
-          return OfferModel.fromJson(
-              offerJson, "${RemoteUrls.baseUrlMovilSena}${dioImage.data["image_url"]}");
+        offers = (response.data["offers"] as List).map((offerJson) {
+          return OfferModel.fromJson(offerJson);
         }).toList();
-        offers = await Future.wait(futures);
       }
+
+      debugPrint("$offers");
       return offers;
     } catch (e) {
+      print(e);
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.storesException);

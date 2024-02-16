@@ -32,10 +32,10 @@ class BottomMenu extends StatelessWidget {
               context.read<MainProvider>().setCurrentIndex(index);
             },
             items: const [
-              BottomNavigationBarItem(
+              /*BottomNavigationBarItem(
                 icon: Icon(Icons.home_filled),
                 label: 'inicio',
-              ),
+              ),*/
               BottomNavigationBarItem(
                   icon: Icon(Icons.store), label: 'Tiendas'),
               BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Listas'),
