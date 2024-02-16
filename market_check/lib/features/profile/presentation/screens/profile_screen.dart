@@ -98,6 +98,38 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              Card(
+                shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: AppColors.appSecondary,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: ScreenSize.absoluteHeight * 0.022,
+                    horizontal: ScreenSize.width * 0.04,
+                  ),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.shopping_bag_sharp,
+                        color: AppColors.white,
+                        size: ScreenSize.absoluteHeight * 0.07,
+                      ),
+                      /*Text(
+                        '25',
+                        style: FontStyles.heading10(AppColors.white),
+                      ),*/
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Compras',
+                        style: FontStyles.bodyBold0(AppColors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ]),
           ),
         ],
