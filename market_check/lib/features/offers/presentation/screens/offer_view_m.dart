@@ -14,8 +14,12 @@ class OfferScreeenM extends StatelessWidget {
       appBar: customAppBar(),
       body: Column(
         children: [
-          const SizedBox(height: 10), 
-          Text('Descuentos', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),),
+          const SizedBox(height: 10),
+          const Text(
+            'Descuentos',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          ),
+          
           OffersListview(
             offerList: context.watch<OffersProvider>().offerList,
           ),

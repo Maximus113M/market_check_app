@@ -10,29 +10,17 @@ class OffersListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
     return SizedBox(
-        height: 200,
-        child: Swiper(
-          viewportFraction: 0.7,
-          scale: 0.6,
-          autoplay: true,
-          pagination: const SwiperPagination(
-            margin: EdgeInsets.only(top: 0),
-            builder: DotSwiperPaginationBuilder(
-                activeColor: Colors.transparent, color: Colors.transparent),
-          ),
-          itemCount: offerList.length,
-          itemBuilder: (context, index) {
-            final offer = offerList[index];
-            return OfferListContent(
-              offerModel: offer,
-            );
-          },
-        )
-
-        /*ListView.builder(
-        scrollDirection: Axis.horizontal,
+      height: 200,
+      child: Swiper(
+        viewportFraction: 0.7,
+        scale: 0.6,
+        autoplay: true,
+        pagination: const SwiperPagination(
+          margin: EdgeInsets.only(top: 0),
+          builder: DotSwiperPaginationBuilder(
+              activeColor: Colors.transparent, color: Colors.transparent),
+        ),
         itemCount: offerList.length,
         itemBuilder: (context, index) {
           final offer = offerList[index];
@@ -40,8 +28,8 @@ class OffersListview extends StatelessWidget {
             offerModel: offer,
           );
         },
-      ),*/
-        );
+      ),
+    );
   }
 }
 
