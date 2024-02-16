@@ -7,18 +7,6 @@ import 'package:market_check/features/stores/presentation/screens/store/store_sc
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    /* ShellRoute(
-        builder: (context, state, child) => const LoginScreen(),
-        routes: [
-          GoRoute(
-              path: "/home",
-              name: HomeScreen.name,
-              builder: (context, state) => const HomeScreen()),
-        ]),*/
-    /*GoRoute(
-        path: "/login",
-        name: LogInScreen.name,
-        builder: (context, state) => const LogInScreen()),*/
     GoRoute(
       path: "/login-form",
       name: LogInFormScreen.name,
@@ -31,16 +19,6 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/main",
       builder: (context, state) => const MainScreen(),
-    ),
-    /*GoRoute(
-      path: "/home",
-      name: HomeScreen.name,
-      builder: (context, state) => HomeScreen(),
-    ),*/
-    GoRoute(
-      path: "/shopping-cart",
-      name: ShoppingCart.name,
-      builder: (context, state) => const ShoppingCart(),
     ),
     GoRoute(
         path: "/stores-m",
@@ -64,20 +42,15 @@ final appRouter = GoRouter(
       builder: (context, state) => const OfferScreeenM(),
     ),
     GoRoute(
-      path: "/offers",
-      name: OffersScreen.name,
-      builder: (context, state) => const OffersScreen(),
+      path: "/shopping-cart",
+      name: ShoppingCart.name,
+      builder: (context, state) => const ShoppingCart(),
     ),
-    GoRoute(
-      path: "/offer-view",
-      name: OfferView.name,
-      builder: (context, state) => const OfferView(),
-    ),
-    GoRoute(
+    /*GoRoute(
       path: "/store-categories",
       name: StoreCategoriesScreen.name,
       builder: (context, state) => const StoreCategoriesScreen(),
-    ),
+    ),*/
     GoRoute(
       path: "/lists",
       name: ShoppingListScreen.name,

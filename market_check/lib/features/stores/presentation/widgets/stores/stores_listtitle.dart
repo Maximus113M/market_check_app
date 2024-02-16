@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/utils/constans/app_shadows.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
@@ -22,10 +23,7 @@ class StoresListTile extends StatelessWidget {
         height: 80,
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: const Offset(8, 10))
+            AppShadows.mainShadow[1]
           ],
           border: Border.all(
             color: Colors.grey,
