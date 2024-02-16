@@ -83,11 +83,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const ShoppingHistoryScreen(),
     ),
     GoRoute(
-      path: "/profile",
-      name: ProfileScreen.name,
-      builder: (context, state) => const ProfileScreen(),
-    ),
-    GoRoute(
       path: "/settings",
       name: SettingsScreen.name,
       builder: (context, state) => const SettingsScreen(),

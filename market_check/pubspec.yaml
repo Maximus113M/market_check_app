@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/Images/
     - assets/Images/avatars/
+    - assets/Images/profile/
     - assets/Images/offers/
     - assets/Images/categories/
     - assets/Images/items/

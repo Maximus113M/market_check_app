@@ -1,3 +1,4 @@
+import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/products/presentation/products_provider.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
@@ -34,5 +35,8 @@ void registerProviders() {
   );
   sl.registerLazySingleton(
     () => MainProvider(),
+  );
+  sl.registerLazySingleton(
+    () => ProfileProvider(),
   );
 }

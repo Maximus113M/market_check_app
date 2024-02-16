@@ -63,4 +63,13 @@ class AppColors {
     Colors.red.shade500,
     Colors.red.shade400,
   ];
+  
+  static final gradientShadowColors = [
+    Colors.black54,
+    Colors.black54,
+    Colors.black38,
+    Colors.black12,
+  ];
+
+
 }

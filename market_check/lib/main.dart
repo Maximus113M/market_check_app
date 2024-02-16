@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
+import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
@@ -35,6 +36,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => sl<MainProvider>()
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<ProfileProvider>()
       ),
     ], child: const MyApp()),
   );
