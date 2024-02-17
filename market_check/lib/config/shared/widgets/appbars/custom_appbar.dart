@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
@@ -19,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       title: Padding(
-        padding: EdgeInsets.only(right: ScreenSize.width * 0.12, bottom: 5),
+        padding: EdgeInsets.only(right: ScreenSize.width * 0.10, bottom: 5),
         child: Image.asset(
           AppAssets.logoHorizontal,
           width: ScreenSize.height * 0.22,
@@ -39,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-AppBar customAppBar()=> AppBar(
+AppBar customAppBar() => AppBar(
       toolbarHeight: ScreenSize.absoluteHeight * 0.07,
       backgroundColor: AppColors.appPrimary,
       shape: const RoundedRectangleBorder(
@@ -49,20 +50,20 @@ AppBar customAppBar()=> AppBar(
         ),
       ),
       centerTitle: true,
-      title: Padding(
-        padding: EdgeInsets.only(right: ScreenSize.width * 0.12, bottom: 5),
-        child: Image.asset(
-          AppAssets.logoHorizontal,
-          width: ScreenSize.height * 0.22,
-        ),
+      title: Image.asset(
+        AppAssets.logoHorizontal,
+        width: ScreenSize.height * 0.22,
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.shopping_cart_rounded,
-            size: 33,
-            color: AppColors.white,
+        Padding(
+          padding: EdgeInsets.only(right: ScreenSize.width * 0.02),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.shopping_cart_outlined,
+              size: 33,
+              color: AppColors.white,
+            ),
           ),
         )
       ],

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/offers/presentation/widgets/offer_listview.dart';
 import 'package:market_check/features/offers/presentation/widgets/search_product_offer.dart';
-import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class OfferScreeenM extends StatelessWidget {
@@ -30,7 +32,8 @@ class OfferScreeenM extends StatelessWidget {
             onPressed: (){
               context.push("/products-view");
             }, 
-            child: Text('Productos')),
+            child: const Text('Productos')),
+            Expanded(child: CategoriesScreen(categoriesList: context.read<CategoriesProvider>().categories)),
 
           
         ],

@@ -20,9 +20,11 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
     try {
       List<CategorieModel> categories = [];
       if(AuthService.user != null){
-        final Response response = await dioGetCategories.get('categories/$storeId');
+        final Response response = await dioGetCategories.get('');
+        print(response);
         if(response.statusCode == 200){
-          categories = (response.data["categories"] as List).map((categorieJson) => CategorieModel.fromJson(categorieJson)).toList();
+          categories = (response.data["categories"] as List).map((categorieJson) => 
+          CategorieModel.fromJson(categorieJson)).toList();
           return categories;
         }
       }
