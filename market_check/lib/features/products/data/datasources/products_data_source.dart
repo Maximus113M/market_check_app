@@ -1,5 +1,4 @@
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
