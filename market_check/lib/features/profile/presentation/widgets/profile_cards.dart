@@ -24,7 +24,8 @@ class ProfileCards extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               boxShadow: AppShadows.mainShadow,
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.white,
             ),
             child: ClipRRect(
               borderRadius: BorderRadiusDirectional.circular(10),
@@ -51,7 +52,7 @@ class ProfileCards extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(
-                colors: AppColors.gradientShadowColors,
+                colors: AppColors.gradientProfileCards,
                 begin: Alignment.bottomCenter,
                 end: Alignment.center,
               ),

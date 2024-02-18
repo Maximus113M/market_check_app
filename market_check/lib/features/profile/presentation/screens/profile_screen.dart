@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
-import 'package:market_check/features/profile/presentation/screens/widgets/profile_cards.dart';
+import 'package:market_check/features/profile/presentation/widgets/profile_cards.dart';
+import 'package:market_check/features/profile/presentation/widgets/profile_image.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String name = "perfile-screen";
@@ -20,19 +20,7 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.02),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.disabled, width: 1),
-            ),
-            child: const Center(
-              child: CircleAvatar(
-                radius: 62,
-                backgroundImage: AssetImage(AppAssets.avatar),
-              ),
-            ),
-          ),
+          const ProfileImage(),
           Text(
             AuthService.user!.name,
             style: FontStyles.subtitle1(AppColors.text),

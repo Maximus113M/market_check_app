@@ -9,7 +9,7 @@ class AppColors {
   static const Color error = Color.fromRGBO(177, 0, 15, 1);
   static const Color errorText = Color.fromARGB(255, 244, 67, 54);
   static const Color disabled = Color.fromRGBO(204, 204, 204, 1);
-  
+
   static const appColor = Color.fromARGB(255, 99, 201, 249);
   static const appColor2 = Color.fromARGB(255, 12, 172, 241);
   static const appColor3 = Color.fromARGB(255, 3, 168, 239);
@@ -26,9 +26,6 @@ class AppColors {
   static const lightText = Color.fromARGB(150, 0, 0, 0);
   static const lightText1 = Color.fromARGB(130, 0, 0, 0);
   static const lightText2 = Color.fromARGB(100, 0, 0, 0);
-
- 
-
 
   static const blueButton = Color.fromARGB(255, 0, 92, 196);
   static const yellowButton = Color.fromARGB(255, 252, 196, 1);
@@ -63,13 +60,12 @@ class AppColors {
     Colors.red.shade500,
     Colors.red.shade400,
   ];
-  
-  static final gradientShadowColors = [
-    Colors.black54,
+
+  static final gradientProfileCards = [
+    Colors.black87,
     Colors.black54,
     Colors.black38,
     Colors.black12,
+    Colors.transparent
   ];
-
-
 }
