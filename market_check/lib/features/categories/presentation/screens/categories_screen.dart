@@ -14,7 +14,6 @@ class CategoriesScreen extends StatelessWidget {
       child: SizedBox(
         height: ScreenSize.absoluteHeight * 0.1,
         child: GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
