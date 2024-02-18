@@ -2,22 +2,17 @@ import 'package:market_check/features/main_screen/presentation/screens/main_scre
 import 'package:market_check/features/screens.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
+import 'package:market_check/injection_container.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    /* ShellRoute(
-        builder: (context, state, child) => const LoginScreen(),
-        routes: [
-          GoRoute(
-              path: "/home",
-              name: HomeScreen.name,
-              builder: (context, state) => const HomeScreen()),
-        ]),*/
-    /*GoRoute(
-        path: "/login",
-        name: LogInScreen.name,
-        builder: (context, state) => const LogInScreen()),*/
+    GoRoute(
+      path: "/",
+      builder: (context, state) => SplashScreen(
+        signInProvider: sl(),
+      ),
+    ),
     GoRoute(
       path: "/login-form",
       name: LogInFormScreen.name,
@@ -31,22 +26,18 @@ final appRouter = GoRouter(
       path: "/main",
       builder: (context, state) => const MainScreen(),
     ),
-    /*GoRoute(
-      path: "/home",
-      name: HomeScreen.name,
-      builder: (context, state) => HomeScreen(),
-    ),*/
     GoRoute(
       path: "/shopping-cart",
       name: ShoppingCart.name,
       builder: (context, state) => const ShoppingCart(),
     ),
     GoRoute(
-        path: "/stores-m",
-        name: StoresScreenM.name,
-        builder: (context, state) => const StoresScreenM(
-            /* storesProvider: sl(),*/
-            )),
+      path: "/stores-m",
+      name: StoresScreenM.name,
+      builder: (context, state) => const StoresScreenM(
+          /* storesProvider: sl(),*/
+          ),
+    ),
     GoRoute(
       path: "/store-view",
       name: StoreScreen.name,
@@ -90,10 +81,6 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/scanner",
       builder: (context, state) => const ScannerScreen(),
-    ),
-    GoRoute(
-      path: "/",
-      builder: (context, state) => const HomeScreen1(),
     ),
   ],
 );

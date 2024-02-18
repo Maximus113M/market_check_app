@@ -7,6 +7,7 @@ import 'package:market_check/features/login/data/models/sign_in_data_model.dart'
 import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
+import 'package:market_check/features/login/domain/use_cases/verify_current_session_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ import 'package:market_check/features/stores/presentation/providers/stores_provi
 import 'package:provider/provider.dart';
 
 class SignInProvider with ChangeNotifier {
+  final VerifyCurrentSessionUseCase verifyCurrentSessionUseCase;
   final VerifyLogInUseCase verifyLogInUseCase;
   final SignUpUseCase signUpUseCase;
   final SignOutUseCase signOutUseCase;
@@ -26,8 +28,9 @@ class SignInProvider with ChangeNotifier {
   String confirmPassword = "";
 
   SignInProvider({
-    required this.signUpUseCase,
+    required this.verifyCurrentSessionUseCase,
     required this.verifyLogInUseCase,
+    required this.signUpUseCase,
     required this.signOutUseCase,
   });
 
@@ -36,8 +39,22 @@ class SignInProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void verifyCurrentSession(BuildContext context) async {
+    final result = await verifyCurrentSessionUseCase(NoParams());
+    result.fold((l) => debugPrint(l.message), (r) async {
+      String route = '/login-form';
+      if (r) {
+        context.read<StoresProvider>().loadStores(notify: true);
+        route = '/main';
+      }
+      Future.delayed(const Duration(seconds: 1)).then(
+        (value) => context.pushReplacement(route),
+      );
+    });
+  }
+
   void validateUser(BuildContext context) async {
-  if (emailInput.trim().isEmpty ||
+    if (emailInput.trim().isEmpty ||
         !AppFuntions.emailRegExp.hasMatch(emailInput)) {
       InAppNotification.showAppNotification(
           context: context,
@@ -57,7 +74,6 @@ class SignInProvider with ChangeNotifier {
           type: NotificationType.error);
       return;
     }
-    print(passwordInput);
 
     final SignInDataModel signInData =
         SignInDataModel(email: emailInput, password: passwordInput);
@@ -69,10 +85,9 @@ class SignInProvider with ChangeNotifier {
         if (r) {
           context.read<StoresProvider>().loadStores(notify: true);
           context.pushReplacement('/main');
-       }
+        }
       },
     );
-    //context.pushReplacement('/stores-m');
   }
 
   void validateSingup(BuildContext context) async {
@@ -144,11 +159,6 @@ class SignInProvider with ChangeNotifier {
     }
     return true;
   }
-
-  /* void onChangeEmail(String email){
-    emailInput = email;
-    notifyListeners();
-  }*/
 
   void logOut(BuildContext context) async {
     final result = await signOutUseCase(NoParams());

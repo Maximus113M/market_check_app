@@ -19,9 +19,7 @@ void main() async {
 
   runApp(
     MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (context) => sl<SignInProvider>()
-      ),
+      ChangeNotifierProvider(create: (context) => sl<SignInProvider>()),
       ChangeNotifierProvider(
         create: (context) => sl<StoresProvider>(),
       ),
@@ -35,10 +33,10 @@ void main() async {
         create: (context) => sl<ShoppingCartProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<MainProvider>()
+        create: (context) => sl<MainProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<ProfileProvider>()
+        create: (context) => sl<ProfileProvider>(),
       ),
     ], child: const MyApp()),
   );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -10,29 +11,66 @@ import 'package:dio/dio.dart';
 import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
 
 abstract class SignInDataSource {
+  Future<bool> verifyCurrentSession();
   Future<bool> verifyLogIn(SignInDataModel signInData);
   Future<String> signUp(SignUpDataModel newUser);
   Future<bool> signOut();
 }
 
 class SignInDataSourceImpl extends SignInDataSource {
+  final FlutterSecureStorage flutterSecureStorage;
+
   final Dio dioSignIn = Dio(
     BaseOptions(
       baseUrl: RemoteUrls.currentUrl,
     ),
   );
 
-  SignInDataSourceImpl();
+  SignInDataSourceImpl({required this.flutterSecureStorage});
+
+  @override
+  Future<bool> verifyCurrentSession() async {
+    try {
+      if (await flutterSecureStorage.containsKey(key: 'access_token')) {
+        final currentSessionInfo = await flutterSecureStorage.readAll();
+        AuthService.user = User.fromJson(currentSessionInfo, isEncripted: true);
+        AuthService.token = currentSessionInfo["access_token"];
+        AuthService.typeToken = currentSessionInfo["token_type"];
+
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      print(e);
+      throw RemoteException(
+          message: "Ocurrio un error al verificar la Sesión",
+          type: ExceptionType.signInException);
+    }
+  }
 
   @override
   Future<bool> verifyLogIn(SignInDataModel signInData) async {
     try {
       final Response response = await dioSignIn.post(RemoteUrls.signInUrl,
           data: {"email": signInData.email, "password": signInData.password});
-      print(response);
       print(response.data["user"]);
 
-      AuthService.user = User.fromJson(response.data);
+      await flutterSecureStorage.write(
+          key: 'id', value: response.data["user"]["id"].toString());
+      await flutterSecureStorage.write(
+          key: 'name', value: response.data["user"]["name"]);
+      await flutterSecureStorage.write(
+          key: 'documento',
+          value: response.data["user"]["documento"].toString());
+      await flutterSecureStorage.write(
+          key: 'email', value: response.data["user"]["email"]);
+      await flutterSecureStorage.write(
+          key: 'access_token', value: response.data["access_token"]);
+      await flutterSecureStorage.write(
+          key: 'token_type', value: response.data["token_type"]);
+
+      AuthService.user = User.fromJson(response.data["user"]);
       AuthService.token = response.data["access_token"];
       AuthService.typeToken = response.data["token_type"];
 
@@ -40,7 +78,6 @@ class SignInDataSourceImpl extends SignInDataSource {
     } on DioException catch (e) {
       //TODO personalizar mensajes
       print(e);
-      print(e.error);
       throw RemoteException(
           message:
               "Ocurrio un error al intentar ingresar, por favor revise sus credenciales",
@@ -80,6 +117,11 @@ class SignInDataSourceImpl extends SignInDataSource {
     try {
       if (AuthService.user != null) {
         dioSignIn.get(RemoteUrls.logOutUrl);
+        AuthService.user = null;
+        AuthService.token = null;
+        AuthService.typeToken = null;
+        await flutterSecureStorage.deleteAll();
+
         return true;
       }
       return false;

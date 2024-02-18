@@ -17,8 +17,9 @@ class LogInFormScreenBody extends StatelessWidget {
             Center(
               child: Padding(
                 padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.15),
-                child: Image.asset(AppAssets.logoVertical,
-                width: ScreenSize.width * 0.85,
+                child: Image.asset(
+                  AppAssets.logoVertical,
+                  width: ScreenSize.width * 0.85,
                 ),
               ),
             ),

@@ -9,4 +9,5 @@ init() async {
   registerRepositories();
   registerUseCases();
   registerProviders();
+  registerFlutterSecureStorage();
 }

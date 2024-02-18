@@ -9,21 +9,21 @@ class User {
   int? purchasePin;
 
   User({
-    required this.id,
+    this.id,
     required this.name,
     required this.document,
     required this.email,
     required this.rolId,
-    this.isPurchaseOpen= false,
+    this.isPurchaseOpen = false,
     this.purchasePin,
   });
 
-  factory User.fromJson(json) => User(
-      id: json["user"]["id"],
-      name: json["user"]["name"],
-      document: json["user"]["documento"].toString(),
-      email: json["user"]["email"],
-      rolId: json["user"]["rol_id"],
+  factory User.fromJson(json, {bool isEncripted = false}) => User(
+        id: isEncripted ? int.parse(json["id"]) : json["id"],
+        name: json["name"],
+        document: json["documento"].toString(),
+        email: json["email"],
+        rolId: json["rol_id"] ?? 4,
       );
 
   Map<String, dynamic> userToJson() => {
