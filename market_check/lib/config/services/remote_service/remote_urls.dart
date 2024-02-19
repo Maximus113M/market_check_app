@@ -17,6 +17,7 @@ class RemoteUrls {
   static const String offersUrl = "ofertas/";
   static const String productsUrl = "productos/";
   static const String categoriesUrl = "categoria/";
+  static const String categoriesUrlByStore = "establecimiento/showCategoriesByStore/";
 
 
   static const String purchaseUrl = "compras/";

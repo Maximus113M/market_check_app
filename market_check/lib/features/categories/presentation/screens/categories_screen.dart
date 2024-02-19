@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
@@ -60,6 +61,7 @@ class CategoriesScreen extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 12, fontWeight: FontWeight.w500),
                 ),
+                onTap: ()=> context.push("/products-view"),
               ),
             );
           },
