@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? icon;
   final IconButton? suffixIcon;
   final bool isNumeric;
+  final bool isEnable;
   final TextEditingController? textController;
 
   final String? errorMessage;
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.suffixIcon,
     this.isNumeric = false,
+    this.isEnable = true,
     this.textController,
   });
 
@@ -34,10 +36,11 @@ class CustomTextFormField extends StatelessWidget {
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(40),
       borderSide: BorderSide(
-        color: AppColors.appMainInput.withOpacity(0.7),
+        color: AppColors.appMainInput.withOpacity(1),
       ),
     );
     return TextFormField(
+      enabled: isEnable,
       controller: textController,
       keyboardType: isNumeric ? TextInputType.number : null,
       style: TextStyle(height: ScreenSize.height * 0.001),
@@ -46,11 +49,14 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-        prefixIcon: icon != null ? Icon(icon) : null,
+        prefixIcon: icon != null
+            ? Icon(icon, color: isEnable ? null : AppColors.unfocused)
+            : null,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: AppColors.appMainInput,
+        fillColor: AppColors.appMainInput2,
         enabledBorder: border,
+        disabledBorder: border,
         focusedBorder:
             border.copyWith(borderSide: BorderSide(color: colors.primary)),
         errorBorder:

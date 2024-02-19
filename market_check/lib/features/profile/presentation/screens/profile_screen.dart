@@ -1,52 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/auth/auth_service.dart';
 
-import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
-import 'package:market_check/features/profile/presentation/widgets/profile_cards.dart';
-import 'package:market_check/features/profile/presentation/widgets/profile_image.dart';
+import 'package:market_check/features/profile/presentation/widgets/profile_body_screen.dart';
+
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String name = "perfile-screen";
-  final ProfileProvider profileProvider;
 
-  const ProfileScreen({super.key, required this.profileProvider});
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const ProfileImage(),
-          Text(
-            AuthService.user!.name,
-            style: FontStyles.subtitle1(AppColors.text),
-          ),
-          Text(
-            AuthService.user!.email,
-            style: FontStyles.body1(AppColors.unfocused),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.width * 0.03,
-              vertical: ScreenSize.absoluteHeight * 0.025,
-            ),
-            child: SizedBox(
-              height: ScreenSize.absoluteHeight * 0.2,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: profileProvider.menuCards.length,
-                itemBuilder: (context, index) => ProfileCards(
-                    title: profileProvider.menuCards[index].title,
-                    imagePath: profileProvider.menuCards[index].imagePath,
-                    isSelected: profileProvider.selectedIndex == index),
-              ),
-            ),
-          ),
-        ],
+      body: ProfileBodyScreen(
+        profileProvider: Provider.of<ProfileProvider>(context),
       ),
     );
   }

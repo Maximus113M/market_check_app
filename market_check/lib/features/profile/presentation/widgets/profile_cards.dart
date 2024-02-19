@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/constans/app_shadows.dart';
 
@@ -17,21 +18,21 @@ class ProfileCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(3),
+      padding: const EdgeInsets.all(4),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
-              boxShadow: AppShadows.mainShadow,
+              boxShadow: AppShadows.profileShadow,
               borderRadius: BorderRadius.circular(10),
               color: AppColors.white,
             ),
             child: ClipRRect(
               borderRadius: BorderRadiusDirectional.circular(10),
               child: FadeInImage(
-                height: ScreenSize.absoluteHeight * 0.18,
-                width: ScreenSize.width * 0.3,
+                height: ScreenSize.absoluteHeight * 0.2,
+                width: ScreenSize.width * 0.29,
                 fit: BoxFit.cover,
                 image: AssetImage(
                   imagePath,
@@ -39,16 +40,16 @@ class ProfileCards extends StatelessWidget {
                 placeholder: const AssetImage(AppAssets.loadingImage),
                 imageErrorBuilder: (context, error, stackTrace) => Image.asset(
                   AppAssets.loadingImage,
-                  height: ScreenSize.absoluteHeight * 0.18,
-                  width: ScreenSize.width * 0.3,
+                  height: ScreenSize.absoluteHeight * 0.2,
+                  width: ScreenSize.width * 0.29,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
           Container(
-            height: ScreenSize.absoluteHeight * 0.18,
-            width: ScreenSize.width * 0.3,
+            height: ScreenSize.absoluteHeight * 0.22,
+            width: ScreenSize.width * 0.29,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(
@@ -61,7 +62,7 @@ class ProfileCards extends StatelessWidget {
           Positioned(
             bottom: 10,
             child: SizedBox(
-              width: ScreenSize.width * 0.3,
+              width: ScreenSize.width * 0.29,
               child: Text(
                 title,
                 style: FontStyles.bodyBold0(AppColors.white),

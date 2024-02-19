@@ -18,6 +18,7 @@ class AppColors {
   static const appSecondary = Color(0xFFfcc407);
   static const appGray = Color(0xFFb3b2b2);
   static const appMainInput = Color(0xFFD2D9DB);
+  static const appMainInput2 = Color.fromARGB(255, 226, 232, 234);
 
   static const text = Colors.black;
   static const textwhite = Colors.white;

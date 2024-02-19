@@ -39,15 +39,18 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-AppBar customAppBar()=> AppBar(
+AppBar customAppBar({Widget? leading, bool isCartVisible = true}) => AppBar(
+      leading: leading,
       toolbarHeight: ScreenSize.absoluteHeight * 0.07,
       backgroundColor: AppColors.appPrimary,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(15),
-          bottomRight: Radius.circular(15),
+          bottomLeft: Radius.circular(18),
+          bottomRight: Radius.circular(18),
         ),
       ),
+      elevation: 10,
+      shadowColor: AppColors.text,
       centerTitle: true,
       title: Padding(
         padding: EdgeInsets.only(right: ScreenSize.width * 0.12, bottom: 5),
@@ -57,13 +60,14 @@ AppBar customAppBar()=> AppBar(
         ),
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.shopping_cart_rounded,
-            size: 33,
-            color: AppColors.white,
-          ),
-        )
+        if (isCartVisible)
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.shopping_cart_rounded,
+              size: 33,
+              color: AppColors.white,
+            ),
+          )
       ],
     );
