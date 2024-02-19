@@ -10,33 +10,26 @@ import 'package:market_check/config/shared/models/create_user_data_model.dart';
 
 import 'package:dio/dio.dart';
 
-abstract class SignInDataSource {
-  Future<bool> verifyCurrentSession();
-  Future<bool> verifyLogIn(SignInDataModel signInData);
-  Future<String> signUp(SignUpDataModel newUser);
-  Future<bool> signOut();
+abstract class ProfileDataSource {
+  Future<bool> updatePasword(String password);
+  //Future<bool> verifyLogIn(SignInDataModel signInData);
+  Future<String> updateUserData(SignUpDataModel updatedData);
 }
 
-class SignInDataSourceImpl extends SignInDataSource {
+class ProfileDataSourceImpl extends ProfileDataSource {
   final FlutterSecureStorage flutterSecureStorage;
 
-  final Dio dioSignIn = Dio(
-    BaseOptions(
-      baseUrl: RemoteUrls.currentUrl,
-    ),
-  );
+  final Dio dioInstance;
 
-  SignInDataSourceImpl({required this.flutterSecureStorage});
+  ProfileDataSourceImpl(
+      {required this.flutterSecureStorage, required this.dioInstance});
 
   @override
-  Future<bool> verifyCurrentSession() async {
+  Future<bool> updatePasword(String password) async {
     try {
-      if (await flutterSecureStorage.containsKey(key: 'access_token')) {
-        final currentSessionInfo = await flutterSecureStorage.readAll();
-        AuthService.user = User.fromJson(currentSessionInfo, isEncripted: true);
-        AuthService.token = currentSessionInfo["access_token"];
-        AuthService.typeToken = currentSessionInfo["token_type"];
+      Response response = await dioInstance.get(RemoteUrls.userUrl);
 
+      if (response.statusCode == 201) {
         return true;
       }
 
@@ -49,10 +42,10 @@ class SignInDataSourceImpl extends SignInDataSource {
     }
   }
 
-  @override
+  /*@override
   Future<bool> verifyLogIn(SignInDataModel signInData) async {
     try {
-      final Response response = await dioSignIn.post(RemoteUrls.signInUrl,
+      final Response response = await dioInstance.post(RemoteUrls.signInUrl,
           data: {"email": signInData.email, "password": signInData.password});
       print(response.data["user"]);
 
@@ -65,10 +58,6 @@ class SignInDataSourceImpl extends SignInDataSource {
           value: response.data["user"]["documento"].toString());
       await flutterSecureStorage.write(
           key: 'email', value: response.data["user"]["email"]);
-      await flutterSecureStorage.write(
-          key: 'access_token', value: response.data["access_token"]);
-      await flutterSecureStorage.write(
-          key: 'token_type', value: response.data["token_type"]);
 
       AuthService.user = User.fromJson(response.data["user"]);
       AuthService.token = response.data["access_token"];
@@ -88,15 +77,32 @@ class SignInDataSourceImpl extends SignInDataSource {
           message: "Ocurrio un error al intentar iniciar Sesión",
           type: ExceptionType.signInException);
     }
-  }
+  }*/
 
   @override
-  Future<String> signUp(SignUpDataModel newUser) async {
+  Future<String> updateUserData(SignUpDataModel updatedData) async {
     try {
-      final Response response = await dioSignIn.post(RemoteUrls.signUpUrl,
-          data: jsonEncode(newUser.userToJson()));
-      print(response.data);
-      return 'Registro exito, ya puedes Iniciar Sesión!';
+      final Response response = await dioInstance.put(
+        RemoteUrls.userUrl,
+        data: jsonEncode(
+          updatedData.userToJson(isPasswordSet: false),
+        ),
+      );
+      if (response.statusCode == 201) {
+        await flutterSecureStorage.write(key: 'name', value: updatedData.name);
+        await flutterSecureStorage.write(
+            key: 'documento', value: updatedData.document.toString());
+        await flutterSecureStorage.write(
+            key: 'email', value: updatedData.email);
+        AuthService.user = User(
+          name: updatedData.name,
+          document: updatedData.document.toString(),
+          email: updatedData.email,
+          rolId: 4,
+        );
+        print(response.data);
+      }
+      return response.data["message"];
     } on DioException catch (e) {
       //TODO personalizar mensajes
       print(e);
@@ -109,28 +115,6 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message: "Ocurrio un error al realizar el registro",
           type: ExceptionType.signInException);
-    }
-  }
-
-  @override
-  Future<bool> signOut() async {
-    try {
-      if (AuthService.user != null) {
-        dioSignIn.get(RemoteUrls.logOutUrl);
-        AuthService.user = null;
-        AuthService.token = null;
-        AuthService.typeToken = null;
-        await flutterSecureStorage.deleteAll();
-
-        return true;
-      }
-      return false;
-    } catch (e) {
-      print(e);
-      throw RemoteException(
-        message: 'Ha ocurrido un error al cerrar la Sesion',
-        type: ExceptionType.signInException,
-      );
     }
   }
 }

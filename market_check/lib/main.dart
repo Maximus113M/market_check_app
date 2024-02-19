@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
@@ -21,7 +20,9 @@ void main() async {
 
   runApp(
     MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context) => sl<SignInProvider>()),
+      ChangeNotifierProvider(
+        create: (context) => sl<SignInProvider>(),
+      ),
       ChangeNotifierProvider(
         create: (context) => sl<StoresProvider>(),
       ),
@@ -37,8 +38,12 @@ void main() async {
       ChangeNotifierProvider(
         create: (context) => sl<ShoppingCartProvider>(),
       ),
-      ChangeNotifierProvider(create: (context) => sl<MainProvider>(),),
-      ChangeNotifierProvider(create: (context) => sl<ProfileProvider>(),),
+      ChangeNotifierProvider(
+        create: (context) => sl<MainProvider>(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<ProfileProvider>(),
+      ),
     ], child: const MyApp()),
   );
 }

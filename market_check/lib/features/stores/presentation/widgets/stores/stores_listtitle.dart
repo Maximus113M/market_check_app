@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
-
 import 'package:market_check/features/stores/data/models/store_model.dart';
-
-import 'package:go_router/go_router.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class StoresListTile extends StatelessWidget {
   final StoreModel storeModel;

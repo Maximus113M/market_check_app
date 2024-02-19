@@ -22,11 +22,11 @@ class SignUpDataModel{
       );
       
 
-    Map<String, dynamic> userToJson() => {
+    Map<String, dynamic> userToJson({bool isPasswordSet= true}) => {
       "name": name,
       "documento": document,
       "email": email,
-      "password": password,
+      if(isPasswordSet)"password": password,
     };
 
 

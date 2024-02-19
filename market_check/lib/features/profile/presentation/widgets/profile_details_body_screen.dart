@@ -23,9 +23,10 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
   TextEditingController emailController = TextEditingController();
   String password = '';
   String confirmPassword = '';
-  bool isPasswordVisible = false;
-  bool isConfirmPasswordVisible = false;
+  bool isPasswordObscure = true;
+  bool isConfirmPasswordObscure = true;
   bool isValidPassword = false;
+  bool isPasswordSet= false;
 
   void onChangePassword(String value) {
     password = value;
@@ -39,16 +40,29 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
   }
 
   void togglePasswordVisibility() {
-    isPasswordVisible = !isPasswordVisible;
+    isPasswordObscure = !isPasswordObscure;
     setState(() {});
   }
 
   void toggleConfirmPasswordVisibility() {
-    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    isConfirmPasswordObscure = !isConfirmPasswordObscure;
     setState(() {});
   }
 
   void validateFields() {
+    if (password.isNotEmpty) {
+      if (password != confirmPassword) {
+        InAppNotification.showAppNotification(
+          context: context,
+          title: 'Contraseña Inválida!',
+          message:
+              'Las contraseñas deben ser de 5 o más caracteres y deben coincidir.',
+          type: NotificationType.warning,
+        );
+        return;
+      }
+      isPasswordSet= true;
+    }
     if (nameController.text.trim().isEmpty ||
         emailController.text.trim().isEmpty ||
         documentController.text.trim().isEmpty) {
@@ -71,16 +85,13 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
       );
       return;
     }
-    if (password.isEmpty || password != confirmPassword) {
-      InAppNotification.showAppNotification(
-        context: context,
-        title: 'Contraseña Inválida!',
-        message:
-            'La contraseña debe ser de 5 o más caracteres y debe coincidir.',
-        type: NotificationType.warning,
-      );
-      return;
+
+    if(isPasswordSet){
+      //DOS CASOS DE USO
+    }else{
+      //Solo update
     }
+
     InAppNotification.showAppNotification(
       context: context,
       title: 'Datos Actualizados!',
@@ -154,27 +165,27 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                 ),
                 formTitle(
                   title: 'Contraseña',
-                  isObscure: isPasswordVisible,
+                  isObscure: isPasswordObscure,
                   icon: Icons.lock,
                   onChange: (p0) => onChangePassword(p0),
                   showPassword: IconButton(
                     onPressed: () => togglePasswordVisibility(),
-                    icon: Icon(isPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off),
+                    icon: Icon(isPasswordObscure
+                        ? Icons.visibility_off
+                        : Icons.visibility),
                   ),
                 ),
                 formTitle(
                   title: 'Confirma la Contraseña',
-                  isObscure: isConfirmPasswordVisible,
+                  isObscure: isConfirmPasswordObscure,
                   isEnable: isValidPassword,
                   icon: Icons.lock,
                   onChange: (p0) => confirmPassword = p0,
                   showPassword: IconButton(
                     onPressed: () => toggleConfirmPasswordVisibility(),
-                    icon: Icon(isPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off),
+                    icon: Icon(isConfirmPasswordObscure
+                        ? Icons.visibility_off
+                        : Icons.visibility),
                   ),
                 ),
                 SizedBox(

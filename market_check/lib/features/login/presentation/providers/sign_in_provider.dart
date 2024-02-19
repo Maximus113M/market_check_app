@@ -4,7 +4,7 @@ import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
-import 'package:market_check/features/login/data/models/sign_up_data_model.dart';
+import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_current_session_use_case.dart';
