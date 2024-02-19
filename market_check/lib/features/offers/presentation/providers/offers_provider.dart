@@ -1,53 +1,37 @@
-/*import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:market_check/features/offers/domain/entities/offer_entity.dart';
-import 'package:market_check/features/offers/presentation/providers/offers_repository_provider.dart';
+import 'package:flutter/foundation.dart';
 
-final getOffersProvider =
-    StateNotifierProvider<OfferNotifier, List<OfferEntity>>((ref) {
-  final offers = ref.watch(offersRepositoryProvider).getOffers;
+import 'package:market_check/config/use_case/use_case.dart';
+import 'package:market_check/features/offers/data/models/offer_model.dart';
+import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
 
-  return OfferNotifier(fetchMoreOffers: offers);
-});
+class OffersProvider with ChangeNotifier {
+  final GetOffersUseCase getOffersUseCase;
+  bool loadingOffers = false;
+  List<OfferModel> offerList = [];
+  OfferModel? currentOffer;
 
-//TODO: POR USAR
-/*final offersHorizontalListView = Provider<List<Offer>>((ref) {
-  final offerList = ref.watch(getOffersProvider);
-  if (offerList.isEmpty) return [];
-  return offerList;
-});*/
+  OffersProvider({required this.getOffersUseCase});
 
-//Caso de uso, define cargar ofertas
-typedef OfferCallback = Future<List<OfferEntity>> Function({int page});
+  Future<void> loadOffers({bool notify = true}) async {    
+    loadingOffers = true;
+    final result = await getOffersUseCase(NoParams());
+    print("---------------------> ahhhhhhhhhhhhhhhhhhhhhhhhhh");
+    result.fold(
+      (l) => null,
+      (r) => offerList = r,
+    );
+    if (notify) notifyListeners();
+    //await Future.delayed(const Duration(seconds: 2));
 
-//Provider Controller
-class OfferNotifier extends StateNotifier<List<OfferEntity>> {
-  OfferCallback fetchMoreOffers;
-  bool isLoading = false;
+    loadingOffers = false;
+    currentOffer = null;
 
-  //TODO: Remove initial offer from STATE
-  OfferNotifier({required this.fetchMoreOffers})
-      : super([
-          /*Offer(
-              active: true,
-              storeId: 1122,
-              id: 1,
-              date: DateTime(DateTime.september),
-              name: "Promo 2x1",
-              poster: "assets/Images/offers/offer11.jpg",
-              items: [],
-              categories: [],
-              description: "Super oferta este mes",
-              price: 49900)*/
-        ]);
-
-  Future<void> loadOffers() async {
-    if (isLoading) return;
-    isLoading = true;
-
-    final List<OfferEntity> offers = await fetchMoreOffers();
-    state = [...state, ...offers];
-
-    await Future.delayed(const Duration(milliseconds: 400));
-    isLoading = false;
+    // notifyListeners();
   }
-}*/
+
+  void getOffers() {
+    //loadOffers();
+    //notifyListeners();
+    //return offerList;
+  }
+}

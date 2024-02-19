@@ -28,21 +28,26 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  animate_do: ^3.1.2
+  animate_do: ^3.3.1
+  another_flushbar: ^1.12.30
   card_swiper: ^3.0.1
   curved_navigation_bar: ^1.0.3
   dartz: ^0.10.1
+  dio: ^5.4.0
   flutter:
     sdk: flutter
-  get_it: ^7.2.0
-  go_router: ^10.2.0
+  flutter_barcode_scanner: ^2.0.0
+  flutter_secure_storage: ^9.0.0
+  get_it: ^7.6.7
+  go_router: ^13.1.0
   google_nav_bar: ^5.0.6
-  provider: ^6.0.5
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  lottie: ^2.7.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -60,9 +65,15 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/Images/
+    - assets/Images/avatars/
+    - assets/Images/profile/
     - assets/Images/offers/
     - assets/Images/categories/
     - assets/Images/items/
+    - assets/Images/stores/
+    - assets/Images/logos/
+    - assets/Images/background/
+    - assets/lottie/
     - assets/fonts/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

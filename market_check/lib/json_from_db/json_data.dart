@@ -272,11 +272,13 @@ Map<String, dynamic> storesJson = {
   "results": [
     {
       "id": 111222,
-      "name": "Exito",
+      "name": "Grupo Exito",
       "caption": "Para Servirte",
       "creation-date": "2023-09-20",
-      "poster": "assets/Images/Almacenes_exito.png",
-      "color": "255, 255, 235, 59",
+      "poster-logo": "assets/Images/stores/Almacenes_exito.png",
+      "poster": "assets/Images/stores/EXITO-poster.jpg",
+      "color": 0xFFffff00,
+      "title-color": 0xFF000000,
       "locations": [
         {
           "name": "Éxito Bucaramanga La Rosita",
@@ -295,8 +297,10 @@ Map<String, dynamic> storesJson = {
       "name": "Tiendas D1",
       "caption": "¡Si lo quieres, lo tienes!",
       "creation-date": "2023-09-20",
-      "poster": "assets/Images/LogoD1.png",
-      "color": "255, 244, 67, 54",
+      "poster-logo": "assets/Images/stores/LogoD1.png",
+      "poster": "assets/Images/stores/D1-poster2.jpg",
+      "color": 0xFFff0000,
+      "title-color": 0xFFffffff,
       "locations": [
         {
           "name": "Tiendas D1 - Cabecera",
@@ -315,8 +319,10 @@ Map<String, dynamic> storesJson = {
       "name": "Supermercados La Canasta",
       "caption": "Mas Fresco",
       "creation-date": "2023-09-20",
-      "poster": "assets/Images/LOGO-LACANASTA.jpg",
-      "color": "255, 165, 214, 167",
+      "poster-logo": "assets/Images/stores/LOGO-LACANASTA.jpg",
+      "poster": "assets/Images/stores/LACANASTA-poster.jpg",
+      "color": 0xFF02971f,
+      "title-color": 0xFF000000,
       "locations": [
         {
           "name": "Supermercados La Canasta FloridaBlanca",
@@ -330,8 +336,10 @@ Map<String, dynamic> storesJson = {
       "name": "Mas x Menos",
       "caption": "Siempre + cerca",
       "creation-date": "2023-09-20",
-      "poster": "assets/Images/masXmenos-logo.png",
-      "color": "255, 33, 150, 243",
+      "poster-logo": "assets/Images/stores/masXmenos-logo.png",
+      "poster": "assets/Images/stores/MASXMENOS-poster2.jpg",
+      "color": 0xFF0b41f7,
+      "title-color": 0xFFffffff,
       "locations": [
         {
           "name": "CIUDADELA",
@@ -350,8 +358,10 @@ Map<String, dynamic> storesJson = {
       "name": "Tiendas Ara",
       "caption": "Alegria al mejor precio",
       "creation-date": "2023-09-20",
-      "poster": "assets/Images/logo-ara.png",
-      "color": "255, 230, 81, 0",
+      "poster-logo": "assets/Images/stores/logo-ara.png",
+      "poster": "assets/Images/stores/ARA-poster.jpg",
+      "color": 0xFFff4500,
+      "title-color": 0xFFffffff,
       "locations": [
         {
           "name": "Tiendas Ara - Mejoras publicas",

@@ -1,65 +1,25 @@
-class SharedException implements Exception {
+class RemoteException implements Exception {
   final String message;
+  final ExceptionType type;
 
-  SharedException({required this.message});
+  RemoteException({required this.message, required this.type});
 }
 
-class LoginException implements Exception {
+class LocalException implements Exception {
   final String message;
+  final ExceptionType type;
 
-  LoginException({required this.message});
+  LocalException({required this.message, required this.type});
 }
 
-class HomeException implements Exception {
-  final String message;
-
-  HomeException({required this.message});
-}
-
-class OffersException implements Exception {
-  final String message;
-
-  OffersException({required this.message});
-}
-
-class ProfileException implements Exception {
-  final String message;
-
-  ProfileException({required this.message});
-}
-
-class SettingsException implements Exception {
-  final String message;
-
-  SettingsException({required this.message});
-}
-
-class ShoppingCartException implements Exception {
-  final String message;
-
-  ShoppingCartException({required this.message});
-}
-
-class ShoppingHistoryException implements Exception {
-  final String message;
-
-  ShoppingHistoryException({required this.message});
-}
-
-class ShoppingListException implements Exception {
-  final String message;
-
-  ShoppingListException({required this.message});
-}
-
-class StoreItemsException implements Exception {
-  final String message;
-
-  StoreItemsException({required this.message});
-}
-
-class StoresException implements Exception {
-  final String message;
-
-  StoresException({required this.message});
+enum ExceptionType {
+  splashException,
+  signUpException,
+  signInException,
+  homeException,
+  offersException,
+  storesException,
+  purchasesException,
+  productsException,
+  shoppingHistoryException,
 }

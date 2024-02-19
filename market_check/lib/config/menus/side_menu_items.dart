@@ -25,10 +25,10 @@ const List<SideMenuItems> appSideMenuItems = [
       link: "/offers",
       icon: Icons.local_offer_outlined),
   SideMenuItems(
-      title: "Productos",
-      subtitle: "Mira la disponibilidad de lo que buscas",
-      link: "/items",
-      icon: Icons.coffee),
+      title: "Escanner",
+      subtitle: "Obten informacion de los productos",
+      link: "/scanner",
+      icon: Icons.qr_code_scanner),
   SideMenuItems(
       title: "Lista de Compras",
       subtitle: "Fija presupuestos para tus compras",

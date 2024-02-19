@@ -1,27 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/utils/utils.dart';
 
-import 'package:market_check/config/shared/widgets/side_menus/side_menu.dart';
+//import 'package:market_check/config/shared/widgets/side_menus/side_menu.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final String title;
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final textStyles = Theme.of(context).textTheme;
-    return SafeArea(
-        child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: SizedBox(
-        width: double.infinity,
-        child: Row(children: [
-          const SideMenu(),
-          Text(title, style: textStyles.titleLarge),
-          const Spacer(),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
-        ]),
+    return AppBar(
+      toolbarHeight: ScreenSize.absoluteHeight * 0.07,
+      backgroundColor: AppColors.appPrimary,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(15),
+          bottomRight: Radius.circular(15),
+        ),
       ),
-    ));
+      centerTitle: true,
+      title: Padding(
+        padding: EdgeInsets.only(right: ScreenSize.width * 0.12, bottom: 5),
+        child: Image.asset(
+          AppAssets.logoHorizontal,
+          width: ScreenSize.height * 0.22,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.shopping_cart_rounded,
+            size: 35,
+            color: AppColors.white,
+          ),
+        )
+      ],
+    );
   }
 }
+
+AppBar customAppBar({Widget? leading, bool isCartVisible = true}) => AppBar(
+      leading: leading,
+      toolbarHeight: ScreenSize.absoluteHeight * 0.07,
+      backgroundColor: AppColors.appPrimary,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(18),
+          bottomRight: Radius.circular(18),
+        ),
+      ),
+      elevation: 10,
+      shadowColor: AppColors.text,
+      centerTitle: true,
+      title: Padding(
+        padding: EdgeInsets.only(right: ScreenSize.width * 0.12, bottom: 5),
+        child: Image.asset(
+          AppAssets.logoHorizontal,
+          width: ScreenSize.height * 0.22,
+        ),
+      ),
+      actions: [
+        if (isCartVisible)
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.shopping_cart_rounded,
+              size: 33,
+              color: AppColors.white,
+            ),
+          )
+      ],
+    );

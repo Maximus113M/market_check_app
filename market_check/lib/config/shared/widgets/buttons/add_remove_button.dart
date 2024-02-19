@@ -50,7 +50,7 @@ class AddRemoveButton extends StatelessWidget {
               onPressed: removeAction),
           Text(
             count.toString(),
-            style: FontStyles.bodyBold1(context, AppColors.text),
+            style: FontStyles.bodyBold1(AppColors.text),
           ),
           IconButton.filled(
               highlightColor: Colors.amber,
@@ -65,7 +65,7 @@ class AddRemoveButton extends StatelessWidget {
               ),
               icon: Icon(
                 Icons.add,
-                color: addColor ?? AppColors.whiteBg,
+                color: addColor ?? AppColors.white,
                 size: iconSize ?? 18,
               ),
               onPressed: addAction),
