@@ -28,4 +28,7 @@ class RemoteUrls {
 
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";
+
+  static String currentImagesUrlCategories =
+      "${currentUrl.replaceFirst('api/', '')}images/categorias/";
 }
