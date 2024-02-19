@@ -22,9 +22,9 @@ class StoresListTile extends StatelessWidget {
       child: Container(
         height: 80,
         decoration: BoxDecoration(
-          boxShadow: [
-            AppShadows.mainShadow[1]
-          ],
+          boxShadow: 
+            AppShadows.mainShadow
+          ,
           border: Border.all(
             color: Colors.grey,
           ),
