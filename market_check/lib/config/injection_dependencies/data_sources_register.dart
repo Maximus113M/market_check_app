@@ -3,6 +3,7 @@ import 'package:market_check/features/stores/data/datasources/stores_datasource.
 import 'package:market_check/features/offers/data/datasources/offers_datasource.dart';
 import 'package:market_check/features/login/data/datasources/sign_in_data_source.dart';
 import 'package:market_check/features/products/data/datasources/products_data_source.dart';
+import 'package:market_check/features/categories/data/datasource/categories_datasource.dart';
 
 void registerDataSources() {
   sl.registerLazySingleton<SignInDataSource>(
@@ -18,5 +19,8 @@ void registerDataSources() {
   );
   sl.registerLazySingleton<ProductsDataSource>(
     () => ProductsDataSourceImpl(),
+  );
+  sl.registerLazySingleton<CategoriesDataSource>(
+    () => CategoriesDataSourceImpl(),
   );
 }

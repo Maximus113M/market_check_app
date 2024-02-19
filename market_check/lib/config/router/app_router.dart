@@ -1,9 +1,11 @@
-import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
-import 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
 import 'package:market_check/features/screens.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
 import 'package:market_check/injection_container.dart';
+import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
+import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
+import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
+import 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
+
+import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -28,11 +30,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const MainScreen(),
     ),
     GoRoute(
-      path: "/shopping-cart",
-      name: ShoppingCart.name,
-      builder: (context, state) => const ShoppingCart(),
-    ),
-    GoRoute(
       path: "/stores-m",
       name: StoresScreenM.name,
       builder: (context, state) => const StoresScreenM(
@@ -45,25 +42,25 @@ final appRouter = GoRouter(
       builder: (context, state) => const StoreScreen(),
     ),
     GoRoute(
+      path: "/products-view",
+      name: ProductsScreen.name,
+      builder: (context, state) => const ProductsScreen(),
+    ),
+     GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,
       builder: (context, state) => const OfferScreeenM(),
     ),
     GoRoute(
-      path: "/offers",
-      name: OffersScreen.name,
-      builder: (context, state) => const OffersScreen(),
+      path: "/shopping-cart",
+      name: ShoppingCart.name,
+      builder: (context, state) => const ShoppingCart(),
     ),
-    GoRoute(
-      path: "/offer-view",
-      name: OfferView.name,
-      builder: (context, state) => const OfferView(),
-    ),
-    GoRoute(
+    /*GoRoute(
       path: "/store-categories",
       name: StoreCategoriesScreen.name,
       builder: (context, state) => const StoreCategoriesScreen(),
-    ),
+    ),*/
     GoRoute(
       path: "/lists",
       name: ShoppingListScreen.name,

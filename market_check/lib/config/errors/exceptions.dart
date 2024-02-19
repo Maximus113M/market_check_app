@@ -21,5 +21,6 @@ enum ExceptionType {
   storesException,
   purchasesException,
   productsException,
+  categoriesException,
   shoppingHistoryException,
 }

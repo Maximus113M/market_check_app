@@ -29,6 +29,7 @@ class StoresProvider with ChangeNotifier {
     if (notify) notifyListeners();
   }
 
+
   void searchStores(String name) async {
     if (name.isEmpty) {
       filteredStoreList = storeList;

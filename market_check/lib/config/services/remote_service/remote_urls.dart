@@ -2,8 +2,9 @@ class RemoteUrls {
 //Base Urls
   static const String baseUrl = "http://127.0.0.1:8000/api/";
   static const String baseUrlMovil = "http://10.0.2.2:8000/api/";
-  static const String baseUrlMovilSena = "http://10.201.194.65:8000/api/";
-//"http://192.168.1.41:8000/api/";
+  static const String baseUrlMovilSena = "http://192.168.1.41:8000/api/";
+
+//"http://10.201.194.65:8000/api/";
 
 //Constans Urls
   static const String signInUrl = "auth/login/";
@@ -14,6 +15,8 @@ class RemoteUrls {
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";
   static const String productsUrl = "productos/";
+  static const String categoriesUrl = "categoria/";
+
 
   static const String purchaseUrl = "compras/";
 

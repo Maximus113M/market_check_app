@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
-import 'package:market_check/config/utils/constans/app_assets.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/screen_size.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
-import 'package:market_check/features/offers/presentation/widgets/offer_listview.dart';
+import 'package:market_check/features/offers/presentation/widgets/offer_swiper.dart';
+
 import 'package:provider/provider.dart';
 
 class OfferScreeenM extends StatelessWidget {
@@ -22,9 +23,19 @@ class OfferScreeenM extends StatelessWidget {
             'Descuentos',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
-          
-          OffersListview(
+          OffersSwiper(
             offerList: context.watch<OffersProvider>().offerList,
+          ),
+          //const SearchProducts(),
+          ElevatedButton(
+            onPressed: () {
+              context.push("/products-view");
+            },
+            child: const Text('Productos'),
+          ),
+          Expanded(
+            child: CategoriesScreen(
+                categoriesList: context.read<CategoriesProvider>().categories),
           ),
         ],
       ),
