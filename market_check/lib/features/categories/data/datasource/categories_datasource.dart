@@ -21,30 +21,30 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
         baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.categoriesUrlByStore}",
         headers: AuthService.headers),
   );
-  
 
-  
   @override
-  Future<List<CategorieModel>> getCategories(int storeId) async{
+  Future<List<CategorieModel>> getCategories(int storeId) async {
     try {
       List<CategorieModel> categories = [];
-      if(AuthService.user != null){
-        final Response response = await dioGetCategoriesByStore.get('storeId');
+      if (AuthService.user != null) {
+        final Response response = await dioGetCategoriesByStore.get('$storeId');
         print(response);
-        if(response.statusCode == 200){
-          categories = (response.data["categories"] as List).map((categorieJson) => 
-          CategorieModel.fromJson(categorieJson)).toList();
+        if (response.statusCode == 200) {
+          categories = (response.data['categories'] as List)
+              .map((categorieJson) => CategorieModel.fromJson(categorieJson))
+              .toList();
           return categories;
         }
       }
-      return[];
+      return [];
     } catch (e) {
       print(e);
-      throw RemoteException(message: "Ha ocurrido un error al consultar las categorias",
-       type: ExceptionType.purchasesException);
+      throw RemoteException(
+          message: "Ha ocurrido un error al consultar las categorias",
+          type: ExceptionType.purchasesException);
     }
   }
-  
+
   /*@override
   Future<List<CategorieModel>> getCategoriesByStore(int storeId) async{
     try {
@@ -53,6 +53,4 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
       
     }
   }*/
-
-  
 }
