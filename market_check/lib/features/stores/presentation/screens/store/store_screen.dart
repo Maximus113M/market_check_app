@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
@@ -19,6 +20,10 @@ class StoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final StoreModel store = context.read<StoresProvider>().currentStore!;
     final int storeId = store.id!;
+    
+    final ProductsByCategoriesModel categoriesModel = ProductsByCategoriesModel(storeId: storeId, categorieId: categorie.id);
+
+    context.read<ProductsProvider>().getProductsByCategories(context, categoriesModel);
     //context.read<ProductsProvider>().getProductsByStore(context, storeId);
     context.read<CategoriesProvider>().getCategories(context, storeId);
 

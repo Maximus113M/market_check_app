@@ -74,12 +74,12 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   @override
   Future<List<ProductModel>> getProductsByCategorie(ProductsByCategoriesModel categoriesData) async{
     try {
-      List<ProductModel> productsCategories = [];
+      List<ProductModel> products = [];
       if(AuthService.user != null){
-        final Response response = await dioGetStoreProducts.get('productsCategories/', data: categoriesData.dataToJson());
-        print(response);
+        final Response response = await dioGetStoreProducts.get('productsCategories/${categoriesData.storeId}/${categoriesData.categorieId}');
+        print(response.data);
         if(response.statusCode == 200){
-          return productsCategories = (response.data['productos'] as List).map((productJson) => ProductModel.fromJson(productJson)).toList();
+          return products = (response.data['productos'] as List).map((productJson) => ProductModel.fromJson(productJson)).toList();
 
         }
       }

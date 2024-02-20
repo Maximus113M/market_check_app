@@ -19,7 +19,7 @@ class ProductsScreen extends StatelessWidget {
         const SearchProducts(),
         ProductsGridView(
             productsList:
-                context.watch<ProductsProvider>().filteredProductsList),
+                context.watch<ProductsProvider>().products),
       ]),
     );
   }
