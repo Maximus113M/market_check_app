@@ -18,16 +18,15 @@ class RemoteUrls {
   static const String productsUrl = "productos/";
   static const String productsCategoriesUrl = "productos/productsCategories/";
   static const String categoriesUrl = "categoria/";
-  static const String categoriesUrlByStore = "establecimiento/showCategoriesByStore/";
-
+  static const String categoriesUrlByStore =
+      "establecimiento/showCategoriesByStore/";
 
   static const String purchaseUrl = "compras/";
 
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovilSena;
-
+  static const String currentUrl = baseUrlMovil;
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";
 
