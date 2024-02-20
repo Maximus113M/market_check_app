@@ -4,10 +4,12 @@ import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
 
 import 'package:dio/dio.dart';
+import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 import 'package:market_check/features/products/data/models/scanner_data_model.dart';
 
 abstract class ProductsDataSource {
   Future<List<ProductModel>> getStoreProducts(int storeId);
+  Future<List<ProductModel>> getProductsByCategorie(ProductsByCategoriesModel categoriesData);
   Future<ProductModel?> getStoreProductByScanner(ScannerDataModel scannerData);
 }
 
@@ -15,6 +17,12 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   final Dio dioGetStoreProducts = Dio(
     BaseOptions(
         baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.productsUrl}",
+        headers: AuthService.headers),
+  );
+
+  final Dio dioGetProductsCategories = Dio(
+    BaseOptions(
+        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.productsCategoriesUrl}",
         headers: AuthService.headers),
   );
 
@@ -60,6 +68,25 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       throw RemoteException(
           message: 'Ha ocurrido un error al scannear el producto.',
           type: ExceptionType.purchasesException);
+    }
+  }
+  
+  @override
+  Future<List<ProductModel>> getProductsByCategorie(ProductsByCategoriesModel categoriesData) async{
+    try {
+      List<ProductModel> productsCategories = [];
+      if(AuthService.user != null){
+        final Response response = await dioGetStoreProducts.get('productsCategories/', data: categoriesData.dataToJson());
+        print(response);
+        if(response.statusCode == 200){
+          return productsCategories = (response.data['productos'] as List).map((productJson) => ProductModel.fromJson(productJson)).toList();
+
+        }
+      }
+      return [];
+    } catch (e) {
+      print(e);
+      throw RemoteException(message: "Ha ocurrido un error al traer los productos de la categoria", type: ExceptionType.productsException);
     }
   }
 }

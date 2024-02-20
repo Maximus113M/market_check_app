@@ -1,3 +1,4 @@
+import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
@@ -41,6 +42,11 @@ void registerUseCases() {
   );
   sl.registerLazySingleton(
     () => GetStoreProductsUseCase(
+      productsRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => GetProductsByCategorie(
       productsRepository: sl(),
     ),
   );

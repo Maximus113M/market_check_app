@@ -6,6 +6,7 @@ import 'package:market_check/features/categories/domain/use_cases/get_categories
 class CategoriesProvider extends ChangeNotifier{
   final GetCategoriesUseCase getCategoriesUseCase;
   List<CategorieModel> categories = [];
+  CategorieModel? currentCategories;
   CategoriesProvider({required this.getCategoriesUseCase});
 
   void getCategories(BuildContext context, int storeId) async {

@@ -30,6 +30,7 @@ void registerProviders() {
   sl.registerLazySingleton(
     () => ProductsProvider(
       getStoreProductsUseCase: sl(),
+      getProductsByCategorie: sl()
     ),
   );
     sl.registerLazySingleton(

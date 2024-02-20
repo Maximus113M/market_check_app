@@ -11,9 +11,12 @@ class StoresListviewM extends StatelessWidget {
     return Container(
       height: double.infinity,
       decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -43,3 +46,4 @@ class StoresListviewM extends StatelessWidget {
     );
   }
 }
+

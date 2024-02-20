@@ -17,3 +17,5 @@ class GetStoreProductByScannerUseCase
     return await productsRepository.getStoreProductByScanner(params);
   }
 }
+
+

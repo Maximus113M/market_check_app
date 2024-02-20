@@ -19,7 +19,7 @@ class StoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final StoreModel store = context.read<StoresProvider>().currentStore!;
     final int storeId = store.id!;
-    context.read<ProductsProvider>().getProductsByStore(context, storeId);
+    //context.read<ProductsProvider>().getProductsByStore(context, storeId);
     context.read<CategoriesProvider>().getCategories(context, storeId);
 
     return Scaffold(

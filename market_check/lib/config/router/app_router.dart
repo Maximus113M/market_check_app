@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
@@ -44,8 +45,16 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/products-view",
       name: ProductsScreen.name,
-      builder: (context, state) => const ProductsScreen(),
+      builder: (context, state) => const ProductsScreen(
+      ),
     ),
+    /*GoRoute(
+      path: "/products-view/:id",
+      name: ProductsScreen.name,
+      builder: (context, state) => ProductsScreen(
+        id:state.pathParameters['id'],
+      ),
+    ),*/
      GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,
