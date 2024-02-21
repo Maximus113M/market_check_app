@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
+import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
-import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
+import 'package:market_check/features/products/presentation/screens/productos_by_category_screen.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
 import 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
 
@@ -39,12 +41,19 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/store-view",
       name: StoreScreen.name,
-      builder: (context, state) => const StoreScreen(),
+      builder: (context, state) => StoreScreen(storesProvider: sl()),
     ),
     GoRoute(
       path: "/products-view",
       name: ProductsScreen.name,
-      builder: (context, state) => const ProductsScreen(),
+      builder: (context, state) => const ProductsScreen(
+      ),
+    ),
+     GoRoute(
+      path: "/products-categories",
+      name: ProductsByCategoryScreen.name,
+      builder: (context, state) => const ProductsByCategoryScreen(
+      ),
     ),
      GoRoute(
       path: "/offers-m",

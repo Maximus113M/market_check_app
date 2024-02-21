@@ -5,7 +5,6 @@ import 'package:market_check/features/stores/presentation/widgets/stores/stores_
 
 class StoresScreenM extends StatelessWidget {
   static const String name = 'stores-m';
-  //final StoresProvider storesProvider;
   const StoresScreenM({super.key});
 
   @override

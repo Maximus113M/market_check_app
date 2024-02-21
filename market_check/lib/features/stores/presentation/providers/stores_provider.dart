@@ -29,7 +29,6 @@ class StoresProvider with ChangeNotifier {
     if (notify) notifyListeners();
   }
 
-
   void searchStores(String name) async {
     if (name.isEmpty) {
       filteredStoreList = storeList;
@@ -40,13 +39,15 @@ class StoresProvider with ChangeNotifier {
     searchTimer = Stream<int>.periodic(
       const Duration(milliseconds: 500),
       (computationCount) => 1,
-    ).take(1).listen((event) {
-      filteredStoreList = storeList
-          .where((store) =>
-              store.name.toLowerCase().contains(searchTextController.text))
-          .toList();
-      notifyListeners();
-    });
+    ).take(1).listen(
+      (event) {
+        filteredStoreList = storeList
+            .where((store) =>
+                store.name.toLowerCase().contains(searchTextController.text))
+            .toList();
+        notifyListeners();
+      },
+    );
   }
 
   void clearSearch() {

@@ -19,8 +19,11 @@ class RemoteUrls {
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";
   static const String productsUrl = "productos/";
+  static const String productsCategoriesUrl = "productos/productsCategories/";
   static const String categoriesUrl = "categoria/";
   static const String storesUrl = "establecimiento/";
+  static const String categoriesUrlByStore =
+      "establecimiento/showCategoriesByStore/";
 
   static const String purchaseUrl = "compras/";
 
@@ -29,10 +32,13 @@ class RemoteUrls {
 //Dynamic Urls
   static const String currentUrl = baseUrlMovilSena;
 
-  static const String currentUrlHttp = baseHttpMovilSena;
+  static const String currentHttp = baseHttpMovilSena;
 
   static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";
+
+  static String currentImagesUrlCategories =
+      "${currentUrl.replaceFirst('api/', '')}images/categorias/";
 }

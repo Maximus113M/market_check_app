@@ -22,8 +22,7 @@ class StoresListTile extends StatelessWidget {
         height: 80,
         decoration: BoxDecoration(
           boxShadow: 
-            AppShadows.mainShadow
-          ,
+            AppShadows.mainShadow,
           border: Border.all(
             color: Colors.grey,
           ),
