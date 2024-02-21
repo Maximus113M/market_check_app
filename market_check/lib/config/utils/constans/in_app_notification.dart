@@ -7,6 +7,9 @@ import 'package:another_flushbar/flushbar.dart';
 
 class 
 InAppNotification {
+
+  InAppNotification._();
+
   static invalidEmailAndPassword({
     required BuildContext context,
   }) {

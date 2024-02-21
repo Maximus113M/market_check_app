@@ -22,7 +22,7 @@ class ProfileBodyScreen extends StatelessWidget {
         /* SizedBox(
             height: ScreenSize.absoluteHeight * 0.01,
           ),*/
-        const ProfileImage(),
+        ProfileImage(imagePath: AppAssets.avatarList[3]),
         Text(
           AuthService.user!.name,
           style: FontStyles.subtitle1(AppColors.text),
@@ -54,7 +54,7 @@ class ProfileBodyScreen extends StatelessWidget {
           onTap: () => context.push('/profile-details'),
         ),
         profileListTile('Cerrar Sesion', 'Esperamos verte pronto de nuevo! :)',
-            onTap: () => profileProvider.signOutFromProfile(context),
+            onTap: () => profileProvider.signOutDialog(context),
             icon: Icons.logout),
         profileListTile(
             'Eliminar Cuenta', 'Elimina tu cuenta y los datos relacionados.',

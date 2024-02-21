@@ -90,7 +90,7 @@ class SignInProvider with ChangeNotifier {
     );
   }
 
-  void validateSingup(BuildContext context) async {
+  void validateSingUp(BuildContext context) async {
     if (!validateInputName() ||
         !validateInputDocument() ||
         !validateInputEmail() ||

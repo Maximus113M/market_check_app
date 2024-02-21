@@ -5,7 +5,7 @@ class AuthService {
   static String? token;
   static String? typeToken;
 
-  static Map<String, dynamic> headers = {
+  static Map<String, String> headers = {
     'Content-Type': 'application/json',
     'Authorization': '$typeToken $token'
   };

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 
 class LogInForm extends StatelessWidget {
@@ -61,33 +62,32 @@ class LogInForm extends StatelessWidget {
                 SizedBox(
                   height: ScreenSize.height * 0.015,
                 ),
-                CustomFilledButton(
-                  text: 'Iniciar Sesión',
+                CustomButton(
                   color: AppColors.appPrimary,
-                  bgColor: AppColors.appSecondary,
-                  verticalSize: 0.017,
-                  horizontalSize: 0.24,
+                  text: 'INICIAR SESIÓN',
                   action: () => loginProvider.validateUser(context),
+                  horizontalMargin: 0,
+                  verticalSize: 0.055,
                 ),
-                const SizedBox(
-                  height: 9,
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Text(
-                    '¿Olvidaste la contraseña?',
-                    style: TextStyle(color: AppColors.appPrimary),
+                
+                Padding(
+                  padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.01, bottom: ScreenSize.absoluteHeight * 0.015),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      '¿Olvidaste la contraseña?',
+                      style: TextStyle(color: AppColors.appPrimary),
+                    ),
                   ),
                 ),
+                
                 GestureDetector(
                   onTap: () {
                     context.push("/register");
                   },
-                  child: const Text(
-                    'Registrate',
-                    style: TextStyle(
-                        color: AppColors.appSecondary,
-                        fontWeight: FontWeight.bold),
+                  child: Text(
+                    '¡Registrate!',
+                    style: FontStyles.bodyBold1(AppColors.appSecondary)
                   ),
                 ),
               ],

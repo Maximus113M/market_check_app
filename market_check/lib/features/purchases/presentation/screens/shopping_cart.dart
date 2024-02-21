@@ -103,7 +103,6 @@ class ShoppingCartBody extends StatelessWidget {
                     verticalSize: 15,
                     color: AppColors.white,
                     bgColor: AppColors.blueButton1,
-                    route: '/home',
                     action: () => {
                       shoppingCartProvider.showEndShoppingDialog(context),
                       //setState(() {}),

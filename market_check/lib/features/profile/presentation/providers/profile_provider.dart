@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
+import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/profile/data/models/profile_cards_model.dart';
@@ -63,6 +65,19 @@ class ProfileProvider with ChangeNotifier {
     );
 
     isLoading = false;
+    notifyListeners();
+  }
+
+  void signOutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => ConfirmDialog(
+        title: 'Cerrar Sesión',
+        message:
+            '¿Deseas cerrar sesión?',
+        mainAction: () => signOutFromProfile(context),
+      ),
+    );
   }
 
   void signOutFromProfile(BuildContext context) {
@@ -72,10 +87,33 @@ class ProfileProvider with ChangeNotifier {
   void deleteAccountDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const ConfirmDialog(
-          title: 'Eliminar Cuenta',
-          message:
-              'Esta accion no se puede revertir, estas seguro que quieres continuar?'),
+      builder: (context) => ConfirmDialog(
+        title: 'Eliminar Cuenta',
+        message:
+            'Esta accion no se puede revertir, ¿estas seguro que quieres continuar?',
+        mainAction: () => deleteAccount(context),
+      ),
     );
+  }
+
+  void deleteAccount(BuildContext context) async {
+    final result = await deleteAccountUseCase(NoParams());
+
+    result.fold(
+        (l) => InAppNotification.serverFailure(
+              context: context,
+              message: l.message,
+            ), (r) {
+      InAppNotification.showAppNotification(
+        context: context,
+        title: r,
+        message:
+            'La cuenta ha sido eliminada exitosamente, los datos relacionados han sido borrados. Esperamos verte de nuevo...',
+        type: NotificationType.success,
+      );
+      Future.delayed(const Duration(seconds: 3)).then(
+        (value) => context.pushReplacement('/login-form'),
+      );
+    });
   }
 }

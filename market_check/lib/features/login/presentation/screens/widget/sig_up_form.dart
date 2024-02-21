@@ -68,8 +68,7 @@ class SignUpForm extends StatelessWidget {
                   verticalSize: 0.017,
                   horizontalSize: 0.212,
                   text: 'Registrarse',
-                  route: "/login-form",
-                  action: () => signUpProvider.validateSingup(context),
+                  action: () => signUpProvider.validateSingUp(context),
                 )
               ],
             ),

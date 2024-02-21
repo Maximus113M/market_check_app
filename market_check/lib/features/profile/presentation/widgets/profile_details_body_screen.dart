@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -101,6 +102,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
     setState(() {
       passwordController.text = '';
       confirmPasswordController.text = '';
+      isValidPassword= false;
     });
   }
 
@@ -131,7 +133,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
               vertical: ScreenSize.absoluteHeight * 0.04,
             ),
             padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.width * 0.05,
+              horizontal: ScreenSize.width * 0.06,
               vertical: ScreenSize.absoluteHeight * 0.02,
             ).copyWith(bottom: ScreenSize.absoluteHeight * 0.05),
             decoration: BoxDecoration(
@@ -197,10 +199,10 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                 SizedBox(
                   height: ScreenSize.absoluteHeight * 0.05,
                 ),
-                CustomFilledButton(
+                CustomButton(
+                  horizontalMargin: 0,
                   text: 'GUARDAR',
-                  verticalSize: ScreenSize.absoluteHeight * 0.019,
-                  horizontalSize: ScreenSize.width * 0.24,
+                  verticalSize: 0.057,
                   bgColor: AppColors.appSecondary,
                   action: () {
                     validateFields();

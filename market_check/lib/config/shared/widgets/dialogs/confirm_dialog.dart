@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
+
+import 'package:go_router/go_router.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;
   final String message;
-  const ConfirmDialog({super.key, required this.title, required this.message});
+  final Function() mainAction;
+  const ConfirmDialog(
+      {super.key,
+      required this.title,
+      required this.message,
+      required this.mainAction});
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +23,42 @@ class ConfirmDialog extends StatelessWidget {
         children: [
           Text(
             title,
-            style: FontStyles.subtitle1(AppColors.appSecondary),
+            style: FontStyles.subtitle0(AppColors.appSecondary),
           ),
           Divider(
-            indent: ScreenSize.width * 0.1,
-            endIndent: ScreenSize.width * 0.1,
+            indent: ScreenSize.width * 0.065,
+            endIndent: ScreenSize.width * 0.065,
             color: AppColors.appSecondary,
             thickness: 2,
           ),
         ],
       ),
       content: Padding(
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05),
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.08),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               message,
               style: FontStyles.body2(AppColors.text),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
       ),
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
         CustomFilledButton(
           text: 'Ok',
-          bgColor: AppColors.appSecondary,
-          verticalSize: 0,
-          horizontalSize: 0.055,
-          action: () {},
+          color: AppColors.white,
+          bgColor: AppColors.appSecondary.withOpacity(0.55),
+          horizontalSize: 0.08,
+          action: () => mainAction(),
         ),
         CustomFilledButton(
           text: 'Cancelar',
-          bgColor: AppColors.appSecondary,
-          verticalSize: 0,
-          horizontalSize: 0,
+          horizontalSize: 0.035,
+          bgColor: AppColors.appSecondary.withOpacity(0.9),
           action: () => context.pop(),
         ),
       ],

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:market_check/config/errors/exceptions.dart';
@@ -8,6 +10,7 @@ import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 abstract class ProfileDataSource {
   Future<bool> updatePasword(String password);
@@ -47,32 +50,34 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   @override
   Future<String> updateAccountData(SignUpDataModel updatedData) async {
     try {
-      final Response response = await dioInstance.put(
+      /*final Response response = await dioInstance.put(
         '${RemoteUrls.userUrl}${AuthService.user!.id!}',
         data: updatedData.userToJson(),
+      );*/
+      //TODO TERMINAR
+      var url = Uri.http(
+          RemoteUrls.currentUrlHttp, '/api/${RemoteUrls.userUrl}${AuthService.user!.id!}');
+      
+      var response = await http.put(
+        url,
+        headers: AuthService.headers,
+        body: jsonEncode(
+          updatedData.userToJson(),
+        ),
       );
 
       if (response.statusCode == 201) {
-        await flutterSecureStorage.write(key: 'name', value: updatedData.name);
-        await flutterSecureStorage.write(
-            key: 'documento', value: updatedData.document.toString());
-        await flutterSecureStorage.write(
-            key: 'email', value: updatedData.email);
-
-        String? userId = await flutterSecureStorage.read(key: 'id');
-        int? id;
-        if (userId != null) {
-          id = int.parse(userId);
-        }
-        AuthService.user = User(
-          id: id,
-          name: updatedData.name,
-          document: updatedData.document.toString(),
-          email: updatedData.email,
-          rolId: 4,
+        final User updatedUser = User.fromJson(
+          jsonDecode(response.body)['user'],
         );
+        AuthService.user = updatedUser;
+        await flutterSecureStorage.write(key: 'name', value: updatedUser.name);
+        await flutterSecureStorage.write(
+            key: 'documento', value: updatedUser.document.toString());
+        await flutterSecureStorage.write(
+            key: 'email', value: updatedUser.email);
       }
-      return response.data["message"];
+      return jsonDecode(response.body)["message"];
     } on DioException catch (e) {
       debugPrint('$e');
       throw RemoteException(
@@ -80,6 +85,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
               "Ocurrio un error al actualizar los datos, por favor intente de nuevo",
           type: ExceptionType.signInException);
     } catch (e) {
+      print(e);
       throw RemoteException(
           message: "Ocurrio un error al actualizar los datos",
           type: ExceptionType.signInException);
@@ -89,8 +95,8 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   @override
   Future<String> deleteAccount() async {
     try {
-      final Response response =
-          await dioInstance.delete('/${AuthService.user!.id}');
+      final Response response = await dioInstance
+          .delete('${RemoteUrls.userUrl}${AuthService.user!.id}');
 
       await flutterSecureStorage.deleteAll();
 

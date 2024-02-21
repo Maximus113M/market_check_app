@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
 class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key});
+  final String imagePath;
+  const ProfileImage({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ProfileImage extends StatelessWidget {
                 top: ScreenSize.absoluteHeight * 0.03, bottom: 3),
             child: CircleAvatar(
               radius: ScreenSize.absoluteHeight * 0.08,
-              backgroundImage: const AssetImage(AppAssets.avatar),
+              backgroundImage: AssetImage(imagePath),
             ),
           ),
           Positioned(
