@@ -160,21 +160,22 @@ class SignInProvider with ChangeNotifier {
     return true;
   }
 
-  void logOut(BuildContext context) async {
+  void signOut(BuildContext context) async {
     final result = await signOutUseCase(NoParams());
     result.fold((l) {
       InAppNotification.serverFailure(context: context, message: l.message);
     }, (r) async {
       if (r) {
-        context.pushReplacement('/login');
+        context.pushReplacement('/login-form');
       } else {
         InAppNotification.showAppNotification(
             context: context,
             title: 'Error!',
             message: 'Credenciales Invalidas. Redireccionando.',
             type: NotificationType.warning);
-        await Future.delayed(const Duration(seconds: 2))
-            .then((value) => context.pushReplacement('/login'));
+        await Future.delayed(const Duration(seconds: 2)).then(
+          (value) => context.pushReplacement('/login-form'),
+        );
       }
     });
   }

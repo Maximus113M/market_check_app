@@ -36,8 +36,8 @@ class LogInForm extends StatelessWidget {
                     print(loginProvider.emailInput);
                   },
                 ),
-                 SizedBox(
-                  height: ScreenSize.absoluteHeight * 0.02 ,
+                SizedBox(
+                  height: ScreenSize.absoluteHeight * 0.02,
                 ),
                 CustomTextFormField(
                   icon: Icons.lock,
@@ -61,11 +61,12 @@ class LogInForm extends StatelessWidget {
                 SizedBox(
                   height: ScreenSize.height * 0.015,
                 ),
-                FilledCustomButton(
+                CustomFilledButton(
                   text: 'Iniciar Sesión',
                   color: AppColors.appPrimary,
                   bgColor: AppColors.appSecondary,
-                  verticalSize: 13,
+                  verticalSize: 0.017,
+                  horizontalSize: 0.24,
                   action: () => loginProvider.validateUser(context),
                 ),
                 const SizedBox(

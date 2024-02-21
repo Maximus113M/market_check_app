@@ -32,7 +32,7 @@ void registerProviders() {
       getStoreProductsUseCase: sl(),
     ),
   );
-    sl.registerLazySingleton(
+  sl.registerLazySingleton(
     () => CategoriesProvider(
       getCategoriesUseCase: sl(),
     ),
@@ -44,6 +44,10 @@ void registerProviders() {
     () => MainProvider(),
   );
   sl.registerLazySingleton(
-    () => ProfileProvider(),
+    () => ProfileProvider(
+      deleteAccountUseCase: sl(),
+      updateAccountDataUseCase: sl(),
+      updatePasswordUseCase: sl(),
+    ),
   );
 }

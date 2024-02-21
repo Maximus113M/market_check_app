@@ -34,14 +34,14 @@ class EndShoppingDialog extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(code,
-                    style: FontStyles.heading0(AppColors.appColor3)),
+                child:
+                    Text(code, style: FontStyles.heading0(AppColors.appColor3)),
               ),
               const Divider(),
               const SizedBox(
                 height: 10,
               ),
-              FilledCustomButton(
+              CustomFilledButton(
                 horizontalSize: 10,
                 verticalSize: 5,
                 text: 'Ok',

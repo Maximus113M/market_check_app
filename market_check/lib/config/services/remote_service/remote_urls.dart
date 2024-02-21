@@ -9,23 +9,23 @@ class RemoteUrls {
 
 //Constans Urls
   static const String signInUrl = "auth/login/";
-  static const String signUpUrl = "auth/signup/";
+  static const String signUpUrl = "auth/mobile-app/";
   static const String logOutUrl = "auth/logout/";
 
-  static const String storesUrl = "establecimiento/";
+  static const String userUrl = "user/";
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/";
   static const String productsUrl = "productos/";
   static const String categoriesUrl = "categoria/";
-  static const String userUrl = "user/";
-
+  static const String storesUrl = "establecimiento/";
 
   static const String purchaseUrl = "compras/";
 
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovilSena;
+  static const String currentUrl = baseUrlMovil;
+  static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 
   static String currentImagesUrl =
       "${currentUrl.replaceFirst('api/', '')}storage/images/";

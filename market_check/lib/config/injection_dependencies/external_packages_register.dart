@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/injection_container.dart';
 
@@ -16,6 +17,7 @@ void registerFlutterSecureStorage() {
     () => Dio(
       BaseOptions(
         baseUrl: RemoteUrls.currentUrl,
+        headers: AuthService.headers,
       ),
     ),
   );

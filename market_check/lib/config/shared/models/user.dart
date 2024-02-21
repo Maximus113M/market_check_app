@@ -21,7 +21,11 @@ class User {
   factory User.fromJson(json, {bool isEncripted = false}) => User(
         id: isEncripted ? int.parse(json["id"]) : json["id"],
         name: json["name"],
-        document: json["documento"] != null ? json["documento"].toString() : '',
+        document: json["documento"] != null
+            ? json["documento"].toString()
+            : json["documento"] == 'null'
+                ? ''
+                : '',
         email: json["email"],
         rolId: json["rol_id"] ?? 4,
       );

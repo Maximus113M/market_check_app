@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/in_app_notification.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+import 'package:market_check/config/utils/constans/in_app_notification.dart';
+import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 
 class ProfileDetailsBodyScreen extends StatefulWidget {
@@ -21,16 +22,17 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController documentController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  String password = '';
-  String confirmPassword = '';
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   bool isPasswordObscure = true;
   bool isConfirmPasswordObscure = true;
   bool isValidPassword = false;
-  bool isPasswordSet= false;
+  bool isPasswordSet = false;
 
   void onChangePassword(String value) {
-    password = value;
-    if (password.isNotEmpty && password.length >= 6) {
+    passwordController.text = value;
+    if (passwordController.text.trim().isNotEmpty &&
+        passwordController.text.trim().length >= 6) {
       isValidPassword = true;
       setState(() {});
       return;
@@ -50,8 +52,10 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
   }
 
   void validateFields() {
-    if (password.isNotEmpty) {
-      if (password != confirmPassword) {
+    if (widget.profileProvider.isLoading) return;
+
+    if (passwordController.text.trim().isNotEmpty) {
+      if (passwordController.text != confirmPasswordController.text) {
         InAppNotification.showAppNotification(
           context: context,
           title: 'Contraseña Inválida!',
@@ -61,7 +65,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
         );
         return;
       }
-      isPasswordSet= true;
+      isPasswordSet = true;
     }
     if (nameController.text.trim().isEmpty ||
         emailController.text.trim().isEmpty ||
@@ -86,18 +90,18 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
       return;
     }
 
-    if(isPasswordSet){
-      //DOS CASOS DE USO
-    }else{
-      //Solo update
-    }
+    SignUpDataModel userData = SignUpDataModel(
+        name: nameController.text,
+        document: int.parse(documentController.text),
+        email: emailController.text,
+        password: passwordController.text);
+    widget.profileProvider.updateAccount(
+        context: context, userData: userData, isPasswordSet: isPasswordSet);
 
-    InAppNotification.showAppNotification(
-      context: context,
-      title: 'Datos Actualizados!',
-      message: 'Tu información ha sido actualizada exitosamente.',
-      type: NotificationType.success,
-    );
+    setState(() {
+      passwordController.text = '';
+      confirmPasswordController.text = '';
+    });
   }
 
   @override
@@ -164,6 +168,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                   onChange: (p0) => emailController.text = p0,
                 ),
                 formTitle(
+                  controller: passwordController,
                   title: 'Contraseña',
                   isObscure: isPasswordObscure,
                   icon: Icons.lock,
@@ -176,11 +181,12 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                   ),
                 ),
                 formTitle(
+                  controller: confirmPasswordController,
                   title: 'Confirma la Contraseña',
                   isObscure: isConfirmPasswordObscure,
                   isEnable: isValidPassword,
                   icon: Icons.lock,
-                  onChange: (p0) => confirmPassword = p0,
+                  onChange: (p0) => confirmPasswordController.text = p0,
                   showPassword: IconButton(
                     onPressed: () => toggleConfirmPasswordVisibility(),
                     icon: Icon(isConfirmPasswordObscure
@@ -191,12 +197,14 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                 SizedBox(
                   height: ScreenSize.absoluteHeight * 0.05,
                 ),
-                FilledCustomButton(
+                CustomFilledButton(
                   text: 'GUARDAR',
                   verticalSize: ScreenSize.absoluteHeight * 0.019,
                   horizontalSize: ScreenSize.width * 0.24,
                   bgColor: AppColors.appSecondary,
-                  action: () => validateFields(),
+                  action: () {
+                    validateFields();
+                  },
                 )
               ],
             ),

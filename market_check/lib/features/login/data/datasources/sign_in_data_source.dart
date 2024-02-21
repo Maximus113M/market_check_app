@@ -54,7 +54,6 @@ class SignInDataSourceImpl extends SignInDataSource {
     try {
       final Response response = await dioSignIn.post(RemoteUrls.signInUrl,
           data: {"email": signInData.email, "password": signInData.password});
-      print(response.data["user"]);
 
       await flutterSecureStorage.write(
           key: 'id', value: response.data["user"]["id"].toString());
@@ -76,12 +75,14 @@ class SignInDataSourceImpl extends SignInDataSource {
 
       return true;
     } on DioException catch (e) {
-      //TODO personalizar mensajes
       print(e);
+      String message = "";
+      if (e.response!.statusCode == 401) {
+        message =
+            "Por favor revisa tus credenciales y asegurate de aceptar la confirmacion enviada a tu correo";
+      }
       throw RemoteException(
-          message:
-              "Ocurrio un error al intentar ingresar, por favor revise sus credenciales",
-          type: ExceptionType.signInException);
+          message: message, type: ExceptionType.signInException);
     } catch (e) {
       print(e);
       throw RemoteException(

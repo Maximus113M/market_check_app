@@ -47,7 +47,7 @@ class ShoppingCartBody extends StatelessWidget {
             children: [
               Text(
                 'Carrito de Compras',
-                style: FontStyles.heading2( AppColors.blueButton3),
+                style: FontStyles.heading2(AppColors.blueButton3),
               ),
               Text(
                 '    ${shoppingCartProvider.shoppingItemsCount()} Productos agregados',
@@ -97,7 +97,7 @@ class ShoppingCartBody extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FilledCustomButton(
+                  CustomFilledButton(
                     text: 'Finalizar Compra',
                     horizontalSize: 25,
                     verticalSize: 15,

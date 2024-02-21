@@ -54,10 +54,12 @@ class ProfileBodyScreen extends StatelessWidget {
           onTap: () => context.push('/profile-details'),
         ),
         profileListTile('Cerrar Sesion', 'Esperamos verte pronto de nuevo! :)',
-            onTap: () {}, icon: Icons.logout),
+            onTap: () => profileProvider.signOutFromProfile(context),
+            icon: Icons.logout),
         profileListTile(
             'Eliminar Cuenta', 'Elimina tu cuenta y los datos relacionados.',
-            onTap: () {}, icon: Icons.person_off),
+            onTap: () => profileProvider.deleteAccountDialog(context),
+            icon: Icons.person_off),
       ],
     );
   }
