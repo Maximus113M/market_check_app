@@ -6,6 +6,8 @@ import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
 import 'package:market_check/features/products/domain/use_cases/get_store_products_use_case.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductsProvider extends ChangeNotifier {
   final GetStoreProductsUseCase getStoreProductsUseCase;
@@ -15,9 +17,13 @@ class ProductsProvider extends ChangeNotifier {
   StreamSubscription? searchTimer;
   TextEditingController searchTextController = TextEditingController();
 
-  ProductsProvider({required this.getStoreProductsUseCase, required this.getProductsByCategorie});
+  ProductsProvider(
+      {required this.getStoreProductsUseCase,
+      required this.getProductsByCategorie});
 
-  void getProductsByStore(BuildContext context, int storeId) async {
+  void getProductsByStore(BuildContext context) async {
+    final storeId = context.read<StoresProvider>().currentStore!.id!;
+
     final result = await getStoreProductsUseCase(storeId);
 
     result.fold(
@@ -26,20 +32,24 @@ class ProductsProvider extends ChangeNotifier {
               message: l.message,
             ), (r) {
       products = r;
+      print(products);
       filteredProductsList = products;
+      notifyListeners();
     });
   }
 
-  void getProductsByCategories(BuildContext context, ProductsByCategoriesModel params) async{
+  void getProductsByCategories(
+      BuildContext context, ProductsByCategoriesModel params) async {
     final result = await getProductsByCategorie(params);
 
     result.fold(
-      (l) => InAppNotification.serverFailure(context: context, message: l.message), 
-      (r) => products = r);
-      notifyListeners();
+        (l) => InAppNotification.serverFailure(
+            context: context, message: l.message), (r) {
+      products = r;
+      filteredProductsList = products;
+    });
+    notifyListeners();
   }
-
-
 
   List<ProductModel> getProductByName(String name) {
     return products.where((product) => product.name.contains(name)).toList();
@@ -71,7 +81,7 @@ class ProductsProvider extends ChangeNotifier {
     }
   }
 
-  void clearSearch(){
+  void clearSearch() {
     searchTextController.clear();
     cancelSearchTimer();
     filteredProductsList = products;

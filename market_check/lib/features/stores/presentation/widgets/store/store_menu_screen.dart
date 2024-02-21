@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class StoreMenuScreen extends StatelessWidget {
               trailing: IconButton(
                   onPressed: () {
                     context.read<OffersProvider>().loadOffers();
+                    context.read<CategoriesProvider>().getCategories(context);
                     context.push('/offers-m');
                   },
                   icon: const Icon(

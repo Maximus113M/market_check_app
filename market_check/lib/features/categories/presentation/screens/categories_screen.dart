@@ -94,8 +94,8 @@ class CategoriesListTile extends StatelessWidget {
             fontSize: 12, fontWeight: FontWeight.w500),
       ),
       onTap: () {
-        context.watch<ProductsProvider>().getProductsByCategories(context, categoriesModel);
-        context.push("/products-view");
+        context.read<ProductsProvider>().getProductsByCategories(context, categoriesModel);
+        context.push("/products-categories");
       } 
     );
   }

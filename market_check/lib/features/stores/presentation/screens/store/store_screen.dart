@@ -14,19 +14,13 @@ import 'package:provider/provider.dart';
 
 class StoreScreen extends StatelessWidget {
   static const String name = 'store-view';
-  const StoreScreen({super.key});
+  final StoresProvider storesProvider;
+  const StoreScreen({super.key, required this.storesProvider});
 
   @override
   Widget build(BuildContext context) {
     final StoreModel store = context.read<StoresProvider>().currentStore!;
-    final int storeId = store.id!;
     
-    final ProductsByCategoriesModel categoriesModel = ProductsByCategoriesModel(storeId: storeId, categorieId: categorie.id);
-
-    context.read<ProductsProvider>().getProductsByCategories(context, categoriesModel);
-    //context.read<ProductsProvider>().getProductsByStore(context, storeId);
-    context.read<CategoriesProvider>().getCategories(context, storeId);
-
     return Scaffold(
       body: Stack(
         children: [

@@ -5,6 +5,7 @@ import 'package:market_check/features/categories/presentation/providers/categori
 import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/offers/presentation/widgets/offer_swiper.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,7 @@ class OfferScreeenM extends StatelessWidget {
           //const SearchProducts(),
           ElevatedButton(
             onPressed: () {
+              context.read<ProductsProvider>().getProductsByStore(context);
               context.push("/products-view");
             },
             child: const Text('Productos'),
