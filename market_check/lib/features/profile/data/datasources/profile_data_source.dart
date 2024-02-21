@@ -56,7 +56,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       );*/
       //TODO TERMINAR
       var url = Uri.http(
-          RemoteUrls.currentUrlHttp, '/api/${RemoteUrls.userUrl}${AuthService.user!.id!}');
+          RemoteUrls.currentHttp, '/api/${RemoteUrls.userUrl}${AuthService.user!.id!}');
       
       var response = await http.put(
         url,
