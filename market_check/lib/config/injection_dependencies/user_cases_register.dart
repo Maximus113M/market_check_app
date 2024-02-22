@@ -11,6 +11,7 @@ import 'package:market_check/features/profile/domain/use_cases/update_account_da
 import 'package:market_check/features/products/domain/use_cases/get_store_products_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_current_session_use_case.dart';
 import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
+import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_history_use_case.dart';
 
 void registerUseCases() {
   sl.registerLazySingleton(
@@ -71,6 +72,11 @@ void registerUseCases() {
   sl.registerLazySingleton(
     () => UpdatePasswordUseCase(
       profileRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => GetShoppinHistoryUseCase(
+      shoppingHistoryRepository: sl(),
     ),
   );
 }

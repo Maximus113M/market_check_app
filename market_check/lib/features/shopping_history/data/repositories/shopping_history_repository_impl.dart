@@ -5,22 +5,23 @@ import 'package:market_check/features/shopping_history/data/datasources/shopping
 import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 import 'package:market_check/features/shopping_history/domain/repositories/shopping_history_repository.dart';
 
-class ShoppingHistoryRepositoryImpl extends ShoppingHistoryRepository{
-  final SoppingHistoryDataSource shoppingHistoryDataSource;
+class ShoppingHistoryRepositoryImpl extends ShoppingHistoryRepository {
+  final ShoppingHistoryDataSource shoppingHistoryDataSource;
 
   ShoppingHistoryRepositoryImpl({required this.shoppingHistoryDataSource});
 
   @override
-  Future<Either<RemoteFailure, List<PurchaseModel>>> getShoppingHistory() async{
+  Future<Either<RemoteFailure, List<PurchaseModel>>>
+      getShoppingHistory() async {
     try {
       return Right(
         await shoppingHistoryDataSource.getShoppingHistory(),
       );
-    }on RemoteException catch (e) {
-      return Left(
-        RemoteFailure(message: e.message, type: ExceptionType.shoppingHistoryException)
-      );
+    } on RemoteException catch (e) {
+      return Left(RemoteFailure(
+        message: e.message,
+        type: ExceptionType.shoppingHistoryException,
+      ));
     }
   }
-
 }

@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
+import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';
 
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
 abstract class CategoriesDataSource {
   Future<List<CategorieModel>> getCategories(int storeId);
@@ -30,17 +31,10 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
     try {
       List<CategorieModel> categories = [];
       if (AuthService.user != null) {
-        //final Response response = await dioGetCategoriesByStore.get('$storeId');
-        //TODO MODELO DE HTTP
-        var url = Uri.http(ServerUrls.currentHttp,
-            '/api/${ServerUrls.categoriesUrlByStore}$storeId');
+        final String path = '${ServerUrls.categoriesUrlByStore}$storeId';
 
-        var response = await http.get(
-          url,
-          headers: AuthService.headers,
-        );
+        final response = await ServerService.serverGet(path);
 
-        print(response);
         if (response.statusCode == 200) {
           categories = (jsonDecode(response.body)['categories'] as List)
               .map((categorieJson) => CategorieModel.fromJson(categorieJson))
@@ -49,8 +43,14 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
         }
       }
       return [];
+    } on HttpException catch (e) {
+      debugPrint('Categories httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
     } catch (e) {
-      print(e);
+      debugPrint('Categories Exception: $e');
       throw RemoteException(
           message: "Ha ocurrido un error al consultar las categorias",
           type: ExceptionType.purchasesException);
