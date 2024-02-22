@@ -7,19 +7,20 @@ import 'package:market_check/features/offers/domain/repositories/offer_repositor
 
 class OffersRepositoryImpl extends OffersRepository {
   final OffersDataSource offersDatasource;
+
   OffersRepositoryImpl({required this.offersDatasource});
 
   @override
-  Future<Either<Failure, List<OfferModel>>> getOffers() async {
+  Future<Either<RemoteFailure, List<OfferModel>>> getOffers(int storeId) async {
     try {
       return Right(
-        await offersDatasource.getOffers(),
+        await offersDatasource.getOffers(storeId),
       );
     } on RemoteException catch (e) {
       return Left(
         RemoteFailure(
           message: e.message,
-          type: e.type,
+          type: ExceptionType.offersException,
         ),
       );
     }

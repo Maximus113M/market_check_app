@@ -7,11 +7,10 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 abstract class OffersDataSource {
-  Future<List<OfferModel>> getOffers();
+  Future<List<OfferModel>> getOffers(int storeId);
 }
 
 class OffersDatasourceImpl extends OffersDataSource {
@@ -30,12 +29,13 @@ class OffersDatasourceImpl extends OffersDataSource {
   );*/
 
   @override
-  Future<List<OfferModel>> getOffers() async {
+  Future<List<OfferModel>> getOffers(int storeId ) async {
     try {
       //final response = await dioOffers.get('mobile-app/');
       List<OfferModel> offers = [];
+      if(AuthService.user != null){
        var url = Uri.http(RemoteUrls.currentHttp,
-            '/api/${RemoteUrls.offersUrl}');
+            '/api/${RemoteUrls.offersUrl}''${storeId}');
 
         var response = await http.get(
           url,
@@ -46,7 +46,7 @@ class OffersDatasourceImpl extends OffersDataSource {
         offers = (jsonDecode(response.body)['offers'] as List).map((offerJson) {
           return OfferModel.fromJson(offerJson);
         }).toList();
-      }
+      }}
 
       debugPrint("$offers");
       return offers;

@@ -1,20 +1,23 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
-import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/domain/use_cases/get_offers_use_case.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:provider/provider.dart';
 
 class OffersProvider with ChangeNotifier {
   final GetOffersUseCase getOffersUseCase;
   bool loadingOffers = false;
   List<OfferModel> offerList = [];
   OfferModel? currentOffer;
+  
 
   OffersProvider({required this.getOffersUseCase});
 
-  Future<void> loadOffers({bool notify = true}) async {    
+  Future<void> loadOffers(BuildContext context,{ bool notify = true}) async {    
     loadingOffers = true;
-    final result = await getOffersUseCase(NoParams());
+    final storeId = context.read<StoresProvider>().currentStore!.id!;
+    final result = await getOffersUseCase(storeId);
     print("---------------------> ahhhhhhhhhhhhhhhhhhhhhhhhhh");
     result.fold(
       (l) => null,

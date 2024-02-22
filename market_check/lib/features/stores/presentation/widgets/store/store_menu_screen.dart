@@ -26,7 +26,7 @@ class StoreMenuScreen extends StatelessWidget {
               subtitle: const Text('Explora nuestras ofertas y categorias'),
               trailing: IconButton(
                   onPressed: () {
-                    context.read<OffersProvider>().loadOffers();
+                    context.read<OffersProvider>().loadOffers(context);
                     context.read<CategoriesProvider>().getCategories(context);
                     context.push('/offers-m');
                   },
