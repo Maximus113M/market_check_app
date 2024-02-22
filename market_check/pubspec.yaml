@@ -68,9 +68,8 @@ flutter:
     - assets/Images/
     - assets/Images/avatars/
     - assets/Images/profile/
-    - assets/Images/offers/
+    - assets/Images/icons/
     - assets/Images/categories/
-    - assets/Images/items/
     - assets/Images/stores/
     - assets/Images/logos/
     - assets/Images/background/

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 
@@ -40,7 +39,12 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-AppBar customAppBar({Widget? leading, bool isCartVisible = true}) => AppBar(
+AppBar customAppBar(
+        {Widget? leading,
+        bool isCartVisible = true,
+        Widget? title,
+        bool isCenterTitle = true}) =>
+    AppBar(
       leading: leading,
       toolbarHeight: ScreenSize.absoluteHeight * 0.07,
       backgroundColor: AppColors.appPrimary,
@@ -52,11 +56,12 @@ AppBar customAppBar({Widget? leading, bool isCartVisible = true}) => AppBar(
       ),
       elevation: 10,
       shadowColor: AppColors.text,
-      centerTitle: true,
-      title: Image.asset(
-        AppAssets.logoHorizontal,
-        width: ScreenSize.height * 0.22,
-      ),
+      centerTitle: isCenterTitle,
+      title: title ??
+          Image.asset(
+            AppAssets.logoHorizontal,
+            width: ScreenSize.height * 0.22,
+          ),
       actions: [
         if (isCartVisible)
           IconButton(
