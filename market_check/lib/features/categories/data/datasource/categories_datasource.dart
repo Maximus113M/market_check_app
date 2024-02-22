@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';
 
 import 'package:dio/dio.dart';
@@ -15,13 +15,13 @@ abstract class CategoriesDataSource {
 class CategoriesDataSourceImpl extends CategoriesDataSource {
   final Dio dioGetCategories = Dio(
     BaseOptions(
-        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.categoriesUrl}",
+        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.categoriesUrl}",
         headers: AuthService.headers),
   );
 
   final Dio dioGetCategoriesByStore = Dio(
     BaseOptions(
-        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.categoriesUrlByStore}",
+        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.categoriesUrlByStore}",
         headers: AuthService.headers),
   );
 
@@ -32,8 +32,8 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
       if (AuthService.user != null) {
         //final Response response = await dioGetCategoriesByStore.get('$storeId');
         //TODO MODELO DE HTTP
-        var url = Uri.http(RemoteUrls.currentHttp,
-            '/api/${RemoteUrls.categoriesUrlByStore}$storeId');
+        var url = Uri.http(ServerUrls.currentHttp,
+            '/api/${ServerUrls.categoriesUrlByStore}$storeId');
 
         var response = await http.get(
           url,
@@ -42,7 +42,7 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
 
         print(response);
         if (response.statusCode == 200) {
-          categories = ( jsonDecode(response.body)['categories'] as List)
+          categories = (jsonDecode(response.body)['categories'] as List)
               .map((categorieJson) => CategorieModel.fromJson(categorieJson))
               .toList();
           return categories;

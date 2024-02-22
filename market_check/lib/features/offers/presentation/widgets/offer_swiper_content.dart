@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/offers/data/models/offer_model.dart';
 
 class OfferSwiperContent extends StatelessWidget {
@@ -21,7 +21,7 @@ class OfferSwiperContent extends StatelessWidget {
           ),
         ),
         child: Image.network(
-          '${RemoteUrls.currentImagesUrl}${offerModel.imagePath}',
+          '${ServerUrls.currentImagesUrl}${offerModel.imagePath}',
           height: 200,
           width: double.infinity,
           fit: BoxFit.cover,

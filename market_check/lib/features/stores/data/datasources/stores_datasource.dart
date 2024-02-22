@@ -1,5 +1,5 @@
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 
 import 'package:dio/dio.dart';
@@ -11,7 +11,7 @@ abstract class StoresDataSource {
 class StoresDataSourceImpl extends StoresDataSource {
   final dioStores = Dio(
     BaseOptions(
-      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.storesUrl}",
+      baseUrl: "${ServerUrls.currentUrl}${ServerUrls.storesUrl}",
     ),
   );
 

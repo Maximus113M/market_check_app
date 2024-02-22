@@ -4,7 +4,7 @@ import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 
@@ -22,7 +22,7 @@ class SignInDataSourceImpl extends SignInDataSource {
 
   final Dio dioSignIn = Dio(
     BaseOptions(
-      baseUrl: RemoteUrls.currentUrl,
+      baseUrl: ServerUrls.currentUrl,
     ),
   );
 
@@ -52,7 +52,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<bool> verifyLogIn(SignInDataModel signInData) async {
     try {
-      final Response response = await dioSignIn.post(RemoteUrls.signInUrl,
+      final Response response = await dioSignIn.post(ServerUrls.signInUrl,
           data: {"email": signInData.email, "password": signInData.password});
 
       await flutterSecureStorage.write(
@@ -94,7 +94,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<String> signUp(SignUpDataModel newUser) async {
     try {
-      final Response response = await dioSignIn.post(RemoteUrls.signUpUrl,
+      final Response response = await dioSignIn.post(ServerUrls.signUpUrl,
           data: jsonEncode(newUser.userToJson()));
       print(response.data);
       return 'Registro exito, ya puedes Iniciar Sesión!';
@@ -117,7 +117,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   Future<bool> signOut() async {
     try {
       if (AuthService.user != null) {
-        dioSignIn.get(RemoteUrls.logOutUrl);
+        dioSignIn.get(ServerUrls.logOutUrl);
         AuthService.user = null;
         AuthService.token = null;
         AuthService.typeToken = null;

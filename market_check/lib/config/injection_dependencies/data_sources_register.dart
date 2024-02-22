@@ -27,7 +27,6 @@ void registerDataSources() {
   sl.registerLazySingleton<ProfileDataSource>(
     () => ProfileDataSourceImpl(
       flutterSecureStorage: sl(),
-      dioInstance: sl(),
     ),
   );
 }

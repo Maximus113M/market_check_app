@@ -1,7 +1,7 @@
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 
 import 'package:dio/dio.dart';
@@ -19,7 +19,7 @@ abstract class PurchasesDataSource {
 class PurchasesDataSourceImpl extends PurchasesDataSource {
   final Dio dioPurchaseBaseUrl = Dio(
     BaseOptions(
-        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.purchaseUrl}",
+        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.purchaseUrl}",
         headers: AuthService.headers),
   );
 

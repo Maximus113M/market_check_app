@@ -1,7 +1,7 @@
-class RemoteUrls {
+class ServerUrls {
 //Base Urls
   static const String baseUrl = "http://127.0.0.1:8000/api/";
-  
+
   static const String baseUrlMovil = "http://10.0.2.2:8000/api/";
   static const String baseUrlMovilSena = "http://10.201.194.65:8000/api/";
   static const String baseUrlMarly = "http://192.168.1.41:8000/api/";
@@ -11,7 +11,6 @@ class RemoteUrls {
   static const String baseHttpMarly = "192.168.1.41:8000";
 
   static const String baseHttpMovilSena = "10.201.194.65:8000";
-
 
 //"http://10.201.194.65:8000/api/";
 
@@ -35,9 +34,9 @@ class RemoteUrls {
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovilSena;
+  static const String currentUrl = baseUrlMovil;
 
-  static const String currentHttp = baseHttpMovilSena;
+  static const String currentHttp = baseHttpMovil;
 
   static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 

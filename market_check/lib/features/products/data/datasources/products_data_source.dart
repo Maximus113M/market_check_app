@@ -1,6 +1,6 @@
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/services/remote_service/remote_urls.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
 
 import 'package:dio/dio.dart';
@@ -9,20 +9,21 @@ import 'package:market_check/features/products/data/models/scanner_data_model.da
 
 abstract class ProductsDataSource {
   Future<List<ProductModel>> getStoreProducts(int storeId);
-  Future<List<ProductModel>> getProductsByCategorie(ProductsByCategoriesModel categoriesData);
+  Future<List<ProductModel>> getProductsByCategorie(
+      ProductsByCategoriesModel categoriesData);
   Future<ProductModel?> getStoreProductByScanner(ScannerDataModel scannerData);
 }
 
 class ProductsDataSourceImpl extends ProductsDataSource {
   final Dio dioGetStoreProducts = Dio(
     BaseOptions(
-        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.productsUrl}",
+        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.productsUrl}",
         headers: AuthService.headers),
   );
 
   final Dio dioGetProductsCategories = Dio(
     BaseOptions(
-        baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.productsCategoriesUrl}",
+        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.productsCategoriesUrl}",
         headers: AuthService.headers),
   );
 
@@ -70,23 +71,29 @@ class ProductsDataSourceImpl extends ProductsDataSource {
           type: ExceptionType.purchasesException);
     }
   }
-  
+
   @override
-  Future<List<ProductModel>> getProductsByCategorie(ProductsByCategoriesModel categoriesData) async{
+  Future<List<ProductModel>> getProductsByCategorie(
+      ProductsByCategoriesModel categoriesData) async {
     try {
       List<ProductModel> products = [];
-      if(AuthService.user != null){
-        final Response response = await dioGetStoreProducts.get('productsCategories/${categoriesData.storeId}/${categoriesData.categorieId}');
+      if (AuthService.user != null) {
+        final Response response = await dioGetStoreProducts.get(
+            'productsCategories/${categoriesData.storeId}/${categoriesData.categorieId}');
         print(response.data);
-        if(response.statusCode == 200){
-          return products = (response.data['productos'] as List).map((productJson) => ProductModel.fromJson(productJson)).toList();
-
+        if (response.statusCode == 200) {
+          return products = (response.data['productos'] as List)
+              .map((productJson) => ProductModel.fromJson(productJson))
+              .toList();
         }
       }
       return [];
     } catch (e) {
       print(e);
-      throw RemoteException(message: "Ha ocurrido un error al traer los productos de la categoria", type: ExceptionType.productsException);
+      throw RemoteException(
+          message:
+              "Ha ocurrido un error al traer los productos de la categoria",
+          type: ExceptionType.productsException);
     }
   }
 }
