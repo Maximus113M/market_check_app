@@ -12,7 +12,7 @@ class MainProvider extends ChangeNotifier {
       backgroundColor: AppColors.appPrimary,
       body: StoresScreenBody(),
     ),
-    const OfferScreeenM(),
+    const ShoppingListScreen(),
     const PendingPurchasesScreen(),
     const ProfileScreen(),
   ];

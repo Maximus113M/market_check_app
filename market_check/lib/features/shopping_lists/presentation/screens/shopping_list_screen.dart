@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 
 class ShoppingListScreen extends StatelessWidget {
   static const String name = "shopping-list-screen";
@@ -7,9 +8,7 @@ class ShoppingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Listas de Compras"),
-        ),
+        appBar: customAppBar(),
         body: Container(
           child: const Text("LISTAS"),
         ));

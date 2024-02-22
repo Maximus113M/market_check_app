@@ -30,6 +30,7 @@ class OfferScreeenM extends StatelessWidget {
           //const SearchProducts(),
           ElevatedButton(
             onPressed: () {
+              
               context.read<ProductsProvider>().getProductsByStore(context);
               context.push("/products-view");
             },
@@ -37,7 +38,7 @@ class OfferScreeenM extends StatelessWidget {
           ),
           Expanded(
             child: CategoriesScreen(
-                categoriesList: context.read<CategoriesProvider>().categories),
+                categoriesList: context.watch<CategoriesProvider>().categories),
           ),
         ],
       ),
