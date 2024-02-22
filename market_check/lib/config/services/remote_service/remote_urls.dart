@@ -22,7 +22,7 @@ class RemoteUrls {
 
   static const String userUrl = "user/";
   static const String imagesUrl = "images/";
-  static const String offersUrl = "ofertas/";
+  static const String offersUrl = "ofertas/mobile-app";
   static const String productsUrl = "productos/";
   static const String productsCategoriesUrl = "productos/productsCategories/";
   static const String categoriesUrl = "categoria/";

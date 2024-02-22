@@ -13,7 +13,7 @@ abstract class CategoriesDataSource {
 }
 
 class CategoriesDataSourceImpl extends CategoriesDataSource {
-  final Dio dioGetCategories = Dio(
+  /*final Dio dioGetCategories = Dio(
     BaseOptions(
         baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.categoriesUrl}",
         headers: AuthService.headers),
@@ -23,7 +23,7 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
     BaseOptions(
         baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.categoriesUrlByStore}",
         headers: AuthService.headers),
-  );
+  );*/
 
   @override
   Future<List<CategorieModel>> getCategories(int storeId) async {

@@ -17,13 +17,13 @@ abstract class OffersDataSource {
 class OffersDatasourceImpl extends OffersDataSource {
   OffersDatasourceImpl();
 
-  final dioOffers = Dio(
+  /*final dioOffers = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.offersUrl}",
     ),
   );
 
-  /* final dioImages = Dio(
+  final dioImages = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.baseUrlMovilSena}${RemoteUrls.imagesUrl}",
     ),
@@ -41,9 +41,9 @@ class OffersDatasourceImpl extends OffersDataSource {
           url,
           headers: AuthService.headers,
         );
-      
+      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        offers = (jsonDecode(response.body)["offers"] as List).map((offerJson) {
+        offers = (jsonDecode(response.body)['offers'] as List).map((offerJson) {
           return OfferModel.fromJson(offerJson);
         }).toList();
       }

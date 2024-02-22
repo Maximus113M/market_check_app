@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_stores_use_case.dart';
+import 'package:provider/provider.dart';
 
 class StoresProvider with ChangeNotifier {
   GetStoresUseCase getStoresUseCase;
@@ -17,7 +18,8 @@ class StoresProvider with ChangeNotifier {
 
   StoresProvider({required this.getStoresUseCase});
 
-  Future<void> loadStores({notify = true}) async {
+  Future<void> loadStores(BuildContext context, {notify = true}) async {
+    context.read<StoresProvider>().currentStore = currentStore;
     loadingStores = true;
     final result = await getStoresUseCase(NoParams());
     loadingStores = false;

@@ -44,7 +44,7 @@ class SignInProvider with ChangeNotifier {
     result.fold((l) => debugPrint(l.message), (r) async {
       String route = '/login-form';
       if (r) {
-        context.read<StoresProvider>().loadStores(notify: true);
+        context.read<StoresProvider>().loadStores(context, notify: true);
         route = '/main';
       }
       Future.delayed(const Duration(seconds: 1)).then(
@@ -83,7 +83,7 @@ class SignInProvider with ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         if (r) {
-          context.read<StoresProvider>().loadStores(notify: true);
+          context.read<StoresProvider>().loadStores(context, notify: true);
           context.pushReplacement('/main');
         }
       },
