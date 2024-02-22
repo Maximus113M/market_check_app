@@ -39,7 +39,7 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
           url,
           headers: AuthService.headers,
         );
-
+        
         print(response);
         if (response.statusCode == 200) {
           categories = ( jsonDecode(response.body)['categories'] as List)
