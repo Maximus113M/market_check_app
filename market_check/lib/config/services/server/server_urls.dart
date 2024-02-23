@@ -36,9 +36,9 @@ class ServerUrls {
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovil;
+  static const String currentUrl = baseUrlMovilSena;
 
-  static const String currentHttp = baseHttpMovil;
+  static const String currentHttp = baseHttpMovilSena;
 
   static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 

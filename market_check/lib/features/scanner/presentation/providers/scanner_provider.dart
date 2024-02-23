@@ -18,7 +18,7 @@ class ScannerProvider with ChangeNotifier {
   void getProductByScanner(BuildContext context) async {
     int storeId = 0;
     scanBarCode = await ScannerService.scanBarcodeNormal().then((code) {
-      storeId = context.watch<StoresProvider>().currentStore!.id;
+      storeId = Provider.of<StoresProvider>(context, listen: false).currentStore!.id;
       return code;
     });
 
