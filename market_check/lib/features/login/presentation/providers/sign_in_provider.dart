@@ -11,6 +11,7 @@ import 'package:market_check/features/login/domain/use_cases/verify_current_sess
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:provider/provider.dart';
 

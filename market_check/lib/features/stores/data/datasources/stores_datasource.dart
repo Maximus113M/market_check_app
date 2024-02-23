@@ -5,7 +5,6 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 abstract class StoresDataSource {
@@ -13,11 +12,11 @@ abstract class StoresDataSource {
 }
 
 class StoresDataSourceImpl extends StoresDataSource {
-  final dioStores = Dio(
+  /*final dioStores = Dio(
     BaseOptions(
       baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.storesUrl}",
     ),
-  );
+  );*/
 
   @override
   Future<List<StoreModel>> getStores() async {

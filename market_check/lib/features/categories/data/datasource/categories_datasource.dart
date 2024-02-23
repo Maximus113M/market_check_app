@@ -5,7 +5,6 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/remote_service/remote_urls.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 abstract class CategoriesDataSource {

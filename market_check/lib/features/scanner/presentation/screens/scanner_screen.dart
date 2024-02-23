@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -89,7 +90,7 @@ class ScannerScreenState extends State<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Escaneo de Productos')),
+        appBar: customAppBar(),
         body: Builder(builder: (BuildContext context) {
           return Container(
               alignment: Alignment.center,

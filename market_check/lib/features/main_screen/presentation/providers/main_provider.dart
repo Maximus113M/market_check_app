@@ -21,4 +21,13 @@ class MainProvider extends ChangeNotifier {
     currentIndex = index;
     notifyListeners();
   }
+
+  void navigateToScreen(int index) {
+    if (index >= 0 && index < screenList.length) {
+      currentIndex = index;
+      notifyListeners();
+    }
+  }
 }
+
+

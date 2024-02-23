@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
+import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
@@ -16,7 +17,12 @@ class OfferScreeenM extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(
+        leading: IconButton(
+          onPressed: () => context.push('/store-view'), 
+          icon: const Icon(Icons.arrow_back,
+          color: AppColors.appSecondary,))
+      ),
       body: Column(
         children: [
           const SizedBox(height: 10),

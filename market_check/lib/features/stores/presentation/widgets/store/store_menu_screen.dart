@@ -46,7 +46,9 @@ class StoreMenuScreen extends StatelessWidget {
               subtitle:
                   const Text('¡Consulta lo productos antes de llevarlos!'),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/scanner');
+                },
                 icon: const Icon(
                   Icons.arrow_circle_right_outlined,
                   size: 30,

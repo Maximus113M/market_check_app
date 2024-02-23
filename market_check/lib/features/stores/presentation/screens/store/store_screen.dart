@@ -46,7 +46,7 @@ class StoreScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.pop(),
+        onPressed: () => context.push('/main'),
         child: const Icon(
           Icons.home,
           size: 30,
