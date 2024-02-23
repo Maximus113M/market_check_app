@@ -38,7 +38,9 @@ void registerProviders() {
     ),
   );
   sl.registerLazySingleton(
-    () => ShoppingCartProvider(),
+    () => ShoppingCartProvider(
+      getPurchaseProductsUseCase: sl(),
+    ),
   );
   sl.registerLazySingleton(
     () => MainProvider(),

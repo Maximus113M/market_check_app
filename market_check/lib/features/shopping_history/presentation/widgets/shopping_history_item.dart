@@ -17,6 +17,9 @@ class ShoppingHistoryItem extends StatelessWidget {
               vertical: ScreenSize.absoluteHeight * 0.01,
               horizontal: ScreenSize.width * 0.02)
           .copyWith(left: ScreenSize.width * 0.03),
+      margin: EdgeInsets.only(
+        bottom: ScreenSize.absoluteHeight * 0.01,
+      ),
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.disabled,

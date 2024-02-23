@@ -4,6 +4,8 @@ import 'package:market_check/features/products/data/repositories/products_reposi
 import 'package:market_check/features/products/domain/repositories/products_repository.dart';
 import 'package:market_check/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:market_check/features/profile/domain/repositories/profile_repository.dart';
+import 'package:market_check/features/purchases/data/repositories/purchases_repository_impl.dart';
+import 'package:market_check/features/purchases/domain/repositories/purchases_repository.dart';
 import 'package:market_check/features/shopping_history/data/repositories/shopping_history_repository_impl.dart';
 import 'package:market_check/features/shopping_history/domain/repositories/shopping_history_repository.dart';
 import 'package:market_check/injection_container.dart';
@@ -48,6 +50,11 @@ void registerRepositories() {
   sl.registerLazySingleton<ShoppingHistoryRepository>(
     () => ShoppingHistoryRepositoryImpl(
       shoppingHistoryDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<PurchasesRepository>(
+    () => PurchasesRepositoryImpl(
+      purchasesDataSource: sl(),
     ),
   );
 }

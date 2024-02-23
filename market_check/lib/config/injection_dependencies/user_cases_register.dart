@@ -1,3 +1,5 @@
+import 'package:market_check/features/purchases/domain/use_cases/create_new_purchase_use_case.dart';
+import 'package:market_check/features/purchases/domain/use_cases/get_purchase_products_use_case.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
@@ -77,6 +79,16 @@ void registerUseCases() {
   sl.registerLazySingleton(
     () => GetShoppinHistoryUseCase(
       shoppingHistoryRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => CreateNewPurchaseUseCase(
+      purchasesRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => GetPurchaseProductsUseCase(
+      purchasesRepository: sl(),
     ),
   );
 }

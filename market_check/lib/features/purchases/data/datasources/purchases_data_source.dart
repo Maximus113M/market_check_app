@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:market_check/config/errors/exceptions.dart';
+import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
@@ -72,16 +76,23 @@ class PurchasesDataSourceImpl extends PurchasesDataSource {
       int purchaseId) async {
     try {
       List<RegisteredPurchaseItemModel> registeredItems = [];
-      final Response response = await dioPurchaseBaseUrl.get('$purchaseId');
+      final response =
+          await ServerService.serverGet('${ServerUrls.purchaseUrl}$purchaseId');
       if (response.statusCode == 200) {
-        registeredItems = (response.data['items'] as List)
+        registeredItems = (jsonDecode(response.body)['items'] as List)
             .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
             .toList();
-        print('getPurchaseProducts => ${response.data['items']}');
       }
 
       return registeredItems;
+    } on HttpException catch (e) {
+      debugPrint('Purchases httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
     } catch (e) {
+      debugPrint('Purchases Exception: $e');
       throw RemoteException(
           message:
               'Ha ocurrido un error al obtener los productos de la compra.',

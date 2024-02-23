@@ -24,7 +24,7 @@ class RegisteredPurchaseItemModel {
         purchaseId: json["compra_id"],
         name: json["nombre"],
         quanty: json["cantidad"],
-        price: json["precio"],
-        total: json["total"],
+        price: double.parse(json["precio"]),
+        total: double.parse(json["total"]),
       );
 }

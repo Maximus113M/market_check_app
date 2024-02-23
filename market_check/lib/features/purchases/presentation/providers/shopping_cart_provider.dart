@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/utils.dart';
 
+import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
+import 'package:market_check/features/purchases/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/purchases/presentation/widgets/end_shopping_dialog.dart';
+import 'package:market_check/features/purchases/domain/use_cases/get_purchase_products_use_case.dart';
 
 class ShoppingCartProvider with ChangeNotifier {
+  final GetPurchaseProductsUseCase getPurchaseProductsUseCase;
+
   List<PurchaseItemModel> shoppingList = [];
   List<PurchaseItemModel> pendingList = [];
   double shoppingLimit = 0;
@@ -12,6 +17,8 @@ class ShoppingCartProvider with ChangeNotifier {
   int counter = 0;
   String code = '';
   bool isPurchasePending = false;
+
+  ShoppingCartProvider({required this.getPurchaseProductsUseCase});
 
   void incrementItemQuanty(int index) {
     shoppingList[index].incrementQuanty();
@@ -68,5 +75,20 @@ class ShoppingCartProvider with ChangeNotifier {
         );
       },
     );
+  }
+
+  Future<List<RegisteredPurchaseItemModel>> getPurchaseProducts(
+      BuildContext context, int purchaseId) async {
+    List<RegisteredPurchaseItemModel> registeredPurchases = [];
+    final result = await getPurchaseProductsUseCase(purchaseId);
+    result.fold(
+        (l) => InAppNotification.showAppNotification(
+              context: context,
+              title: 'Error de conexión',
+              message: l.message,
+              type: NotificationType.error,
+            ),
+        (r) => registeredPurchases = r);
+    return registeredPurchases;
   }
 }

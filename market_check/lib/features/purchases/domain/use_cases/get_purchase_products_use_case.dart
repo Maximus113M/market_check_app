@@ -12,7 +12,7 @@ class GetPurchaseProductsUseCase
   GetPurchaseProductsUseCase({required this.purchasesRepository});
 
   @override
-  Future<Either<Failure, List<RegisteredPurchaseItemModel>>> call(
+  Future<Either<RemoteFailure, List<RegisteredPurchaseItemModel>>> call(
       int params) async {
     return purchasesRepository.getPurchaseProducts(params);
   }

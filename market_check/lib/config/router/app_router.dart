@@ -3,7 +3,6 @@ import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
-import 'package:market_check/features/shopping_history/presentation/screens/shopping_history_details_screen.dart';
 import 'package:market_check/features/products/presentation/screens/productos_by_category_screen.dart';
 import 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
 
@@ -77,11 +76,6 @@ final appRouter = GoRouter(
       path: "/shopping-history",
       name: ShoppingHistoryScreen.name,
       builder: (context, state) => const ShoppingHistoryScreen(),
-    ),
-    GoRoute(
-      path: "/shopping-history-details",
-      name: ShoppingHistoryDetailsScreen.name,
-      builder: (context, state) => const ShoppingHistoryDetailsScreen(),
     ),
     GoRoute(
       path: "/settings",
