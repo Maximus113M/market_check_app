@@ -40,7 +40,9 @@ class ShoppingListScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                context.push('/create-lists');
+              },
               icon: const Icon(
                 Icons.add,
                 color: AppColors.appPrimary,
