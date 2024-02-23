@@ -15,13 +15,9 @@ class ShoppingListScreen extends StatelessWidget {
     final mainProvider = Provider.of<MainProvider>(context, listen: false);
     return Scaffold(
         appBar: customAppBar(
-            leading: IconButton(
-          onPressed: () => mainProvider.navigateToScreen(0),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.appSecondary,
-          ),
-        )),
+          isCartVisible: false
+        ),
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

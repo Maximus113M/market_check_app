@@ -31,7 +31,6 @@ class RemoteUrls {
       "establecimiento/showCategoriesByStore/";
 
   static const String purchaseUrl = "compras/";
-
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls

@@ -20,14 +20,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: customAppBar(
-        isCartVisible: false,
-        leading: IconButton(
-          onPressed: () => mainProvider.navigateToScreen(0),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.appSecondary,
-          ),
-        ),
+        isCartVisible: false
       ),
       body: ProfileBodyScreen(
         profileProvider: Provider.of<ProfileProvider>(context),
