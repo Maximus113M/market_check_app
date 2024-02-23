@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/features/screens.dart';
 
 //import 'package:market_check/config/shared/widgets/side_menus/side_menu.dart';
 
@@ -30,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(
             Icons.shopping_cart_rounded,
-            size: 35,
+            size: 3,
             color: AppColors.white,
           ),
         )
@@ -43,7 +45,8 @@ AppBar customAppBar(
         {Widget? leading,
         bool isCartVisible = true,
         Widget? title,
-        bool isCenterTitle = true}) =>
+        bool isCenterTitle = true,
+        required BuildContext context}) =>
     AppBar(
       leading: leading,
       toolbarHeight: ScreenSize.absoluteHeight * 0.07,
@@ -65,10 +68,10 @@ AppBar customAppBar(
       actions: [
         if (isCartVisible)
           IconButton(
-            onPressed: () {},
+            onPressed: () => context.pushNamed(ShoppingCartScreen.name),
             icon: const Icon(
               Icons.shopping_cart_rounded,
-              size: 33,
+              size: 31,
               color: AppColors.white,
             ),
           )

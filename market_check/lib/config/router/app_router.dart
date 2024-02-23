@@ -59,8 +59,8 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: "/shopping-cart",
-      name: ShoppingCart.name,
-      builder: (context, state) => const ShoppingCart(),
+      name: ShoppingCartScreen.name,
+      builder: (context, state) => const ShoppingCartScreen(),
     ),
     /*GoRoute(
       path: "/store-categories",
@@ -84,6 +84,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: "/scanner",
+      name: ScannerScreen.name,
       builder: (context, state) => const ScannerScreen(),
     ),
     GoRoute(

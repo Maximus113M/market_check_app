@@ -18,6 +18,7 @@ class ConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      surfaceTintColor: AppColors.white,
       title: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -25,16 +26,10 @@ class ConfirmDialog extends StatelessWidget {
             title,
             style: FontStyles.subtitle0(AppColors.appSecondary),
           ),
-          Divider(
-            indent: ScreenSize.width * 0.065,
-            endIndent: ScreenSize.width * 0.065,
-            color: AppColors.appSecondary,
-            thickness: 2,
-          ),
         ],
       ),
       content: Padding(
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.08),
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.03),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -6,6 +6,8 @@ class ServerUrls {
   static const String baseUrlMovilSena = "http://10.201.194.65:8000/api/";
   static const String baseUrlMarly = "http://192.168.1.41:8000/api/";
 
+  static const String baseHttp = "127.0.0.1:8000";
+
   static const String baseHttpMovil = "10.0.2.2:8000";
 
   static const String baseHttpMarly = "192.168.1.41:8000";

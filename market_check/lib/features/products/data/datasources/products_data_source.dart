@@ -2,16 +2,14 @@ import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
+import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 
 import 'package:dio/dio.dart';
-import 'package:market_check/features/products/data/models/products_by_category_model.dart';
-import 'package:market_check/features/products/data/models/scanner_data_model.dart';
 
 abstract class ProductsDataSource {
   Future<List<ProductModel>> getStoreProducts(int storeId);
   Future<List<ProductModel>> getProductsByCategorie(
       ProductsByCategoriesModel categoriesData);
-  Future<ProductModel?> getStoreProductByScanner(ScannerDataModel scannerData);
 }
 
 class ProductsDataSourceImpl extends ProductsDataSource {
@@ -52,27 +50,6 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   }
 
   @override
-  Future<ProductModel?> getStoreProductByScanner(
-      ScannerDataModel scannerData) async {
-    try {
-      if (AuthService.user != null) {
-        final Response response = await dioGetStoreProducts
-            .get('store-products/', data: scannerData.dataToJson());
-        if (response.statusCode == 200) {
-          return ProductModel.fromJson(response.data["product"]);
-        }
-      }
-
-      return null;
-    } catch (e) {
-      print(e);
-      throw RemoteException(
-          message: 'Ha ocurrido un error al scannear el producto.',
-          type: ExceptionType.purchasesException);
-    }
-  }
-
-  @override
   Future<List<ProductModel>> getProductsByCategorie(
       ProductsByCategoriesModel categoriesData) async {
     try {
@@ -87,7 +64,7 @@ class ProductsDataSourceImpl extends ProductsDataSource {
               .toList();
         }
       }
-      return [];
+      return products;
     } catch (e) {
       print(e);
       throw RemoteException(

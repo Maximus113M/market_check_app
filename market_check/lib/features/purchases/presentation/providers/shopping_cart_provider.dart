@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
+import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
 import 'package:market_check/features/purchases/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/purchases/presentation/widgets/end_shopping_dialog.dart';
@@ -77,6 +78,13 @@ class ShoppingCartProvider with ChangeNotifier {
     );
   }
 
+  void addNewProductToCart(ProductModel product) {
+    PurchaseItemModel purchaseItem = PurchaseItemModel(product: product);
+    shoppingList.add(purchaseItem);
+    notifyListeners();
+  }
+
+  //TODO MOVER A PURCHASE HISTORY
   Future<List<RegisteredPurchaseItemModel>> getPurchaseProducts(
       BuildContext context, int purchaseId) async {
     List<RegisteredPurchaseItemModel> registeredPurchases = [];

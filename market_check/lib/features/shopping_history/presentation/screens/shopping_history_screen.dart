@@ -17,6 +17,7 @@ class ShoppingHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
+        context: context,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(

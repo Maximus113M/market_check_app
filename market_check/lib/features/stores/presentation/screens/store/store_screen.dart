@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
-import 'package:market_check/features/products/data/models/products_by_category_model.dart';
-import 'package:market_check/features/products/presentation/providers/products_provider.dart';
-import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/store/store_container_screen.dart';
 

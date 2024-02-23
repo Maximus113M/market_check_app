@@ -14,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(isCartVisible: false),
+      appBar: customAppBar(context: context, isCartVisible: false),
       body: ProfileBodyScreen(
         profileProvider: Provider.of<ProfileProvider>(context),
       ),

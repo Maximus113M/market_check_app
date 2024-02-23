@@ -13,7 +13,7 @@ class ProductsByCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(context: context),
       body: Column(children: [
         const SearchProducts(),
         ProductsGridView(
@@ -63,13 +63,16 @@ class ProductsListTile extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
-        
-        
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.02, horizontal: ScreenSize.width * 0.02),
+        padding: EdgeInsets.symmetric(
+            vertical: ScreenSize.absoluteHeight * 0.02,
+            horizontal: ScreenSize.width * 0.02),
         child: ListTile(
-          title: Text(productModel.name, style: const TextStyle(fontWeight: FontWeight.w500),),
+          title: Text(
+            productModel.name,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
           subtitle: Text('\$ ${productModel.originalPrice}'),
           leading: const Icon(
             Icons.loyalty,

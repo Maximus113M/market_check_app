@@ -95,7 +95,7 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
                           SizedBox(
                             width: ScreenSize.width * 0.35,
                             child: Text(
-                              products[index].name,
+                              '${products[index].quanty}x ${products[index].name}',
                               style: FontStyles.body2(AppColors.text),
                             ),
                           ),

@@ -11,7 +11,7 @@ class PendingPurchasesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(context: context),
       body: const _StoreItemsView(),
       backgroundColor: Colors.transparent,
     );

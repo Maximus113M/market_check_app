@@ -1,3 +1,4 @@
+import 'package:market_check/features/scanner/presentation/providers/scanner_provider.dart';
 import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
@@ -30,7 +31,9 @@ void registerProviders() {
   );
   sl.registerLazySingleton(
     () => ProductsProvider(
-        getStoreProductsUseCase: sl(), getProductsByCategorie: sl()),
+      getStoreProductsUseCase: sl(),
+      getProductsByCategorie: sl(),
+    ),
   );
   sl.registerLazySingleton(
     () => CategoriesProvider(
@@ -56,5 +59,8 @@ void registerProviders() {
     () => ShoppingHistoryProvider(
       getShoppinHistoryUseCase: sl(),
     ),
+  );
+  sl.registerLazySingleton(
+    () => ScannerProvider(getStoreProductByScannerUseCase: sl()),
   );
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/screens.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key});
@@ -13,7 +15,8 @@ class StoreMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
+        padding:
+            EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
         child: Column(
           children: [
             ListTile(
@@ -46,7 +49,7 @@ class StoreMenuScreen extends StatelessWidget {
               subtitle:
                   const Text('¡Consulta lo productos antes de llevarlos!'),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () => context.pushNamed(ScannerScreen.name),
                 icon: const Icon(
                   Icons.arrow_circle_right_outlined,
                   size: 30,

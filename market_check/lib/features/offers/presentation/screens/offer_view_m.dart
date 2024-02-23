@@ -16,7 +16,7 @@ class OfferScreeenM extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(context: context),
       body: Column(
         children: [
           const SizedBox(height: 10),
