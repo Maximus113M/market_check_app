@@ -56,11 +56,6 @@ final appRouter = GoRouter(
       name: ShoppingCart.name,
       builder: (context, state) => const ShoppingCart(),
     ),
-    /*GoRoute(
-      path: "/store-categories",
-      name: StoreCategoriesScreen.name,
-      builder: (context, state) => const StoreCategoriesScreen(),
-    ),*/
     GoRoute(
       path: "/lists",
       name: ShoppingListScreen.name,
