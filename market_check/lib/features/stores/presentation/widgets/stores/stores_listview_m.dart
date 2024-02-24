@@ -38,7 +38,7 @@ class StoresListviewM extends StatelessWidget {
                 final store = storeList[index];
                 return GestureDetector(
                   onTap: () {
-                    context.read<StoresProvider>().loadStores(context);
+                    context.read<StoresProvider>().currentStore = store;
                     context.push("/store-view");
                   },
                   child: StoresListTile(storeModel: store),
