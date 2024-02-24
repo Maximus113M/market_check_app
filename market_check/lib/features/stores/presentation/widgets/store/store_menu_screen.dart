@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
@@ -13,18 +14,25 @@ class StoreMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
+        padding:
+            EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(
-                Icons.category_rounded,
-                size: 35,
-                color: AppColors.appPrimary,
-              ),
-              title: const Text('Categorias'),
-              subtitle: const Text('Explora nuestras ofertas y categorias'),
-              trailing: IconButton(
+            GestureDetector(
+              onTap: () {
+                context.read<OffersProvider>().loadOffers(context);
+                context.read<CategoriesProvider>().getCategories(context);
+                context.push('/offers-m');
+              },
+              child: ListTile(
+                leading: const Icon(
+                  Icons.category_rounded,
+                  size: 35,
+                  color: AppColors.appPrimary,
+                ),
+                title: const Text('Categorias'),
+                subtitle: const Text('Explora nuestras ofertas y categorias'),
+                trailing: IconButton(
                   onPressed: () {
                     context.read<OffersProvider>().loadOffers(context);
                     context.read<CategoriesProvider>().getCategories(context);
@@ -33,7 +41,9 @@ class StoreMenuScreen extends StatelessWidget {
                   icon: const Icon(
                     Icons.arrow_circle_right_outlined,
                     size: 30,
-                  )),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             ListTile(
@@ -46,9 +56,7 @@ class StoreMenuScreen extends StatelessWidget {
               subtitle:
                   const Text('¡Consulta lo productos antes de llevarlos!'),
               trailing: IconButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 icon: const Icon(
                   Icons.arrow_circle_right_outlined,
                   size: 30,
