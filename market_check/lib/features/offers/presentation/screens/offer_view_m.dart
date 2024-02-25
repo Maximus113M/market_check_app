@@ -4,9 +4,9 @@ import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
+import 'package:market_check/features/offers/data/models/offer_model.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/offers/presentation/widgets/offer_swiper.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/screens.dart';
 
@@ -18,23 +18,31 @@ class OfferScreeenM extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<OfferModel> offers = context.watch<OffersProvider>().offerList;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: customAppBar(
-            leading: IconButton(
-                onPressed: () => context.push('/store-view'),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.appSecondary,
-                ))),
-        body: Column(
-          children: [
-             const SizedBox(height: 10),
-            const Text(
-              'Descuentos',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          leading: IconButton(
+            onPressed: () => context.push('/store-view'),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.appSecondary,
             ),
+          ),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 10),
+            if(offers.isNotEmpty)
+            const Center(
+              child: Text(
+                'Descuentos',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+            ),
+            if(offers.isNotEmpty)
             OffersSwiper(
               offerList: context.watch<OffersProvider>().offerList,
             ),
@@ -45,18 +53,19 @@ class OfferScreeenM extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: TabBarView(               
-                children: [               
+              child: TabBarView(
+                children: [
                   CategoriesScreen(
                       categoriesList:
                           context.watch<CategoriesProvider>().categories),
                   ProductsScreen(
-                    productsList: context.watch<ProductsProvider>().filteredProductsList,
+                    productsList:
+                        context.watch<ProductsProvider>().filteredProductsList,
                   )
                 ],
               ),
             ),
-           
+
             //const SearchProducts(),
             /*ElevatedButton(
               onPressed: () {
