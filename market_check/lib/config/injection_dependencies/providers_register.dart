@@ -1,3 +1,4 @@
+import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
@@ -50,5 +51,8 @@ void registerProviders() {
       updateAccountDataUseCase: sl(),
       updatePasswordUseCase: sl(),
     ),
+  );
+  sl.registerLazySingleton(
+    () => ShoppingListsProvider(),
   );
 }

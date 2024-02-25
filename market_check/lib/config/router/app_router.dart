@@ -1,6 +1,7 @@
 import 'package:market_check/features/screens.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/injection_container.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -36,11 +37,11 @@ final appRouter = GoRouter(
       name: StoreScreen.name,
       builder: (context, state) => StoreScreen(storesProvider: sl()),
     ),
-    GoRoute(
+    /*GoRoute(
       path: "/products-view",
       name: ProductsScreen.name,
-      builder: (context, state) => const ProductsScreen(),
-    ),
+      builder: (context, state) => ProductsScreen(productsList: sl()),
+    ),*/
     GoRoute(
       path: "/products-categories",
       name: ProductsByCategoryScreen.name,

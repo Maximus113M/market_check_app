@@ -106,7 +106,7 @@ class SignInProvider with ChangeNotifier {
     }
 
     final SignUpDataModel singUpData = SignUpDataModel(
-        name: names,
+        name: names, 
         document: int.tryParse(document),
         email: emailInput,
         password: passwordInput);

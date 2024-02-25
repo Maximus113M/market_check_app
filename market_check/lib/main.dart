@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
+import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
@@ -43,6 +44,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => sl<ProfileProvider>(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<ShoppingListsProvider>(),
       ),
     ], child: const MyApp()),
   );

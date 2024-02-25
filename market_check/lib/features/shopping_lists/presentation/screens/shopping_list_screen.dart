@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
-import 'package:provider/provider.dart';
+
 
 class ShoppingListScreen extends StatelessWidget {
   static const String name = "shopping-list-screen";
@@ -12,7 +11,6 @@ class ShoppingListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainProvider = Provider.of<MainProvider>(context, listen: false);
     return Scaffold(
         appBar: customAppBar(
           isCartVisible: false
