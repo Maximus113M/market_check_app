@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:market_check/features/screens.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
-import 'package:market_check/features/screens.dart';
 
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -19,24 +20,37 @@ class StoreMenuScreen extends StatelessWidget {
             EdgeInsets.symmetric(vertical: ScreenSize.absoluteHeight * 0.04),
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(
-                Icons.category_rounded,
-                size: 35,
-                color: AppColors.appPrimary,
-              ),
-              title: const Text('Categorias'),
-              subtitle: const Text('Explora nuestras ofertas y categorias'),
-              trailing: IconButton(
+            GestureDetector(
+              onTap: () {
+                context.read<OffersProvider>().loadOffers(context);
+                context.read<CategoriesProvider>().getCategories(context);
+                context.read<ProductsProvider>().getProductsByStore(context);
+                context.push('/offers-m');
+              },
+              child: ListTile(
+                leading: const Icon(
+                  Icons.category_rounded,
+                  size: 35,
+                  color: AppColors.appPrimary,
+                ),
+                title: const Text('Categorias'),
+                subtitle: const Text('Explora nuestras ofertas y categorias'),
+                trailing: IconButton(
                   onPressed: () {
-                    context.read<OffersProvider>().loadOffers();
+                    context.read<OffersProvider>().loadOffers(context);
                     context.read<CategoriesProvider>().getCategories(context);
+                    context
+                        .read<ProductsProvider>()
+                        .getProductsByStore(context);
+
                     context.push('/offers-m');
                   },
                   icon: const Icon(
                     Icons.arrow_circle_right_outlined,
                     size: 30,
-                  )),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             ListTile(

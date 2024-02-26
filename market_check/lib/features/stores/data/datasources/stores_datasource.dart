@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
+import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 
 abstract class StoresDataSource {
@@ -11,6 +11,12 @@ abstract class StoresDataSource {
 }
 
 class StoresDataSourceImpl extends StoresDataSource {
+  /*final dioStores = Dio(
+    BaseOptions(
+      baseUrl: "${RemoteUrls.currentUrl}${RemoteUrls.storesUrl}",
+    ),
+  );*/
+
   @override
   Future<List<StoreModel>> getStores() async {
     try {
@@ -23,7 +29,6 @@ class StoresDataSourceImpl extends StoresDataSource {
         }).toList();
         return stores.where((store) => store.state != 0).toList();
       }
-
       return stores;
     } on HttpException catch (e) {
       debugPrint('Stores httpException: $e');

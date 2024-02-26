@@ -1,12 +1,8 @@
 import 'package:market_check/features/screens.dart';
-import 'package:market_check/injection_container.dart';
-import 'package:market_check/features/main_screen/presentation/screens/main_screen.dart';
-import 'package:market_check/features/products/presentation/screens/productos_screen.dart';
-import 'package:market_check/features/stores/presentation/screens/store/store_screen.dart';
-import 'package:market_check/features/products/presentation/screens/productos_by_category_screen.dart';
-import 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
+
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -42,11 +38,11 @@ final appRouter = GoRouter(
       name: StoreScreen.name,
       builder: (context, state) => StoreScreen(storesProvider: sl()),
     ),
-    GoRoute(
+    /*GoRoute(
       path: "/products-view",
       name: ProductsScreen.name,
-      builder: (context, state) => const ProductsScreen(),
-    ),
+      builder: (context, state) => ProductsScreen(productsList: sl()),
+    ),*/
     GoRoute(
       path: "/products-categories",
       name: ProductsByCategoryScreen.name,
@@ -62,15 +58,20 @@ final appRouter = GoRouter(
       name: ShoppingCartScreen.name,
       builder: (context, state) => const ShoppingCartScreen(),
     ),
-    /*GoRoute(
-      path: "/store-categories",
-      name: StoreCategoriesScreen.name,
-      builder: (context, state) => const StoreCategoriesScreen(),
-    ),*/
     GoRoute(
       path: "/lists",
       name: ShoppingListScreen.name,
       builder: (context, state) => const ShoppingListScreen(),
+    ),
+    GoRoute(
+      path: "/create-lists",
+      name: CreateShoppingListScreen.name,
+      builder: (context, state) => const CreateShoppingListScreen(),
+    ),
+     GoRoute(
+      path: "/addProducts-lists",
+      name: AddProductsListScreen.name,
+      builder: (context, state) => const AddProductsListScreen(),
     ),
     GoRoute(
       path: "/shopping-history",

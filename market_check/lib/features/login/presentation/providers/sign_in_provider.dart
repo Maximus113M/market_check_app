@@ -11,6 +11,7 @@ import 'package:market_check/features/login/domain/use_cases/verify_current_sess
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,7 @@ class SignInProvider with ChangeNotifier {
     result.fold((l) => debugPrint(l.message), (r) async {
       String route = '/login-form';
       if (r) {
-        context.read<StoresProvider>().loadStores(notify: true);
+        context.read<StoresProvider>().loadStores(context, notify: true);
         route = '/main';
       }
       Future.delayed(const Duration(seconds: 1)).then(
@@ -83,7 +84,7 @@ class SignInProvider with ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         if (r) {
-          context.read<StoresProvider>().loadStores(notify: true);
+          context.read<StoresProvider>().loadStores(context, notify: true);
           context.pushReplacement('/main');
         }
       },
@@ -105,7 +106,7 @@ class SignInProvider with ChangeNotifier {
     }
 
     final SignUpDataModel singUpData = SignUpDataModel(
-        name: names,
+        name: names, 
         document: int.tryParse(document),
         email: emailInput,
         password: passwordInput);

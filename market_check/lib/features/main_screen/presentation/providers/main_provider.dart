@@ -12,7 +12,7 @@ class MainProvider extends ChangeNotifier {
       backgroundColor: AppColors.appPrimary,
       body: StoresScreenBody(),
     ),
-    const OfferScreeenM(),
+    const ShoppingListScreen(),
     const PendingPurchasesScreen(),
     const ProfileScreen(),
   ];
@@ -21,4 +21,13 @@ class MainProvider extends ChangeNotifier {
     currentIndex = index;
     notifyListeners();
   }
+
+  void navigateToScreen(int index) {
+    if (index >= 0 && index < screenList.length) {
+      currentIndex = index;
+      notifyListeners();
+    }
+  }
 }
+
+

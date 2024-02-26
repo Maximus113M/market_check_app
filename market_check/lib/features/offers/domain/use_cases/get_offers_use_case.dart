@@ -5,12 +5,15 @@ import 'package:market_check/features/offers/domain/repositories/offer_repositor
 
 import 'package:dartz/dartz.dart';
 
-class GetOffersUseCase extends UseCase<List<OfferModel>, NoParams> {
+class GetOffersUseCase extends UseCase<List<OfferModel>, int> {
   final OffersRepository offersRepository;
 
   GetOffersUseCase({required this.offersRepository});
-
+  
   @override
-  Future<Either<Failure, List<OfferModel>>> call(params) async =>
-      await offersRepository.getOffers();
+  Future<Either<RemoteFailure, List<OfferModel>>> call(int params) async{
+    return await offersRepository.getOffers(params);
+  }
+
+  
 }

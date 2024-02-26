@@ -5,8 +5,8 @@ import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/features/scanner/presentation/providers/scanner_provider.dart';
 import 'package:market_check/features/scanner/presentation/widgets/scanner_body_screen.dart';
 
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ScannerScreen extends StatelessWidget {
   static const String name = '/scanner';

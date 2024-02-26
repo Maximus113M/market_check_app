@@ -12,6 +12,7 @@ import 'package:market_check/features/main_screen/presentation/providers/main_pr
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 
 import 'package:provider/provider.dart';
@@ -22,6 +23,9 @@ void main() async {
 
   runApp(
     MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (context) => sl<MainProvider>(),
+      ),
       ChangeNotifierProvider(
         create: (context) => sl<SignInProvider>(),
       ),
@@ -41,10 +45,10 @@ void main() async {
         create: (context) => sl<ShoppingProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<MainProvider>(),
+        create: (context) => sl<ProfileProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<ProfileProvider>(),
+        create: (context) => sl<ShoppingListsProvider>(),
       ),
       ChangeNotifierProvider(
         create: (context) => sl<ShoppingHistoryProvider>(),

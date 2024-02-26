@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';

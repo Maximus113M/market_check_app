@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -7,25 +7,11 @@ import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';
 
-import 'package:dio/dio.dart';
-
 abstract class CategoriesDataSource {
   Future<List<CategorieModel>> getCategories(int storeId);
 }
 
 class CategoriesDataSourceImpl extends CategoriesDataSource {
-  final Dio dioGetCategories = Dio(
-    BaseOptions(
-        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.categoriesUrl}",
-        headers: AuthService.headers),
-  );
-
-  final Dio dioGetCategoriesByStore = Dio(
-    BaseOptions(
-        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.categoriesUrlByStore}",
-        headers: AuthService.headers),
-  );
-
   @override
   Future<List<CategorieModel>> getCategories(int storeId) async {
     try {
