@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
+
+import 'package:go_router/go_router.dart';
 
 class LogInForm extends StatelessWidget {
   final SignInProvider loginProvider;
@@ -63,15 +62,17 @@ class LogInForm extends StatelessWidget {
                   height: ScreenSize.height * 0.015,
                 ),
                 CustomButton(
+                  radius: 0.5,
                   color: AppColors.appPrimary,
                   text: 'INICIAR SESIÓN',
                   action: () => loginProvider.validateUser(context),
                   horizontalMargin: 0,
                   verticalSize: 0.055,
                 ),
-                
                 Padding(
-                  padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.01, bottom: ScreenSize.absoluteHeight * 0.015),
+                  padding: EdgeInsets.only(
+                      top: ScreenSize.absoluteHeight * 0.01,
+                      bottom: ScreenSize.absoluteHeight * 0.015),
                   child: GestureDetector(
                     onTap: () {},
                     child: const Text(
@@ -80,15 +81,12 @@ class LogInForm extends StatelessWidget {
                     ),
                   ),
                 ),
-                
                 GestureDetector(
                   onTap: () {
                     context.push("/register");
                   },
-                  child: Text(
-                    '¡Registrate!',
-                    style: FontStyles.bodyBold1(AppColors.appSecondary)
-                  ),
+                  child: Text('¡Registrate!',
+                      style: FontStyles.bodyBold1(AppColors.appSecondary)),
                 ),
               ],
             ),

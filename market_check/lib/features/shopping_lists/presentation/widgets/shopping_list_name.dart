@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/features/screens.dart';
+
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
-import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:market_check/features/shopping_lists/presentation/widgets/shoppping_list_listile.dart';
+import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ShoppingListName extends StatelessWidget {
   final List<ShoppingListsModel> shoppingList;

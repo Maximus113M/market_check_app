@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
-import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/screen_size.dart';
+
+import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
+import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 
 class SignUpForm extends StatelessWidget {
   final SignInProvider signUpProvider;
@@ -62,14 +62,14 @@ class SignUpForm extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 45),
-                CustomFilledButton(
-                  bgColor: AppColors.appSecondary,
+                CustomButton(
+                  radius: 0.5,
                   color: AppColors.appPrimary,
-                  verticalSize: 0.017,
-                  horizontalSize: 0.212,
-                  text: 'Registrarse',
+                  text: 'REGISTRATE',
                   action: () => signUpProvider.validateSingUp(context),
-                )
+                  horizontalMargin: 0,
+                  verticalSize: 0.055,
+                ),
               ],
             ),
           ),

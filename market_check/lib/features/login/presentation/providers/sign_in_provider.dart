@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/use_case/use_case.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
-import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
+import 'package:market_check/features/login/data/models/sign_in_data_model.dart';
 import 'package:market_check/features/login/domain/use_cases/sign_up_use_case.dart';
-import 'package:market_check/features/login/domain/use_cases/verify_current_session_use_case.dart';
+import 'package:market_check/features/login/domain/use_cases/sign_out_use_case.dart';
 import 'package:market_check/features/login/domain/use_cases/verify_log_in_use_case.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:market_check/features/login/domain/use_cases/verify_current_session_use_case.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:provider/provider.dart';
 
 class SignInProvider with ChangeNotifier {
@@ -106,7 +105,7 @@ class SignInProvider with ChangeNotifier {
     }
 
     final SignUpDataModel singUpData = SignUpDataModel(
-        name: names, 
+        name: names,
         document: int.tryParse(document),
         email: emailInput,
         password: passwordInput);

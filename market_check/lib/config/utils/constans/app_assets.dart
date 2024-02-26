@@ -2,6 +2,7 @@ class AppAssets {
   static const String optionalLogoImage = 'assets/Images/LogoOpcionalSinBg.png';
   static const String loadingImage = 'assets/Images/jar-loading.gif';
   static const String scanner = 'assets/Images/qr-scan.png';
+  static const String scanner2 = 'assets/Images/icons/scanner.png';
 
 //--------------------------avatars
   static const String avatar = 'assets/Images/avatars/fubiki.jpg';
@@ -25,7 +26,7 @@ class AppAssets {
   static const String shopping = 'assets/Images/profile/shoppings.webp';
   static const String stores = 'assets/Images/profile/stores.jpeg';
   static const String favoritesProducts =
-      'assets/Images/categories/lacteos.png';
+      'assets/Images/profile/products.png';
 
 //--------------------------Icons
   static const String invoiceIcon = 'assets/Images/icons/invoice.png';

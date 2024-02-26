@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/menus/menu_categories.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 
 class PendingPurchasesScreen extends StatelessWidget {
@@ -12,13 +11,18 @@ class PendingPurchasesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context: context),
-      body: const _StoreItemsView(),
+      body: SizedBox(
+        child: Text(
+          'COMPRAS PENDIENTES',
+          style: FontStyles.heading1(AppColors.appPrimary),
+        ),
+      ),
       backgroundColor: Colors.transparent,
     );
   }
 }
 
-class _StoreItemsView extends StatelessWidget {
+/*class _StoreItemsView extends StatelessWidget {
   const _StoreItemsView();
 
   @override
@@ -48,4 +52,4 @@ class _StoreItemsView extends StatelessWidget {
       ),
     );
   }
-}
+}*/

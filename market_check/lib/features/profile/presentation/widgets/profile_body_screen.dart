@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_cards.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_image.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileBodyScreen extends StatelessWidget {
   final ProfileProvider profileProvider;

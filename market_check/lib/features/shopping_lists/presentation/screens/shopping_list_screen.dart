@@ -4,7 +4,6 @@ import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 
-
 class ShoppingListScreen extends StatelessWidget {
   static const String name = "shopping-list-screen";
   const ShoppingListScreen({super.key});
@@ -12,10 +11,7 @@ class ShoppingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(
-          isCartVisible: false
-        ),
-
+        appBar: customAppBar(context: context, isCartVisible: false),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
@@ -26,10 +27,22 @@ class ScannerBodyScreen extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: ScreenSize.absoluteHeight * 0.05,
-              bottom: ScreenSize.absoluteHeight * 0.2),
-          child: Image.asset(
-            AppAssets.scanner,
+                    top: ScreenSize.absoluteHeight * 0.05,
+                    bottom: ScreenSize.absoluteHeight * 0.2),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                height: ScreenSize.absoluteHeight * 0.35,
+                child: Image.asset(
+                  AppAssets.scanner2,
+                ),
+              ),
+              Container(
+                height: ScreenSize.absoluteHeight * 0.35,
+                width: double.infinity,
+                color: AppColors.white.withOpacity(0.6),)
+            ],
           ),
         ),
         CustomButton(

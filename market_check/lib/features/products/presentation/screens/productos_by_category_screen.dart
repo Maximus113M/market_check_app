@@ -14,14 +14,16 @@ class ProductsByCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context: context),
-      body: Column(children: [
-        Expanded(
-          child: ProductsScreen(
-            productsList:
-                context.watch<ProductsProvider>().filteredProductsList,
+      body: Column(
+        children: [
+          Expanded(
+            child: ProductsScreen(
+              productsList:
+                  context.watch<ProductsProvider>().filteredProductsList,
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

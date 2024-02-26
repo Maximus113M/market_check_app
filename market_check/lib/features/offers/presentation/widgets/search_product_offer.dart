@@ -21,17 +21,20 @@ class SearchProducts extends StatelessWidget {
               textController:
                   context.read<ProductsProvider>().searchTextController,
               onChange: (value) =>
-                  context.read<ProductsProvider>().searchProducts(value)),
+                  context.read<ProductsProvider>().searchProducts(value, SearchType.categories)),
           if (context
-              .read<ProductsProvider>()
+              .watch<ProductsProvider>()
               .searchTextController
               .text
               .isNotEmpty)
-            IconButton(
-              onPressed: () => context.read<ProductsProvider>().clearSearch(),
-              icon: const Icon(
-                Icons.cancel_outlined,
-                color: AppColors.text,
+            Positioned(
+              right: 0,
+              child: IconButton(
+                onPressed: () => context.read<ProductsProvider>().clearSearch(SearchType.categories),
+                icon: const Icon(
+                  Icons.cancel_outlined,
+                  color: AppColors.text,
+                ),
               ),
             ),
         ],

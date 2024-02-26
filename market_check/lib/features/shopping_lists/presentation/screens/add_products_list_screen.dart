@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
-import 'package:market_check/config/shared/widgets/shared_widgets.dart';
+
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
+import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class AddProductsListScreen extends StatelessWidget {
@@ -16,7 +15,7 @@ class AddProductsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String productName = '';
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(context: context),
       body: Column(
         children: [
           Padding(
@@ -71,8 +70,8 @@ class ShoppingListProductsListview extends StatelessWidget {
           itemBuilder: (context, index) {
             final List<String> productList =
                 shoppingListsProvider.shoppingList[index].products;
-                List<Widget> listTiles = [];
-                productList.forEach((productName) {
+            List<Widget> listTiles = [];
+            productList.forEach((productName) {
               listTiles.add(ListTile(
                 title: Text(productName),
               ));

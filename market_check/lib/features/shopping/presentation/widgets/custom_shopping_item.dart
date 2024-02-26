@@ -22,7 +22,7 @@ class CustomShoppingItem extends StatelessWidget {
       constraints: BoxConstraints(minHeight: ScreenSize.absoluteHeight * 0.1),
       padding: EdgeInsets.symmetric(
           horizontal: ScreenSize.width * 0.03,
-          vertical: ScreenSize.absoluteHeight * 0.01),
+          vertical: ScreenSize.absoluteHeight * 0.01).copyWith(right: ScreenSize.width * 0.02),
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
