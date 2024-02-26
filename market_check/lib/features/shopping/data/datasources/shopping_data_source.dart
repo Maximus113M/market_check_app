@@ -60,9 +60,6 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
           '${ServerUrls.purchaseUrl}$purchaseId/producto/${purchaseItem.product.id}',
           {'itemsCount': purchaseItem.quanty});
 
-      /*final Response response = await dioPurchaseBaseUrl.get(
-          '$purchaseId/producto/${purchaseItem.product.id}',
-          data: {'itemsCount': purchaseItem.quanty});*/
       print(response.body);
     } on HttpException catch (e) {
       debugPrint('ShoppingDataSource httpException: $e');
