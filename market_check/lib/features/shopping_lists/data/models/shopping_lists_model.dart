@@ -1,9 +1,9 @@
 class ShoppingListsModel {
   final String nameList;
-  final String? products;
+  final List<String> products;
 
 
-  ShoppingListsModel({required this.nameList, this.products});
+  ShoppingListsModel({required this.nameList, required this.products}); 
 
 
 }

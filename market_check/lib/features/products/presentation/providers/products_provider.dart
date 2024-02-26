@@ -21,6 +21,8 @@ class ProductsProvider extends ChangeNotifier {
       {required this.getStoreProductsUseCase,
       required this.getProductsByCategorie});
 
+
+
   void getProductsByStore(BuildContext context) async {
     final storeId = context.read<StoresProvider>().currentStore!.id!;
 
@@ -30,7 +32,8 @@ class ProductsProvider extends ChangeNotifier {
         (l) => InAppNotification.serverFailure(
               context: context,
               message: l.message,
-            ), (r) {
+            ),
+             (r) {
       products = r;
       print(products);
       filteredProductsList = products;
@@ -38,17 +41,20 @@ class ProductsProvider extends ChangeNotifier {
     });
   }
 
+
   void getProductsByCategories(
       BuildContext context, ProductsByCategoriesModel params) async {
     final result = await getProductsByCategorie(params);
 
     result.fold(
-        (l) => InAppNotification.serverFailure(
-            context: context, message: l.message), (r) {
-      products = r;
-      filteredProductsList = products;
-    });
-    notifyListeners();
+      (l) =>
+          InAppNotification.serverFailure(context: context, message: l.message),
+      (r) {
+        products = r;
+        filteredProductsList = products;
+        notifyListeners();
+      },
+    );
   }
 
   List<ProductModel> getProductByName(String name) {

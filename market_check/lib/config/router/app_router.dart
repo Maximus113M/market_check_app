@@ -1,6 +1,7 @@
 import 'package:market_check/features/screens.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
 import 'package:market_check/injection_container.dart';
 
 final appRouter = GoRouter(
@@ -66,6 +67,11 @@ final appRouter = GoRouter(
       path: "/create-lists",
       name: CreateShoppingListScreen.name,
       builder: (context, state) => const CreateShoppingListScreen(),
+    ),
+     GoRoute(
+      path: "/addProducts-lists",
+      name: AddProductsListScreen.name,
+      builder: (context, state) => const AddProductsListScreen(),
     ),
     GoRoute(
       path: "/shopping-history",

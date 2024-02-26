@@ -17,7 +17,7 @@ class ProductsByCategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(
         leading: IconButton(
-          onPressed: ()=>context.push('/offers-m'), 
+          onPressed: ()=>context.pushReplacement('/offers-m'), 
           icon: const Icon(Icons.arrow_back,
           color: AppColors.appSecondary,))
       ),

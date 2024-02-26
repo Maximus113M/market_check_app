@@ -5,6 +5,7 @@ import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
 class StoreMenuScreen extends StatelessWidget {
@@ -22,6 +23,7 @@ class StoreMenuScreen extends StatelessWidget {
               onTap: () {
                 context.read<OffersProvider>().loadOffers(context);
                 context.read<CategoriesProvider>().getCategories(context);
+                context.read<ProductsProvider>().getProductsByStore(context);
                 context.push('/offers-m');
               },
               child: ListTile(
@@ -36,6 +38,10 @@ class StoreMenuScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<OffersProvider>().loadOffers(context);
                     context.read<CategoriesProvider>().getCategories(context);
+                    context
+                        .read<ProductsProvider>()
+                        .getProductsByStore(context);
+
                     context.push('/offers-m');
                   },
                   icon: const Icon(

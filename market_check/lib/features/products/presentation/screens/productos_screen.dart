@@ -25,7 +25,7 @@ class ProductsScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 5 / 3,
+                  childAspectRatio: 8 / 3,
                 ),
                 itemCount: productsList.length,
                 itemBuilder: (context, index) {
@@ -35,6 +35,7 @@ class ProductsScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );
