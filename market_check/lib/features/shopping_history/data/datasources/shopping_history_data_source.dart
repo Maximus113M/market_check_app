@@ -38,6 +38,8 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signInException);
     } catch (e) {
+      debugPrint('ShoppingHistory httpException: $e');
+
       throw RemoteException(
           message: 'No se pudo obtener la lista',
           type: ExceptionType.shoppingHistoryException);
