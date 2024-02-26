@@ -26,7 +26,6 @@ class ShoppingHistoryScreen extends StatelessWidget {
           ),
         ),
         isCartVisible: false,
-        //isCenterTitle: false,
         title: Text(
           "Historial de Compra",
           style: FontStyles.subtitle0(AppColors.white),

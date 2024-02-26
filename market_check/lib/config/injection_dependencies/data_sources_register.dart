@@ -1,5 +1,5 @@
 import 'package:market_check/features/profile/data/datasources/profile_data_source.dart';
-import 'package:market_check/features/purchases/data/datasources/purchases_data_source.dart';
+import 'package:market_check/features/shopping/data/datasources/shopping_data_source.dart';
 import 'package:market_check/features/scanner/data/datasources/scanner_data_source.dart';
 import 'package:market_check/features/shopping_history/data/datasources/shopping_history_data_source.dart';
 import 'package:market_check/injection_container.dart';
@@ -35,7 +35,7 @@ void registerDataSources() {
   sl.registerLazySingleton<ShoppingHistoryDataSource>(
     () => ShoppingHistoryDataSourceImpl(),
   );
-  sl.registerLazySingleton<PurchasesDataSource>(
+  sl.registerLazySingleton<ShoppingDataSource>(
     () => PurchasesDataSourceImpl(),
   );
   sl.registerLazySingleton<ScannerDataSource>(

@@ -22,7 +22,7 @@ class ShoppingHistoryScreenBody extends StatelessWidget {
       itemCount: shoppingHistoryProvider.purchases.length,
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
-          shoppingHistoryProvider.showShoppingHistoryModal(
+          shoppingHistoryProvider.getPurchaseProducts(
               context, shoppingHistoryProvider.purchases[index]);
         },
         child: ShoppingHistoryItem(

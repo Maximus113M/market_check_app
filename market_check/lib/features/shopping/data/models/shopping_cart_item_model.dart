@@ -1,11 +1,11 @@
 import 'package:market_check/features/products/data/models/product_model.dart';
 
-class PurchaseItemModel {
+class ShoppingCartItemModel {
   final ProductModel product;
   int quanty;
   int totalPrice;
 
-  PurchaseItemModel({
+  ShoppingCartItemModel({
     required this.product,
     this.quanty = 1,
     this.totalPrice = 0,

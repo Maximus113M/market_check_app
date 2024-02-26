@@ -1,26 +1,19 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
-import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
+import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
 
 import 'package:dio/dio.dart';
-import 'package:market_check/features/purchases/data/models/registered_purchase_item.dart';
 
-abstract class PurchasesDataSource {
-  Future<bool> createNewPurchase(List<PurchaseItemModel> purchaseItems);
+abstract class ShoppingDataSource {
+  Future<bool> createNewPurchase(List<ShoppingCartItemModel> purchaseItems);
 
   Future<void> addProductToPurchase(
-      PurchaseItemModel purchaseItem, int purchaseId);
-
-  Future<List<RegisteredPurchaseItemModel>> getPurchaseProducts(int purchaseId);
+      ShoppingCartItemModel purchaseItem, int purchaseId);
 }
 
-class PurchasesDataSourceImpl extends PurchasesDataSource {
+class PurchasesDataSourceImpl extends ShoppingDataSource {
   final Dio dioPurchaseBaseUrl = Dio(
     BaseOptions(
         baseUrl: "${ServerUrls.currentUrl}${ServerUrls.purchaseUrl}",
@@ -28,7 +21,8 @@ class PurchasesDataSourceImpl extends PurchasesDataSource {
   );
 
   @override
-  Future<bool> createNewPurchase(List<PurchaseItemModel> purchaseItems) async {
+  Future<bool> createNewPurchase(
+      List<ShoppingCartItemModel> purchaseItems) async {
     try {
       final User? user = AuthService.user;
       if (user == null) return false;
@@ -58,7 +52,7 @@ class PurchasesDataSourceImpl extends PurchasesDataSource {
 
   @override
   Future<void> addProductToPurchase(
-      PurchaseItemModel purchaseItem, int purchaseId) async {
+      ShoppingCartItemModel purchaseItem, int purchaseId) async {
     try {
       final Response response = await dioPurchaseBaseUrl.get(
           '$purchaseId/producto/${purchaseItem.product.id}',
@@ -67,35 +61,6 @@ class PurchasesDataSourceImpl extends PurchasesDataSource {
     } catch (e) {
       throw RemoteException(
           message: 'Ha ocurrido un error al agregar productos a la compra.',
-          type: ExceptionType.purchasesException);
-    }
-  }
-
-  @override
-  Future<List<RegisteredPurchaseItemModel>> getPurchaseProducts(
-      int purchaseId) async {
-    try {
-      List<RegisteredPurchaseItemModel> registeredItems = [];
-      final response =
-          await ServerService.serverGet('${ServerUrls.purchaseUrl}$purchaseId');
-      if (response.statusCode == 200) {
-        registeredItems = (jsonDecode(response.body)['items'] as List)
-            .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
-            .toList();
-      }
-
-      return registeredItems;
-    } on HttpException catch (e) {
-      debugPrint('Purchases httpException: $e');
-      throw RemoteException(
-          message:
-              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
-    } catch (e) {
-      debugPrint('Purchases Exception: $e');
-      throw RemoteException(
-          message:
-              'Ha ocurrido un error al obtener los productos de la compra.',
           type: ExceptionType.purchasesException);
     }
   }

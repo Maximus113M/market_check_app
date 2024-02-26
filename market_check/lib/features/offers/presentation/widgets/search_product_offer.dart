@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class SearchProducts extends StatelessWidget {
@@ -15,14 +16,12 @@ class SearchProducts extends StatelessWidget {
       child: Stack(
         children: [
           CustomTextFormField(
-            icon: Icons.search_outlined,
-            hint: 'Buscar productos',
-            textController:
-                context.read<ProductsProvider>().searchTextController,
-            onChange: (value) =>
-                context.read<ProductsProvider>().searchProducts(value)
-                
-          ),
+              icon: Icons.search_outlined,
+              hint: 'Buscar productos',
+              textController:
+                  context.read<ProductsProvider>().searchTextController,
+              onChange: (value) =>
+                  context.read<ProductsProvider>().searchProducts(value)),
           if (context
               .read<ProductsProvider>()
               .searchTextController

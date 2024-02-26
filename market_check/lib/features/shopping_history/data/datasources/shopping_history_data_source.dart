@@ -7,9 +7,11 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
 
 abstract class ShoppingHistoryDataSource {
   Future<List<PurchaseModel>> getShoppingHistory();
+  Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(int purchaseId);
 }
 
 class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
@@ -30,7 +32,7 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       }
       return purhaseList;
     } on HttpException catch (e) {
-      debugPrint('Stores httpException: $e');
+      debugPrint('ShoppingHistory httpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
@@ -39,6 +41,35 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       throw RemoteException(
           message: 'No se pudo obtener la lista',
           type: ExceptionType.shoppingHistoryException);
+    }
+  }
+
+  @override
+  Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(
+      int purchaseId) async {
+    try {
+      List<RegisteredPurchaseItemModel> registeredItems = [];
+      final response =
+          await ServerService.serverGet('${ServerUrls.purchaseUrl}$purchaseId');
+      if (response.statusCode == 200) {
+        registeredItems = (jsonDecode(response.body)['items'] as List)
+            .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
+            .toList();
+      }
+
+      return registeredItems;
+    } on HttpException catch (e) {
+      debugPrint('ShoppingHistory httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
+    } catch (e) {
+      debugPrint('ShoppingHistory Exception: $e');
+      throw RemoteException(
+          message:
+              'Ha ocurrido un error al obtener los productos de la compra.',
+          type: ExceptionType.purchasesException);
     }
   }
 }

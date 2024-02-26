@@ -1,10 +1,10 @@
 class ServerUrls {
 //Base Urls
   static const String baseUrl = "http://127.0.0.1:8000/api/";
-
   static const String baseUrlMovil = "http://10.0.2.2:8000/api/";
   static const String baseUrlMovilSena = "http://10.201.194.65:8000/api/";
   static const String baseUrlMarly = "http://192.168.1.41:8000/api/";
+  static const String baseUrlIpv4Camilo = "http://192.168.1.10:8000/api/";
 
   static const String baseHttp = "127.0.0.1:8000";
 
@@ -13,6 +13,8 @@ class ServerUrls {
   static const String baseHttpMarly = "192.168.1.41:8000";
 
   static const String baseHttpMovilSena = "10.201.194.65:8000";
+
+  static const String baseHttpIpv4Camilo = '192.168.1.10:8000';
 
 //"http://10.201.194.65:8000/api/";
 
@@ -36,9 +38,11 @@ class ServerUrls {
   static const String shoppingHistoryUrl = "mobile-app/";
 
 //Dynamic Urls
-  static const String currentUrl = baseUrlMovil;
+  //static const String currentUrl = baseUrlMovil;
+  static const String currentUrl = baseUrlIpv4Camilo;
 
-  static const String currentHttp = baseHttpMovil;
+  //static const String currentHttp = baseHttpMovil;
+  static const String currentHttp = baseHttpIpv4Camilo;
 
   static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
-import 'package:market_check/features/purchases/presentation/widgets/custom_shopping_item.dart';
-import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/shopping/presentation/widgets/custom_shopping_item.dart';
+import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -31,14 +31,14 @@ class ShoppingCartScreen extends StatelessWidget {
         toolbarHeight: 40,
       ),
       body: ShoppingCartBodyScreen(
-        shoppingCartProvider: Provider.of<ShoppingCartProvider>(context),
+        shoppingCartProvider: Provider.of<ShoppingProvider>(context),
       ),
     );
   }
 }
 
 class ShoppingCartBodyScreen extends StatelessWidget {
-  final ShoppingCartProvider shoppingCartProvider;
+  final ShoppingProvider shoppingCartProvider;
 
   const ShoppingCartBodyScreen({super.key, required this.shoppingCartProvider});
 
@@ -73,7 +73,7 @@ class ShoppingCartBodyScreen extends StatelessWidget {
                     item: shoppingCartProvider.shoppingList[index],
                     index: index,
                     shoppingCartProvider:
-                        Provider.of<ShoppingCartProvider>(context),
+                        Provider.of<ShoppingProvider>(context),
                   ),
                 );
               },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
-import 'package:market_check/features/purchases/data/models/registered_purchase_item.dart';
+import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -11,11 +11,13 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
   final PurchaseModel currentPurchase;
   final List<StoreModel> stores;
   final List<RegisteredPurchaseItemModel> products;
+  final int totalProducts;
   const ShoppingHistoryModalDetails({
     super.key,
     required this.stores,
     required this.currentPurchase,
     required this.products,
+    required this.totalProducts,
   });
 
   @override
@@ -81,7 +83,7 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
                   color: AppColors.lightText2,
                 ),
                 SizedBox(
-                  height: products.length > 6
+                  height: products.length > 5
                       ? ScreenSize.absoluteHeight * 0.5
                       : ScreenSize.absoluteHeight * 0.2,
                   child: ListView.builder(
@@ -124,7 +126,7 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Productos: ${products.length}',
+                        'Productos: $totalProducts',
                         style: FontStyles.bodyBold1(AppColors.text),
                       ),
                       Text(
@@ -140,7 +142,7 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
         ),
         Positioned(
           right: ScreenSize.width * 0.08,
-          top: products.length > 6
+          top: products.length > 5
               ? ScreenSize.absoluteHeight * 0.105
               : ScreenSize.absoluteHeight * 0.258,
           child: IconButton(

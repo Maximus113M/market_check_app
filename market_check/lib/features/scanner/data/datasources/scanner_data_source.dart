@@ -21,7 +21,7 @@ class ScannerDataSourceImpl extends ScannerDataSource {
     try {
       if (AuthService.user != null) {
         final response = await ServerService.serverPost(
-          '${ServerUrls.productsUrl}store-products/',
+          '${ServerUrls.productsUrl}scanner-product/',
           scannerData.dataToJson(),
         );
         if (response.statusCode == 200) {

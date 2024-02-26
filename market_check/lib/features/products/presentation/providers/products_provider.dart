@@ -1,12 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
 import 'package:market_check/features/products/domain/use_cases/get_store_products_use_case.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class ProductsProvider extends ChangeNotifier {
@@ -22,7 +23,7 @@ class ProductsProvider extends ChangeNotifier {
       required this.getProductsByCategorie});
 
   void getProductsByStore(BuildContext context) async {
-    final storeId = context.read<StoresProvider>().currentStore!.id!;
+    final storeId = context.read<StoresProvider>().currentStore!.id;
 
     final result = await getStoreProductsUseCase(storeId);
 

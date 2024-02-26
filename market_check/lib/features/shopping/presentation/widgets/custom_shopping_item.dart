@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/add_remove_button.dart';
-import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
-import 'package:market_check/features/purchases/presentation/providers/shopping_cart_provider.dart';
+import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
+import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 
 class CustomShoppingItem extends StatelessWidget {
-  final PurchaseItemModel item;
-  final ShoppingCartProvider shoppingCartProvider;
+  final ShoppingCartItemModel item;
+  final ShoppingProvider shoppingCartProvider;
   final int index;
 
   const CustomShoppingItem(

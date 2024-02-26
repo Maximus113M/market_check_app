@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
-import 'package:market_check/features/purchases/data/models/purchase_item_model.dart';
-import 'package:market_check/features/purchases/data/models/registered_purchase_item.dart';
-import 'package:market_check/features/purchases/presentation/widgets/end_shopping_dialog.dart';
-import 'package:market_check/features/purchases/domain/use_cases/get_purchase_products_use_case.dart';
+import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
+import 'package:market_check/features/shopping/presentation/widgets/end_shopping_dialog.dart';
+import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_products_use_case.dart';
 
-class ShoppingCartProvider with ChangeNotifier {
-  final GetPurchaseProductsUseCase getPurchaseProductsUseCase;
+class ShoppingProvider with ChangeNotifier {
+  final GetShoppingProductsUseCase getPurchaseProductsUseCase;
 
-  List<PurchaseItemModel> shoppingList = [];
-  List<PurchaseItemModel> pendingList = [];
+  List<ShoppingCartItemModel> shoppingList = [];
+  List<ShoppingCartItemModel> pendingList = [];
   double shoppingLimit = 0;
   double totalBuy = 0;
   int counter = 0;
   String code = '';
   bool isPurchasePending = false;
 
-  ShoppingCartProvider({required this.getPurchaseProductsUseCase});
+  ShoppingProvider({required this.getPurchaseProductsUseCase});
 
   void incrementItemQuanty(int index) {
     shoppingList[index].incrementQuanty();
@@ -78,25 +75,9 @@ class ShoppingCartProvider with ChangeNotifier {
     );
   }
 
-  void addNewProductToCart(ProductModel product) {
-    PurchaseItemModel purchaseItem = PurchaseItemModel(product: product);
-    shoppingList.add(purchaseItem);
+  void addNewProductToCart(ShoppingCartItemModel shoppingCartItem) {
+    //ShoppingCartItemModel purchaseItem = shoppingCartItem;
+    shoppingList.add(shoppingCartItem);
     notifyListeners();
-  }
-
-  //TODO MOVER A PURCHASE HISTORY
-  Future<List<RegisteredPurchaseItemModel>> getPurchaseProducts(
-      BuildContext context, int purchaseId) async {
-    List<RegisteredPurchaseItemModel> registeredPurchases = [];
-    final result = await getPurchaseProductsUseCase(purchaseId);
-    result.fold(
-        (l) => InAppNotification.showAppNotification(
-              context: context,
-              title: 'Error de conexión',
-              message: l.message,
-              type: NotificationType.error,
-            ),
-        (r) => registeredPurchases = r);
-    return registeredPurchases;
   }
 }

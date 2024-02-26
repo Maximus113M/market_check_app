@@ -10,10 +10,10 @@ import 'package:market_check/features/stores/data/repositories/stores_repository
 import 'package:market_check/features/products/domain/repositories/products_repository.dart';
 import 'package:market_check/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:market_check/features/scanner/data/repositories/scanner_repository_impl.dart';
-import 'package:market_check/features/purchases/domain/repositories/purchases_repository.dart';
+import 'package:market_check/features/shopping/domain/repositories/shopping_repository.dart';
 import 'package:market_check/features/products/data/repositories/products_repository_impl.dart';
 import 'package:market_check/features/categories/domain/repositories/categories_repository.dart';
-import 'package:market_check/features/purchases/data/repositories/purchases_repository_impl.dart';
+import 'package:market_check/features/shopping/data/repositories/shopping_repository_impl.dart';
 import 'package:market_check/features/categories/data/repositories/categories_repository_impl.dart';
 import 'package:market_check/features/shopping_history/domain/repositories/shopping_history_repository.dart';
 import 'package:market_check/features/shopping_history/data/repositories/shopping_history_repository_impl.dart';
@@ -54,8 +54,8 @@ void registerRepositories() {
       shoppingHistoryDataSource: sl(),
     ),
   );
-  sl.registerLazySingleton<PurchasesRepository>(
-    () => PurchasesRepositoryImpl(
+  sl.registerLazySingleton<ShoppingRepository>(
+    () => ShoppingRepositoryImpl(
       purchasesDataSource: sl(),
     ),
   );

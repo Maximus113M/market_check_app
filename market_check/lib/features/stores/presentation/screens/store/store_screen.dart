@@ -32,16 +32,17 @@ class StoreScreen extends StatelessWidget {
                   height: ScreenSize.width * 0.7,
                   width: double.infinity,
                   child: FadeInImage(
-                      placeholder: const AssetImage(AppAssets.loadingImage),
-                      image: NetworkImage(
-                        '${ServerUrls.currentImagesUrl}${store.poster!}',
-                      ),
+                    placeholder: const AssetImage(AppAssets.loadingImage),
+                    image: NetworkImage(
+                      '${ServerUrls.currentImagesUrl}${store.poster!}',
+                    ),
+                    fit: BoxFit.cover,
+                    imageErrorBuilder: (context, error, stackTrace) =>
+                        Image.asset(
+                      'assets/Images/stores/establecimiento-base.jpg',
                       fit: BoxFit.cover,
-                      imageErrorBuilder: (context, error, stackTrace) =>
-                          Image.asset(
-                            'assets/Images/stores/establecimiento-base.jpg',
-                            fit: BoxFit.cover,
-                          )),
+                    ),
+                  ),
                 ),
           const StoreContainerScreen(),
         ],
