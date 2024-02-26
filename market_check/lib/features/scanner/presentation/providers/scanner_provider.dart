@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 
 import 'package:market_check/config/services/scanner/scanner_service.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
@@ -26,14 +27,14 @@ class ScannerProvider with ChangeNotifier {
     //TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
     if (int.parse(scanBarCode) == -1) {
       final ProductModel product = ProductModel(
-          id: 1,
-          code: 2032156,
+          id: 5,
+          code: 789789,
           state: 1,
           currentPrice: 6000,
           originalPrice: 6000,
-          name: 'Nachos',
+          name: 'Nachos ExtraQueso',
           description: '500 g',
-          stock: 100,
+          stock: 200,
           storeId: 1,
           categoryId: 1,
           subcategoryId: 1);
@@ -73,8 +74,6 @@ class ScannerProvider with ChangeNotifier {
   void showScannedProduct(BuildContext context) {
     int productCount = 1;
     int totalPrice = currentProduct!.currentPrice;
-    ShoppingCartItemModel shoppingCartItem = ShoppingCartItemModel(
-        product: currentProduct!, quanty: productCount, totalPrice: totalPrice);
     void getTotalPrice() {
       totalPrice = currentProduct!.currentPrice * productCount;
     }
@@ -84,7 +83,8 @@ class ScannerProvider with ChangeNotifier {
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => ScannedProductDialog(
           product: currentProduct!,
-          mainAction: () => addProductToShoppingCart(context, shoppingCartItem),
+          mainAction: () =>
+              addProductToShoppingCart(context, productCount, totalPrice),
           secondaryAction: () => context.pop(),
           addAction: () {
             productCount++;
@@ -105,16 +105,30 @@ class ScannerProvider with ChangeNotifier {
   }
 
   void addProductToShoppingCart(
-      BuildContext context, ShoppingCartItemModel item) {
-    context.read<ShoppingProvider>().addNewProductToCart(item);
+      BuildContext context, int productCount, int totalPrice) {
+    ShoppingCartItemModel shoppingCartItem = ShoppingCartItemModel(
+        product: currentProduct!, quanty: productCount, totalPrice: totalPrice);
+
+    bool result =
+        context.read<ShoppingProvider>().addNewProductToCart(shoppingCartItem);
+    clearCurrentProduct();
     context.pop();
-    InAppNotification.showAppNotification(
+    if (result) {
+      InAppNotification.showAppNotification(
         context: context,
         title: 'Producto Agregado!',
-        message:
-            'El producto ha sido agregado al carrito, puedes consultarlo para ver el total de tu compra.',
-        type: NotificationType.success);
-    clearCurrentProduct();
+        message: 'El producto ha sido agregado al carrito.',
+        type: NotificationType.success,
+      );
+      return;
+    }
+    InAppNotification.showAppNotification(
+      context: context,
+      title: 'Hey, tienes una compra pendiente!',
+      message:
+          'Dirigete a una caja con el siguiente codigo ${AuthService.user!.purchasePin} o puedes elegir continuar o elimina la compra.',
+      type: NotificationType.warning,
+    );
   }
 
   void clearCurrentProduct() {

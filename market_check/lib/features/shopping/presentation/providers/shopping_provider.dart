@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
+import 'package:market_check/features/shopping/domain/use_cases/create_new_purchase_use_case.dart';
 import 'package:market_check/features/shopping/presentation/widgets/end_shopping_dialog.dart';
-import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_products_use_case.dart';
 
 class ShoppingProvider with ChangeNotifier {
-  final GetShoppingProductsUseCase getPurchaseProductsUseCase;
-
+  final CreateNewPurchaseUseCase createNewPurchaseUseCase;
   List<ShoppingCartItemModel> shoppingList = [];
   List<ShoppingCartItemModel> pendingList = [];
   double shoppingLimit = 0;
@@ -16,7 +16,7 @@ class ShoppingProvider with ChangeNotifier {
   String code = '';
   bool isPurchasePending = false;
 
-  ShoppingProvider({required this.getPurchaseProductsUseCase});
+  ShoppingProvider({required this.createNewPurchaseUseCase});
 
   void incrementItemQuanty(int index) {
     shoppingList[index].incrementQuanty();
@@ -41,43 +41,56 @@ class ShoppingProvider with ChangeNotifier {
   int shoppingItemsCount() {
     counter = 0;
     totalBuy = 0;
-    //Metodo para sumar un atributo
-    //int result = shoppingList.fold(
-    //    0, (previousItem, item) => previousItem + item.quanty);
 
     for (var item in shoppingList) {
       counter += item.quanty;
       totalBuy += item.totalPrice;
     }
 
-    print('------------------> counter active');
     return counter;
   }
 
-  void endShopping() {
-    pendingList.addAll(shoppingList);
-    shoppingList.clear();
+  void endShopping(BuildContext context) async {
+    if (AuthService.user!.isPurchaseOpen) return;
+    final result = await createNewPurchaseUseCase(shoppingList);
+    result.fold((l) {
+      debugPrint(l.message);
+    }, (r) {
+      if (r) {
+        showEndShoppingDialog(context);
+      }
+    });
   }
 
   void showEndShoppingDialog(BuildContext context) {
-    if (isPurchasePending) return;
-    code = "${AppFuntions.randomNumber()}";
-    isPurchasePending = true;
-    endShopping();
     showDialog(
       barrierColor: AppColors.lightText.withOpacity(0.5),
       context: context,
       builder: (context) {
         return EndShoppingDialog(
-          code: code,
+          code: '${AuthService.user!.purchasePin}',
         );
       },
     );
   }
 
-  void addNewProductToCart(ShoppingCartItemModel shoppingCartItem) {
-    //ShoppingCartItemModel purchaseItem = shoppingCartItem;
-    shoppingList.add(shoppingCartItem);
-    notifyListeners();
+  bool addNewProductToCart(ShoppingCartItemModel shoppingCartItem) {
+    if (AuthService.user!.isPurchaseOpen) return false;
+
+    bool isProductAdded = false;
+    for (var item in shoppingList) {
+      if (item.product.id == shoppingCartItem.product.id) {
+        item.quanty = item.quanty + shoppingCartItem.quanty;
+        item.total();
+        isProductAdded = true;
+        notifyListeners();
+        break;
+      }
+    }
+    if (!isProductAdded) {
+      shoppingList.add(shoppingCartItem);
+      notifyListeners();
+    }
+    return true;
   }
 }

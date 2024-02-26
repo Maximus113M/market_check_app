@@ -1,10 +1,11 @@
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
+
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
+import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
-
-import 'package:dio/dio.dart';
 
 abstract class ShoppingDataSource {
   Future<bool> createNewPurchase(List<ShoppingCartItemModel> purchaseItems);
@@ -14,36 +15,37 @@ abstract class ShoppingDataSource {
 }
 
 class PurchasesDataSourceImpl extends ShoppingDataSource {
-  final Dio dioPurchaseBaseUrl = Dio(
-    BaseOptions(
-        baseUrl: "${ServerUrls.currentUrl}${ServerUrls.purchaseUrl}",
-        headers: AuthService.headers),
-  );
-
   @override
   Future<bool> createNewPurchase(
       List<ShoppingCartItemModel> purchaseItems) async {
     try {
-      final User? user = AuthService.user;
-      if (user == null) return false;
+      if (AuthService.user == null) return false;
       if (purchaseItems.isNotEmpty) {
-        final Response response = await dioPurchaseBaseUrl.post('new-purchase/',
-            data: {'establecimiento_id': purchaseItems[0].product.storeId});
-        if (response.statusCode == 201) {
-          final int pin = response.data["pin"];
-          final int purchaseId = response.data["id"];
+        final response = await ServerService.serverGet(
+            '${ServerUrls.purchaseUrl}${ServerUrls.createPurchaseUrl}${purchaseItems[0].product.storeId}');
 
-          for (var item in purchaseItems) {
+        if (response.statusCode == 201) {
+          final int pin = jsonDecode(response.body)["pin"];
+          final int purchaseId = jsonDecode(response.body)["id"];
+
+          Future.forEach(purchaseItems, (item) async {
             await addProductToPurchase(item, purchaseId);
-          }
-          user.isPurchaseOpen = true;
-          user.purchasePin = pin;
+          });
+          AuthService.user!.isPurchaseOpen = true;
+          AuthService.user!.purchasePin = pin;
 
           return true;
         }
       }
       return false;
+    } on HttpException catch (e) {
+      debugPrint('ShoppingDataSource httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.purchasesException);
     } catch (e) {
+      debugPrint('ShoppingDataSource Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al intentar crear la compra',
           type: ExceptionType.purchasesException);
@@ -54,11 +56,22 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
   Future<void> addProductToPurchase(
       ShoppingCartItemModel purchaseItem, int purchaseId) async {
     try {
-      final Response response = await dioPurchaseBaseUrl.get(
+      final response = await ServerService.serverPost(
+          '${ServerUrls.purchaseUrl}$purchaseId/producto/${purchaseItem.product.id}',
+          {'itemsCount': purchaseItem.quanty});
+
+      /*final Response response = await dioPurchaseBaseUrl.get(
           '$purchaseId/producto/${purchaseItem.product.id}',
-          data: {'itemsCount': purchaseItem.quanty});
-      print(response.data);
+          data: {'itemsCount': purchaseItem.quanty});*/
+      print(response.body);
+    } on HttpException catch (e) {
+      debugPrint('ShoppingDataSource httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.purchasesException);
     } catch (e) {
+      debugPrint('ShoppingDataSource Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al agregar productos a la compra.',
           type: ExceptionType.purchasesException);

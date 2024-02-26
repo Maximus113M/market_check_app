@@ -1,6 +1,7 @@
 class AppAssets {
   static const String optionalLogoImage = 'assets/Images/LogoOpcionalSinBg.png';
   static const String loadingImage = 'assets/Images/jar-loading.gif';
+  static const String scanner = 'assets/Images/qr-scan.png';
 
 //--------------------------avatars
   static const String avatar = 'assets/Images/avatars/fubiki.jpg';

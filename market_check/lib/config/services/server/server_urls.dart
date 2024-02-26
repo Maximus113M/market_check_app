@@ -34,6 +34,7 @@ class ServerUrls {
       "establecimiento/showCategoriesByStore/";
 
   static const String purchaseUrl = "compras/";
+  static const String createPurchaseUrl = "new-purchase/";
 
   static const String shoppingHistoryUrl = "mobile-app/";
 

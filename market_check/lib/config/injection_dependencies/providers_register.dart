@@ -42,7 +42,7 @@ void registerProviders() {
   );
   sl.registerLazySingleton(
     () => ShoppingProvider(
-      getPurchaseProductsUseCase: sl(),
+      createNewPurchaseUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

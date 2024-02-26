@@ -11,50 +11,36 @@ class ScannerBodyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: ScreenSize.absoluteHeight * 0.85,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: ScreenSize.absoluteHeight * 0.1),
-                child: SizedBox(
-                  child: Icon(
-                    Icons.qr_code_scanner_rounded,
-                    size: ScreenSize.absoluteHeight * 0.5,
-                    color: AppColors.text.withOpacity(0.4),
-                  ),
-                ),
-              ),
-              CustomButton(
-                textStyle: FontStyles.subtitle1(AppColors.appPrimary),
-                horizontalMargin: 0.18,
-                verticalSize: 0.065,
-                text: 'Escanea el Codigo',
-                action: () async {
-                  scannerProvider.getProductByScanner(context);
-                },
-              ),
-              if (scannerProvider.currentProduct != null)
-                Text('Producto= ${scannerProvider.currentProduct!.name}')
-            ],
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: ScreenSize.width * 0.1,
+              vertical: ScreenSize.absoluteHeight * 0.01),
+          child: Text(
+            'Escanea el codigo de barras del producto para obtener informacion o agregarlo a tu carrito de compras.',
+            style: FontStyles.bodyBold1(AppColors.lightText),
+            textAlign: TextAlign.center,
           ),
         ),
-        /*Positioned(
-          bottom: 0,
-          child: CustomButton(
-            textStyle: FontStyles.subtitle1(AppColors.appPrimary),
-            horizontalMargin: 0.18,
-            verticalSize: 0.065,
-            text: 'Escanea el Codigo',
-            action: () async {
-              scannerProvider.getProductByScanner(context);
-            },
+        Padding(
+          padding: EdgeInsets.only(
+              top: ScreenSize.absoluteHeight * 0.05,
+              bottom: ScreenSize.absoluteHeight * 0.2),
+          child: Image.asset(
+            AppAssets.scanner,
           ),
-        ),*/
+        ),
+        CustomButton(
+          textStyle: FontStyles.subtitle1(AppColors.appPrimary),
+          horizontalMargin: 0.18,
+          verticalSize: 0.065,
+          text: 'Escanear el Codigo',
+          action: () {
+            scannerProvider.getProductByScanner(context);
+          },
+        ),
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -37,6 +38,7 @@ class SignInDataSourceImpl extends SignInDataSource {
         AuthService.token = currentSessionInfo["access_token"];
         AuthService.typeToken = currentSessionInfo["token_type"];
 
+        debugPrint('${AuthService.token}');
         return true;
       }
 

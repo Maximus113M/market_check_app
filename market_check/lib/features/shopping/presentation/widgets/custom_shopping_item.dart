@@ -19,62 +19,61 @@ class CustomShoppingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenSize.height * 0.12,
+      constraints: BoxConstraints(minHeight: ScreenSize.absoluteHeight * 0.1),
+      padding: EdgeInsets.symmetric(
+          horizontal: ScreenSize.width * 0.03,
+          vertical: ScreenSize.absoluteHeight * 0.01),
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.lightText.withOpacity(0.025)),
-      child: Stack(
+        borderRadius: BorderRadius.circular(12),
+        color: AppColors.lightText.withOpacity(0.04),
+      ),
+      child: Row(
         children: [
-          Positioned(
-            top: ScreenSize.height * 0.055,
-            right: 2,
-            child: AddRemoveButton(
-              count: shoppingCartProvider.shoppingList[index].quanty,
-              addAction: () => shoppingCartProvider.incrementItemQuanty(index),
-              removeAction: () =>
-                  shoppingCartProvider.decrementItemQuanty(index),
-            ),
+          Icon(
+            Icons.loyalty,
+            size: ScreenSize.height * 0.058,
+            color: AppColors.appSecondary,
           ),
-          Row(
-            children: [
-              /*ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  item.image,
-                  fit: BoxFit.cover,
-                  height: ScreenSize.height * 0.125,
-                ),
-              ),*/
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 90,
-                    width: 140,
-                    child: Text(
-                      item.product.name,
-                      maxLines: 2,
-                      style: FontStyles.bodyBold2(
-                        AppColors.text,
-                      ),
-                    ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.03),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: ScreenSize.absoluteHeight * 0.08,
+                    maxWidth: ScreenSize.width * 0.39,
+                    minWidth: ScreenSize.width * 0.39,
                   ),
-                ],
-              ),
-            ],
-          ),
-          Positioned(
-            left: ScreenSize.height * 0.12,
-            bottom: 25,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                '\$${item.totalPrice}',
-                style: FontStyles.bodyBold1(AppColors.lightText),
-              ),
+                  child: Text(
+                    item.product.name,
+                    maxLines: 2,
+                    style: FontStyles.bodyBold3(
+                      AppColors.text,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Text(
+                  '${item.product.description}',
+                  style: FontStyles.bodyBold4(AppColors.lightText),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Text(
+                    '\$${item.totalPrice}',
+                    style: FontStyles.bodyBold2(AppColors.text),
+                  ),
+                ),
+              ],
             ),
+          ),
+          AddRemoveButton(
+            count: item.quanty,
+            addAction: () => shoppingCartProvider.incrementItemQuanty(index),
+            removeAction: () => shoppingCartProvider.decrementItemQuanty(index),
           ),
         ],
       ),

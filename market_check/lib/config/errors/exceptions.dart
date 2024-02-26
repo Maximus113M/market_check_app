@@ -30,4 +30,5 @@ enum ExceptionType {
   purchasesException,
   categoriesException,
   shoppingHistoryException,
+  scannerException
 }

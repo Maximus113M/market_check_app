@@ -14,41 +14,37 @@ class EndShoppingDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: AppColors.white,
       insetAnimationCurve: Curves.bounceIn,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsetsDirectional.all(ScreenSize.absoluteHeight * 0.04),
-          child: Column(
-            children: [
-              Text(
-                'Ya casi es tuyo!',
-                style: FontStyles.heading2(AppColors.blueButton1),
+      child: Padding(
+        padding: EdgeInsetsDirectional.all(ScreenSize.absoluteHeight * 0.04),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Casi terminas!',
+              style: FontStyles.subtitle0(AppColors.appSecondary),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Text(
+                'Ve a la caja mas cercana con el siguiente codigo para finalizar tu compra.',
+                style: FontStyles.body2(AppColors.lightText),
+                textAlign: TextAlign.center,
               ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Text(
-                  'Ve a la caja mas cercana con el siguiente codigo para finalizar tu compra.',
-                  style: FontStyles.body2(AppColors.lightText),
-                  textAlign: TextAlign.center,
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                code,
+                style: FontStyles.heading3(AppColors.text),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child:
-                    Text(code, style: FontStyles.heading0(AppColors.appColor3)),
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomFilledButton(
-                horizontalSize: 10,
-                verticalSize: 5,
-                text: 'Ok',
-                action: () => context.push('/home'),
-              )
-            ],
-          ),
+            ),
+            CustomFilledButton(
+              color: AppColors.white,
+              bgColor: AppColors.appPrimary,
+              text: 'Ok',
+              action: () => context.pop(),
+            )
+          ],
         ),
       ),
     );
