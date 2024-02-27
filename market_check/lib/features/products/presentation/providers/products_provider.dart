@@ -22,7 +22,6 @@ class ProductsProvider extends ChangeNotifier {
       required this.getProductsByCategorie});
 
 
-
   void getProductsByStore(BuildContext context) async {
     final storeId = context.read<StoresProvider>().currentStore!.id!;
 

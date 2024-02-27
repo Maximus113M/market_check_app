@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';

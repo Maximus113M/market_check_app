@@ -1,12 +1,14 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
 
 class ShoppingListsProvider extends ChangeNotifier {
   List<ShoppingListsModel> shoppingList = [];
   int currentIndex = 0;
+  TextEditingController customTextForm = TextEditingController();
+  bool checkBox = true;
 
   void createShoppingList(String name) {
-    final newList = ShoppingListsModel(nameList: name, products: []);
+    final newList = ShoppingListsModel(nameList: name, products: [], isSelected: false);
     shoppingList.add(newList);
     notifyListeners();
   }
@@ -21,4 +23,23 @@ class ShoppingListsProvider extends ChangeNotifier {
     currentIndex = selectedIndex;
     notifyListeners();
   }
+
+  void deleteList(){
+    shoppingList.removeAt(currentIndex);
+    notifyListeners();
+  }
+
+  void clearCustomTextform(){
+    customTextForm.clear();
+    notifyListeners();
+  }
+
+  void selectdCheckBox(bool? value,){
+    checkBox = value!;
+    notifyListeners();
+  }
+
+
+
+
 }
