@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class CategoriesProvider extends ChangeNotifier {
   final GetCategoriesUseCase getCategoriesUseCase;
   List<CategorieModel> categories = [];
-  CategorieModel? currentCategories;
+  CategorieModel? currentCategorie;
   CategoriesProvider({required this.getCategoriesUseCase});
 
   void getCategories(BuildContext context) async {
@@ -24,5 +24,9 @@ class CategoriesProvider extends ChangeNotifier {
             ),
         (r) => categories = r);
     notifyListeners();
+  }
+
+  void setCurrentCategorie(CategorieModel categorie) {
+    currentCategorie = categorie;
   }
 }

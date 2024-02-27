@@ -29,8 +29,7 @@ class ProductsScreen extends StatelessWidget {
                 ),
                 itemCount: productsList.length,
                 itemBuilder: (context, index) {
-                  final products = productsList[index];
-                  return ProductsListTile(productModel: products);
+                  return ProductsListTile(productModel: productsList[index]);
                 },
               ),
             ),

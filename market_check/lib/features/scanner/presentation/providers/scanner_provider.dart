@@ -27,17 +27,20 @@ class ScannerProvider with ChangeNotifier {
     //TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
     if (int.parse(scanBarCode) == -1) {
       final ProductModel product = ProductModel(
-          id: 41,
-          code: 789789,
-          state: 1,
-          currentPrice: 6000,
-          originalPrice: 6000,
-          name: 'Nachos ExtraQueso',
-          description: '500 g',
-          stock: 200,
-          storeId: 7,
-          categoryId: 1,
-          subcategoryId: 1);
+        //id: 41,
+        id: 5,
+        code: 789789,
+        state: 1,
+        currentPrice: 6000,
+        originalPrice: 6000,
+        name: 'Nachos ExtraQueso',
+        description: '500 g',
+        stock: 200,
+        //storeId: 7,
+        storeId: 1,
+        categoryId: 1,
+        subcategoryId: 1,
+      );
       currentProduct = product;
       notifyListeners();
     }

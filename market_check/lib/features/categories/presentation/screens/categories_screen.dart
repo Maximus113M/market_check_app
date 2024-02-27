@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
-import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/categories/data/models/categories_model.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/products/data/models/products_by_category_model.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
@@ -33,16 +33,17 @@ class CategoriesScreen extends StatelessWidget {
           ),
           itemCount: categoriesList.length,
           itemBuilder: (context, index) {
-            final categorie = categoriesList[index];
             return Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
-                //color: Colors.grey,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(18),
                 ),
               ),
-              child: CategoriesListTile(categorie: categorie),
+              child: CategoriesListItem(
+                categorie: categoriesList[index],
+                storeId: context.read<StoresProvider>().currentStore!.id,
+              ),
             );
           },
         ),
@@ -51,21 +52,18 @@ class CategoriesScreen extends StatelessWidget {
   }
 }
 
-class CategoriesListTile extends StatelessWidget {
-  const CategoriesListTile({
+class CategoriesListItem extends StatelessWidget {
+  final int storeId;
+  final CategorieModel categorie;
+
+  const CategoriesListItem({
     super.key,
     required this.categorie,
+    required this.storeId,
   });
-
-  final CategorieModel categorie;
 
   @override
   Widget build(BuildContext context) {
-    final StoreModel store = context.read<StoresProvider>().currentStore!;
-    final int storeId = store.id;
-    final ProductsByCategoriesModel categoriesModel =
-        ProductsByCategoriesModel(storeId: storeId, categorieId: categorie.id);
-
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       leading: Container(
@@ -92,9 +90,12 @@ class CategoriesListTile extends StatelessWidget {
         style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
       ),
       onTap: () {
-        context
-            .read<ProductsProvider>()
-            .getProductsByCategories(context, categoriesModel);
+        context.read<CategoriesProvider>().setCurrentCategorie(categorie);
+        context.read<ProductsProvider>().getProductsByCategories(
+              context,
+              ProductsByCategoriesModel(
+                  storeId: storeId, categorieId: categorie.id),
+            );
         context.push("/products-categories");
       },
     );

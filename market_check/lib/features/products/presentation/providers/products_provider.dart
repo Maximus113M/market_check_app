@@ -5,8 +5,8 @@ import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/products/data/models/products_by_category_model.dart';
-import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
 import 'package:market_check/features/products/domain/use_cases/get_store_products_use_case.dart';
+import 'package:market_check/features/products/domain/use_cases/get_product_by_categories_use_case.dart';
 
 import 'package:provider/provider.dart';
 
@@ -19,12 +19,15 @@ class ProductsProvider extends ChangeNotifier {
   StreamSubscription? searchTimer;
   TextEditingController searchTextController = TextEditingController();
 
+  SearchType currentSearchType = SearchType.categories;
+
   ProductsProvider(
       {required this.getStoreProductsUseCase,
       required this.getProductsByCategorie});
 
   void getProductsByStore(BuildContext context) async {
     final storeId = context.read<StoresProvider>().currentStore!.id;
+
     filteredProductsList.clear();
     final result = await getStoreProductsUseCase(storeId);
 
@@ -33,8 +36,9 @@ class ProductsProvider extends ChangeNotifier {
               context: context,
               message: l.message,
             ), (r) {
-      products = r;
+      products = [...r];
       filteredProductsList = r;
+
       notifyListeners();
     });
   }
@@ -42,7 +46,6 @@ class ProductsProvider extends ChangeNotifier {
   void getProductsByCategories(
       BuildContext context, ProductsByCategoriesModel params) async {
     filteredProductsList.clear();
-
     final result = await getProductsByCategorie(params);
 
     result.fold(
@@ -57,25 +60,32 @@ class ProductsProvider extends ChangeNotifier {
     );
   }
 
-  List<ProductModel> getProductByName(String name) {
-    return products.where((product) => product.name.contains(name)).toList();
+  void setCurrentSearchType(SearchType type) {
+    currentSearchType = type;
   }
 
-  void searchProducts(String name, SearchType type) async {
+  //TODO REVISAR
+  /*List<ProductModel> getProductByName(String name) {
+    return products.where((product) => product.name.contains(name)).toList();
+  }*/
+
+  void searchProducts(String name) async {
     List<ProductModel> currentList = [];
-    switch (type) {
+    switch (currentSearchType) {
       case SearchType.categories:
         if (name.isEmpty) {
+          filteredProductsList.clear();
           filteredProductsList.addAll(productsByCategorie);
         }
-        currentList .addAll(productsByCategorie);
+        currentList.addAll(productsByCategorie);
         notifyListeners();
         break;
       case SearchType.products:
         if (name.isEmpty) {
-          filteredProductsList.addAll(products);
+          filteredProductsList.clear();
+          filteredProductsList = [...products];
         }
-        currentList.addAll(products);
+        currentList = [...products];
         notifyListeners();
         break;
       default:
@@ -86,7 +96,7 @@ class ProductsProvider extends ChangeNotifier {
     cancelSearchTimer();
     searchTimer = Stream<int>.periodic(
       const Duration(milliseconds: 500),
-      (computationCount) => 1,
+      (countValue) => 1,
     ).take(1).listen((event) {
       filteredProductsList = currentList
           .where((product) =>
@@ -103,29 +113,29 @@ class ProductsProvider extends ChangeNotifier {
     }
   }
 
-  void clearSearch(SearchType type) {
+  void clearSearch() {
     searchTextController.clear();
     cancelSearchTimer();
-    switch (type) {
+    switch (currentSearchType) {
       case SearchType.categories:
-        filteredProductsList = productsByCategorie;
+        filteredProductsList = [...productsByCategorie];
 
         notifyListeners();
         break;
       case SearchType.products:
-        filteredProductsList = products;
+        filteredProductsList = [...products];
 
         notifyListeners();
         break;
       default:
+        filteredProductsList = [];
         return;
     }
-    notifyListeners();
   }
 
-  void restartFilterList() {
-    productsByCategorie.clear();
-    productsByCategorie.addAll(products);
+  void restartProductList() {
+    filteredProductsList.clear();
+    filteredProductsList = [...products];
     notifyListeners();
   }
 }

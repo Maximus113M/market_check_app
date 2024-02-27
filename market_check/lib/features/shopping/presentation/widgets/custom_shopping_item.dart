@@ -21,8 +21,9 @@ class CustomShoppingItem extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(minHeight: ScreenSize.absoluteHeight * 0.1),
       padding: EdgeInsets.symmetric(
-          horizontal: ScreenSize.width * 0.03,
-          vertical: ScreenSize.absoluteHeight * 0.01).copyWith(right: ScreenSize.width * 0.02),
+              horizontal: ScreenSize.width * 0.03,
+              vertical: ScreenSize.absoluteHeight * 0.01)
+          .copyWith(right: ScreenSize.width * 0.02),
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -44,8 +45,8 @@ class CustomShoppingItem extends StatelessWidget {
                 ConstrainedBox(
                   constraints: BoxConstraints(
                     maxHeight: ScreenSize.absoluteHeight * 0.08,
-                    maxWidth: ScreenSize.width * 0.39,
-                    minWidth: ScreenSize.width * 0.39,
+                    maxWidth: ScreenSize.width * 0.37,
+                    minWidth: ScreenSize.width * 0.37,
                   ),
                   child: Text(
                     item.product.name,

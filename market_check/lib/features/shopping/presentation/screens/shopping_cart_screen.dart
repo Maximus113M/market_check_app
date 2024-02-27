@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/auth/auth_service.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
 import 'package:market_check/features/shopping/presentation/widgets/custom_shopping_item.dart';
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';

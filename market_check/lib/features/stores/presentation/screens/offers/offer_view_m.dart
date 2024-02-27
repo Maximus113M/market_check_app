@@ -15,8 +15,10 @@ import 'package:go_router/go_router.dart';
 class OfferScreeenM extends StatelessWidget {
   static const name = "offers-m";
   final List<OfferModel> offers;
+  final ProductsProvider productsProvider;
 
-  const OfferScreeenM({super.key, required this.offers});
+  const OfferScreeenM(
+      {super.key, required this.offers, required this.productsProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class OfferScreeenM extends StatelessWidget {
         appBar: customAppBar(
           context: context,
           leading: IconButton(
-            onPressed: () => context.push('/store-view'),
+            onPressed: () => context.pop(),
             icon: const Icon(
               Icons.arrow_back,
               color: AppColors.appSecondary,
@@ -51,7 +53,12 @@ class OfferScreeenM extends StatelessWidget {
 
             TabBar(
               onTap: (value) {
-                context.read<ProductsProvider>().restartFilterList();
+                if (value == 0) {
+                  productsProvider.setCurrentSearchType(SearchType.categories);
+                } else {
+                  productsProvider.restartProductList();
+                  productsProvider.setCurrentSearchType(SearchType.products);
+                }
               },
               tabs: const [
                 Tab(text: "Categorias"),
@@ -62,8 +69,9 @@ class OfferScreeenM extends StatelessWidget {
               child: TabBarView(
                 children: [
                   CategoriesScreen(
-                      categoriesList:
-                          context.watch<CategoriesProvider>().categories),
+                    categoriesList:
+                        context.watch<CategoriesProvider>().categories,
+                  ),
                   ProductsScreen(
                     productsList:
                         context.watch<ProductsProvider>().filteredProductsList,

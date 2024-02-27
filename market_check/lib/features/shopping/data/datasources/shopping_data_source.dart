@@ -28,7 +28,7 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
           final int pin = jsonDecode(response.body)["pin"];
           final int purchaseId = jsonDecode(response.body)["id"];
 
-          Future.forEach(purchaseItems, (item) async {
+          await Future.forEach(purchaseItems, (item) async {
             await addProductToPurchase(item, purchaseId);
           });
           AuthService.user!.isPurchaseOpen = true;
@@ -53,7 +53,7 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
   }
 
   @override
-  Future<void> addProductToPurchase(
+  Future<bool> addProductToPurchase(
       ShoppingCartItemModel purchaseItem, int purchaseId) async {
     try {
       final response = await ServerService.serverPost(
@@ -61,6 +61,7 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
           {'itemsCount': purchaseItem.quanty});
 
       print(response.body);
+      return true;
     } on HttpException catch (e) {
       debugPrint('ShoppingDataSource httpException: $e');
       throw RemoteException(

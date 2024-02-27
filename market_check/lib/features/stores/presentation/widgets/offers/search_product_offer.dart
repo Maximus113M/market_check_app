@@ -20,9 +20,8 @@ class SearchProducts extends StatelessWidget {
             hint: 'Buscar productos',
             textController:
                 context.read<ProductsProvider>().searchTextController,
-            onChange: (value) => context
-                .read<ProductsProvider>()
-                .searchProducts(value, SearchType.categories),
+            onChange: (value) =>
+                context.read<ProductsProvider>().searchProducts(value),
           ),
           if (context
               .watch<ProductsProvider>()
@@ -32,9 +31,7 @@ class SearchProducts extends StatelessWidget {
             Positioned(
               right: 0,
               child: IconButton(
-                onPressed: () => context
-                    .read<ProductsProvider>()
-                    .clearSearch(SearchType.categories),
+                onPressed: () => context.read<ProductsProvider>().clearSearch(),
                 icon: const Icon(
                   Icons.cancel_outlined,
                   color: AppColors.text,

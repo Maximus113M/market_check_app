@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
-import 'package:market_check/features/shopping/domain/use_cases/create_new_purchase_use_case.dart';
 import 'package:market_check/features/shopping/presentation/widgets/end_shopping_dialog.dart';
+import 'package:market_check/features/shopping/domain/use_cases/create_new_purchase_use_case.dart';
 
 class ShoppingProvider with ChangeNotifier {
   final CreateNewPurchaseUseCase createNewPurchaseUseCase;
@@ -51,13 +51,16 @@ class ShoppingProvider with ChangeNotifier {
   }
 
   void endShopping(BuildContext context) async {
-    if (AuthService.user!.isPurchaseOpen) return;
+    if (AuthService.user!.isPurchaseOpen) {
+      return;
+    }
     final result = await createNewPurchaseUseCase(shoppingList);
     result.fold((l) {
       debugPrint(l.message);
     }, (r) {
       if (r) {
         showEndShoppingDialog(context);
+        notifyListeners();
       }
     });
   }

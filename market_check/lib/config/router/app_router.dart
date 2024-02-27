@@ -50,8 +50,9 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,
-      builder: (context, state) => const OfferScreeenM(
-        offers: [],
+      builder: (context, state) => OfferScreeenM(
+        offers: const [],
+        productsProvider: sl(),
       ),
     ),
     GoRoute(

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/server/server_urls.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/stores/data/models/store_model.dart';
+import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/store/store_container_screen.dart';
 
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 class StoreScreen extends StatelessWidget {
@@ -16,12 +14,10 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StoreModel store = context.read<StoresProvider>().currentStore!;
-
     return Scaffold(
       body: Stack(
         children: [
-          (store.poster == null)
+          (storesProvider.currentStore!.poster == null)
               ? Image.asset(
                   'assets/Images/stores/establecimiento-base.jpg',
                   width: double.infinity,
@@ -34,7 +30,7 @@ class StoreScreen extends StatelessWidget {
                   child: FadeInImage(
                     placeholder: const AssetImage(AppAssets.loadingImage),
                     image: NetworkImage(
-                      '${ServerUrls.currentImagesUrl}${store.poster!}',
+                      '${ServerUrls.currentImagesUrl}${storesProvider.currentStore!.poster!}',
                     ),
                     fit: BoxFit.cover,
                     imageErrorBuilder: (context, error, stackTrace) =>
@@ -48,11 +44,12 @@ class StoreScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push('/main'),
+        backgroundColor: AppColors.appPrimary,
+        onPressed: () => context.pop(),
         child: const Icon(
           Icons.home,
           size: 30,
-          color: AppColors.appPrimary,
+          color: AppColors.appSecondary,
         ),
       ),
     );
