@@ -1,6 +1,5 @@
 import 'package:market_check/features/screens.dart';
 
-
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
 
@@ -51,7 +50,9 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,
-      builder: (context, state) => const OfferScreeenM(),
+      builder: (context, state) => const OfferScreeenM(
+        offers: [],
+      ),
     ),
     GoRoute(
       path: "/shopping-cart",
@@ -68,7 +69,7 @@ final appRouter = GoRouter(
       name: CreateShoppingListScreen.name,
       builder: (context, state) => const CreateShoppingListScreen(),
     ),
-     GoRoute(
+    GoRoute(
       path: "/addProducts-lists",
       name: AddProductsListScreen.name,
       builder: (context, state) => const AddProductsListScreen(),
