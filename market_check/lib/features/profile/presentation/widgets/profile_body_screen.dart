@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_cards.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_image.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';

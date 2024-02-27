@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
-import 'package:market_check/config/utils/constans/app_assets.dart';
-import 'package:market_check/config/utils/screen_size.dart';
+
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores/stores_listview_m.dart';
+import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
+
 import 'package:provider/provider.dart';
 
 class StoresScreenBody extends StatelessWidget {

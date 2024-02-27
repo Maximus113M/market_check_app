@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
