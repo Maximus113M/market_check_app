@@ -11,6 +11,6 @@ class GetStoresUseCase extends UseCase<List<StoreModel>, NoParams> {
   GetStoresUseCase({required this.storesRepository});
 
   @override
-  Future<Either<Failure, List<StoreModel>>> call(NoParams params) async =>
+  Future<Either<RemoteFailure, List<StoreModel>>> call(NoParams params) async =>
       await storesRepository.getStores();
 }

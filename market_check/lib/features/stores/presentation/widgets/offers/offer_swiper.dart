@@ -2,7 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
-import 'package:market_check/features/stores/presentation/screens/offers/widgets/offer_swiper_content.dart';
+import 'package:market_check/features/stores/presentation/widgets/offers/offer_swiper_content.dart';
 
 class OffersSwiper extends StatelessWidget {
   final List<OfferModel> offerList;

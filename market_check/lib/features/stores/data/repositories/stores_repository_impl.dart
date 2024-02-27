@@ -13,7 +13,7 @@ class StoresRepositoryImpl extends StoresRepository {
   StoresRepositoryImpl({required this.storesDatasource});
 
   @override
-  Future<Either<Failure, List<StoreModel>>> getStores() async {
+  Future<Either<RemoteFailure, List<StoreModel>>> getStores() async {
     try {
       return Right(
         await storesDatasource.getStores(),

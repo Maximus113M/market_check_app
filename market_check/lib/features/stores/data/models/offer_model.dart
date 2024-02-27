@@ -30,7 +30,7 @@ class OfferModel {
         storeId: json["establecimiento_id"],
       );
   //TODO: ELIMINAR?
-  Map<String, dynamic> storeModelToJson() => {
+  Map<String, dynamic> offerModelToJson() => {
         if (id != null) "id": id,
         "estado": state,
         "fecha_inicio": dateStart,

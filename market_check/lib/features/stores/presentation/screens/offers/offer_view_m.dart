@@ -4,7 +4,7 @@ import 'package:market_check/features/screens.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
-import 'package:market_check/features/stores/presentation/screens/offers/widgets/offer_swiper.dart';
+import 'package:market_check/features/stores/presentation/widgets/offers/offer_swiper.dart';
 import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';

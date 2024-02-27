@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/use_case/use_case.dart';
@@ -7,6 +6,7 @@ import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_offers_use_case.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_stores_use_case.dart';
+
 import 'package:provider/provider.dart';
 
 class StoresProvider with ChangeNotifier {
@@ -78,13 +78,12 @@ class StoresProvider with ChangeNotifier {
     loadingOffers = true;
     final storeId = context.read<StoresProvider>().currentStore!.id;
     final result = await getOffersUseCase(storeId);
-    print("---------------------> ahhhhhhhhhhhhhhhhhhhhhhhhhh");
+
     result.fold(
       (l) => null,
       (r) => offerList = r,
     );
     if (notify) notifyListeners();
-    //await Future.delayed(const Duration(seconds: 2));
 
     loadingOffers = false;
     currentOffer = null;

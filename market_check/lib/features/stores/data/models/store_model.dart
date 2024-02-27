@@ -35,19 +35,6 @@ class StoreModel {
         logo: json["Logo"],
         locations: json["DireccionEstablecimiento"],
       );
-
-  Map<String, dynamic> storeModelToJson() => {
-        "id": id,
-        "Nit": nit,
-        "Estado": state,
-        "NombreEstablecimiento": name,
-        "CorreoEstablecimiento": email,
-        "Lema": description,
-        "ColorInterfaz": color,
-        "Imagen": poster,
-        "Logo": logo,
-        "DireccionEstablecimiento": locations
-      };
 }
 
 class StoreLocation {
