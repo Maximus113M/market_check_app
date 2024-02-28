@@ -5,7 +5,7 @@ class ShoppingListsProvider extends ChangeNotifier {
   List<ShoppingListsModel> shoppingList = [];
   int currentIndex = 0;
   TextEditingController customTextForm = TextEditingController();
-  bool checkBox = true;
+  bool checkBox = false;
 
   void createShoppingList(String name) {
     final newList = ShoppingListsModel(nameList: name, products: [], isSelected: false);

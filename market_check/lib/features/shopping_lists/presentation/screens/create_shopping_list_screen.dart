@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/screen_size.dart';
@@ -7,6 +8,8 @@ import 'package:market_check/features/shopping_lists/presentation/widgets/shoppi
 import 'package:market_check/features/shopping_lists/presentation/widgets/show_modal_bottom.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/utils/utils.dart';
+
 class CreateShoppingListScreen extends StatelessWidget {
   static const name = 'create-lists';
   const CreateShoppingListScreen({super.key});
@@ -14,7 +17,11 @@ class CreateShoppingListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(
+        leading: IconButton(
+          onPressed: ()=>context.pop(), 
+          icon: const Icon(Icons.arrow_back, color: AppColors.appSecondary,))
+      ),
       body: Column(
         children: [
           Padding(

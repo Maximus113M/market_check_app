@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
@@ -16,7 +14,11 @@ class AddProductsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String productName = '';
     return Scaffold(
-      appBar: customAppBar(),
+      appBar: customAppBar(
+        leading: IconButton(
+          onPressed: ()=>context.pop(), 
+          icon: const Icon(Icons.arrow_back, color: AppColors.appSecondary,))
+      ),
       body: Column(
         children: [
           Padding(
