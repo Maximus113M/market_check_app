@@ -34,7 +34,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<PurchaseModel?> verifyCurrentSession() async {
     try {
-      PurchaseModel? openPurhase;
+      PurchaseModel? openPurchase;
       if (await flutterSecureStorage.containsKey(key: 'access_token')) {
         final currentSessionInfo = await flutterSecureStorage.readAll();
         AuthService.user = User.fromJson(currentSessionInfo, isEncripted: true);
@@ -43,13 +43,14 @@ class SignInDataSourceImpl extends SignInDataSource {
 
         debugPrint('${AuthService.token}');
 
-        openPurhase = await getOpenPurchases();
-        if (openPurhase != null) {
+        openPurchase = await getOpenPurchases();
+        if (openPurchase != null) {
           AuthService.user!.isPurchaseOpen = true;
+        AuthService.user!.purchasePin= openPurchase.pin;
         }
       }
 
-      return openPurhase;
+      return openPurchase;
     } on HttpException catch (e) {
       debugPrint('VerifyCurrentSession httpException: $e');
       throw RemoteException(
@@ -92,6 +93,7 @@ class SignInDataSourceImpl extends SignInDataSource {
       PurchaseModel? openPurchase = await getOpenPurchases();
       if (openPurchase != null) {
         AuthService.user!.isPurchaseOpen = true;
+        AuthService.user!.purchasePin= openPurchase.pin;
       }
 
       return openPurchase;
@@ -118,6 +120,9 @@ class SignInDataSourceImpl extends SignInDataSource {
       final response = await ServerService.serverGet(path);
 
       if (response.statusCode == 200) {
+        if(jsonDecode(response.body)['openPurchase'] == null){
+          return null;
+        }
         openPurchase =
             PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
       }

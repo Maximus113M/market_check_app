@@ -40,11 +40,11 @@ class ServerUrls {
   static const String closeShoppingHistoryUrl = "close-purchases-app/";
 
 //Dynamic Urls
-  //static const String currentUrl = baseUrlMovilSena;
-  static const String currentUrl = baseUrlIpv4Camilo;
+  static const String currentUrl = baseUrlMovilSena;
+  //static const String currentUrl = baseUrlIpv4Camilo;
 
-  //static const String currentHttp = baseHttpMovilSena;
-  static const String currentHttp = baseHttpIpv4Camilo;
+  static const String currentHttp = baseHttpMovilSena;
+  //static const String currentHttp = baseHttpIpv4Camilo;
 
   static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 

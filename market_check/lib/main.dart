@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 
 import 'injection_container.dart';
 import 'package:market_check/config/theme/app_theme.dart';
@@ -51,6 +52,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => sl<ScannerProvider>(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => sl<PendingProvider>(),
       ),
     ], child: const MyApp()),
   );

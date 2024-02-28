@@ -36,7 +36,11 @@ class ShoppingListsProvider extends ChangeNotifier {
   }
 
   void selectdCheckBox(int index) {
-    shoppingList[currentIndex].products[index].toggleState();
+    currentShoppingList!.products[index].toggleState();
     notifyListeners();
+  }
+  //TODO VERIFICAR USO
+  selectCurrentIndex(int index){
+    currentIndex= index;
   }
 }
