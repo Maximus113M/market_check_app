@@ -59,6 +59,7 @@ class ShoppingProvider with ChangeNotifier {
       debugPrint(l.message);
     }, (r) {
       if (r) {
+        shoppingList.clear();
         showEndShoppingDialog(context);
         notifyListeners();
       }

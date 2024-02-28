@@ -54,7 +54,7 @@ void main() async {
         create: (context) => sl<ScannerProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<PendingProvider>(),
+        create: (context) => sl<PendingPurchaseProvider>(),
       ),
     ], child: const MyApp()),
   );
