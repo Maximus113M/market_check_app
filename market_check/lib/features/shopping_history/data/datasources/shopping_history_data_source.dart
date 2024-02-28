@@ -22,11 +22,11 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       List<PurchaseModel> purhaseList = [];
       if (user == null) return purhaseList;
       const String path =
-          '${ServerUrls.purchaseUrl}${ServerUrls.shoppingHistoryUrl}';
+          '${ServerUrls.purchaseUrl}${ServerUrls.closeShoppingHistoryUrl}';
       final response = await ServerService.serverGet(path);
 
       if (response.statusCode == 200) {
-        purhaseList = (jsonDecode(response.body)["purchases"] as List)
+        purhaseList = (jsonDecode(response.body)['closePurchases'] as List)
             .map((purchaseJson) => PurchaseModel.fromJson(purchaseJson))
             .toList();
       }

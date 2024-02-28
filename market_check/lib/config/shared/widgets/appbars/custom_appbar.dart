@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_badge_icon.dart';
+import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 
-import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-AppBar customAppBar(
-        {Widget? leading,
-        bool isCartVisible = true,
-        Widget? title,
-        bool isCenterTitle = true,
-        required BuildContext context}) =>
+AppBar customAppBar({
+  Widget? leading,
+  bool isCartVisible = true,
+  Widget? title,
+  bool isCenterTitle = true,
+  required BuildContext context,
+}) =>
     AppBar(
       leading: leading,
       toolbarHeight: ScreenSize.absoluteHeight * 0.07,
@@ -36,13 +39,12 @@ AppBar customAppBar(
         if (isCartVisible)
           Padding(
             padding: EdgeInsets.only(right: ScreenSize.width * 0.005),
-            child: IconButton(
-              onPressed: () => context.pushNamed(ShoppingCartScreen.name),
-              icon: const Icon(
-                Icons.shopping_cart_rounded,
-                size: 30,
-                color: AppColors.white,
-              ),
+            child: CustomBadge(
+              icon: Icons.shopping_cart_rounded,
+              iconSize: 30,
+              counter: context.watch<ShoppingProvider>().shoppingItemsCount(),
+              color: AppColors.white,
+              route: ShoppingCartScreen.name,
             ),
           )
       ],

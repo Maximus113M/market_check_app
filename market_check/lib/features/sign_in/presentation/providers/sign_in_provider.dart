@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_out_use_case.dart';
@@ -26,6 +28,7 @@ class SignInProvider with ChangeNotifier {
   String names = "";
   String document = "";
   String confirmPassword = "";
+  PurchaseModel? openPurchases;
 
   SignInProvider({
     required this.verifyCurrentSessionUseCase,
@@ -43,10 +46,13 @@ class SignInProvider with ChangeNotifier {
     final result = await verifyCurrentSessionUseCase(NoParams());
     result.fold((l) => debugPrint(l.message), (r) async {
       String route = '/login-form';
-      if (r) {
+
+      if (AuthService.user != null) {
+        openPurchases = r;
         context.read<StoresProvider>().loadStores(context, notify: true);
         route = '/main';
       }
+
       Future.delayed(const Duration(seconds: 1)).then(
         (value) => context.pushReplacement(route),
       );
@@ -82,7 +88,8 @@ class SignInProvider with ChangeNotifier {
       (l) =>
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
-        if (r) {
+        if (AuthService.user != null) {
+          openPurchases = r;
           context.read<StoresProvider>().loadStores(context, notify: true);
           context.pushReplacement('/main');
         }

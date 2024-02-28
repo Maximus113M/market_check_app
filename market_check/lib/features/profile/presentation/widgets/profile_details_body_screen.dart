@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 
@@ -102,7 +101,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
     setState(() {
       passwordController.text = '';
       confirmPasswordController.text = '';
-      isValidPassword= false;
+      isValidPassword = false;
     });
   }
 
@@ -130,7 +129,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
           Container(
             margin: EdgeInsets.symmetric(
               horizontal: ScreenSize.width * 0.05,
-              vertical: ScreenSize.absoluteHeight * 0.04,
+              vertical: ScreenSize.absoluteHeight * 0.05,
             ),
             padding: EdgeInsets.symmetric(
               horizontal: ScreenSize.width * 0.06,
@@ -196,17 +195,21 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
                         : Icons.visibility),
                   ),
                 ),
-                SizedBox(
-                  height: ScreenSize.absoluteHeight * 0.05,
-                ),
-                CustomButton(
-                  horizontalMargin: 0,
-                  text: 'GUARDAR',
-                  verticalSize: 0.057,
-                  bgColor: AppColors.appSecondary,
-                  action: () {
-                    validateFields();
-                  },
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: ScreenSize.absoluteHeight * 0.06,
+                  ),
+                  child: CustomButton(
+                    horizontalMargin: 0,
+                    text: 'GUARDAR',
+                    verticalSize: 0.06,
+                    radius: 0.06,
+                    color: AppColors.appPrimary,
+                    bgColor: AppColors.appSecondary,
+                    action: () {
+                      validateFields();
+                    },
+                  ),
                 )
               ],
             ),

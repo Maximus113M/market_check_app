@@ -6,14 +6,16 @@ import 'package:market_check/config/shared/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
-import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
+import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
+import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 
 import 'package:dio/dio.dart';
 
 abstract class SignInDataSource {
-  Future<bool> verifyCurrentSession();
-  Future<bool> verifyLogIn(SignInDataModel signInData);
+  Future<PurchaseModel?> verifyCurrentSession();
+  Future<PurchaseModel?> verifyLogIn(SignInDataModel signInData);
   Future<String> signUp(SignUpDataModel newUser);
   Future<bool> signOut();
 }
@@ -30,8 +32,9 @@ class SignInDataSourceImpl extends SignInDataSource {
   SignInDataSourceImpl({required this.flutterSecureStorage});
 
   @override
-  Future<bool> verifyCurrentSession() async {
+  Future<PurchaseModel?> verifyCurrentSession() async {
     try {
+      PurchaseModel? openPurhase;
       if (await flutterSecureStorage.containsKey(key: 'access_token')) {
         final currentSessionInfo = await flutterSecureStorage.readAll();
         AuthService.user = User.fromJson(currentSessionInfo, isEncripted: true);
@@ -39,12 +42,22 @@ class SignInDataSourceImpl extends SignInDataSource {
         AuthService.typeToken = currentSessionInfo["token_type"];
 
         debugPrint('${AuthService.token}');
-        return true;
+
+        openPurhase = await getOpenPurchases();
+        if (openPurhase != null) {
+          AuthService.user!.isPurchaseOpen = true;
+        }
       }
 
-      return false;
+      return openPurhase;
+    } on HttpException catch (e) {
+      debugPrint('VerifyCurrentSession httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
     } catch (e) {
-      print(e);
+      debugPrint('VerifyCurrentSession Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al verificar la Sesión",
           type: ExceptionType.signInException);
@@ -52,43 +65,74 @@ class SignInDataSourceImpl extends SignInDataSource {
   }
 
   @override
-  Future<bool> verifyLogIn(SignInDataModel signInData) async {
+  Future<PurchaseModel?> verifyLogIn(SignInDataModel signInData) async {
     try {
-      final Response response = await dioSignIn.post(ServerUrls.signInUrl,
-          data: {"email": signInData.email, "password": signInData.password});
+      final response = await ServerService.serverPost(ServerUrls.signInUrl,
+          {"email": signInData.email, "password": signInData.password});
 
       await flutterSecureStorage.write(
-          key: 'id', value: response.data["user"]["id"].toString());
+          key: 'id', value: jsonDecode(response.body)["user"]["id"].toString());
       await flutterSecureStorage.write(
-          key: 'name', value: response.data["user"]["name"]);
+          key: 'name', value: jsonDecode(response.body)["user"]["name"]);
       await flutterSecureStorage.write(
           key: 'documento',
-          value: response.data["user"]["documento"].toString());
+          value: jsonDecode(response.body)["user"]["documento"].toString());
       await flutterSecureStorage.write(
-          key: 'email', value: response.data["user"]["email"]);
+          key: 'email', value: jsonDecode(response.body)["user"]["email"]);
       await flutterSecureStorage.write(
-          key: 'access_token', value: response.data["access_token"]);
+          key: 'access_token',
+          value: jsonDecode(response.body)["access_token"]);
       await flutterSecureStorage.write(
-          key: 'token_type', value: response.data["token_type"]);
+          key: 'token_type', value: jsonDecode(response.body)["token_type"]);
 
-      AuthService.user = User.fromJson(response.data["user"]);
-      AuthService.token = response.data["access_token"];
-      AuthService.typeToken = response.data["token_type"];
+      AuthService.user = User.fromJson(jsonDecode(response.body)["user"]);
+      AuthService.token = jsonDecode(response.body)["access_token"];
+      AuthService.typeToken = jsonDecode(response.body)["token_type"];
 
-      return true;
-    } on DioException catch (e) {
-      print(e);
-      String message = "";
-      if (e.response!.statusCode == 401) {
-        message =
-            "Por favor revisa tus credenciales y asegurate de aceptar la confirmacion enviada a tu correo";
+      PurchaseModel? openPurchase = await getOpenPurchases();
+      if (openPurchase != null) {
+        AuthService.user!.isPurchaseOpen = true;
       }
+
+      return openPurchase;
+    } on HttpException catch (e) {
+      debugPrint('VerifyLogIn httpException: $e');
       throw RemoteException(
-          message: message, type: ExceptionType.signInException);
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
     } catch (e) {
-      print(e);
+      debugPrint('VerifyLogIn Exception: $e');
       throw RemoteException(
-          message: "Ocurrio un error al intentar iniciar Sesión",
+          message:
+              "Revisa tus credenciales y asegurate de confirma la notificacion enviada a tu correo",
+          type: ExceptionType.signInException);
+    }
+  }
+
+  Future<PurchaseModel?> getOpenPurchases() async {
+    try {
+      PurchaseModel? openPurchase;
+      const String path =
+          '${ServerUrls.purchaseUrl}${ServerUrls.openShoppingHistoryUrl}';
+      final response = await ServerService.serverGet(path);
+
+      if (response.statusCode == 200) {
+        openPurchase =
+            PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
+      }
+
+      return openPurchase;
+    } on HttpException catch (e) {
+      debugPrint('GetOpenPurchases httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.signInException);
+    } catch (e) {
+      debugPrint('GetOpenPurchases Exception: $e');
+      throw RemoteException(
+          message: "Ocurrio un error al obtener las compras pendientes",
           type: ExceptionType.signInException);
     }
   }

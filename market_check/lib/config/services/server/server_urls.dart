@@ -36,7 +36,8 @@ class ServerUrls {
   static const String purchaseUrl = "compras/";
   static const String createPurchaseUrl = "new-purchase/";
 
-  static const String shoppingHistoryUrl = "mobile-app/";
+  static const String openShoppingHistoryUrl = "open-purchases-app/";
+  static const String closeShoppingHistoryUrl = "close-purchases-app/";
 
 //Dynamic Urls
   //static const String currentUrl = baseUrlMovilSena;

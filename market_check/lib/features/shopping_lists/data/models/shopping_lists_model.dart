@@ -1,10 +1,8 @@
-class ShoppingListsModel {
-  final String nameList;
-  final List<String> products;
-  bool isSelected = false;
+import 'package:market_check/features/shopping_lists/data/models/shopping_lists_item_model.dart';
 
+class ShoppingListModel {
+  String nameList;
+  List<ShoppingListItemModel> products;
 
-  ShoppingListsModel({required this.nameList, required this.products, required this.isSelected}); 
-
-
+  ShoppingListModel({required this.nameList, required this.products});
 }

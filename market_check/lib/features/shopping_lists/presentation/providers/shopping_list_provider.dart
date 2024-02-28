@@ -1,45 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/features/shopping_lists/data/models/shopping_lists_item_model.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
 
 class ShoppingListsProvider extends ChangeNotifier {
-  List<ShoppingListsModel> shoppingList = [];
+  List<ShoppingListModel> shoppingList = [];
+  ShoppingListModel? currentShoppingList;
   int currentIndex = 0;
-  TextEditingController customTextForm = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
   bool checkBox = true;
 
   void createShoppingList(String name) {
-    final newList = ShoppingListsModel(nameList: name, products: [], isSelected: false);
+    final newList = ShoppingListModel(nameList: name, products: []);
     shoppingList.add(newList);
     notifyListeners();
   }
 
-  void addProductsToList(String productName) {
-      shoppingList[currentIndex].products.add(productName);
-      print(shoppingList[currentIndex].products);
-      notifyListeners();
-  }
+  void addProductsToList() {
+    if (productNameController.text.isEmpty) return;
+    currentShoppingList!.products.add(
+      ShoppingListItemModel(itemName: productNameController.text),
+    );
+    productNameController.clear();
 
-  void selectShoppingList(int selectedIndex) {
-    currentIndex = selectedIndex;
     notifyListeners();
   }
 
-  void deleteList(){
+  void selectShoppingList(int selectedIndex) {
+    currentShoppingList = shoppingList[selectedIndex];
+    notifyListeners();
+  }
+
+  void deleteList() {
     shoppingList.removeAt(currentIndex);
     notifyListeners();
   }
 
-  void clearCustomTextform(){
-    customTextForm.clear();
+  void selectdCheckBox(int index) {
+    shoppingList[currentIndex].products[index].toggleState();
     notifyListeners();
   }
-
-  void selectdCheckBox(bool? value,){
-    checkBox = value!;
-    notifyListeners();
-  }
-
-
-
-
 }

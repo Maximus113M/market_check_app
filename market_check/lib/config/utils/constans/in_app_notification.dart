@@ -75,7 +75,7 @@ class InAppNotification {
         notificationIcon = Icons.warning_outlined;
         break;
       default:
-        notificationColor = AppColors.successText;
+        notificationColor = AppColors.appSecondary;
         Icons.shield_outlined;
     }
     Flushbar(

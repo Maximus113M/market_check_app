@@ -28,7 +28,7 @@ class CustomBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => route != null ? context.push(route!) : null,
+      onTap: () => context.pushNamed(route!),
       child: SizedBox(
         height: height ?? 38,
         width: width ?? 38,
@@ -45,9 +45,9 @@ class CustomBadge extends StatelessWidget {
             if (counter > 0)
               Positioned(
                 top: 0,
-                right: 0,
+                right: 2,
                 child: CircleAvatar(
-                  maxRadius: 9,
+                  maxRadius: 8.5,
                   backgroundColor: Colors.red,
                   child: Text(
                     '$counter',

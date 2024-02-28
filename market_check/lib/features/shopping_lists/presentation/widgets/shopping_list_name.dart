@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 class ShoppingListName extends StatelessWidget {
-  final List<ShoppingListsModel> shoppingList;
+  final List<ShoppingListModel> shoppingList;
   const ShoppingListName({
     super.key,
     required this.shoppingList,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/features/screens.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/features/stores/presentation/widgets/offers/offer_swiper.dart';
@@ -27,6 +27,10 @@ class OfferScreeenM extends StatelessWidget {
       child: Scaffold(
         appBar: customAppBar(
           context: context,
+          title: Text(
+            'Categorías y Productos',
+            style: FontStyles.subtitle0(AppColors.appSecondary),
+          ),
           leading: IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(

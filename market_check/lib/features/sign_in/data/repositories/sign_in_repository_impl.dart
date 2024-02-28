@@ -1,7 +1,8 @@
 import 'package:market_check/config/errors/failures.dart';
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
+import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 import 'package:market_check/features/sign_in/data/datasources/sign_in_data_source.dart';
 import 'package:market_check/features/sign_in/domain/repositories/sign_in_repsitory.dart';
 
@@ -13,7 +14,7 @@ class SignInRepositoryImpl extends SignInRepostory {
   SignInRepositoryImpl({required this.signInDataSource});
 
   @override
-  Future<Either<RemoteFailure, bool>> verifyCurrentSession() async {
+  Future<Either<RemoteFailure, PurchaseModel?>> verifyCurrentSession() async {
     try {
       return Right(
         await signInDataSource.verifyCurrentSession(),
@@ -26,7 +27,7 @@ class SignInRepositoryImpl extends SignInRepostory {
   }
 
   @override
-  Future<Either<RemoteFailure, bool>> verifyLogIn(
+  Future<Either<RemoteFailure, PurchaseModel?>> verifyLogIn(
       SignInDataModel signInData) async {
     try {
       return Right(

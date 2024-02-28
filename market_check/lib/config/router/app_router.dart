@@ -73,7 +73,9 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/addProducts-lists",
       name: AddProductsListScreen.name,
-      builder: (context, state) => const AddProductsListScreen(),
+      builder: (context, state) => AddProductsListScreen(
+        shoppingListsProvider: sl(),
+      ),
     ),
     GoRoute(
       path: "/shopping-history",

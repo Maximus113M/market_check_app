@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
-import 'package:market_check/features/products/presentation/widgets/product_listile.dart';
+import 'package:market_check/features/products/presentation/widgets/product_list_item.dart';
 import 'package:market_check/features/stores/presentation/widgets/offers/search_product_offer.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -23,13 +23,13 @@ class ProductsScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 8 / 3,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 7 / 3,
                 ),
                 itemCount: productsList.length,
                 itemBuilder: (context, index) {
-                  return ProductsListTile(productModel: productsList[index]);
+                  return ProductsListItem(productModel: productsList[index]);
                 },
               ),
             ),
