@@ -1,3 +1,5 @@
+import 'package:market_check/features/pending_purchases/data/repositories/pending_purchases_repository_impl.dart';
+import 'package:market_check/features/pending_purchases/domain/repositories/pending_purchases_repository.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/sign_in/domain/repositories/sign_in_repsitory.dart';
 import 'package:market_check/features/stores/domain/repositories/store_repository.dart';
@@ -55,6 +57,11 @@ void registerRepositories() {
   sl.registerLazySingleton<ScannerRepository>(
     () => ScannerRepositoryImpl(
       scannerDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<PendingPurchasesRepository>(
+    () => PendingPurchasesRepositoryImpl(
+      pendingPurchasesDataSource: sl(),
     ),
   );
 }

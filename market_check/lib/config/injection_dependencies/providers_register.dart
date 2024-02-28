@@ -1,3 +1,4 @@
+import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
@@ -54,12 +55,21 @@ void registerProviders() {
   );
   sl.registerLazySingleton(
     () => ShoppingHistoryProvider(
-        getShoppinHistoryUseCase: sl(), getShoppingProductsUseCase: sl()),
+      getShoppinHistoryUseCase: sl(),
+      getShoppingProductsUseCase: sl(),
+    ),
   );
   sl.registerLazySingleton(
-    () => ScannerProvider(getStoreProductByScannerUseCase: sl()),
+    () => ScannerProvider(
+      getStoreProductByScannerUseCase: sl(),
+    ),
   );
   sl.registerLazySingleton(
     () => ShoppingListsProvider(),
+  );
+  sl.registerLazySingleton(
+    () => PendingProvider(
+      getOpenPurchaseUseCase: sl(),
+    ),
   );
 }
