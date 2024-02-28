@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
+import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
+import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 import 'package:provider/provider.dart';
 
 class BottomMenu extends StatelessWidget {
@@ -32,6 +34,10 @@ class BottomMenu extends StatelessWidget {
           currentIndex: context.watch<MainProvider>().currentIndex,
           onTap: (index) {
             context.read<MainProvider>().setCurrentIndex(index);
+            if(index==2){
+              context.read<PendingPurchaseProvider>().getOpenPurchase(context);
+             // context.read<ShoppingHistoryProvider>().getOpenPurchase(context);
+            }
           },
           items: const [
             BottomNavigationBarItem(

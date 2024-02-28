@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/pending_purchases/presentation/widgets/pending_purchases_item.dart';
-import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
+import 'package:market_check/features/pending_purchases/presentation/widgets/pending_purchases_item.dart';
+
 import 'package:provider/provider.dart';
 
 class PendingPurchasesBodyScreen extends StatelessWidget {
-  final SignInProvider signInProvider;
-  const PendingPurchasesBodyScreen({super.key, required this.signInProvider});
+  final PendingPurchaseProvider pendingPurchaseProvider;
+  const PendingPurchasesBodyScreen(
+      {super.key, required this.pendingPurchaseProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class PendingPurchasesBodyScreen extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.03),
           child: PendingPurchasesItem(
-            purchase: signInProvider.openPurchases,
+            purchase: pendingPurchaseProvider.openPurchase,
             stores: context.watch<StoresProvider>().storeList,
           ),
         ),
