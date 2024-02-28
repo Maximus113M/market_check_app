@@ -26,11 +26,15 @@ class AddProductsListScreen extends StatelessWidget {
               onChange: (value) {
                 productName = value;
               },
+              textController:
+                  context.read<ShoppingListsProvider>().customTextForm,
               hint: 'Ingresa el nombre del producto',
               suffixIcon: IconButton(
                 onPressed: () {
                   Provider.of<ShoppingListsProvider>(context, listen: false)
                       .addProductsToList(productName);
+                  Provider.of<ShoppingListsProvider>(context, listen: false)
+                      .clearCustomTextform();
                 },
                 icon: const Icon(
                   Icons.send,
@@ -71,11 +75,36 @@ class ShoppingListProductsListview extends StatelessWidget {
             final List<String> productList =
                 shoppingListsProvider.shoppingList[index].products;
             List<Widget> listTiles = [];
-            productList.forEach((productName) {
-              listTiles.add(ListTile(
-                title: Text(productName),
-              ));
-            });
+            productList.forEach(
+              (productName) {
+                listTiles.add(
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: ScreenSize.absoluteHeight * 0.05,
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: ScreenSize.width * 0.03,
+                              vertical: ScreenSize.absoluteHeight * 0.001),
+                          child: Text(productName),
+                        ),
+                        value: context.watch<ShoppingListsProvider>().checkBox,
+                        onChanged: (value) {
+                          context
+                              .read<ShoppingListsProvider>()
+                              .selectdCheckBox(value!);
+                        },
+                        checkboxShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
             return Column(
               children: listTiles,
             );

@@ -27,8 +27,8 @@ class StoresListviewM extends StatelessWidget {
           const Center(
             child: Padding(
               padding: EdgeInsets.only(top: 30),
-              child: Text('Listado de establecimientos cercanos',
-                  style: TextStyle(fontSize: 16)),
+              child: Text('Listado de establecimientos',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
             ),
           ),
           Expanded(
