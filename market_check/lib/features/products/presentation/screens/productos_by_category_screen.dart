@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:go_router/go_router.dart';
-import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/screens.dart';
+import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class ProductsByCategoryScreen extends StatelessWidget {
@@ -15,18 +17,27 @@ class ProductsByCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          leading: IconButton(
-              onPressed: () => context.pushReplacement('/offers-m'),
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppColors.appSecondary,
-              ))),
+        context: context,
+        isCartVisible: false,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.appSecondary,
+          ),
+        ),
+        title: Text(
+          context.read<CategoriesProvider>().currentCategorie!.name,
+          style: FontStyles.subtitle0(AppColors.appSecondary),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: ProductsScreen(
-                productsList:
-                    context.watch<ProductsProvider>().filteredProductsList),
+              productsList:
+                  context.watch<ProductsProvider>().filteredProductsList,
+            ),
           ),
         ],
       ),

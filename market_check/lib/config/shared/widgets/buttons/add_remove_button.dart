@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/constans/font_styles.dart';
+import 'package:market_check/config/utils/utils.dart';
 
 class AddRemoveButton extends StatelessWidget {
   final double? height;
@@ -11,8 +10,8 @@ class AddRemoveButton extends StatelessWidget {
   final Color? removeColor;
   final Color? addColor;
   final int count;
-  final VoidCallback? addAction;
-  final VoidCallback? removeAction;
+  final VoidCallback addAction;
+  final VoidCallback removeAction;
 
   const AddRemoveButton(
       {super.key,
@@ -24,28 +23,27 @@ class AddRemoveButton extends StatelessWidget {
       this.removeColor,
       this.addColor,
       required this.count,
-      this.addAction,
-      this.removeAction});
+      required this.addAction,
+      required this.removeAction});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? 40,
+      height: height ?? 35,
       width: width,
-      padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: containerBg ?? Colors.grey.shade300,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           IconButton(
+              visualDensity: VisualDensity.compact,
               highlightColor: Colors.amber.shade300,
               icon: Icon(
                 Icons.remove,
                 color: removeColor ?? AppColors.lightText,
-                size: iconSize ?? 18,
+                size: iconSize ?? 15,
               ),
               onPressed: removeAction),
           Text(
@@ -53,6 +51,7 @@ class AddRemoveButton extends StatelessWidget {
             style: FontStyles.bodyBold1(AppColors.text),
           ),
           IconButton.filled(
+              visualDensity: VisualDensity.compact,
               highlightColor: Colors.amber,
               style: ButtonStyle(
                 shape: MaterialStatePropertyAll(
@@ -66,7 +65,7 @@ class AddRemoveButton extends StatelessWidget {
               icon: Icon(
                 Icons.add,
                 color: addColor ?? AppColors.white,
-                size: iconSize ?? 18,
+                size: iconSize ?? 15,
               ),
               onPressed: addAction),
         ],

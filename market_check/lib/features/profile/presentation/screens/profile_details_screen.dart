@@ -15,6 +15,7 @@ class ProfileDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
+        context: context,
         isCartVisible: false,
         leading: IconButton(
           onPressed: () => context.pop(),

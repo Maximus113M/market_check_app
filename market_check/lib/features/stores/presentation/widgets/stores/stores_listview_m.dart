@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/stores/stores_listtitle.dart';
@@ -11,9 +12,7 @@ class StoresListviewM extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-      height: double.infinity,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -22,26 +21,28 @@ class StoresListviewM extends StatelessWidget {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: Text('Listado de establecimientos',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+          /*Padding(
+            padding: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.02),
+            child: Text(
+              'Establecimientos',
+              style: FontStyles.subtitle1(AppColors.lightText),
             ),
-          ),
+          ),*/
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.symmetric(
+                  horizontal: ScreenSize.width * 0.04,
+                  vertical: ScreenSize.absoluteHeight * 0.02),
               itemCount: storeList.length,
               itemBuilder: (context, index) {
-                final store = storeList[index];
                 return GestureDetector(
                   onTap: () {
-                    context.read<StoresProvider>().currentStore = store;
+                    context.read<StoresProvider>().currentStore =
+                        storeList[index];
                     context.push("/store-view");
                   },
-                  child: StoresListTile(storeModel: store),
+                  child: StoresItemTile(storeModel: storeList[index]),
                 );
               },
             ),

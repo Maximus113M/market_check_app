@@ -4,7 +4,7 @@ import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/login/presentation/providers/sign_in_provider.dart';
+import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/profile/data/models/profile_cards_model.dart';
 import 'package:market_check/features/profile/domain/use_cases/delete_account_use_case.dart';
 import 'package:market_check/features/profile/domain/use_cases/update_account_data_use_case.dart';
@@ -73,8 +73,7 @@ class ProfileProvider with ChangeNotifier {
       context: context,
       builder: (context) => ConfirmDialog(
         title: 'Cerrar Sesión',
-        message:
-            '¿Deseas cerrar sesión?',
+        message: '¿Deseas cerrar sesión?',
         mainAction: () => signOutFromProfile(context),
       ),
     );
@@ -114,6 +113,7 @@ class ProfileProvider with ChangeNotifier {
       Future.delayed(const Duration(seconds: 3)).then(
         (value) => context.pushReplacement('/login-form'),
       );
+      //context.p
     });
   }
 }

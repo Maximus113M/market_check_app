@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
-import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
-import 'package:market_check/features/offers/presentation/providers/offers_provider.dart';
+
+import 'package:market_check/features/screens.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
+import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class StoreMenuScreen extends StatelessWidget {
   const StoreMenuScreen({super.key});
@@ -20,8 +21,9 @@ class StoreMenuScreen extends StatelessWidget {
         child: Column(
           children: [
             GestureDetector(
+              //TODO REVISAR ESTO ?????
               onTap: () {
-                context.read<OffersProvider>().loadOffers(context);
+                context.read<StoresProvider>().loadOffers(context);
                 context.read<CategoriesProvider>().getCategories(context);
                 context.read<ProductsProvider>().getProductsByStore(context);
                 context.push('/offers-m');
@@ -36,7 +38,7 @@ class StoreMenuScreen extends StatelessWidget {
                 subtitle: const Text('Explora nuestras ofertas y categorias'),
                 trailing: IconButton(
                   onPressed: () {
-                    context.read<OffersProvider>().loadOffers(context);
+                    context.read<StoresProvider>().loadOffers(context);
                     context.read<CategoriesProvider>().getCategories(context);
                     context
                         .read<ProductsProvider>()
@@ -62,7 +64,7 @@ class StoreMenuScreen extends StatelessWidget {
               subtitle:
                   const Text('¡Consulta lo productos antes de llevarlos!'),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () => context.pushNamed(ScannerScreen.name),
                 icon: const Icon(
                   Icons.arrow_circle_right_outlined,
                   size: 30,

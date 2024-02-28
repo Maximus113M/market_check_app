@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
-import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_cards.dart';
 import 'package:market_check/features/profile/presentation/widgets/profile_image.dart';
+import 'package:market_check/features/profile/presentation/providers/profile_provider.dart';
+import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileBodyScreen extends StatelessWidget {
@@ -41,10 +42,18 @@ class ProfileBodyScreen extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: profileProvider.menuCards.length,
-              itemBuilder: (context, index) => ProfileCards(
-                  title: profileProvider.menuCards[index].title,
-                  imagePath: profileProvider.menuCards[index].imagePath,
-                  isSelected: profileProvider.selectedIndex == index),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  context
+                      .read<ShoppingHistoryProvider>()
+                      .getPurchasesHistory(context);
+                  context.push(profileProvider.menuCards[index].route);
+                },
+                child: ProfileCards(
+                    title: profileProvider.menuCards[index].title,
+                    imagePath: profileProvider.menuCards[index].imagePath,
+                    isSelected: profileProvider.selectedIndex == index),
+              ),
             ),
           ),
         ),

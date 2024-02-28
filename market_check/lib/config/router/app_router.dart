@@ -50,12 +50,15 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/offers-m",
       name: OfferScreeenM.name,
-      builder: (context, state) => const OfferScreeenM(),
+      builder: (context, state) => OfferScreeenM(
+        offers: const [],
+        productsProvider: sl(),
+      ),
     ),
     GoRoute(
       path: "/shopping-cart",
-      name: ShoppingCart.name,
-      builder: (context, state) => const ShoppingCart(),
+      name: ShoppingCartScreen.name,
+      builder: (context, state) => const ShoppingCartScreen(),
     ),
     GoRoute(
       path: "/lists",
@@ -67,10 +70,12 @@ final appRouter = GoRouter(
       name: CreateShoppingListScreen.name,
       builder: (context, state) => const CreateShoppingListScreen(),
     ),
-     GoRoute(
+    GoRoute(
       path: "/addProducts-lists",
       name: AddProductsListScreen.name,
-      builder: (context, state) => const AddProductsListScreen(),
+      builder: (context, state) => AddProductsListScreen(
+        shoppingListsProvider: sl(),
+      ),
     ),
     GoRoute(
       path: "/shopping-history",
@@ -84,6 +89,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: "/scanner",
+      name: ScannerScreen.name,
       builder: (context, state) => const ScannerScreen(),
     ),
     GoRoute(

@@ -12,17 +12,18 @@ class CustomFilledButton extends StatelessWidget {
   final double fontSize;
   final Color? color;
   final Color? bgColor;
+  final double radius;
 
-  const CustomFilledButton({
-    super.key,
-    required this.text,
-    required this.action,
-    this.horizontalSize = 0.03,
-    this.verticalSize = 0.012,
-    this.fontSize = 0,
-    this.color,
-    this.bgColor,
-  });
+  const CustomFilledButton(
+      {super.key,
+      required this.text,
+      required this.action,
+      this.horizontalSize = 0.03,
+      this.verticalSize = 0.012,
+      this.fontSize = 0,
+      this.color,
+      this.bgColor,
+      this.radius = 0.1});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class CustomFilledButton extends StatelessWidget {
             MaterialStatePropertyAll(bgColor ?? AppColors.blueButton1),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(ScreenSize.width * radius),
           ),
         ),
         padding: MaterialStatePropertyAll(
@@ -44,7 +45,7 @@ class CustomFilledButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: FontStyles.bodyBold3(color ?? AppColors.white),
+        style: FontStyles.bodyBold2(color ?? AppColors.white),
       ),
     );
   }

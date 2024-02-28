@@ -1,5 +1,5 @@
 class StoreModel {
-  final int? id;
+  final int id;
   final int nit;
   final int state;
   final String name;
@@ -11,7 +11,7 @@ class StoreModel {
   final String locations; //TODO: LIST<LOCATIONS>
 
   StoreModel({
-    this.id,
+    required this.id,
     required this.nit,
     required this.state,
     required this.name,
@@ -35,19 +35,6 @@ class StoreModel {
         logo: json["Logo"],
         locations: json["DireccionEstablecimiento"],
       );
-
-  Map<String, dynamic> storeModelToJson() => {
-        if (id != null) "id": id,
-        "Nit": nit,
-        "Estado": state,
-        "NombreEstablecimiento": name,
-        "CorreoEstablecimiento": email,
-        "Lema": description,
-        "ColorInterfaz": color,
-        "Imagen": poster,
-        "Logo": logo,
-        "DireccionEstablecimiento": locations
-      };
 }
 
 class StoreLocation {

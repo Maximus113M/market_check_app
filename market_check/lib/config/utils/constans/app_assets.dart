@@ -1,14 +1,8 @@
 class AppAssets {
-  static const String logoImage = 'assets/Images/LogoApp.jpg';
-  static const String logoPng = 'assets/Images/AppLogo.png';
-  static const String userLogo = 'assets/Images/userLogo.png';
   static const String optionalLogoImage = 'assets/Images/LogoOpcionalSinBg.png';
-  static const String googleLogo = 'assets/Images/googleLogo.png';
-  static const String offerReference = 'assets/Images/offers/offer4.png';
-  static const String productReference = 'assets/Images/items/cafe.png';
-  static const String productReference2 = 'assets/Images/categories/meat2.png';
-  static const String storeReference = 'assets/Images/stores/EXITO-poster.jpg';
   static const String loadingImage = 'assets/Images/jar-loading.gif';
+  static const String scanner = 'assets/Images/qr-scan.png';
+  static const String scanner2 = 'assets/Images/icons/scanner.png';
 
 //--------------------------avatars
   static const String avatar = 'assets/Images/avatars/fubiki.jpg';
@@ -32,7 +26,11 @@ class AppAssets {
   static const String shopping = 'assets/Images/profile/shoppings.webp';
   static const String stores = 'assets/Images/profile/stores.jpeg';
   static const String favoritesProducts =
-      'assets/Images/categories/lacteos.png';
+      'assets/Images/profile/products.png';
+
+//--------------------------Icons
+  static const String invoiceIcon = 'assets/Images/icons/invoice.png';
+  static const String invoice2 = 'assets/Images/icons/invoiceFull.png';
 
 //--------------------------Logos - animaciones
   static const String logoHorizontal = 'assets/Images/logos/logoHorizontal.png';
@@ -44,4 +42,5 @@ class AppAssets {
   static const String iconoLottieList = 'assets/lottie/List.json';
   static const String iconoLottieStore = 'assets/lottie/store.json';
   static const String iconoLottieProfile = 'assets/lottie/profile.json';
+  static const String cartLogo = 'assets/Images/logos/car.png';
 }

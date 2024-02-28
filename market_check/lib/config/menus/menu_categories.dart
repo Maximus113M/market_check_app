@@ -10,7 +10,6 @@ class MenuItemCategories {
       required this.link,
       required this.poster});
 }
-//TODO: terminar lista de Categorias
 //const List<MenuItemCategories>
 
 const List<MenuItemCategories> appSubmenuCategories = [

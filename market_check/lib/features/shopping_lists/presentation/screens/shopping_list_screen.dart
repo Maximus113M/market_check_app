@@ -3,12 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
-import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:market_check/features/shopping_lists/presentation/screens/create_shopping_list_screen.dart';
-import 'package:market_check/features/shopping_lists/presentation/widgets/shopping_list_name.dart';
-import 'package:market_check/features/shopping_lists/presentation/widgets/shoppping_list_listile.dart';
-import 'package:provider/provider.dart';
+
 
 class ShoppingListScreen extends StatelessWidget {
   static const String name = "shopping-list-screen";
@@ -18,11 +14,8 @@ class ShoppingListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ShoppingListsModel> shoppingList =
-        context.watch<ShoppingListsProvider>().shoppingList;
-    if (shoppingList.isEmpty){
-      return Scaffold(
-        appBar: customAppBar(isCartVisible: false),
+    return Scaffold(
+        appBar: customAppBar(context: context, isCartVisible: false),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -61,9 +54,6 @@ class ShoppingListScreen extends StatelessWidget {
         ),
       );
     }     
-      else {
-      return  const CreateShoppingListScreen();
-    }
   }
   
-}
+
