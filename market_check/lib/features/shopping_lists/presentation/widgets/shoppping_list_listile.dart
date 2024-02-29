@@ -5,7 +5,7 @@ import 'package:market_check/features/shopping_lists/presentation/providers/shop
 import 'package:provider/provider.dart';
 
 class ShoppingListListile extends StatelessWidget {
-  final ShoppingListModel shoppingListsModel;
+  final ShoppingListsModel shoppingListsModel;
   const ShoppingListListile({
     super.key,
     required this.shoppingListsModel,

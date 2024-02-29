@@ -10,7 +10,6 @@ import 'package:market_check/features/shopping_lists/presentation/providers/shop
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../config/utils/utils.dart';
 
 class CreateShoppingListScreen extends StatelessWidget {
   static const name = 'create-lists';

@@ -65,7 +65,7 @@ class AddProductsListScreen extends StatelessWidget {
               child: ShoppingListProductsListview(
                 shoppingListsProvider: context.read(),
                 productList:
-                    context.watch<ShoppingListsProvider>().currentShoppingList!,
+                  context.watch<ShoppingListsProvider>().currentShoppingList!,
               ),
             ),
           ],
@@ -77,7 +77,7 @@ class AddProductsListScreen extends StatelessWidget {
 
 class ShoppingListProductsListview extends StatelessWidget {
   final ShoppingListsProvider shoppingListsProvider;
-  final ShoppingListModel productList;
+  final ShoppingListsModel productList;
 
   const ShoppingListProductsListview({
     super.key,
