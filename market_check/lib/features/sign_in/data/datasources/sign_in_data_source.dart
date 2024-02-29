@@ -103,7 +103,7 @@ class SignInDataSourceImpl extends SignInDataSource {
       debugPrint('VerifyLogIn Exception: $e');
       throw RemoteException(
           message:
-              "Revisa tus credenciales y asegurate de confirma la notificacion enviada a tu correo",
+              "Revisa tus credenciales y asegurate de confirmar la notificación enviada a tu correo",
           type: ExceptionType.signInException);
     }
   }

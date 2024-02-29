@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 import 'package:market_check/config/use_case/use_case.dart';
+import 'package:market_check/config/utils/constans/app_assets.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/profile/data/models/profile_cards_model.dart';
@@ -16,6 +17,8 @@ class ProfileProvider with ChangeNotifier {
   final UpdateAccountDataUseCase updateAccountDataUseCase;
   final UpdatePasswordUseCase updatePasswordUseCase;
   bool isLoading = false;
+  final List<String> avatars = AppAssets.avatarList;
+  String selectdAvatare = '';
 
   ProfileProvider({
     required this.deleteAccountUseCase,
@@ -116,4 +119,9 @@ class ProfileProvider with ChangeNotifier {
       //context.p
     });
   }
+
+  void selectdAvatar(int index){
+    selectdAvatare = avatars[index];
+    notifyListeners();
+  } 
 }

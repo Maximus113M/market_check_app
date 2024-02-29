@@ -6,7 +6,6 @@ import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_out_use_case.dart';
