@@ -11,7 +11,7 @@ class ServerService {
   static const String _baseUrl = ServerUrls.currentHttp;
 
   static Future<http.Response> serverGet(String path) async {
-    final Uri uri = Uri.http(_baseUrl, '/api/$path');
+    final Uri uri = Uri.https(_baseUrl, '/api/$path');
 
     try {
       final response = await http.get(
@@ -29,7 +29,7 @@ class ServerService {
 
   static Future<http.Response> serverPost(
       String path, Map<String, dynamic> json) async {
-    final Uri uri = Uri.http(_baseUrl, '/api/$path');
+    final Uri uri = Uri.https(_baseUrl, '/api/$path');
 
     try {
       final response = await http.post(
@@ -48,7 +48,7 @@ class ServerService {
 
   static Future<http.Response> serverPut(
       String path, Map<String, dynamic> json) async {
-    final Uri uri = Uri.http(_baseUrl, '/api/$path');
+    final Uri uri = Uri.https(_baseUrl, '/api/$path');
 
     try {
       final response = await http.put(
@@ -66,7 +66,7 @@ class ServerService {
   }
 
   static Future<http.Response> serverDelete(String path) async {
-    final Uri uri = Uri.http(_baseUrl, '/api/$path');
+    final Uri uri = Uri.https(_baseUrl, '/api/$path');
 
     try {
       final response = await http.delete(
