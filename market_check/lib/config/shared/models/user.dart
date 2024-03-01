@@ -29,8 +29,12 @@ class User {
                 ? ''
                 : '',
         email: json["email"],
-        rolId: json["rol_id"] ?? 4,
-        profileImage: json["profile_image"] 
+        rolId: int.tryParse('${json["rol_id"]}') ?? 4,
+        profileImage: int.tryParse('${json["profile_image"]}') 
+
+
+
+        
       );
 
   Map<String, dynamic> userToJson() => {

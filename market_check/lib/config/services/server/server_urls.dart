@@ -14,7 +14,7 @@ class ServerUrls {
   static const String hostingUrl = 'https://marketcheck.api.adsocidm.com/api/';
 
 //Constans Urls
-  static const String signInUrl = "auth/login/";
+  static const String signInUrl = "auth/login";
   static const String signUpUrl = "auth/mobile-app/";
   static const String logOutUrl = "auth/logout/";
 
@@ -33,16 +33,16 @@ class ServerUrls {
   static const String purchaseUrl = "compras/";
   static const String createPurchaseUrl = "new-purchase/";
 
-  static const String openShoppingHistoryUrl = "open-purchases-app/";
-  static const String closeShoppingHistoryUrl = "close-purchases-app/";
+  static const String openShoppingHistoryUrl = "open-purchases-app";
+  static const String closeShoppingHistoryUrl = "close-purchases-app";
 
 //Dynamic Urls
-  //static const String currentUrl = hostingUrl;
-  static const String currentUrl = baseUrlMovilSena;
+  static const String currentUrl = hostingUrl;
+  //static const String currentUrl = baseUrlMovilSena;
   //static const String currentUrl = baseUrlIpv4Camilo;
 
-  //static const String currentHttp = hosting;
-  static const String currentHttp = baseHttpMovilSena;
+  static const String currentHttp = hosting;
+  //static const String currentHttp = baseHttpMovilSena;
   //static const String currentHttp = baseHttpIpv4Camilo;
 
   //static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');

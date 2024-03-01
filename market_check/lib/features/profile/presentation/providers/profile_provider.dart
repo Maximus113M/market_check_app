@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
@@ -18,7 +20,8 @@ class ProfileProvider with ChangeNotifier {
   final UpdatePasswordUseCase updatePasswordUseCase;
   bool isLoading = false;
   final List<String> avatars = AppAssets.avatarList;
-  String selectdAvatare = '';
+  int selectdAvatare = 0;
+  
 
   ProfileProvider({
     required this.deleteAccountUseCase,
@@ -120,8 +123,30 @@ class ProfileProvider with ChangeNotifier {
     });
   }
 
-  void selectdAvatar(int index){
-    selectdAvatare = avatars[index];
+  
+
+  void selectdAvatar(int index) async{
+    selectdAvatare = index;
+    User currentUser= AuthService.user!;
+    /*AuthService.user = User(
+      name: currentUser.name, 
+      document: currentUser.document, 
+      email: currentUser.email, 
+      rolId: currentUser.rolId, 
+      profileImage: selectdAvatare);*/
+      final result = await updateAccountDataUseCase(SignUpDataModel(
+        name: currentUser.name, 
+        document: int.tryParse(currentUser.document), 
+        email: currentUser.email, 
+        password: null,
+        profileImage: selectdAvatare
+        ));
+
+      result.fold(
+        (l) => null, 
+        (r) => null);
+
+
     notifyListeners();
   } 
 }

@@ -23,9 +23,9 @@ class ProfileImage extends StatelessWidget {
                 top: ScreenSize.absoluteHeight * 0.03, bottom: 3),
             child: CircleAvatar(
               radius: ScreenSize.absoluteHeight * 0.08,
-              backgroundImage: context.read<ProfileProvider>().selectdAvatare.isEmpty ?
-              AssetImage(avatars[1])
-              :AssetImage(context.watch<ProfileProvider>().selectdAvatare),
+              backgroundImage:  
+              AssetImage(avatars[context.watch<ProfileProvider>().selectdAvatare])
+              ,
 
             ),
           ),

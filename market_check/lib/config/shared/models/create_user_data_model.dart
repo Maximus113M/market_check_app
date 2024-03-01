@@ -4,13 +4,16 @@ class SignUpDataModel {
   final String email;
   final String? password;
   final int rolId;
+  final int? profileImage;
 
   SignUpDataModel(
       {this.rolId = 4,
       required this.name,
       required this.document,
       required this.email,
-      required this.password});
+      required this.password,
+      this.profileImage, 
+      });
 
   factory SignUpDataModel.fromJson(json) => SignUpDataModel(
         name: json['name'],
@@ -18,6 +21,7 @@ class SignUpDataModel {
         email: json['email'],
         password: json['password'],
         rolId: json['rol_id'],
+        profileImage: json['image_profile']
       );
 
   Map<String, dynamic> userToJson() => {
@@ -26,5 +30,6 @@ class SignUpDataModel {
         "email": email,
         "rol_id": rolId,
         if (password != null) "password": password,
+        "image_profile": profileImage ?? 0
       };
 }

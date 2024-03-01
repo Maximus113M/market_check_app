@@ -49,7 +49,6 @@ class SignInProvider with ChangeNotifier {
       if (AuthService.user != null) {
         context.read<PendingPurchaseProvider>().setFirstPendingPurchases(r);
         context.read<StoresProvider>().loadStores(context, notify: true);
-        //context.read<ProfileProvider>().selectdAvatare = '1';
         route = '/main';
       }
 
