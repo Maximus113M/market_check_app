@@ -62,7 +62,9 @@ class ProfileDataSourceImpl extends ProfileDataSource {
 
       if (response.statusCode == 201) {
         var cualquira = jsonDecode(response.body)['user'];
+
         print(cualquira);
+        
         final User updatedUser = User.fromJson(
           jsonDecode(response.body)['user'],
         );

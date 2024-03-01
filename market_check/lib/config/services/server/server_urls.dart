@@ -15,7 +15,7 @@ class ServerUrls {
 
 //Constans Urls
   static const String signInUrl = "auth/login";
-  static const String signUpUrl = "auth/mobile-app/";
+  static const String signUpUrl = "auth/mobile-app";
   static const String logOutUrl = "auth/logout/";
 
   static const String userUrl = "user/";

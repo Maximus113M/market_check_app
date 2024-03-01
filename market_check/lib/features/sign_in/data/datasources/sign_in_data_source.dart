@@ -84,6 +84,10 @@ class SignInDataSourceImpl extends SignInDataSource {
         AuthService.user = User.fromJson(jsonDecode(response.body)["user"]);
         AuthService.token = jsonDecode(response.body)["access_token"];
         AuthService.typeToken = jsonDecode(response.body)["token_type"];
+        AuthService.headers = {
+          'Content-Type': 'application/json',
+          'Authorization': '${AuthService.typeToken} ${AuthService.token}'
+        };
 
         openPurchase = await getOpenPurchases();
         if (openPurchase != null) {
