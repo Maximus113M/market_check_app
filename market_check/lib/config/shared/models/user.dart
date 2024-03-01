@@ -4,6 +4,7 @@ class User {
   final String document;
   final String email;
   final int rolId;
+  final int? profileImage;
 
   bool isPurchaseOpen;
   int? purchasePin;
@@ -16,6 +17,7 @@ class User {
     required this.rolId,
     this.isPurchaseOpen = false,
     this.purchasePin,
+    required this.profileImage
   });
 
   factory User.fromJson(json, {bool isEncripted = false}) => User(
@@ -28,6 +30,7 @@ class User {
                 : '',
         email: json["email"],
         rolId: json["rol_id"] ?? 4,
+        profileImage: json["profile_image"] 
       );
 
   Map<String, dynamic> userToJson() => {
@@ -35,6 +38,7 @@ class User {
         if (document.isNotEmpty) "documento": document,
         "name": name,
         "email": email,
-        "rol_id": rolId
+        "rol_id": rolId,
+        "profile_image": profileImage
       };
 }

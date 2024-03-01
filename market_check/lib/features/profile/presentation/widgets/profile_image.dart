@@ -12,6 +12,7 @@ class ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SizedBox(
       width: ScreenSize.width,
       child: Stack(
@@ -22,7 +23,10 @@ class ProfileImage extends StatelessWidget {
                 top: ScreenSize.absoluteHeight * 0.03, bottom: 3),
             child: CircleAvatar(
               radius: ScreenSize.absoluteHeight * 0.08,
-              backgroundImage: AssetImage(context.read<ProfileProvider>().selectdAvatare)
+              backgroundImage: context.read<ProfileProvider>().selectdAvatare.isEmpty ?
+              AssetImage(avatars[1])
+              :AssetImage(context.watch<ProfileProvider>().selectdAvatare),
+
             ),
           ),
           Positioned(
@@ -42,6 +46,7 @@ class ProfileImage extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             context.read<ProfileProvider>().selectdAvatar(index);
+                            print(index);
                             context.pop();
                           },
                           child: CircleAvatar(
