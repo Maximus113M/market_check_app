@@ -25,6 +25,8 @@ class ServerUrls {
   static const String productsCategoriesUrl = "productos/productsCategories/";
   static const String categoriesUrl = "categoria/";
   static const String storesUrl = "establecimiento/";
+  static const String listsUrl = "listas/";
+
   static const String categoriesUrlByStore =
       "establecimiento/showCategoriesByStore/";
 

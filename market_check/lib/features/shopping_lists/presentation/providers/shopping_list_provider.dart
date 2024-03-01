@@ -12,7 +12,7 @@ class ShoppingListsProvider extends ChangeNotifier {
   int productsCounter = 0;
 
   void createShoppingList(String name) {
-    final newList = ShoppingListsModel(nameList: name, products: [], userId: AuthService.user!.id!, totalProductsCounter: 0);
+    final newList = ShoppingListsModel(nameList: name, products: [], userId: AuthService.user!.id!);
     shoppingList.add(newList);
     notifyListeners();
   }
