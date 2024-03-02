@@ -64,7 +64,8 @@ class ProfileDataSourceImpl extends ProfileDataSource {
         var cualquira = jsonDecode(response.body)['user'];
 
         print(cualquira);
-        
+        print(jsonDecode(response.body)['image_profile']);
+
         final User updatedUser = User.fromJson(
           jsonDecode(response.body)['user'],
         );
@@ -74,7 +75,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
             key: 'documento', value: updatedUser.document.toString());
         await flutterSecureStorage.write(
             key: 'email', value: updatedUser.email);
-        await flutterSecureStorage.write(key: 'profile_image', value: ('${updatedUser.profileImage}'));
+        await flutterSecureStorage.write(key: 'image_profile', value: ('${updatedUser.profileImage}'));
       }
       return jsonDecode(response.body)["message"];
     } on HttpException catch (e) {

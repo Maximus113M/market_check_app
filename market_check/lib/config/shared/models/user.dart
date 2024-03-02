@@ -30,7 +30,7 @@ class User {
                 : '',
         email: json["email"],
         rolId: int.tryParse('${json["rol_id"]}') ?? 4,
-        profileImage: int.tryParse('${json["profile_image"]}') 
+        profileImage: int.tryParse('${json["image_profile"]}') 
 
 
 

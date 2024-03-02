@@ -29,7 +29,7 @@ class ProfileProvider with ChangeNotifier {
     required this.updatePasswordUseCase,
   });
 
-  int selectedIndex = 0;
+  int selectedIndex = AuthService.user!.profileImage?? 0;
   List<ProfileCardsModel> menuCards = ProfileCardsModel.profileCardsMenu;
 
   void setIndex(int index) {
