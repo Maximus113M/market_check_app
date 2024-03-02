@@ -9,6 +9,6 @@ class AuthService {
 
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
-    'Authorization': '$typeToken $token'
+    'Authorization': '$typeToken $token',
   };
 }

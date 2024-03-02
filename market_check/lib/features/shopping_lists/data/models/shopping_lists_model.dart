@@ -20,3 +20,4 @@ class ShoppingListsModel {
     "productos": products
   };
 }
+

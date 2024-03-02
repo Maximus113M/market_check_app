@@ -12,7 +12,7 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   Future<ShoppingListsModel> createShoppingList(ShoppingListsModel newList) async {
     try {
       final response = await ServerService.serverPost(
-          ServerUrls.listsUrl, newList.shoppingListJson());
+          ServerUrls.listsUrl,  newList.shoppingListJson());
           if(response.statusCode == 201){}
           return newList;
     } catch (e) {
@@ -20,3 +20,4 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
     }
   }
 }
+

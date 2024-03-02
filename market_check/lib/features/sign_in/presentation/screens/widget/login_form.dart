@@ -3,10 +3,8 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
-import 'package:url_launcher/link.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class LogInForm extends StatelessWidget {

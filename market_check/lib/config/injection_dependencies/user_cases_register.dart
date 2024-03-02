@@ -1,4 +1,5 @@
 import 'package:market_check/features/pending_purchases/domain/use_cases/get_open_purchases_use_case.dart';
+import 'package:market_check/features/shopping_lists/domain/use_cases/shopping_lists_use_case.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_out_use_case.dart';
@@ -101,6 +102,11 @@ void registerUseCases() {
   sl.registerLazySingleton(
     () => GetOpenPurchasesUseCase(
       pendingPurchasesRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => ShoppingListsUseCase(
+      shoppingListsRepository: sl(),
     ),
   );
 }

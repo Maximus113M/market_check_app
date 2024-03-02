@@ -22,5 +22,4 @@ class ShoppingListsRepositoryImpl extends ShoppingListsRepository{
       );
     }
   }
-
 }

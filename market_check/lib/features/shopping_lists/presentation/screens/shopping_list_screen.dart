@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
-import 'package:market_check/features/shopping_lists/presentation/screens/create_shopping_list_screen.dart';
 
 
 class ShoppingListScreen extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:market_check/features/shopping_lists/data/datasource/shopping_lists_datasource.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/stores/data/datasources/stores_datasource.dart';
 import 'package:market_check/features/sign_in/data/datasources/sign_in_data_source.dart';
@@ -40,5 +41,8 @@ void registerDataSources() {
   );
   sl.registerLazySingleton<PendingPurchasesDataSource>(
     () => PendingPurchasesDataSourceImpl(),
+  );
+  sl.registerLazySingleton<ShoppingListsDatasorce>(
+    () => ShoppingListsDatasorceImpl(),
   );
 }

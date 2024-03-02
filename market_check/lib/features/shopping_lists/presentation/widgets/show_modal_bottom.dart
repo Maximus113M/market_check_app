@@ -54,7 +54,7 @@ class ShowModalBottomSheet extends StatelessWidget {
                         text: 'Crear lista',
                         action: () {
                           final String listname = listName;
-                          context.read<ShoppingListsProvider>().createShoppingList(listname);
+                          context.read<ShoppingListsProvider>().createShoppingList(context, listname);
                           context.pop();
                         },
                         horizontalMargin: 0,
