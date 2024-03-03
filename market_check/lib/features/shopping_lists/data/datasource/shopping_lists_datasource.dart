@@ -17,9 +17,16 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   @override
   Future<List<ShoppingListsModel>> getShoppingLists() async {
     try {
+      List<ShoppingListsModel> userLists = [];
       final response = await ServerService.serverGet(ServerUrls.listsUrl);
-      if (response.statusCode == 201) {
-        print(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        print(jsonDecode(response.body)['Listas del usuario']);
+
+        userLists = (jsonDecode(response.body)['Listas del usuario'] as List)
+            .map((jsonList) => ShoppingListsModel.fromJson(jsonList))
+            .toList();
+
+        print(userLists);
       }
       return [];
     } catch (e) {

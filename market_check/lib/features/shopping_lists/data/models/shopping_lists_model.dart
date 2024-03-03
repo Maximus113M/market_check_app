@@ -15,21 +15,27 @@ class ShoppingListsModel {
     required this.products,
   });
 
-  factory ShoppingListsModel.fromJson(json) => ShoppingListsModel(
-        id: json['id'],
-        userId: json['user_id'],
-        nameList: json['listName'],
-        products: (jsonDecode(json['productos']))
-            .map((itemFromJson) => ShoppingListItemModel.fromJson(itemFromJson))
-            .toList(),
+  factory ShoppingListsModel.fromJson(json) {
+    final List<ShoppingListItemModel> products = [];
+
+    (jsonDecode(json['productos']) as Map).forEach((key, value) {
+      products.add(
+        ShoppingListItemModel.fromJson(jsonDecode(value)),
       );
+    });
+    print(products);
+    return ShoppingListsModel(
+      id: json['id'],
+      userId: json['user_id'],
+      nameList: json['listName'],
+      products: products,
+    );
+  }
 
   Map<String, dynamic> shoppingListToJson() {
-    var test = Map<String, String>.fromIterable(
-      products,
-      key: (item) => item.itemName,
-      value: (item) => jsonEncode(item.toMap()),
-    );
+    var test = {
+      for (var item in products) item.itemName: jsonEncode(item.toMap())
+    };
 
     print(test);
     return {

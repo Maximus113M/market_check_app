@@ -16,11 +16,22 @@ class AddProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          shoppingListsProvider.updateShoppingList(context);
-        },
-        child: const Text('Guardar'),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              shoppingListsProvider.getShoppingLists(context);
+            },
+            child: const Text('Listar'),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              shoppingListsProvider.updateShoppingList(context);
+            },
+            child: const Text('Guardar'),
+          ),
+        ],
       ),
       appBar: customAppBar(
         context: context,
