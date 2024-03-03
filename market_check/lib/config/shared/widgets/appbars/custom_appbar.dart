@@ -29,7 +29,7 @@ AppBar customAppBar({
       centerTitle: isCenterTitle,
       title: title ??
           Padding(
-            padding: EdgeInsets.only(right: ScreenSize.width * 0.15),
+            padding: EdgeInsets.only(right: ScreenSize.width * 0.01),
             child: Image.asset(
               AppAssets.logoHorizontal,
               width: ScreenSize.height * 0.22,
