@@ -20,8 +20,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.productsException),
+        RemoteFailure(message: e.message, type: ExceptionType.products),
       );
     }
   }
@@ -35,8 +34,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.productsException),
+        RemoteFailure(message: e.message, type: ExceptionType.products),
       );
     }
   }

@@ -22,7 +22,7 @@ class ShoppingHistoryRepositoryImpl extends ShoppingHistoryRepository {
     } on RemoteException catch (e) {
       return Left(RemoteFailure(
         message: e.message,
-        type: ExceptionType.shoppingHistoryException,
+        type: ExceptionType.shoppingHistory,
       ));
     }
   }
@@ -36,8 +36,7 @@ class ShoppingHistoryRepositoryImpl extends ShoppingHistoryRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.shoppingHistoryException),
+        RemoteFailure(message: e.message, type: ExceptionType.shoppingHistory),
       );
     }
   }

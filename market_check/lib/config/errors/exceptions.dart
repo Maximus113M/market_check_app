@@ -19,18 +19,17 @@ class HttpException implements Exception {
 }
 
 enum ExceptionType {
-  splashException,
-  signUpException,
-  signInException,
-  homeException,
-  offersException,
-  storesException,
-  profileException,
-  productsException,
-  purchasesException,
-  categoriesException,
-  shoppingHistoryException,
-  pendingPurchasesException,
-  scannerException,
-  shoppingListsException
+  splash,
+  signUp,
+  signIn,
+  offers,
+  stores,
+  profile,
+  products,
+  purchases,
+  categories,
+  shoppingHistory,
+  pendingPurchases,
+  scanner,
+  shoppingLists
 }

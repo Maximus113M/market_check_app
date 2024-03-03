@@ -34,12 +34,12 @@ class ScannerDataSourceImpl extends ScannerDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.scannerException);
+          type: ExceptionType.scanner);
     } catch (e) {
       debugPrint('Scanner Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al scannear el producto.',
-          type: ExceptionType.scannerException);
+          type: ExceptionType.scanner);
     }
   }
 }

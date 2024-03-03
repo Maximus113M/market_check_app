@@ -22,7 +22,7 @@ class StoresRepositoryImpl extends StoresRepository {
       return Left(
         RemoteFailure(
           message: e.message,
-          type: ExceptionType.storesException,
+          type: ExceptionType.stores,
         ),
       );
     }
@@ -38,7 +38,7 @@ class StoresRepositoryImpl extends StoresRepository {
       return Left(
         RemoteFailure(
           message: e.message,
-          type: ExceptionType.offersException,
+          type: ExceptionType.offers,
         ),
       );
     }

@@ -16,6 +16,12 @@ class AddProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          shoppingListsProvider.updateShoppingList(context);
+        },
+        child: const Text('Guardar'),
+      ),
       appBar: customAppBar(
         context: context,
         isCartVisible: false,
@@ -65,7 +71,7 @@ class AddProductsListScreen extends StatelessWidget {
               child: ShoppingListProductsListview(
                 shoppingListsProvider: context.read(),
                 productList:
-                  context.watch<ShoppingListsProvider>().currentShoppingList!,
+                    context.watch<ShoppingListsProvider>().currentShoppingList!,
               ),
             ),
           ],

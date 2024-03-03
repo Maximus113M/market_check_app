@@ -41,12 +41,12 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('$e');
       throw RemoteException(
           message: "Ocurrio un error al actualizar la contraseña",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -75,7 +75,8 @@ class ProfileDataSourceImpl extends ProfileDataSource {
             key: 'documento', value: updatedUser.document.toString());
         await flutterSecureStorage.write(
             key: 'email', value: updatedUser.email);
-        await flutterSecureStorage.write(key: 'image_profile', value: ('${updatedUser.profileImage}'));
+        await flutterSecureStorage.write(
+            key: 'image_profile', value: ('${updatedUser.profileImage}'));
       }
       return jsonDecode(response.body)["message"];
     } on HttpException catch (e) {
@@ -83,12 +84,12 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('$e');
       throw RemoteException(
           message: "Ocurrio un error al actualizar los datos",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -109,13 +110,13 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('$e');
       throw RemoteException(
           message:
               "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 }

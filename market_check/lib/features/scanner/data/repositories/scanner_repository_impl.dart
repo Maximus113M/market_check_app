@@ -23,7 +23,7 @@ class ScannerRepositoryImpl extends ScannerRepository {
       return Left(
         RemoteFailure(
           message: e.message,
-          type: ExceptionType.scannerException,
+          type: ExceptionType.scanner,
         ),
       );
     }

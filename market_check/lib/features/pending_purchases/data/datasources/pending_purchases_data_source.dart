@@ -40,13 +40,13 @@ class PendingPurchasesDataSourceImpl extends PendingPurchasesDataSource {
       throw RemoteException(
         message:
             "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-        type: ExceptionType.pendingPurchasesException,
+        type: ExceptionType.pendingPurchases,
       );
     } catch (e) {
       debugPrint('GetOpenPurchase Exception: $e');
       throw RemoteException(
         message: "Ocurrio un error al obtener las compras pendientes",
-        type: ExceptionType.pendingPurchasesException,
+        type: ExceptionType.pendingPurchases,
       );
     }
   }

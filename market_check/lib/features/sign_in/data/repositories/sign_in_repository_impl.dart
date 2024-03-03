@@ -59,7 +59,7 @@ class SignInRepositoryImpl extends SignInRepostory {
       return Right(await signInDataSource.signOut());
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(message: e.message, type: ExceptionType.signInException),
+        RemoteFailure(message: e.message, type: ExceptionType.signIn),
       );
     }
   }

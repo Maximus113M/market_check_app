@@ -19,8 +19,7 @@ class ShoppingRepositoryImpl extends ShoppingRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.purchasesException),
+        RemoteFailure(message: e.message, type: ExceptionType.purchases),
       );
     }
   }
