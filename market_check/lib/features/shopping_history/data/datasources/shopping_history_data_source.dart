@@ -36,13 +36,13 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('ShoppingHistory httpException: $e');
 
       throw RemoteException(
           message: 'No se pudo obtener la lista',
-          type: ExceptionType.shoppingHistoryException);
+          type: ExceptionType.shoppingHistory);
     }
   }
 
@@ -65,13 +65,13 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('ShoppingHistory Exception: $e');
       throw RemoteException(
           message:
               'Ha ocurrido un error al obtener los productos de la compra.',
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     }
   }
 }

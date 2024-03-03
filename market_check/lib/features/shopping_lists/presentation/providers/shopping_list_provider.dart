@@ -1,30 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/services/auth/auth_service.dart';
+import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_item_model.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
-import 'package:market_check/features/shopping_lists/domain/use_cases/shopping_lists_use_case.dart';
+import 'package:market_check/features/shopping_lists/domain/use_cases/create_shopping_list_use_case.dart';
+import 'package:market_check/features/shopping_lists/domain/use_cases/get_shopping_lists_use_case.dart';
+import 'package:market_check/features/shopping_lists/domain/use_cases/update_shopping_list_use_case.dart';
 
 class ShoppingListsProvider extends ChangeNotifier {
-  final ShoppingListsUseCase shoppingListsUseCase;
+  final GetShoppingListsUseCase getShoppingListsUseCase;
+  final CreateShoppingListUseCase createShoppingListsUseCase;
+  final UpdateShoppingListUseCase updateShoppingListUseCase;
 
-  ShoppingListsProvider({required this.shoppingListsUseCase});
+  ShoppingListsProvider(
+      {required this.getShoppingListsUseCase,
+      required this.updateShoppingListUseCase,
+      required this.createShoppingListsUseCase});
 
   List<ShoppingListsModel> shoppingList = [];
   ShoppingListsModel? currentShoppingList;
   int currentIndex = 0;
   TextEditingController productNameController = TextEditingController();
   bool checkBox = false;
-  int productsCounter = 0;
+  int productsCounter = 1;
 
-  void createShoppingList(BuildContext context ,String name) async {
-    final newList = ShoppingListsModel(
-        nameList: name, products: [], userId: AuthService.user!.id!);
+  //TODO Terminar
+  void getShoppingLists(BuildContext context) async {
+    final result = await getShoppingListsUseCase(NoParams());
+  }
+
+  void createShoppingList(BuildContext context, String name) async {
+    final newList = ShoppingListsModel(nameList: name, products: []);
     shoppingList.add(newList);
-    final result = await shoppingListsUseCase(newList);
+    final result = await createShoppingListsUseCase(newList);
     result.fold(
-      (l) => InAppNotification.serverFailure(context: context, message: l.message), 
-      (r) => newList);
+        (l) => InAppNotification.serverFailure(
+            context: context, message: l.message),
+        (r) => newList);
     notifyListeners();
   }
 
@@ -38,6 +50,16 @@ class ShoppingListsProvider extends ChangeNotifier {
     );
     productNameController.clear();
 
+    notifyListeners();
+  }
+
+  //TODO Terminar
+  void updateShoppingList(BuildContext context) async {
+    final result = await updateShoppingListUseCase(currentShoppingList!);
+    result.fold(
+        (l) => InAppNotification.serverFailure(
+            context: context, message: l.message),
+        (updateList) => null);
     notifyListeners();
   }
 

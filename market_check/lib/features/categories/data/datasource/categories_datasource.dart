@@ -34,12 +34,12 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('Categories Exception: $e');
       throw RemoteException(
           message: "Ha ocurrido un error al consultar las categorias",
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     }
   }
 }

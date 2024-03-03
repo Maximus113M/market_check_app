@@ -45,7 +45,7 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       print(e);
       throw RemoteException(
           message: 'Ha ocurrido un error al consultar los productos.',
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     }
   }
 
@@ -70,7 +70,7 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       throw RemoteException(
           message:
               "Ha ocurrido un error al traer los productos de la categoria",
-          type: ExceptionType.productsException);
+          type: ExceptionType.products);
     }
   }
 }

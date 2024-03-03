@@ -65,7 +65,11 @@ void registerProviders() {
     ),
   );
   sl.registerLazySingleton(
-    () => ShoppingListsProvider(shoppingListsUseCase: sl()),
+    () => ShoppingListsProvider(
+      createShoppingListsUseCase: sl(),
+      getShoppingListsUseCase: sl(),
+      updateShoppingListUseCase: sl(),
+    ),
   );
   sl.registerLazySingleton(
     () => PendingPurchaseProvider(

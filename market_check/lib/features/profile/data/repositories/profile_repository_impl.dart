@@ -18,8 +18,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.categoriesException),
+        RemoteFailure(message: e.message, type: ExceptionType.categories),
       );
     }
   }
@@ -33,8 +32,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.categoriesException),
+        RemoteFailure(message: e.message, type: ExceptionType.categories),
       );
     }
   }
@@ -47,8 +45,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(
-            message: e.message, type: ExceptionType.categoriesException),
+        RemoteFailure(message: e.message, type: ExceptionType.categories),
       );
     }
   }

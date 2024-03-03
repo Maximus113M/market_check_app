@@ -21,7 +21,7 @@ class PendingPurchasesRepositoryImpl extends PendingPurchasesRepository {
       return Left(
         RemoteFailure(
           message: e.message,
-          type: ExceptionType.pendingPurchasesException,
+          type: ExceptionType.pendingPurchases,
         ),
       );
     }

@@ -48,12 +48,12 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('VerifyCurrentSession Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al verificar la Sesión",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -102,13 +102,13 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('VerifyLogIn Exception: $e');
       throw RemoteException(
           message:
               "Revisa tus credenciales y asegurate de confirmar la notificación enviada a tu correo",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -133,12 +133,12 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('GetOpenPurchases Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al obtener las compras pendientes",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -155,13 +155,13 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('SignUp Exception $e');
       throw RemoteException(
           message:
               "Ocurrio un error al relizar el registro, por favor intente de nuevo",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     }
   }
 
@@ -183,12 +183,12 @@ class SignInDataSourceImpl extends SignInDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint('SignOut Exception: $e');
       throw RemoteException(
         message: 'Ha ocurrido un error al cerrar la Sesion',
-        type: ExceptionType.signInException,
+        type: ExceptionType.signIn,
       );
     }
   }

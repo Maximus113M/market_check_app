@@ -32,12 +32,12 @@ class StoresDataSourceImpl extends StoresDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signInException);
+          type: ExceptionType.signIn);
     } catch (e) {
       debugPrint("Stores Exception: $e");
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
-          type: ExceptionType.storesException);
+          type: ExceptionType.stores);
     }
   }
 
@@ -67,12 +67,12 @@ class StoresDataSourceImpl extends StoresDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.offersException);
+          type: ExceptionType.offers);
     } catch (e) {
       debugPrint('Offers Exception: $e');
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
-          type: ExceptionType.offersException);
+          type: ExceptionType.offers);
     }
   }
 }

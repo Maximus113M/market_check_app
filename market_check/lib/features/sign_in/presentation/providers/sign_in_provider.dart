@@ -43,9 +43,13 @@ class SignInProvider with ChangeNotifier {
 
   void verifyCurrentSession(BuildContext context) async {
     final result = await verifyCurrentSessionUseCase(NoParams());
-    result.fold((l) => debugPrint(l.message), (r) async {
-      String route = '/login-form';
-
+    String route = '/login-form';
+    result.fold((l) {
+      debugPrint(l.message);
+      Future.delayed(const Duration(seconds: 1)).then(
+        (value) => context.pushReplacement(route),
+      );
+    }, (r) async {
       if (AuthService.user != null) {
         context.read<PendingPurchaseProvider>().setFirstPendingPurchases(r);
         context.read<StoresProvider>().loadStores(context, notify: true);

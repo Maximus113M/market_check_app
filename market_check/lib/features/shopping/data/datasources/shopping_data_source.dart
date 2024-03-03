@@ -43,12 +43,12 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     } catch (e) {
       debugPrint('ShoppingDataSource Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al intentar crear la compra',
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     }
   }
 
@@ -67,12 +67,12 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     } catch (e) {
       debugPrint('ShoppingDataSource Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al agregar productos a la compra.',
-          type: ExceptionType.purchasesException);
+          type: ExceptionType.purchases);
     }
   }
 }
