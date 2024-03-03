@@ -64,7 +64,7 @@ class ShoppingListsProvider extends ChangeNotifier {
     result.fold(
         (l) => InAppNotification.serverFailure(
             context: context, message: l.message),
-        (updateList) => null);
+        (updateList) => currentShoppingList = updateList);
     notifyListeners();
   }
 
