@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
+import 'package:market_check/config/utils/constans/app_colors.dart';
 import 'package:market_check/config/utils/screen_size.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class ShowModalBottomSheet extends StatelessWidget {
                       const SizedBox(height: 10),
                       CustomTextFormField(
                         onChange: (value) {
-                          listName = value;
+                        listName = value;
                         },
                         hint: 'Nombre de la lista',
                       ),
@@ -67,7 +68,9 @@ class ShowModalBottomSheet extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(Icons.add),
+      icon: const Icon(Icons.add,
+      color: AppColors.appSecondary,
+      size: 30),
     );
   }
 }

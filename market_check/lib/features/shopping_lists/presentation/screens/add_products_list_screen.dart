@@ -21,13 +21,13 @@ class AddProductsListScreen extends StatelessWidget {
         isCartVisible: false,
         title: Text(
           shoppingListsProvider.currentShoppingList!.nameList,
-          style: FontStyles.subtitle0(AppColors.white),
+          style: FontStyles.subtitle0(AppColors.appSecondary),
         ),
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(
             Icons.arrow_back,
-            color: AppColors.white,
+            color: AppColors.appSecondary,
           ),
         ),
       ),
