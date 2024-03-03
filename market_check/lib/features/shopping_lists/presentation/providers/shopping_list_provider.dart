@@ -27,6 +27,10 @@ class ShoppingListsProvider extends ChangeNotifier {
   //TODO Terminar
   void getShoppingLists(BuildContext context) async {
     final result = await getShoppingListsUseCase(NoParams());
+    result.fold(
+      (l) => InAppNotification.serverFailure(
+        context: context, message: l.message), 
+      (r) => null);
   }
 
   void createShoppingList(BuildContext context, String name) async {
@@ -42,6 +46,7 @@ class ShoppingListsProvider extends ChangeNotifier {
 
   void addProductsToList() {
     if (productNameController.text.isEmpty) return;
+    
     currentShoppingList!.products.add(
       ShoppingListItemModel(
         itemName: productNameController.text,

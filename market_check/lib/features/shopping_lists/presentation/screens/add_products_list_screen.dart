@@ -19,12 +19,12 @@ class AddProductsListScreen extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(
+          /*FloatingActionButton(
             onPressed: () {
               shoppingListsProvider.getShoppingLists(context);
             },
             child: const Text('Listar'),
-          ),
+          ),*/
           FloatingActionButton(
             onPressed: () {
               shoppingListsProvider.updateShoppingList(context);

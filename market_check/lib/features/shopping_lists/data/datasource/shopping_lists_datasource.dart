@@ -47,9 +47,10 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
       if (response.statusCode >= 300) {
         throw HttpException(message: '${jsonDecode(response.body)['message']}');
       }
-      //TODO DEVOLVER LA DE LA DB
-      jsonDecode(response.body)[''];
-      return newList;
+      final responseBody = jsonDecode(response.body)['lista'];
+      final createdList = ShoppingListsModel.fromJson(responseBody);
+      print(createdList);
+      return createdList;
     } catch (e) {
       debugPrint('$e');
       throw RemoteException(
@@ -63,11 +64,16 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   Future<ShoppingListsModel> updateShoppingList(
       ShoppingListsModel newList) async {
     try {
+
       final response = await ServerService.serverPut(
-          '${ServerUrls.listsUrl}/2', newList.shoppingListToJson());
+          '${ServerUrls.listsUrl}/newList.id',
+          newList.shoppingListToJson());
+        print(response);
+
       if (response.statusCode == 201) {
-        //TODO DEVOLVER LO DE LA DB
-        return newList;
+        final responseBody = jsonDecode(response.body)['lista'];
+        final updateList = ShoppingListsModel.fromJson(responseBody);
+        return updateList;
       }
       throw UnimplementedError();
     } catch (e) {
