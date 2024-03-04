@@ -28,25 +28,27 @@ class ShoppingListsProvider extends ChangeNotifier {
   void getShoppingLists(BuildContext context) async {
     final result = await getShoppingListsUseCase(NoParams());
     result.fold(
-      (l) => InAppNotification.serverFailure(
-        context: context, message: l.message), 
-      (r) => null);
+        (l) => InAppNotification.serverFailure(
+            context: context, message: l.message), (r) {
+      shoppingList = r;
+    });
   }
 
   void createShoppingList(BuildContext context, String name) async {
     final newList = ShoppingListsModel(nameList: name, products: []);
-    shoppingList.add(newList);
+    print(newList);
+    
     final result = await createShoppingListsUseCase(newList);
     result.fold(
         (l) => InAppNotification.serverFailure(
             context: context, message: l.message),
-        (r) => newList);
+        (r) => shoppingList.add(r));
     notifyListeners();
   }
 
   void addProductsToList() {
     if (productNameController.text.isEmpty) return;
-    
+
     currentShoppingList!.products.add(
       ShoppingListItemModel(
         itemName: productNameController.text,
@@ -61,6 +63,7 @@ class ShoppingListsProvider extends ChangeNotifier {
   //TODO Terminar
   void updateShoppingList(BuildContext context) async {
     final result = await updateShoppingListUseCase(currentShoppingList!);
+    print(result);
     result.fold(
         (l) => InAppNotification.serverFailure(
             context: context, message: l.message),
