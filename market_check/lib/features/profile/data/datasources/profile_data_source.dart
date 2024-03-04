@@ -10,7 +10,7 @@ import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 
 abstract class ProfileDataSource {
-  Future<bool> updatePasword(String password);
+  Future<void> updatePasword(String password);
   Future<String> updateAccountData(SignUpDataModel updatedData);
   Future<String> deleteAccount();
 }
@@ -21,32 +21,31 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   ProfileDataSourceImpl({required this.flutterSecureStorage});
 
   @override
-  Future<bool> updatePasword(String password) async {
+  Future<void> updatePasword(String password) async {
     try {
       final String path =
-          '${ServerUrls.userUrl}${AuthService.user!.id!}/change-password';
+          '${ServerUrls.userUrl}${AuthService.user!.id!}${ServerUrls.changePasswordUrl}';
 
       final response = await ServerService.serverPut(
         path,
         {'password': password},
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return true;
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
-
-      return false;
     } on HttpException catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, updatePasword HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, updatePasword Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al actualizar la contraseña",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     }
   }
 
@@ -60,36 +59,35 @@ class ProfileDataSourceImpl extends ProfileDataSource {
         updatedData.userToJson(),
       );
 
-      if (response.statusCode == 201) {
-        var cualquira = jsonDecode(response.body)['user'];
-
-        print(cualquira);
-        print(jsonDecode(response.body)['image_profile']);
-
-        final User updatedUser = User.fromJson(
-          jsonDecode(response.body)['user'],
-        );
-        AuthService.user = updatedUser;
-        await flutterSecureStorage.write(key: 'name', value: updatedUser.name);
-        await flutterSecureStorage.write(
-            key: 'documento', value: updatedUser.document.toString());
-        await flutterSecureStorage.write(
-            key: 'email', value: updatedUser.email);
-        await flutterSecureStorage.write(
-            key: 'image_profile', value: ('${updatedUser.profileImage}'));
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+
+      final User updatedUser = User.fromJson(
+        jsonDecode(response.body)['user'],
+      );
+
+      AuthService.user = updatedUser;
+      await flutterSecureStorage.write(key: 'name', value: updatedUser.name);
+      await flutterSecureStorage.write(
+          key: 'documento', value: updatedUser.document.toString());
+      await flutterSecureStorage.write(key: 'email', value: updatedUser.email);
+      await flutterSecureStorage.write(
+          key: 'image_profile', value: ('${updatedUser.profileImage}'));
+
       return jsonDecode(response.body)["message"];
     } on HttpException catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, updateAccountData HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, updateAccountData Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al actualizar los datos",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     }
   }
 
@@ -100,23 +98,26 @@ class ProfileDataSourceImpl extends ProfileDataSource {
 
       final response = await ServerService.serverDelete(path);
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        await flutterSecureStorage.deleteAll();
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+
+      await flutterSecureStorage.deleteAll();
 
       return jsonDecode(response.body)["message"];
     } on HttpException catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, deleteAccount HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ProfileDataSource, deleteAccount Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",
-          type: ExceptionType.signIn);
+          type: ExceptionType.profile);
     }
   }
 }

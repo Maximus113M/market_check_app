@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -44,13 +44,13 @@ class SignInDataSourceImpl extends SignInDataSource {
 
       return openPurchase;
     } on HttpException catch (e) {
-      debugPrint('VerifyCurrentSession httpException: $e');
+      debugPrint('SignInDataSource, verifyCurrentSession HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('VerifyCurrentSession Exception: $e');
+      debugPrint('SignInDataSource, verifyCurrentSession Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al verificar la Sesión",
           type: ExceptionType.signIn);
@@ -64,47 +64,50 @@ class SignInDataSourceImpl extends SignInDataSource {
           {"email": signInData.email, "password": signInData.password});
 
       PurchaseModel? openPurchase;
-      if (response.statusCode == 200) {
-        await flutterSecureStorage.write(
-            key: 'id',
-            value: jsonDecode(response.body)["user"]["id"].toString());
-        await flutterSecureStorage.write(
-            key: 'name', value: jsonDecode(response.body)["user"]["name"]);
-        await flutterSecureStorage.write(
-            key: 'documento',
-            value: jsonDecode(response.body)["user"]["documento"].toString());
-        await flutterSecureStorage.write(
-            key: 'email', value: jsonDecode(response.body)["user"]["email"]);
-        await flutterSecureStorage.write(
-            key: 'access_token',
-            value: jsonDecode(response.body)["access_token"]);
-        await flutterSecureStorage.write(
-            key: 'token_type', value: jsonDecode(response.body)["token_type"]);
 
-        AuthService.user = User.fromJson(jsonDecode(response.body)["user"]);
-        AuthService.token = jsonDecode(response.body)["access_token"];
-        AuthService.typeToken = jsonDecode(response.body)["token_type"];
-        AuthService.headers = {
-          'Content-Type': 'application/json',
-          'Authorization': '${AuthService.typeToken} ${AuthService.token}'
-        };
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
 
-        openPurchase = await getOpenPurchases();
-        if (openPurchase != null) {
-          AuthService.user!.isPurchaseOpen = true;
-          AuthService.user!.purchasePin = openPurchase.pin;
-        }
+      await flutterSecureStorage.write(
+          key: 'id', value: jsonDecode(response.body)["user"]["id"].toString());
+      await flutterSecureStorage.write(
+          key: 'name', value: jsonDecode(response.body)["user"]["name"]);
+      await flutterSecureStorage.write(
+          key: 'documento',
+          value: jsonDecode(response.body)["user"]["documento"].toString());
+      await flutterSecureStorage.write(
+          key: 'email', value: jsonDecode(response.body)["user"]["email"]);
+      await flutterSecureStorage.write(
+          key: 'access_token',
+          value: jsonDecode(response.body)["access_token"]);
+      await flutterSecureStorage.write(
+          key: 'token_type', value: jsonDecode(response.body)["token_type"]);
+
+      AuthService.user = User.fromJson(jsonDecode(response.body)["user"]);
+      AuthService.token = jsonDecode(response.body)["access_token"];
+      AuthService.typeToken = jsonDecode(response.body)["token_type"];
+      AuthService.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': '${AuthService.typeToken} ${AuthService.token}'
+      };
+
+      openPurchase = await getOpenPurchases();
+      if (openPurchase != null) {
+        AuthService.user!.isPurchaseOpen = true;
+        AuthService.user!.purchasePin = openPurchase.pin;
       }
 
       return openPurchase;
     } on HttpException catch (e) {
-      debugPrint('VerifyLogIn httpException: $e');
+      debugPrint('SignInDataSource, verifyLogIn HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('VerifyLogIn Exception: $e');
+      debugPrint('SignInDataSource, verifyLogIn Exception: $e');
       throw RemoteException(
           message:
               "Revisa tus credenciales y asegurate de confirmar la notificación enviada a tu correo",
@@ -117,25 +120,28 @@ class SignInDataSourceImpl extends SignInDataSource {
       PurchaseModel? openPurchase;
       const String path =
           '${ServerUrls.purchaseUrl}${ServerUrls.openShoppingHistoryUrl}';
+
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode == 200) {
-        if (jsonDecode(response.body)['openPurchase'] == null) {
-          return null;
-        }
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+
+      if (jsonDecode(response.body)['openPurchase'] != null) {
         openPurchase =
             PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
       }
 
       return openPurchase;
     } on HttpException catch (e) {
-      debugPrint('GetOpenPurchases httpException: $e');
+      debugPrint('SignInDataSource, getOpenPurchases HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('GetOpenPurchases Exception: $e');
+      debugPrint('SignInDataSource, getOpenPurchases Exception: $e');
       throw RemoteException(
           message: "Ocurrio un error al obtener las compras pendientes",
           type: ExceptionType.signIn);
@@ -147,17 +153,24 @@ class SignInDataSourceImpl extends SignInDataSource {
     try {
       final response = await ServerService.serverPost(
           ServerUrls.signUpUrl, newUser.userToJson());
-      if (response.statusCode == 201) {}
-      print(jsonDecode(response.body));
-      return 'Registro exito, ya puedes Iniciar Sesión!';
+
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+
+      debugPrint(
+        jsonDecode(response.body),
+      );
+      return 'Registro exito, Verifica la confirmación enviada a tu correo!';
     } on HttpException catch (e) {
-      debugPrint('SignUp httpException: $e');
+      debugPrint('SignInDataSource, signUp HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('SignUp Exception $e');
+      debugPrint('SignInDataSource, signUp Exception $e');
       throw RemoteException(
           message:
               "Ocurrio un error al relizar el registro, por favor intente de nuevo",
@@ -169,7 +182,13 @@ class SignInDataSourceImpl extends SignInDataSource {
   Future<bool> signOut() async {
     try {
       if (AuthService.user != null) {
-        ServerService.serverGet(ServerUrls.logOutUrl);
+        final response = await ServerService.serverGet(ServerUrls.logOutUrl);
+
+        if (response.statusCode >= 300) {
+          throw HttpException(
+              message: '${response.statusCode}, ${response.reasonPhrase}');
+        }
+
         AuthService.user = null;
         AuthService.token = null;
         AuthService.typeToken = null;
@@ -179,13 +198,13 @@ class SignInDataSourceImpl extends SignInDataSource {
       }
       return false;
     } on HttpException catch (e) {
-      debugPrint('SignOut httpException: $e');
+      debugPrint('SignInDataSource, signOut HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('SignOut Exception: $e');
+      debugPrint('SignInDataSource, signOut Exception: $e');
       throw RemoteException(
         message: 'Ha ocurrido un error al cerrar la Sesion',
         type: ExceptionType.signIn,

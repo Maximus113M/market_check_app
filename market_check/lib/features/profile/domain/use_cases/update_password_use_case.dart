@@ -4,13 +4,13 @@ import 'package:market_check/features/profile/domain/repositories/profile_reposi
 
 import 'package:dartz/dartz.dart';
 
-class UpdatePasswordUseCase extends UseCase<bool, String> {
+class UpdatePasswordUseCase extends UseCase<void, String> {
   final ProfileRepository profileRepository;
 
   UpdatePasswordUseCase({required this.profileRepository});
 
   @override
-  Future<Either<RemoteFailure, bool>> call(String params) async {
+  Future<Either<RemoteFailure, void>> call(String params) async {
     return await profileRepository.updatePasword(params);
   }
 }

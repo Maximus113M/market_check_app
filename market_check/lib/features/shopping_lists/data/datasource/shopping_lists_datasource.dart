@@ -10,7 +10,7 @@ abstract class ShoppingListsDatasorce {
   Future<List<ShoppingListsModel>> getShoppingLists();
   Future<ShoppingListsModel> createShoppingList(ShoppingListsModel newList);
   Future<ShoppingListsModel> updateShoppingList(ShoppingListsModel newList);
-  Future<void> deleteShoppingList(int newList);
+  Future<void> deleteShoppingList(int listId);
 }
 
 class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
@@ -18,19 +18,29 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   Future<List<ShoppingListsModel>> getShoppingLists() async {
     try {
       List<ShoppingListsModel> userLists = [];
+
       final response = await ServerService.serverGet(ServerUrls.listsUrl);
-      if (response.statusCode == 200) {
-        print(jsonDecode(response.body)['Listas del usuario']);
 
-        userLists = (jsonDecode(response.body)['Listas del usuario'] as List)
-            .map((jsonList) => ShoppingListsModel.fromJson(jsonList))
-            .toList();
-
-        print(userLists);
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
-      return [];
+
+      debugPrint(jsonDecode(response.body)['Listas del usuario']);
+
+      userLists = (jsonDecode(response.body)['Listas del usuario'] as List)
+          .map((jsonList) => ShoppingListsModel.fromJson(jsonList))
+          .toList();
+
+      return userLists;
+    } on HttpException catch (e) {
+      debugPrint('ShoppingListDatasource, getShoppingLists HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.shoppingLists);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ShoppingListDatasource, getShoppingLists Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo",
@@ -44,15 +54,25 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
     try {
       final response = await ServerService.serverPost(
           ServerUrls.listsUrl, newList.shoppingListToJson());
+
       if (response.statusCode >= 300) {
-        throw HttpException(message: '${jsonDecode(response.body)['message']}');
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
-      final responseBody = jsonDecode(response.body)['lista'];
-      final createdList = ShoppingListsModel.fromJson(responseBody);
-      print(createdList);
+
+      final createdList =
+          ShoppingListsModel.fromJson(jsonDecode(response.body)['lista']);
+
       return createdList;
+    } on HttpException catch (e) {
+      debugPrint(
+          'ShoppingListDatasource, createShoppingLists HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.shoppingLists);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ShoppingListDatasource, createShoppingLists Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo",
@@ -64,20 +84,26 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   Future<ShoppingListsModel> updateShoppingList(
       ShoppingListsModel newList) async {
     try {
-
       final response = await ServerService.serverPut(
-          '${ServerUrls.listsUrl}/newList.id',
-          newList.shoppingListToJson());
-        print(response);
+          '${ServerUrls.listsUrl}/${newList.id}', newList.shoppingListToJson());
 
-      if (response.statusCode == 201) {
-        final responseBody = jsonDecode(response.body)['lista'];
-        final updateList = ShoppingListsModel.fromJson(responseBody);
-        return updateList;
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
-      throw UnimplementedError();
+      final updateList =
+          ShoppingListsModel.fromJson(jsonDecode(response.body)['lista']);
+
+      return updateList;
+    } on HttpException catch (e) {
+      debugPrint(
+          'ShoppingListDatasource, updateShoppingLists HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.shoppingLists);
     } catch (e) {
-      debugPrint('$e');
+      debugPrint('ShoppingListDatasource, updateShoppingLists Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo",
@@ -86,8 +112,27 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   }
 
   @override
-  Future<void> deleteShoppingList(int newList) {
-    // TODO: implement deleteShoppingList
-    throw UnimplementedError();
+  Future<void> deleteShoppingList(int listId) async {
+    try {
+      final response = await ServerService.serverDelete(ServerUrls.listsUrl);
+
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+    } on HttpException catch (e) {
+      debugPrint(
+          'ShoppingListDatasource, deleteShoppingLists HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.shoppingLists);
+    } catch (e) {
+      debugPrint('ShoppingListDatasource, deleteShoppingLists Exception: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo",
+          type: ExceptionType.shoppingLists);
+    }
   }
 }
