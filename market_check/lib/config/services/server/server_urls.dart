@@ -46,11 +46,13 @@ class ServerUrls {
 //Dynamic Urls
   //static const String currentUrl = hostingUrl;
   //static const String currentUrl = baseUrlMarly;
-  static const String currentUrl = baseUrlIpv4Camilo;
+  //static const String currentUrl = baseUrlIpv4Camilo;
+  static const String currentUrl = baseUrlMovilSena;
 
   //static const String currentHttp = hosting;
   //static const String currentHttp = baseHttpMarly;
-  static const String currentHttp = baseHttpIpv4Camilo;
+  //static const String currentHttp = baseHttpIpv4Camilo;
+  static const String currentHttp = baseHttpMovilSena;
 
   //static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
 

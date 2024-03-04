@@ -60,6 +60,9 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<PurchaseModel?> verifyLogIn(SignInDataModel signInData) async {
     try {
+      final responseTemp= await ServerService.serverGet('images');
+      responseTemp.body;
+
       final response = await ServerService.serverPost(ServerUrls.signInUrl,
           {"email": signInData.email, "password": signInData.password});
 
