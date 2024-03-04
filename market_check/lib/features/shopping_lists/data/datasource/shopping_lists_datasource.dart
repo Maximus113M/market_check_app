@@ -26,8 +26,6 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      debugPrint(jsonDecode(response.body)['Listas del usuario']);
-
       userLists = (jsonDecode(response.body)['Listas del usuario'] as List)
           .map((jsonList) => ShoppingListsModel.fromJson(jsonList))
           .toList();
@@ -114,7 +112,8 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   @override
   Future<void> deleteShoppingList(int listId) async {
     try {
-      final response = await ServerService.serverDelete(ServerUrls.listsUrl);
+      final response =
+          await ServerService.serverDelete('${ServerUrls.listsUrl}/$listId');
 
       if (response.statusCode >= 300) {
         throw HttpException(
