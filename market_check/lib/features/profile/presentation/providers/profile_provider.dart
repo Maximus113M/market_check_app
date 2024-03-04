@@ -22,7 +22,7 @@ class ProfileProvider with ChangeNotifier {
   final UpdatePasswordUseCase updatePasswordUseCase;
   bool isLoading = false;
   final List<String> avatars = AppAssets.avatarList;
-  int selectdAvatare = 0;
+  int selectdAvatare = AuthService.user!.profileImage!;
 
   ProfileProvider({
     required this.deleteAccountUseCase,

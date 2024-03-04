@@ -83,6 +83,8 @@ class SignInDataSourceImpl extends SignInDataSource {
       await flutterSecureStorage.write(
           key: 'email', value: jsonDecode(response.body)["user"]["email"]);
       await flutterSecureStorage.write(
+          key: 'profile_image', value: ('${jsonDecode(response.body)["user"]["profile_image"]}'));    
+      await flutterSecureStorage.write(
           key: 'access_token',
           value: jsonDecode(response.body)["access_token"]);
       await flutterSecureStorage.write(

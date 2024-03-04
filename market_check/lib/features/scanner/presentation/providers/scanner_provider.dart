@@ -5,6 +5,7 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/scanner/scanner_service.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
+import 'package:market_check/features/scanner/data/models/scanner_data_model.dart';
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 import 'package:market_check/features/scanner/presentation/widgets/scanned_product_dialog.dart';
 import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
@@ -24,7 +25,7 @@ class ScannerProvider with ChangeNotifier {
     int storeId = context.read<StoresProvider>().currentStore!.id;
     scanBarCode = await ScannerService.scanBarcodeNormal();
 
-    //TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
+    /*//TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
     if (int.parse(scanBarCode) == -1) {
       final ProductModel product = ProductModel(
         id: 1,
@@ -44,8 +45,8 @@ class ScannerProvider with ChangeNotifier {
     }
 
     //
-    print(scanBarCode);
-    /* if (int.parse(scanBarCode) < 0) return;
+    print(scanBarCode);*/
+    if (int.parse(scanBarCode) < 0) return;
 
     final ScannerDataModel scannerData =
         ScannerDataModel(storeId: storeId, productCode: int.parse(scanBarCode));
@@ -56,7 +57,7 @@ class ScannerProvider with ChangeNotifier {
               context: context,
               message: l.message,
             ), (product) {
-      print(product);
+      
       if (product == null) {
         InAppNotification.showAppNotification(
             context: context,
@@ -67,7 +68,7 @@ class ScannerProvider with ChangeNotifier {
       }
       currentProduct = product;
       notifyListeners();
-    });*/
+    });
     Future.delayed(const Duration(seconds: 1))
         .then((value) => showScannedProduct(context));
   }

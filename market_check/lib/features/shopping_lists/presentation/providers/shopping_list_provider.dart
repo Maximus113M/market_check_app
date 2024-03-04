@@ -31,7 +31,7 @@ class ShoppingListsProvider extends ChangeNotifier {
   int productsCounter = 1;
 
   void getShoppingLists(BuildContext context) async {
-    if (shoppingLists.isNotEmpty) return;
+    //if (shoppingLists.isNotEmpty) return;
 
     final result = await getShoppingListsUseCase(NoParams());
     result.fold(
