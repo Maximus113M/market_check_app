@@ -60,7 +60,7 @@ class SignInDataSourceImpl extends SignInDataSource {
   @override
   Future<PurchaseModel?> verifyLogIn(SignInDataModel signInData) async {
     try {
-      final responseTemp= await ServerService.serverGet('images');
+      final responseTemp = await ServerService.serverGet('images');
       responseTemp.body;
 
       final response = await ServerService.serverPost(ServerUrls.signInUrl,
@@ -83,7 +83,8 @@ class SignInDataSourceImpl extends SignInDataSource {
       await flutterSecureStorage.write(
           key: 'email', value: jsonDecode(response.body)["user"]["email"]);
       await flutterSecureStorage.write(
-          key: 'profile_image', value: ('${jsonDecode(response.body)["user"]["profile_image"]}'));    
+          key: 'profile_image',
+          value: ('${jsonDecode(response.body)["user"]["profile_image"]}'));
       await flutterSecureStorage.write(
           key: 'access_token',
           value: jsonDecode(response.body)["access_token"]);
@@ -164,9 +165,8 @@ class SignInDataSourceImpl extends SignInDataSource {
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      debugPrint(
-        jsonDecode(response.body),
-      );
+      debugPrint(response.body);
+      
       return 'Registro exito, Verifica la confirmación enviada a tu correo!';
     } on HttpException catch (e) {
       debugPrint('SignInDataSource, signUp HttpException: $e');

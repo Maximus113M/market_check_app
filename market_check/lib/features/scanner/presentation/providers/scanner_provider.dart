@@ -24,6 +24,7 @@ class ScannerProvider with ChangeNotifier {
   void getProductByScanner(BuildContext context) async {
     int storeId = context.read<StoresProvider>().currentStore!.id;
     scanBarCode = await ScannerService.scanBarcodeNormal();
+    print(scanBarCode);
 
     /*//TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
     if (int.parse(scanBarCode) == -1) {
@@ -57,7 +58,6 @@ class ScannerProvider with ChangeNotifier {
               context: context,
               message: l.message,
             ), (product) {
-      
       if (product == null) {
         InAppNotification.showAppNotification(
             context: context,

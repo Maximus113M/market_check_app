@@ -98,7 +98,7 @@ class ShoppingListScreen extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(
-                  height: ScreenSize.absoluteHeight * 0.7,
+                  height: ScreenSize.absoluteHeight * 0.68,
                   child: ShoppingListName(
                     shoppingList:
                         context.watch<ShoppingListsProvider>().shoppingLists,

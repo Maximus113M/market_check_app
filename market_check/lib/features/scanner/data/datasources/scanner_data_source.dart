@@ -8,13 +8,13 @@ import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/scanner/data/models/scanner_data_model.dart';
 
 abstract class ScannerDataSource {
-  Future<ProductModel> getStoreProductByScanner(ScannerDataModel scannerData);
+  Future<ProductModel?> getStoreProductByScanner(ScannerDataModel scannerData);
 }
 
 class ScannerDataSourceImpl extends ScannerDataSource {
   ScannerDataSourceImpl();
   @override
-  Future<ProductModel> getStoreProductByScanner(
+  Future<ProductModel?> getStoreProductByScanner(
       ScannerDataModel scannerData) async {
     try {
       final response = await ServerService.serverPost(
@@ -25,6 +25,10 @@ class ScannerDataSourceImpl extends ScannerDataSource {
       if (response.statusCode >= 300) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+      ProductModel? product;
+      if(jsonDecode(response.body)["product"] == null){
+        return product;
       }
 
       return ProductModel.fromJson(jsonDecode(response.body)["product"]);
