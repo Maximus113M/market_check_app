@@ -71,12 +71,14 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
           newList.shoppingListToJson());
         print(response);
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201 || response.statusCode == 200) {
         final responseBody = jsonDecode(response.body)['lista'];
-        //final updateList = ShoppingListsModel.fromJson(responseBody);
-        return responseBody;
+        final updateList = ShoppingListsModel.fromJson(responseBody);
+        return updateList;
       }
+
       throw UnimplementedError();
+ 
     } catch (e) {
       debugPrint('$e');
       throw RemoteException(
