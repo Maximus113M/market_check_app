@@ -103,6 +103,8 @@ class ProfileProvider with ChangeNotifier {
   }
 
   void deleteAccount(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
     final result = await deleteAccountUseCase(NoParams());
 
     result.fold(
@@ -122,6 +124,7 @@ class ProfileProvider with ChangeNotifier {
       );
       //context.p
     });
+    isLoading = false;
   }
 
   void selectdAvatar(int index) async {

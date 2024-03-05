@@ -18,10 +18,14 @@ class ScannerProvider with ChangeNotifier {
   final GetStoreProductByScannerUseCase getStoreProductByScannerUseCase;
   String scanBarCode = '';
   ProductModel? currentProduct;
+  bool isLoading = false;
 
   ScannerProvider({required this.getStoreProductByScannerUseCase});
 
   void getProductByScanner(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
     int storeId = context.read<StoresProvider>().currentStore!.id;
     scanBarCode = await ScannerService.scanBarcodeNormal();
     print(scanBarCode);
@@ -47,7 +51,10 @@ class ScannerProvider with ChangeNotifier {
 
     //
     print(scanBarCode);*/
-    if (int.parse(scanBarCode) < 0) return;
+    if (int.parse(scanBarCode) < 0) {
+      isLoading = false;
+      return;
+    }
 
     final ScannerDataModel scannerData =
         ScannerDataModel(storeId: storeId, productCode: scanBarCode);
@@ -71,6 +78,7 @@ class ScannerProvider with ChangeNotifier {
     });
     Future.delayed(const Duration(seconds: 1))
         .then((value) => showScannedProduct(context));
+    isLoading= false;    
   }
 
   void showScannedProduct(BuildContext context) {

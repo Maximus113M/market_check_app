@@ -2,13 +2,13 @@ class ServerUrls {
   ServerUrls._();
 
 //Base Urls
-  static const String baseUrlMovilSena = "http://10.201.194.65:8000/api/";
+  static const String baseUrlMovilSena = "http://10.201.194.25:8000/api/";
   static const String baseUrlMarly = "http://192.168.1.41:8000/api/";
   static const String baseUrlIpv4Camilo = "http://192.168.1.10:8000/api/";
 
   static const String baseHttpMarly = "192.168.1.41:8000";
 
-  static const String baseHttpMovilSena = "10.201.194.65:8000";
+  static const String baseHttpMovilSena = "10.201.194.25:8000";
 
   static const String baseHttpIpv4Camilo = '192.168.1.10:8000';
 
@@ -44,14 +44,14 @@ class ServerUrls {
   static const String closeShoppingHistoryUrl = "close-purchases-app";
 
 //Dynamic Urls
-  //static const String currentUrl = hostingUrl;
+  static const String currentUrl = hostingUrl;
   //static const String currentUrl = baseUrlMarly;
-  static const String currentUrl = baseUrlIpv4Camilo;
+  //static const String currentUrl = baseUrlIpv4Camilo;
   //static const String currentUrl = baseUrlMovilSena;
 
-  //static const String currentHttp = hosting;
+  static const String currentHttp = hosting;
   //static const String currentHttp = baseHttpMarly;
-  static const String currentHttp = baseHttpIpv4Camilo;
+  //static const String currentHttp = baseHttpIpv4Camilo;
   //static const String currentHttp = baseHttpMovilSena;
 
   //static String currentUrlSignIn = baseUrlMovil.replaceFirst('api/', '');
