@@ -77,7 +77,7 @@ class LogInForm extends StatelessWidget {
                       bottom: ScreenSize.absoluteHeight * 0.015),
                   child: GestureDetector(
                     onTap: () {
-                      launchUrlString("https://www.google.com/");
+                      launchUrlString("https://marketcheck.api.adsocidm.com/password/reset");
                     },
                     child: const Text(
                       '¿Olvidaste la contraseña?',
