@@ -50,7 +50,7 @@ class ScannerProvider with ChangeNotifier {
     if (int.parse(scanBarCode) < 0) return;
 
     final ScannerDataModel scannerData =
-        ScannerDataModel(storeId: storeId, productCode: int.parse(scanBarCode));
+        ScannerDataModel(storeId: storeId, productCode: scanBarCode);
     final result = await getStoreProductByScannerUseCase(scannerData);
 
     result.fold(

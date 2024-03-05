@@ -35,6 +35,7 @@ class ProductsDataSourceImpl extends ProductsDataSource {
             .toList();
         products.where((product) => product.state != 0).toList();
       }
+
       return products;
     } on HttpException catch (e) {
       debugPrint('getStoreProducts httpException: $e');

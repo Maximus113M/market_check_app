@@ -9,7 +9,7 @@ class CustomFilledButton extends StatelessWidget {
   final VoidCallback action;
   final double horizontalSize;
   final double verticalSize;
-  final double fontSize;
+  final TextStyle? fontStyle;
   final Color? color;
   final Color? bgColor;
   final double radius;
@@ -20,7 +20,7 @@ class CustomFilledButton extends StatelessWidget {
       required this.action,
       this.horizontalSize = 0.03,
       this.verticalSize = 0.012,
-      this.fontSize = 0,
+      this.fontStyle,
       this.color,
       this.bgColor,
       this.radius = 0.1});
@@ -45,7 +45,7 @@ class CustomFilledButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: FontStyles.bodyBold2(color ?? AppColors.white),
+        style: fontStyle ?? FontStyles.bodyBold2(color ?? AppColors.white),
       ),
     );
   }

@@ -20,18 +20,24 @@ class AddProductsListScreen extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          /*FloatingActionButton(
-            onPressed: () {
-              shoppingListsProvider.getShoppingLists(context);
-            },
-            child: const Text('Listar'),
-          ),*/
-          FloatingActionButton(
+          IconButton.filled(
+            style: ButtonStyle(
+              backgroundColor:
+                  const MaterialStatePropertyAll(AppColors.appPrimary),
+              shape: MaterialStatePropertyAll(
+                ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
             onPressed: () {
               shoppingListsProvider.updateShoppingList(context);
             },
-            child: const Text('Guardar'),
-          ),
+            icon: Icon(
+              Icons.save,
+              size: ScreenSize.absoluteHeight * 0.053,
+            ),
+          )
         ],
       ),
       appBar: customAppBar(

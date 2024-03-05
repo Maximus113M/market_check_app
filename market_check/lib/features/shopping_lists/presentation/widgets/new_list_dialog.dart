@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 
@@ -15,32 +14,44 @@ class NewListDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     String listName = '';
     return AlertDialog(
-      title: Text(
-        'Nueva Lista',
-        style: FontStyles.bodyBold0(AppColors.appSecondary),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CustomTextFormField(
-            onChange: (value) {
-              listName = value;
-            },
-            hint: 'Nombre de la lista',
-          ),
-          const SizedBox(height: 30),
-          CustomButton(
-            text: 'Crear lista',
-            action: () {
-              final String listname = listName;
-              context
-                  .read<ShoppingListsProvider>()
-                  .createShoppingList(context, listname);
-              context.pop();
-            },
-            horizontalMargin: 0,
-          ),
-        ],
+      surfaceTintColor: AppColors.white,
+      content: Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Text(
+                  'Nueva Lista',
+                  style: FontStyles.heading11(AppColors.text),
+                ),
+                Image.asset(
+                  AppAssets.listIcon,
+                  height: ScreenSize.absoluteHeight * 0.05,
+                )
+              ],
+            ),
+            TextFormField(
+              onChanged: (value) {
+                listName = value;
+              },
+            ),
+            SizedBox(height: ScreenSize.absoluteHeight * 0.03),
+            CustomButton(
+              text: 'Crear lista',
+              textStyle: FontStyles.bodyBold0(AppColors.appPrimary),
+              color: AppColors.appPrimary,
+              bgColor: AppColors.appSecondary,
+              action: () {
+                context
+                    .read<ShoppingListsProvider>()
+                    .createShoppingList(context, listName);
+                context.pop();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

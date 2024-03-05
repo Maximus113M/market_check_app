@@ -25,12 +25,11 @@ class AppAssets {
 //--------------------------Profile
   static const String shopping = 'assets/Images/profile/shoppings.webp';
   static const String stores = 'assets/Images/profile/stores.jpeg';
-  static const String favoritesProducts =
-      'assets/Images/profile/products.png';
+  static const String favoritesProducts = 'assets/Images/profile/products.png';
 
 //--------------------------Icons
   static const String invoiceIcon = 'assets/Images/icons/invoice.png';
-  static const String invoice2 = 'assets/Images/icons/invoiceFull.png';
+  static const String listIcon = 'assets/Images/icons/list.png';
 
 //--------------------------Logos - animaciones
   static const String logoHorizontal = 'assets/Images/logos/logoHorizontal.png';
