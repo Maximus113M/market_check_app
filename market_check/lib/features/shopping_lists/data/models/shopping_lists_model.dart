@@ -23,7 +23,7 @@ class ShoppingListsModel {
         ShoppingListItemModel.fromJson(jsonDecode(value)),
       );
     });
-    print(products);
+
     return ShoppingListsModel(
       id: json['id'],
       userId: json['user_id'],

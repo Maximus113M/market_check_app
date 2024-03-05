@@ -19,9 +19,11 @@ class PendingPurchasesBodyScreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'COMPRAS PENDIENTES',
-            style: FontStyles.subtitle0(AppColors.appPrimary),
+          child: Center(
+            child: Text(
+              'COMPRAS PENDIENTES',
+              style: FontStyles.subtitle0(AppColors.appPrimary),
+            ),
           ),
         ),
         Padding(

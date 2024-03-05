@@ -83,11 +83,6 @@ final appRouter = GoRouter(
       builder: (context, state) => const ShoppingHistoryScreen(),
     ),
     GoRoute(
-      path: "/settings",
-      name: SettingsScreen.name,
-      builder: (context, state) => const SettingsScreen(),
-    ),
-    GoRoute(
       path: "/scanner",
       name: ScannerScreen.name,
       builder: (context, state) => const ScannerScreen(),

@@ -6,7 +6,6 @@ export 'package:market_check/features/stores/presentation/screens/store/store_sc
 export 'package:market_check/features/profile/presentation/screens/profile_details_screen.dart';
 export 'package:market_check/injection_container.dart';
 
-export 'package:market_check/features/settings/setting_screen.dart';
 export 'package:market_check/features/profile/presentation/screens/profile_screen.dart';
 export 'package:market_check/features/shopping/presentation/screens/shopping_cart_screen.dart';
 export 'package:market_check/features/sign_in/presentation/screens/login/login_form_screen.dart';

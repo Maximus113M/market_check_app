@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
@@ -18,23 +17,27 @@ class StoresDataSourceImpl extends StoresDataSource {
   Future<List<StoreModel>> getStores() async {
     try {
       List<StoreModel> stores = [];
+
       final response = await ServerService.serverGet(ServerUrls.storesUrl);
 
-      if (response.statusCode == 200) {
-        stores = (jsonDecode(response.body)["stores"] as List).map((storeJson) {
-          return StoreModel.fromJson(storeJson);
-        }).toList();
-        return stores.where((store) => store.state != 0).toList();
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
-      return stores;
+
+      stores = (jsonDecode(response.body)["stores"] as List).map((storeJson) {
+        return StoreModel.fromJson(storeJson);
+      }).toList();
+
+      return stores.where((store) => store.state != 0).toList();
     } on HttpException catch (e) {
-      debugPrint('Stores httpException: $e');
+      debugPrint('StoresDataSource, getStores HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint("Stores Exception: $e");
+      debugPrint("StoresDataSource, getStores Exception: $e");
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.stores);
@@ -46,30 +49,31 @@ class StoresDataSourceImpl extends StoresDataSource {
     try {
       List<OfferModel> offers = [];
 
-      if (AuthService.user != null) {
-        var response = await ServerService.serverGet(
-          ServerUrls.offersUrl,
-        );
+      final response = await ServerService.serverGet(
+        ServerUrls.offersUrl,
+      );
 
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          offers = (jsonDecode(response.body)['offers'] as List).map(
-            (offerJson) {
-              return OfferModel.fromJson(offerJson);
-            },
-          ).toList();
-        }
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+
+      offers = (jsonDecode(response.body)['offers'] as List).map(
+        (offerJson) {
+          return OfferModel.fromJson(offerJson);
+        },
+      ).toList();
 
       debugPrint("$offers");
       return offers;
     } on HttpException catch (e) {
-      debugPrint('Offers httpException: $e');
+      debugPrint('StoresDatasource, getOffers HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.offers);
     } catch (e) {
-      debugPrint('Offers Exception: $e');
+      debugPrint('StoresDatasource, getOffers Exception: $e');
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.offers);

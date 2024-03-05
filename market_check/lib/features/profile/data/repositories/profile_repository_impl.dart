@@ -1,9 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/errors/failures.dart';
+import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/profile/data/datasources/profile_data_source.dart';
 import 'package:market_check/features/profile/domain/repositories/profile_repository.dart';
+
+import 'package:dartz/dartz.dart';
 
 class ProfileRepositoryImpl extends ProfileRepository {
   final ProfileDataSource profileDataSource;
@@ -38,7 +39,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Future<Either<RemoteFailure, bool>> updatePasword(String password) async {
+  Future<Either<RemoteFailure, void>> updatePasword(String password) async {
     try {
       return Right(
         await profileDataSource.updatePasword(password),

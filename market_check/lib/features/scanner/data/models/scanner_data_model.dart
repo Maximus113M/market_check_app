@@ -1,6 +1,6 @@
 class ScannerDataModel {
   final int storeId;
-  final int productCode;
+  final String productCode;
 
   ScannerDataModel({required this.storeId, required this.productCode});
 

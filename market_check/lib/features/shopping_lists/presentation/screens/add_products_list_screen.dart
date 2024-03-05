@@ -7,6 +7,7 @@ import 'package:market_check/features/shopping_lists/presentation/providers/shop
 import 'package:market_check/features/shopping_lists/presentation/widgets/shopping_list_products_listview.dart';
 
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class AddProductsListScreen extends StatelessWidget {
   static const name = 'addProducts-lists';
@@ -20,12 +21,24 @@ class AddProductsListScreen extends StatelessWidget {
       /*floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          /*FloatingActionButton(
+          IconButton.filled(
+            style: ButtonStyle(
+              backgroundColor:
+                  const MaterialStatePropertyAll(AppColors.appPrimary),
+              shape: MaterialStatePropertyAll(
+                ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
             onPressed: () {
-              shoppingListsProvider.getShoppingLists(context);
+              shoppingListsProvider.updateShoppingList(context);
             },
-            child: const Text('Listar'),
-          ),*/
+            icon: Icon(
+              Icons.save,
+              size: ScreenSize.absoluteHeight * 0.053,
+            ),
+          )
         ],
       ),*/
       appBar: customAppBar(

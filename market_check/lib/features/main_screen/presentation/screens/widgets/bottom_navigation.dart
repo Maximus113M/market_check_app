@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/main_screen/presentation/providers/main_provider.dart';
 import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
+import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class BottomMenu extends StatelessWidget {
-  const BottomMenu({
-    super.key,
-  });
+  const BottomMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //final mainProvider = Provider.of<MainProvider>(context);
     return Container(
       clipBehavior: Clip.hardEdge,
       margin:
@@ -33,9 +34,20 @@ class BottomMenu extends StatelessWidget {
           currentIndex: context.watch<MainProvider>().currentIndex,
           onTap: (index) {
             context.read<MainProvider>().setCurrentIndex(index);
-            if(index==2){
-              context.read<PendingPurchaseProvider>().getOpenPurchase(context);
-             // context.read<ShoppingHistoryProvider>().getOpenPurchase(context);
+            switch (index) {
+              case 0:
+                context.read<StoresProvider>().loadStores(context);
+                break;
+              case 1:
+                context.read<ShoppingListsProvider>().getShoppingLists(context);
+                break;
+              case 2:
+                context
+                    .read<PendingPurchaseProvider>()
+                    .getOpenPurchase(context);
+
+                break;
+              default:
             }
           },
           items: const [

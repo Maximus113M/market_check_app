@@ -23,7 +23,7 @@ class ProfileBodyScreen extends StatelessWidget {
         /* SizedBox(
             height: ScreenSize.absoluteHeight * 0.01,
           ),*/
-        ProfileImage(avatars: AppAssets.avatarList),
+        const ProfileImage(avatars: AppAssets.avatarList),
         Text(
           AuthService.user!.name,
           style: FontStyles.subtitle1(AppColors.text),

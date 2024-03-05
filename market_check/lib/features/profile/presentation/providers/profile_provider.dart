@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/services/auth/auth_service.dart';
-import 'package:market_check/config/shared/models/create_user_data_model.dart';
-import 'package:market_check/config/shared/models/user.dart';
-import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
+
 import 'package:market_check/config/use_case/use_case.dart';
+import 'package:market_check/config/shared/models/user.dart';
 import 'package:market_check/config/utils/constans/app_assets.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
+import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 import 'package:market_check/features/profile/data/models/profile_cards_model.dart';
+import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/profile/domain/use_cases/delete_account_use_case.dart';
-import 'package:market_check/features/profile/domain/use_cases/update_account_data_use_case.dart';
 import 'package:market_check/features/profile/domain/use_cases/update_password_use_case.dart';
+import 'package:market_check/features/profile/domain/use_cases/update_account_data_use_case.dart';
+
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileProvider with ChangeNotifier {
   final DeleteAccountUseCase deleteAccountUseCase;
@@ -20,8 +22,7 @@ class ProfileProvider with ChangeNotifier {
   final UpdatePasswordUseCase updatePasswordUseCase;
   bool isLoading = false;
   final List<String> avatars = AppAssets.avatarList;
-  int selectdAvatare = 0;
-  
+  int selectdAvatare = AuthService.user!.profileImage!;
 
   ProfileProvider({
     required this.deleteAccountUseCase,
@@ -29,7 +30,7 @@ class ProfileProvider with ChangeNotifier {
     required this.updatePasswordUseCase,
   });
 
-  int selectedIndex = AuthService.user!.profileImage?? 0;
+  int selectedIndex = AuthService.user!.profileImage ?? 0;
   List<ProfileCardsModel> menuCards = ProfileCardsModel.profileCardsMenu;
 
   void setIndex(int index) {
@@ -53,7 +54,7 @@ class ProfileProvider with ChangeNotifier {
           message: l.message,
         );
         isLoading = false;
-      }, (r) => isPasswordUpdated = r);
+      }, (r) => isPasswordUpdated = true);
 
       if (!isPasswordUpdated) return;
     }
@@ -102,6 +103,8 @@ class ProfileProvider with ChangeNotifier {
   }
 
   void deleteAccount(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
     final result = await deleteAccountUseCase(NoParams());
 
     result.fold(
@@ -121,32 +124,21 @@ class ProfileProvider with ChangeNotifier {
       );
       //context.p
     });
+    isLoading = false;
   }
 
-  
-
-  void selectdAvatar(int index) async{
+  void selectdAvatar(int index) async {
     selectdAvatare = index;
-    User currentUser= AuthService.user!;
-    /*AuthService.user = User(
-      name: currentUser.name, 
-      document: currentUser.document, 
-      email: currentUser.email, 
-      rolId: currentUser.rolId, 
-      profileImage: selectdAvatare);*/
-      final result = await updateAccountDataUseCase(SignUpDataModel(
-        name: currentUser.name, 
-        document: int.tryParse(currentUser.document), 
-        email: currentUser.email, 
+    User currentUser = AuthService.user!;
+    final result = await updateAccountDataUseCase(SignUpDataModel(
+        name: currentUser.name,
+        document: int.tryParse(currentUser.document),
+        email: currentUser.email,
         password: null,
-        profileImage: selectdAvatare
-        ));
+        profileImage: selectdAvatare));
 
-      result.fold(
-        (l) => null, 
-        (r) => null);
-
+    result.fold((l) => null, (r) => null);
 
     notifyListeners();
-  } 
+  }
 }

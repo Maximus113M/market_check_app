@@ -28,6 +28,7 @@ class SignInProvider with ChangeNotifier {
   String names = "";
   String document = "";
   String confirmPassword = "";
+  bool isLoading = false;
 
   SignInProvider({
     required this.verifyCurrentSessionUseCase,
@@ -63,6 +64,9 @@ class SignInProvider with ChangeNotifier {
   }
 
   void validateUser(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
     if (emailInput.trim().isEmpty ||
         !AppFuntions.emailRegExp.hasMatch(emailInput)) {
       InAppNotification.showAppNotification(
@@ -70,6 +74,7 @@ class SignInProvider with ChangeNotifier {
           title: 'Email Invalido!',
           message: 'El formato de correo ingresado no es valido',
           type: NotificationType.error);
+      isLoading = false;
       return;
     }
     if (passwordInput.contains(" ") ||
@@ -81,6 +86,7 @@ class SignInProvider with ChangeNotifier {
           message:
               'La contraseña no debe contener espacios y debe ser mayor de 5 digitos',
           type: NotificationType.error);
+      isLoading = false;
       return;
     }
 
@@ -98,9 +104,13 @@ class SignInProvider with ChangeNotifier {
         }
       },
     );
+    isLoading = false;
   }
 
   void validateSingUp(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
     if (!validateInputName() ||
         !validateInputDocument() ||
         !validateInputEmail() ||
@@ -111,6 +121,7 @@ class SignInProvider with ChangeNotifier {
           title: 'Error en el registro',
           message: 'Revise nuevamente los datos ingresados',
           type: NotificationType.error);
+      isLoading = false;
       return;
     }
 
@@ -135,6 +146,7 @@ class SignInProvider with ChangeNotifier {
         );
       },
     );
+    isLoading = false;
   }
 
   bool validateInputName() {
@@ -171,6 +183,8 @@ class SignInProvider with ChangeNotifier {
   }
 
   void signOut(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
     final result = await signOutUseCase(NoParams());
     result.fold((l) {
       InAppNotification.serverFailure(context: context, message: l.message);
@@ -188,5 +202,6 @@ class SignInProvider with ChangeNotifier {
         );
       }
     });
+    isLoading = false;
   }
 }

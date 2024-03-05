@@ -5,6 +5,7 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/scanner/scanner_service.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
+import 'package:market_check/features/scanner/data/models/scanner_data_model.dart';
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 import 'package:market_check/features/scanner/presentation/widgets/scanned_product_dialog.dart';
 import 'package:market_check/features/shopping/data/models/shopping_cart_item_model.dart';
@@ -17,18 +18,22 @@ class ScannerProvider with ChangeNotifier {
   final GetStoreProductByScannerUseCase getStoreProductByScannerUseCase;
   String scanBarCode = '';
   ProductModel? currentProduct;
+  bool isLoading = false;
 
   ScannerProvider({required this.getStoreProductByScannerUseCase});
 
   void getProductByScanner(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
     int storeId = context.read<StoresProvider>().currentStore!.id;
     scanBarCode = await ScannerService.scanBarcodeNormal();
+    print(scanBarCode);
 
-    //TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
+    /*//TODO DESARROLLO EN MOVIL PARA SIMULAR UN PRODUCTO
     if (int.parse(scanBarCode) == -1) {
       final ProductModel product = ProductModel(
-        id: 42,
-        //id: 5,
+        id: 1,
         code: 789789,
         state: 1,
         currentPrice: 6000,
@@ -36,8 +41,7 @@ class ScannerProvider with ChangeNotifier {
         name: 'Nachos ExtraQueso',
         description: '500 g',
         stock: 200,
-        storeId: 7,
-        //storeId: 1,
+        storeId: 1,
         categoryId: 1,
         subcategoryId: 1,
       );
@@ -46,11 +50,14 @@ class ScannerProvider with ChangeNotifier {
     }
 
     //
-    print(scanBarCode);
-    /* if (int.parse(scanBarCode) < 0) return;
+    print(scanBarCode);*/
+    if (int.parse(scanBarCode) < 0) {
+      isLoading = false;
+      return;
+    }
 
     final ScannerDataModel scannerData =
-        ScannerDataModel(storeId: storeId, productCode: int.parse(scanBarCode));
+        ScannerDataModel(storeId: storeId, productCode: scanBarCode);
     final result = await getStoreProductByScannerUseCase(scannerData);
 
     result.fold(
@@ -58,7 +65,6 @@ class ScannerProvider with ChangeNotifier {
               context: context,
               message: l.message,
             ), (product) {
-      print(product);
       if (product == null) {
         InAppNotification.showAppNotification(
             context: context,
@@ -69,9 +75,10 @@ class ScannerProvider with ChangeNotifier {
       }
       currentProduct = product;
       notifyListeners();
-    });*/
+    });
     Future.delayed(const Duration(seconds: 1))
         .then((value) => showScannedProduct(context));
+    isLoading= false;    
   }
 
   void showScannedProduct(BuildContext context) {

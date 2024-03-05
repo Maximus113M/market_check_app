@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:market_check/config/shared/widgets/dialogs/custom_imersive_dialog.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -52,6 +54,7 @@ class ShoppingProvider with ChangeNotifier {
 
   void endShopping(BuildContext context) async {
     if (AuthService.user!.isPurchaseOpen) {
+      showRemainerDialog(context);
       return;
     }
     final result = await createNewPurchaseUseCase(shoppingList);
@@ -64,6 +67,25 @@ class ShoppingProvider with ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  void showRemainerDialog(BuildContext context) {
+    showDialog(
+      barrierColor: AppColors.text.withOpacity(0.9),
+      context: context,
+      builder: (context) {
+        return CustomImersiveDialog(
+          disableOptionTitle: 'Ver',
+          contentBody: Text(
+            'Tienes un compra pendiente, con el codigo ${AuthService.user!.purchasePin}, acercate a una caja para terminar el pedido!',
+            style: FontStyles.bodyBold1(AppColors.white),
+            textAlign: TextAlign.center,
+          ),
+          disableOption: () {},
+          okOption: () => context.pop(),
+        );
+      },
+    );
   }
 
   void showEndShoppingDialog(BuildContext context) {

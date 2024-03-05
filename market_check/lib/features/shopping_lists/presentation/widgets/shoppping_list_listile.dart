@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/utils/constans/app_colors.dart';
+
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingListListile extends StatelessWidget {
   final ShoppingListsModel shoppingListsModel;
+  final int index;
   const ShoppingListListile({
     super.key,
     required this.shoppingListsModel,
+    required this.index,
   });
 
   @override
@@ -16,9 +19,10 @@ class ShoppingListListile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          minVerticalPadding: 0,
           title: Text(
             shoppingListsModel.nameList,
-            style: const TextStyle(fontSize: 18),
+            style: FontStyles.body0(AppColors.text),
           ),
           leading: const Icon(
             Icons.bookmark_added_outlined,
@@ -27,7 +31,7 @@ class ShoppingListListile extends StatelessWidget {
           ),
           trailing: IconButton(
             onPressed: () {
-              context.read<ShoppingListsProvider>().deleteList();
+              context.read<ShoppingListsProvider>().deleteList(context, index);
             },
             icon: const Icon(
               Icons.delete_forever_rounded,

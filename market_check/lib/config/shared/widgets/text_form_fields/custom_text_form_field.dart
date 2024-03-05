@@ -43,12 +43,12 @@ class CustomTextFormField extends StatelessWidget {
       enabled: isEnable,
       controller: textController,
       keyboardType: isNumeric ? TextInputType.number : null,
-      style: TextStyle(height: ScreenSize.height * 0.001),
+      style: TextStyle(height: ScreenSize.absoluteHeight * 0.0012),
       onChanged: (value) => onChange(value),
       obscureText: obscureText,
       decoration: InputDecoration(
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+            EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01, vertical: 10),
         prefixIcon: icon != null
             ? Icon(icon, color: isEnable ? null : AppColors.unfocused)
             : null,

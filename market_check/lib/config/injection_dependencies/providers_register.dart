@@ -1,4 +1,3 @@
-import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
@@ -8,6 +7,7 @@ import 'package:market_check/features/main_screen/presentation/providers/main_pr
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
+import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
 import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 
@@ -69,6 +69,7 @@ void registerProviders() {
       createShoppingListsUseCase: sl(),
       getShoppingListsUseCase: sl(),
       updateShoppingListUseCase: sl(),
+      deleteShoppingListUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

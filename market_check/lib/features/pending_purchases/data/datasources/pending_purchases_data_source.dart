@@ -15,35 +15,40 @@ class PendingPurchasesDataSourceImpl extends PendingPurchasesDataSource {
   @override
   Future<PurchaseModel?> getOpenPurchase() async {
     try {
-      PurchaseModel? openPurchase;
+      PurchaseModel openPurchase;
       const String path =
           '${ServerUrls.purchaseUrl}${ServerUrls.openShoppingHistoryUrl}';
+
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode == 200) {
-        if (jsonDecode(response.body)['openPurchase'] == null) {
-          AuthService.user!.isPurchaseOpen = false;
-          AuthService.user!.purchasePin = null;
-          return null;
-        }
-
-        openPurchase =
-            PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
-
-        AuthService.user!.isPurchaseOpen = true;
-        AuthService.user!.purchasePin = openPurchase.pin;
+      if (response.statusCode >= 300) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+
+      if (jsonDecode(response.body)['openPurchase'] == null) {
+        AuthService.user!.isPurchaseOpen = false;
+        AuthService.user!.purchasePin = null;
+        return null;
+      }
+
+      openPurchase =
+          PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
+
+      AuthService.user!.isPurchaseOpen = true;
+      AuthService.user!.purchasePin = openPurchase.pin;
 
       return openPurchase;
     } on HttpException catch (e) {
-      debugPrint('GetOpenPurchase httpException: $e');
+      debugPrint(
+          'PendingPurchasesDataSource, getOpenPurchase HttpException: $e');
       throw RemoteException(
         message:
             "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
         type: ExceptionType.pendingPurchases,
       );
     } catch (e) {
-      debugPrint('GetOpenPurchase Exception: $e');
+      debugPrint('PendingPurchasesDataSource, getOpenPurchase Exception: $e');
       throw RemoteException(
         message: "Ocurrio un error al obtener las compras pendientes",
         type: ExceptionType.pendingPurchases,

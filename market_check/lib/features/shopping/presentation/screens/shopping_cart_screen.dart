@@ -55,17 +55,17 @@ class ShoppingCartBodyScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 left: ScreenSize.width * 0.13,
-                bottom: ScreenSize.absoluteHeight * 0.02),
+                bottom: ScreenSize.absoluteHeight * 0.025),
             child: Text(
               '${shoppingCartProvider.shoppingItemsCount()} ${shoppingCartProvider.shoppingItemsCount() == 1 ? 'Producto agregado' : 'Productos agregados'}',
-              style: FontStyles.bodyBold1(AppColors.lightText),
+              style: FontStyles.bodyBold0(AppColors.lightText),
             ),
           ),
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.disabled, width: 2),
                 borderRadius: BorderRadius.circular(20)),
-            height: ScreenSize.height * 0.73,
+            height: ScreenSize.height * 0.74,
             child: ListView.builder(
               padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.width * 0.02,
@@ -104,6 +104,7 @@ class ShoppingCartBodyScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 CustomFilledButton(
+                  fontStyle: FontStyles.bodyBold1(AppColors.appPrimary),
                   text: AuthService.user!.isPurchaseOpen
                       ? 'Compra Pendiente'
                       : 'Finalizar Compra',
@@ -112,7 +113,7 @@ class ShoppingCartBodyScreen extends StatelessWidget {
                   radius: 0.03,
                   action: () => {
                     shoppingCartProvider.endShopping(context),
-                    print('${shoppingCartProvider.pendingList.length}  ???')
+                    print('Nel pa !!!')
                   },
                 ),
               ],
