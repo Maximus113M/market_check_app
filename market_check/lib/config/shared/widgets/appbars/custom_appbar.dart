@@ -6,6 +6,7 @@ import 'package:market_check/config/shared/widgets/appbars/custom_badge_icon.dar
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
 
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 AppBar customAppBar({
   Widget? leading,
@@ -37,14 +38,16 @@ AppBar customAppBar({
           ),
       actions: [
         if (isCartVisible)
-          Padding(
-            padding: EdgeInsets.only(right: ScreenSize.width * 0.005),
-            child: CustomBadge(
-              icon: Icons.shopping_cart_rounded,
-              iconSize: 30,
-              counter: context.watch<ShoppingProvider>().shoppingItemsCount(),
-              color: AppColors.white,
-              route: ShoppingCartScreen.name,
+          GestureDetector(
+            onTap: () => context.pushNamed(ShoppingCartScreen.name),
+            child: Padding(
+              padding: EdgeInsets.only(right: ScreenSize.width * 0.005),
+              child: CustomBadge(
+                icon: Icons.shopping_cart_rounded,
+                iconSize: 30,
+                counter: context.watch<ShoppingProvider>().shoppingItemsCount(),
+                color: AppColors.white,
+              ),
             ),
           )
       ],

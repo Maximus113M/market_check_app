@@ -74,7 +74,7 @@ class StoresProvider with ChangeNotifier {
     }
   }
 
-  Future<void> loadOffers(BuildContext context, {bool notify = true}) async {
+  void loadOffers(BuildContext context, {bool notify = true}) async {
     loadingOffers = true;
     final storeId = context.read<StoresProvider>().currentStore!.id;
     final result = await getOffersUseCase(storeId);
@@ -83,11 +83,10 @@ class StoresProvider with ChangeNotifier {
       (l) => null,
       (r) => offerList = r,
     );
-    if (notify) notifyListeners();
 
     loadingOffers = false;
     currentOffer = null;
 
-    // notifyListeners();
+    notifyListeners();
   }
 }

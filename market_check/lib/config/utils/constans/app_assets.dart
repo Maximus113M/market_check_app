@@ -41,5 +41,6 @@ class AppAssets {
   static const String iconoLottieList = 'assets/lottie/List.json';
   static const String iconoLottieStore = 'assets/lottie/store.json';
   static const String iconoLottieProfile = 'assets/lottie/profile.json';
+  static const String loadingLottie = 'assets/lottie/loading.json';
   static const String cartLogo = 'assets/Images/logos/car.png';
 }

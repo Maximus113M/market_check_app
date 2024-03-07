@@ -22,12 +22,12 @@ class ScannerDataSourceImpl extends ScannerDataSource {
         scannerData.dataToJson(),
       );
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
       ProductModel? product;
-      if(jsonDecode(response.body)["product"] == null){
+      if (jsonDecode(response.body)["product"] == null) {
         return product;
       }
 

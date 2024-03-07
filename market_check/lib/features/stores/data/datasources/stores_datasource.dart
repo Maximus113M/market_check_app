@@ -20,12 +20,18 @@ class StoresDataSourceImpl extends StoresDataSource {
 
       final response = await ServerService.serverGet(ServerUrls.storesUrl);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      stores = (jsonDecode(response.body)["stores"] as List).map((storeJson) {
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      stores = (jsonDecode(fixedResponse ?? response.body)["stores"] as List)
+          .map((storeJson) {
         return StoreModel.fromJson(storeJson);
       }).toList();
 
@@ -50,15 +56,21 @@ class StoresDataSourceImpl extends StoresDataSource {
       List<OfferModel> offers = [];
 
       final response = await ServerService.serverGet(
-        ServerUrls.offersUrl,
+        '${ServerUrls.offersUrl}$storeId',
       );
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      offers = (jsonDecode(response.body)['offers'] as List).map(
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      offers =
+          (jsonDecode(fixedResponse ?? response.body)['offers'] as List).map(
         (offerJson) {
           return OfferModel.fromJson(offerJson);
         },

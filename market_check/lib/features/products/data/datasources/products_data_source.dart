@@ -25,14 +25,20 @@ class ProductsDataSourceImpl extends ProductsDataSource {
         final response = await ServerService.serverGet(
             '${ServerUrls.productsUrl}${ServerUrls.storeProductsUrl}$storeId');
 
-        if (response.statusCode >= 300) {
+        if (response.statusCode != 200 && response.statusCode != 201) {
           throw HttpException(
               message: '${response.statusCode}, ${response.reasonPhrase}');
         }
 
-        products = (jsonDecode(response.body)["products"] as List)
-            .map((productJson) => ProductModel.fromJson(productJson))
-            .toList();
+        String? fixedResponse;
+        if (!response.body.endsWith('}')) {
+          fixedResponse = '${response.body}}';
+        }
+
+        products =
+            (jsonDecode(fixedResponse ?? response.body)["products"] as List)
+                .map((productJson) => ProductModel.fromJson(productJson))
+                .toList();
         products.where((product) => product.state != 0).toList();
       }
 
@@ -60,16 +66,20 @@ class ProductsDataSourceImpl extends ProductsDataSource {
         final Response response = await ServerService.serverGet(
             '${ServerUrls.productsCategoriesUrl}${categoriesData.storeId}/${categoriesData.categorieId}');
 
-        debugPrint(response.body);
-
-        if (response.statusCode >= 300) {
+        if (response.statusCode != 200 && response.statusCode != 201) {
           throw HttpException(
               message: '${response.statusCode}, ${response.reasonPhrase}');
         }
 
-        products = (jsonDecode(response.body)['productos'] as List)
-            .map((productJson) => ProductModel.fromJson(productJson))
-            .toList();
+        String? fixedResponse;
+        if (!response.body.endsWith('}')) {
+          fixedResponse = '${response.body}}';
+        }
+
+        products =
+            (jsonDecode(fixedResponse ?? response.body)['productos'] as List)
+                .map((productJson) => ProductModel.fromJson(productJson))
+                .toList();
       }
       return products;
     } on HttpException catch (e) {

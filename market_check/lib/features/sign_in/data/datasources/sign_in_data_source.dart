@@ -78,27 +78,34 @@ class SignInDataSourceImpl extends SignInDataSource {
         );
       }
 
+      late String fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      } else {
+        fixedResponse = response.body;
+      }
+
       await flutterSecureStorage.write(
-          key: 'id', value: jsonDecode(response.body)["user"]["id"].toString());
+          key: 'id', value: jsonDecode(fixedResponse)["user"]["id"].toString());
       await flutterSecureStorage.write(
-          key: 'name', value: jsonDecode(response.body)["user"]["name"]);
+          key: 'name', value: jsonDecode(fixedResponse)["user"]["name"]);
       await flutterSecureStorage.write(
           key: 'documento',
-          value: jsonDecode(response.body)["user"]["documento"].toString());
+          value: jsonDecode(fixedResponse)["user"]["documento"].toString());
       await flutterSecureStorage.write(
-          key: 'email', value: jsonDecode(response.body)["user"]["email"]);
+          key: 'email', value: jsonDecode(fixedResponse)["user"]["email"]);
       await flutterSecureStorage.write(
           key: 'profile_image',
-          value: ('${jsonDecode(response.body)["user"]["profile_image"]}'));
+          value: ('${jsonDecode(fixedResponse)["user"]["profile_image"]}'));
       await flutterSecureStorage.write(
           key: 'access_token',
-          value: jsonDecode(response.body)["access_token"]);
+          value: jsonDecode(fixedResponse)["access_token"]);
       await flutterSecureStorage.write(
-          key: 'token_type', value: jsonDecode(response.body)["token_type"]);
+          key: 'token_type', value: jsonDecode(fixedResponse)["token_type"]);
 
-      AuthService.user = User.fromJson(jsonDecode(response.body)["user"]);
-      AuthService.token = jsonDecode(response.body)["access_token"];
-      AuthService.typeToken = jsonDecode(response.body)["token_type"];
+      AuthService.user = User.fromJson(jsonDecode(fixedResponse)["user"]);
+      AuthService.token = jsonDecode(fixedResponse)["access_token"];
+      AuthService.typeToken = jsonDecode(fixedResponse)["token_type"];
       AuthService.headers = {
         'Content-Type': 'application/json',
         'Authorization': '${AuthService.typeToken} ${AuthService.token}'
@@ -141,9 +148,14 @@ class SignInDataSourceImpl extends SignInDataSource {
         );
       }
 
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
       if (jsonDecode(response.body)['openPurchase'] != null) {
-        openPurchase =
-            PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
+        openPurchase = PurchaseModel.fromJson(
+            jsonDecode(fixedResponse ?? response.body)['openPurchase']);
       }
 
       return openPurchase;
