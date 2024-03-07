@@ -45,7 +45,7 @@ class CategoriesScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.grey, width: 1.5),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(18),
                             ),
@@ -85,11 +85,11 @@ class CategoriesListItem extends StatelessWidget {
             );
         context.push("/products-categories");
       },
-      child: Wrap(
+      child: Row(
         children: [
           Container(
-            width: 57,
-            height: 57,
+            width: ScreenSize.width * 0.15,
+            height: ScreenSize.absoluteHeight * 0.066,
             decoration: const BoxDecoration(
               color: AppColors.appSecondary,
               borderRadius: BorderRadius.only(
@@ -97,8 +97,10 @@ class CategoriesListItem extends StatelessWidget {
                 bottomLeft: Radius.circular(16),
               ),
             ),
-            child: Image.network(
-              '${ServerUrls.currentImagesUrlCategories}${categorie.image}',
+            child: SizedBox(
+              child: Image.network(
+                '${ServerUrls.currentImagesUrlCategories}${categorie.image}',
+              ),
             ),
           ),
           SizedBox(
