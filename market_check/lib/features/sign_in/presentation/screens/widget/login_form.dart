@@ -35,7 +35,6 @@ class LogInForm extends StatelessWidget {
                   label: 'Email',
                   onChange: (emailValue) {
                     loginProvider.emailInput = emailValue;
-                    print(loginProvider.emailInput);
                   },
                 ),
                 SizedBox(

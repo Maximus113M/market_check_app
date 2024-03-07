@@ -68,9 +68,14 @@ class SignInDataSourceImpl extends SignInDataSource {
 
       PurchaseModel? openPurchase;
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode == 401) {
+        throw Exception();
+      }
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
-            message: '${response.statusCode}, ${response.reasonPhrase}');
+          message: '${response.statusCode}, ${response.reasonPhrase}',
+        );
       }
 
       await flutterSecureStorage.write(
@@ -108,6 +113,7 @@ class SignInDataSourceImpl extends SignInDataSource {
       return openPurchase;
     } on HttpException catch (e) {
       debugPrint('SignInDataSource, verifyLogIn HttpException: $e');
+
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
@@ -129,9 +135,10 @@ class SignInDataSourceImpl extends SignInDataSource {
 
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
-            message: '${response.statusCode}, ${response.reasonPhrase}');
+          message: '${response.statusCode}, ${response.reasonPhrase}',
+        );
       }
 
       if (jsonDecode(response.body)['openPurchase'] != null) {
@@ -160,14 +167,15 @@ class SignInDataSourceImpl extends SignInDataSource {
       final response = await ServerService.serverPost(
           ServerUrls.signUpUrl, newUser.userToJson());
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
-            message: '${response.statusCode}, ${response.reasonPhrase}');
+          message: '${response.statusCode}, ${response.reasonPhrase}',
+        );
       }
 
       debugPrint(response.body);
-      
-      return 'Registro exito, Verifica la confirmación enviada a tu correo!';
+
+      return 'Registro exitoso, Verifica la confirmación enviada a tu correo!';
     } on HttpException catch (e) {
       debugPrint('SignInDataSource, signUp HttpException: $e');
       throw RemoteException(
@@ -189,9 +197,10 @@ class SignInDataSourceImpl extends SignInDataSource {
       if (AuthService.user != null) {
         final response = await ServerService.serverGet(ServerUrls.logOutUrl);
 
-        if (response.statusCode >= 300) {
+        if (response.statusCode != 200 && response.statusCode != 201) {
           throw HttpException(
-              message: '${response.statusCode}, ${response.reasonPhrase}');
+            message: '${response.statusCode}, ${response.reasonPhrase}',
+          );
         }
 
         AuthService.user = null;

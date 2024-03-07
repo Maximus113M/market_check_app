@@ -84,7 +84,7 @@ class StoresItemTile extends StatelessWidget {
                   SizedBox(
                     width: ScreenSize.width * 0.52,
                     child: Text(
-                      storeModel.description!,
+                      storeModel.description?? '',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
