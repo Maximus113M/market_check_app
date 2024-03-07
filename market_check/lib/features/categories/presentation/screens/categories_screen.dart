@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
@@ -73,31 +75,7 @@ class CategoriesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-      leading: Container(
-        width: 60,
-        height: 200,
-        decoration: const BoxDecoration(
-          color: Colors.indigo,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            bottomLeft: Radius.circular(12),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.network(
-            '${ServerUrls.currentImagesUrlCategories}${categorie.image}',
-            width: 40,
-            height: 50,
-          ),
-        ),
-      ),
-      title: Text(
-        categorie.name,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-      ),
+    return GestureDetector(
       onTap: () {
         context.read<CategoriesProvider>().setCurrentCategorie(categorie);
         context.read<ProductsProvider>().getProductsByCategories(
@@ -107,6 +85,36 @@ class CategoriesListItem extends StatelessWidget {
             );
         context.push("/products-categories");
       },
+      child: Wrap(
+        children: [
+          Container(
+            width: 57,
+            height: 57,
+            decoration: const BoxDecoration(
+              color: AppColors.appSecondary,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+              ),
+            ),
+            child: Image.network(
+              '${ServerUrls.currentImagesUrlCategories}${categorie.image}',
+            ),
+          ),
+          SizedBox(
+            width: ScreenSize.width * 0.3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                categorie.name,
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
