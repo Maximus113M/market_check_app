@@ -24,12 +24,12 @@ class ScannerScreen extends StatelessWidget {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: AppColors.white,
+              color: AppColors.appSecondary,
             )),
         context: context,
         title: Text(
           'Escaneo de Productos',
-          style: FontStyles.subtitle0(AppColors.white),
+          style: FontStyles.subtitle0(AppColors.appSecondary),
         ),
       ),
       body: ScannerBodyScreen(

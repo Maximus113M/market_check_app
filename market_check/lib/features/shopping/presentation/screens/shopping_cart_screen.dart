@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
@@ -17,7 +18,21 @@ class ShoppingCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: customAppBar(
+          context: context,
+          isCartVisible: false,
+          title: Text(
+            'Carrito de compras',
+            style: FontStyles.subtitle0(AppColors.appSecondary)
+          ),
+          leading: IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.appSecondary,
+            ),
+          )),
+      /*appBar: AppBar(
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(
@@ -30,7 +45,7 @@ class ShoppingCartScreen extends StatelessWidget {
           style: FontStyles.heading11(AppColors.appPrimary),
         ),
         toolbarHeight: 40,
-      ),
+      ),*/
       body: SafeArea(
         child: ShoppingCartBodyScreen(
           shoppingCartProvider: Provider.of<ShoppingProvider>(context),
@@ -55,7 +70,8 @@ class ShoppingCartBodyScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 left: ScreenSize.width * 0.13,
-                bottom: ScreenSize.absoluteHeight * 0.025),
+                top: ScreenSize.absoluteHeight * 0.025,
+                bottom: ScreenSize.absoluteHeight * 0.020),
             child: Text(
               '${shoppingCartProvider.shoppingItemsCount()} ${shoppingCartProvider.shoppingItemsCount() == 1 ? 'Producto agregado' : 'Productos agregados'}',
               style: FontStyles.bodyBold0(AppColors.lightText),
@@ -65,7 +81,7 @@ class ShoppingCartBodyScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.disabled, width: 2),
                 borderRadius: BorderRadius.circular(20)),
-            height: ScreenSize.height * 0.74,
+            height: ScreenSize.height * 0.68,
             child: ListView.builder(
               padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.width * 0.02,

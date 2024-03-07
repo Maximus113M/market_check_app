@@ -48,7 +48,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         contentPadding:
-            EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01, vertical: 10),
+            EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05, vertical: 15),
         prefixIcon: icon != null
             ? Icon(icon, color: isEnable ? null : AppColors.unfocused)
             : null,

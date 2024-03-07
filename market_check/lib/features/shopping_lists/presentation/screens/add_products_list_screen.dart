@@ -7,7 +7,6 @@ import 'package:market_check/features/shopping_lists/presentation/providers/shop
 import 'package:market_check/features/shopping_lists/presentation/widgets/shopping_list_products_listview.dart';
 
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 
 class AddProductsListScreen extends StatelessWidget {
   static const name = 'addProducts-lists';
@@ -72,6 +71,7 @@ class AddProductsListScreen extends StatelessWidget {
                 },
                 textController:
                     context.read<ShoppingListsProvider>().productNameController,
+
                 hint: 'Ingresa el nombre del producto',
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -95,7 +95,8 @@ class AddProductsListScreen extends StatelessWidget {
             ),
             SizedBox(height: ScreenSize.absoluteHeight * 0.13),
             CustomButton(
-              text: 'Guardar lista', 
+              text: 'Guardar lista',
+              color: AppColors.appPrimary, 
               action: () {
                 shoppingListsProvider.updateShoppingList(context);
               },)

@@ -73,9 +73,18 @@ class ShoppingListsProvider extends ChangeNotifier {
     final result = await updateShoppingListUseCase(currentShoppingList!);
     print(result);
     result.fold(
-        (l) => InAppNotification.serverFailure(
-            context: context, message: l.message),
-        (updateList) => currentShoppingList = updateList);
+      (l) =>
+          InAppNotification.serverFailure(context: context, message: l.message),
+      (updateList) {
+        currentShoppingList = updateList;
+        InAppNotification.showAppNotification(
+          context: context,
+          title: 'Actualización Exitosa',
+          message: 'La lista se ha actualizado satisfactoriamente.',
+          type: NotificationType.success,
+        );
+      },
+    );
     notifyListeners();
   }
 

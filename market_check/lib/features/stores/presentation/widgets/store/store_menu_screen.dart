@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/config/utils/utils.dart';
@@ -54,41 +55,26 @@ class StoreMenuScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            ListTile(
-              leading: const Icon(
-                Icons.qr_code_scanner_rounded,
-                size: 35,
-                color: AppColors.appPrimary,
-              ),
-              title: const Text('Escanea productos'),
-              subtitle:
-                  const Text('¡Consulta lo productos antes de llevarlos!'),
-              trailing: IconButton(
-                onPressed: () => context.pushNamed(ScannerScreen.name),
-                icon: const Icon(
-                  Icons.arrow_circle_right_outlined,
-                  size: 30,
+            GestureDetector(
+              onTap: () => context.pushNamed(ScannerScreen.name),
+              child: ListTile(
+                leading: const Icon(
+                  Icons.qr_code_scanner_rounded,
+                  size: 35,
+                  color: AppColors.appPrimary,
+                ),
+                title: const Text('Escanea productos'),
+                subtitle:
+                    const Text('¡Consulta lo productos antes de llevarlos!'),
+                trailing: IconButton(
+                  onPressed: () => context.pushNamed(ScannerScreen.name),
+                  icon: const Icon(
+                    Icons.arrow_circle_right_outlined,
+                    size: 30,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            ListTile(
-              leading: const Icon(
-                Icons.list_rounded,
-                size: 35,
-                color: AppColors.appPrimary,
-              ),
-              title: const Text('Crea tus listas'),
-              subtitle: const Text(
-                  'Encuentra en nuestros productos lo que necesitas'),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.arrow_circle_right_outlined,
-                  size: 30,
-                ),
-              ),
-            )
           ],
         ),
       ),
