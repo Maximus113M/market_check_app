@@ -15,9 +15,12 @@ class SignUpForm extends StatelessWidget {
       child: Container(
         height: ScreenSize.height * 0.70,
         decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
         child: Form(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.13)
@@ -25,6 +28,8 @@ class SignUpForm extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextFormField(
+                  verticalPadding: 0.018,
+                  horizontalPadding: 0.042,
                   label: 'Nombre y Apellido',
                   onChange: (nameValue) {
                     signUpProvider.names = nameValue;
@@ -32,6 +37,8 @@ class SignUpForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
+                  verticalPadding: 0.018,
+                  horizontalPadding: 0.042,
                   isNumeric: true,
                   label: 'Número de documento',
                   onChange: (documentValue) {
@@ -40,6 +47,8 @@ class SignUpForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
+                  verticalPadding: 0.018,
+                  horizontalPadding: 0.042,
                   label: 'Correo electronico',
                   onChange: (emailValue) {
                     signUpProvider.emailInput = emailValue;
@@ -47,6 +56,8 @@ class SignUpForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
+                  verticalPadding: 0.018,
+                  horizontalPadding: 0.042,
                   label: 'Contraseña',
                   obscureText: true,
                   onChange: (passwordValue) {
@@ -55,6 +66,8 @@ class SignUpForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
+                  verticalPadding: 0.018,
+                  horizontalPadding: 0.042,
                   label: 'Nuevamente la contraseña',
                   obscureText: true,
                   onChange: (confirmPassword) {
