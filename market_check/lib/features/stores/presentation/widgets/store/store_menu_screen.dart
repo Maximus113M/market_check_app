@@ -34,8 +34,9 @@ class StoreMenuScreen extends StatelessWidget {
                   size: 35,
                   color: AppColors.appPrimary,
                 ),
-                title: const Text('Categorias'),
-                subtitle: const Text('Explora nuestras ofertas y categorias'),
+                title: const Text('Productos y Categorias'),
+                subtitle: const Text(
+                    'Explora nuestras ofertas, productos y categorias'),
                 trailing: IconButton(
                   onPressed: () {
                     context.read<StoresProvider>().loadOffers(context);
@@ -62,7 +63,7 @@ class StoreMenuScreen extends StatelessWidget {
               ),
               title: const Text('Escanea productos'),
               subtitle:
-                  const Text('¡Consulta lo productos antes de llevarlos!'),
+                  const Text('¡Consulta los productos antes de llevarlos!'),
               trailing: IconButton(
                 onPressed: () => context.pushNamed(ScannerScreen.name),
                 icon: const Icon(

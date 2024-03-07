@@ -99,7 +99,7 @@ class ShoppingListsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectdCheckBox(int index) {
+  void selectCheckBox(int index) {
     currentShoppingList!.products[index].toggleState();
     notifyListeners();
   }
@@ -111,8 +111,8 @@ class ShoppingListsProvider extends ChangeNotifier {
     );
   }
 
-  //TODO VERIFICAR USO
-  selectCurrentIndex(int index) {
-    currentIndex = index;
+  removeListItem(int index) {
+    currentShoppingList!.products.removeAt(index);
+    notifyListeners();
   }
 }

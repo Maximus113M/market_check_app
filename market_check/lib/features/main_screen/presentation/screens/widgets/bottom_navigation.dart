@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_badge_icon.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
@@ -50,20 +52,23 @@ class BottomMenu extends StatelessWidget {
               default:
             }
           },
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(Icons.store),
               label: 'Tiendas',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.list),
               label: 'Listas',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: CustomBadge(
+                  icon: Icons.shopping_bag,
+                  iconSize: 25,
+                  counter: AuthService.user!.isPurchaseOpen ? 1 : 0),
               label: 'Compras',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Mi cuenta',
             ),

@@ -35,17 +35,12 @@ class CustomImersiveDialog extends StatelessWidget {
         content: contentBody,
         actionsAlignment: MainAxisAlignment.center,
         actions: [
-          /* CustomFilledButton(
-            text: disableOptionTitle,
-            fontStyle: FontStyles.bodyBold0(AppColors.white),
-            action: () => disableOption(),
-            bgColor: AppColors.text,
-          ),*/
           CustomFilledButton(
             text: okOptionTitle ?? 'Ok',
-            fontStyle: FontStyles.subtitle1(AppColors.text),
+            fontStyle: FontStyles.bodyBold0(AppColors.text),
             action: () => okOption(),
             bgColor: AppColors.white.withOpacity(0.8),
+            verticalSize: 0.01,
           ),
         ],
       ),

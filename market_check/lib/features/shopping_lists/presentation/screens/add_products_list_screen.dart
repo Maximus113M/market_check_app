@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:go_router/go_router.dart';
+import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
-import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
+import 'package:market_check/features/shopping_lists/presentation/widgets/shopping_list_products_listview.dart';
 
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 
 class AddProductsListScreen extends StatelessWidget {
   static const name = 'addProducts-lists';
@@ -17,7 +18,7 @@ class AddProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Column(
+      /*floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           IconButton.filled(
@@ -38,8 +39,14 @@ class AddProductsListScreen extends StatelessWidget {
               size: ScreenSize.absoluteHeight * 0.053,
             ),
           )
+          /*FloatingActionButton(
+            onPressed: () {
+              shoppingListsProvider.getShoppingLists(context);
+            },
+            child: const Text('Listar'),
+          ),*/
         ],
-      ),
+      ),*/
       appBar: customAppBar(
         context: context,
         isCartVisible: false,
@@ -92,47 +99,14 @@ class AddProductsListScreen extends StatelessWidget {
                     context.watch<ShoppingListsProvider>().currentShoppingList!,
               ),
             ),
+            SizedBox(height: ScreenSize.absoluteHeight * 0.13),
+            CustomButton(
+              text: 'Guardar lista',
+              action: () {
+                shoppingListsProvider.updateShoppingList(context);
+              },
+            )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ShoppingListProductsListview extends StatelessWidget {
-  final ShoppingListsProvider shoppingListsProvider;
-  final ShoppingListsModel productList;
-
-  const ShoppingListProductsListview({
-    super.key,
-    required this.shoppingListsProvider,
-    required this.productList,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01),
-      itemCount: productList.products.length,
-      itemBuilder: (context, index) => Container(
-        /*decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors.disabled)),*/
-        width: double.infinity,
-        height: ScreenSize.absoluteHeight * 0.05,
-        child: CheckboxListTile(
-          controlAffinity: ListTileControlAffinity.leading,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.width * 0.01,
-            ),
-            child: Text(productList.products[index].itemName),
-          ),
-          value: productList.products[index].isSelected,
-          onChanged: (value) {
-            shoppingListsProvider.selectdCheckBox(index);
-          },
-          checkboxShape: const CircleBorder(),
         ),
       ),
     );

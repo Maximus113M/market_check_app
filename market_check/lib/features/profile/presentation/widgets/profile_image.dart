@@ -56,7 +56,7 @@ class ProfileImage extends StatelessWidget {
                               onTap: () {
                                 context
                                     .read<ProfileProvider>()
-                                    .selectdAvatar(index);
+                                    .selectAvatar(index);
                                 context.pop();
                               },
                               child: CircleAvatar(
