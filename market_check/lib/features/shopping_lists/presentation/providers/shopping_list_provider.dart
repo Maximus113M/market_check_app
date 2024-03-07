@@ -71,7 +71,6 @@ class ShoppingListsProvider extends ChangeNotifier {
   //TODO Terminar
   void updateShoppingList(BuildContext context) async {
     final result = await updateShoppingListUseCase(currentShoppingList!);
-    print(result);
     result.fold(
       (l) =>
           InAppNotification.serverFailure(context: context, message: l.message),
@@ -109,7 +108,7 @@ class ShoppingListsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectdCheckBox(int index) {
+  void selectCheckBox(int index) {
     currentShoppingList!.products[index].toggleState();
     notifyListeners();
   }
@@ -121,8 +120,8 @@ class ShoppingListsProvider extends ChangeNotifier {
     );
   }
 
-  //TODO VERIFICAR USO
-  selectCurrentIndex(int index) {
-    currentIndex = index;
+  removeListItem(int index) {
+    currentShoppingList!.products.removeAt(index);
+    notifyListeners();
   }
 }

@@ -19,14 +19,20 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
 
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      categories = (jsonDecode(response.body)['categories'] as List)
-          .map((categorieJson) => CategorieModel.fromJson(categorieJson))
-          .toList();
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      categories =
+          (jsonDecode(fixedResponse ?? response.body)['categories'] as List)
+              .map((categorieJson) => CategorieModel.fromJson(categorieJson))
+              .toList();
 
       return categories;
     } on HttpException catch (e) {

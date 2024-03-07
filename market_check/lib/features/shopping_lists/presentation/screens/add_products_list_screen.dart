@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_button.dart';
 import 'package:market_check/config/utils/utils.dart';
@@ -38,6 +39,12 @@ class AddProductsListScreen extends StatelessWidget {
               size: ScreenSize.absoluteHeight * 0.053,
             ),
           )
+          /*FloatingActionButton(
+            onPressed: () {
+              shoppingListsProvider.getShoppingLists(context);
+            },
+            child: const Text('Listar'),
+          ),*/
         ],
       ),*/
       appBar: customAppBar(
@@ -99,7 +106,8 @@ class AddProductsListScreen extends StatelessWidget {
               color: AppColors.appPrimary, 
               action: () {
                 shoppingListsProvider.updateShoppingList(context);
-              },)
+              },
+            )
           ],
         ),
       ),

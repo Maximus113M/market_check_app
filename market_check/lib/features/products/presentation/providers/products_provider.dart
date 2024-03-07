@@ -18,6 +18,7 @@ class ProductsProvider extends ChangeNotifier {
   List<ProductModel> filteredProductsList = [];
   StreamSubscription? searchTimer;
   TextEditingController searchTextController = TextEditingController();
+  bool isLoading = false;
 
   SearchType currentSearchType = SearchType.categories;
 
@@ -26,25 +27,32 @@ class ProductsProvider extends ChangeNotifier {
       required this.getProductsByCategorie});
 
   void getProductsByStore(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
     final storeId = context.read<StoresProvider>().currentStore!.id;
 
     filteredProductsList.clear();
     final result = await getStoreProductsUseCase(storeId);
 
     result.fold(
-        (l) => InAppNotification.serverFailure(
-              context: context,
-              message: l.message,
-            ), (r) {
-      products = [...r];
-      filteredProductsList = r;
-
-      notifyListeners();
-    });
+      (l) => InAppNotification.serverFailure(
+        context: context,
+        message: l.message,
+      ),
+      (r) {
+        products = [...r];
+        filteredProductsList = r;
+      },
+    );
+    isLoading = false;
+    notifyListeners();
   }
 
   void getProductsByCategories(
       BuildContext context, ProductsByCategoriesModel params) async {
+    if (isLoading) return;
+    isLoading = true;
+
     filteredProductsList.clear();
     final result = await getProductsByCategorie(params);
 
@@ -54,10 +62,11 @@ class ProductsProvider extends ChangeNotifier {
       (r) {
         productsByCategorie = r;
         filteredProductsList = r;
-
-        notifyListeners();
       },
     );
+
+    isLoading = false;
+    notifyListeners();
   }
 
   void setCurrentSearchType(SearchType type) {

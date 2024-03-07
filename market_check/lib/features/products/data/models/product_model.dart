@@ -9,7 +9,6 @@ class ProductModel {
   final int stock;
   final int storeId;
   final int? categoryId;
-  final int? subcategoryId;
 
   ProductModel({
     required this.id,
@@ -22,7 +21,6 @@ class ProductModel {
     required this.stock,
     required this.storeId,
     required this.categoryId,
-    required this.subcategoryId,
   });
 
   factory ProductModel.fromJson(json) => ProductModel(
@@ -36,6 +34,5 @@ class ProductModel {
         stock: json["numeroStock"],
         storeId: json["id_establecimiento"],
         categoryId: json["id_categoria"],
-        subcategoryId: json["id_subcategoria"],
       );
 }

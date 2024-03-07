@@ -51,7 +51,6 @@ final appRouter = GoRouter(
       path: "/offers-m",
       name: OfferScreeenM.name,
       builder: (context, state) => OfferScreeenM(
-        offers: const [],
         productsProvider: sl(),
       ),
     ),

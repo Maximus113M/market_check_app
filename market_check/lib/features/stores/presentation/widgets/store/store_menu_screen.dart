@@ -35,8 +35,9 @@ class StoreMenuScreen extends StatelessWidget {
                   size: 35,
                   color: AppColors.appPrimary,
                 ),
-                title: const Text('Categorias'),
-                subtitle: const Text('Explora nuestras ofertas y categorias'),
+                title: const Text('Productos y Categorias'),
+                subtitle: const Text(
+                    'Explora nuestras ofertas, productos y categorias'),
                 trailing: IconButton(
                   onPressed: () {
                     context.read<StoresProvider>().loadOffers(context);
@@ -55,23 +56,20 @@ class StoreMenuScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            GestureDetector(
-              onTap: () => context.pushNamed(ScannerScreen.name),
-              child: ListTile(
-                leading: const Icon(
-                  Icons.qr_code_scanner_rounded,
-                  size: 35,
-                  color: AppColors.appPrimary,
-                ),
-                title: const Text('Escanea productos'),
-                subtitle:
-                    const Text('¡Consulta lo productos antes de llevarlos!'),
-                trailing: IconButton(
-                  onPressed: () => context.pushNamed(ScannerScreen.name),
-                  icon: const Icon(
-                    Icons.arrow_circle_right_outlined,
-                    size: 30,
-                  ),
+            ListTile(
+              leading: const Icon(
+                Icons.qr_code_scanner_rounded,
+                size: 35,
+                color: AppColors.appPrimary,
+              ),
+              title: const Text('Escanea productos'),
+              subtitle:
+                  const Text('¡Consulta los productos antes de llevarlos!'),
+              trailing: IconButton(
+                onPressed: () => context.pushNamed(ScannerScreen.name),
+                icon: const Icon(
+                  Icons.arrow_circle_right_outlined,
+                  size: 30,
                 ),
               ),
             ),

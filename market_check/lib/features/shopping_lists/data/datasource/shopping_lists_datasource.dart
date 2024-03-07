@@ -81,7 +81,6 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
   @override
   Future<ShoppingListsModel> updateShoppingList(
       ShoppingListsModel newList) async {
-        
     try {
       final response = await ServerService.serverPut(
           '${ServerUrls.listsUrl}/${newList.id}', newList.shoppingListToJson());

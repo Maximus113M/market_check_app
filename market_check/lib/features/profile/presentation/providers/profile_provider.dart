@@ -127,7 +127,7 @@ class ProfileProvider with ChangeNotifier {
     isLoading = false;
   }
 
-  void selectdAvatar(int index) async {
+  void selectAvatar(int index) async {
     selectdAvatare = index;
     User currentUser = AuthService.user!;
     final result = await updateAccountDataUseCase(SignUpDataModel(

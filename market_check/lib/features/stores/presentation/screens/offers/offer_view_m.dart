@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/features/screens.dart';
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/offers/offer_swiper.dart';
 import 'package:market_check/features/categories/presentation/screens/categories_screen.dart';
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
@@ -14,11 +14,9 @@ import 'package:go_router/go_router.dart';
 
 class OfferScreeenM extends StatelessWidget {
   static const name = "offers-m";
-  final List<OfferModel> offers;
   final ProductsProvider productsProvider;
 
-  const OfferScreeenM(
-      {super.key, required this.offers, required this.productsProvider});
+  const OfferScreeenM({super.key, required this.productsProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +40,21 @@ class OfferScreeenM extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 10),
-            if (offers.isNotEmpty)
-              const Center(
-                child: Text(
-                  'Descuentos',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                ),
-              ),
-            if (offers.isNotEmpty)
-              OffersSwiper(
-                offerList: offers,
-              ),
+            const SizedBox(height: 5),
+            context.watch<StoresProvider>().offerList.isNotEmpty
+                ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       Text(
+                         'Descuentos',
+                         style: FontStyles.subtitle0(AppColors.appPrimary),
+                       ),
+                      OffersSwiper(
+                        offerList: context.watch<StoresProvider>().offerList,
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
 
             TabBar(
               onTap: (value) {
@@ -83,15 +84,6 @@ class OfferScreeenM extends StatelessWidget {
                 ],
               ),
             ),
-
-            //const SearchProducts(),
-            /*ElevatedButton(
-              onPressed: () {
-                context.read<ProductsProvider>().getProductsByStore(context);
-                context.push("/products-view");
-              },
-              child: const Text('Productos'),
-            ),*/
           ],
         ),
       ),
