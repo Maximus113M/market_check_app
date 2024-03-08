@@ -21,7 +21,7 @@ class ProfileDetailsScreen extends StatelessWidget {
           onPressed: () => context.pop(),
           icon: const Icon(
             Icons.arrow_back,
-            color: AppColors.white,
+            color: AppColors.appSecondary,
           ),
         ),
       ),

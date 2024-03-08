@@ -78,6 +78,7 @@ class AddProductsListScreen extends StatelessWidget {
                 },
                 textController:
                     context.read<ShoppingListsProvider>().productNameController,
+
                 hint: 'Ingresa el nombre del producto',
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -102,6 +103,7 @@ class AddProductsListScreen extends StatelessWidget {
             SizedBox(height: ScreenSize.absoluteHeight * 0.13),
             CustomButton(
               text: 'Guardar lista',
+              color: AppColors.appPrimary, 
               action: () {
                 shoppingListsProvider.updateShoppingList(context);
               },
