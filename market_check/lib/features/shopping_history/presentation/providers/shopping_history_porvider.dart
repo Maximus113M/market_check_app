@@ -40,8 +40,8 @@ class ShoppingHistoryProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getPurchaseProducts(
-      BuildContext context, PurchaseModel currentPurchase) async {
+  void getPurchaseProducts(BuildContext context, PurchaseModel currentPurchase,
+      {bool showModal = true}) async {
     final result = await getShoppingProductsUseCase(currentPurchase.id);
     result.fold(
         (l) => InAppNotification.showAppNotification(
@@ -53,8 +53,11 @@ class ShoppingHistoryProvider with ChangeNotifier {
       registeredPurchaseItems = r;
       int totalProducts = registeredPurchaseItems.fold(0,
           (previousValue, purchaseItem) => previousValue + purchaseItem.quanty);
-      showShoppingHistoryModal(context, currentPurchase, totalProducts);
+      if (showModal) {
+        showShoppingHistoryModal(context, currentPurchase, totalProducts);
+      }
     });
+    notifyListeners();
   }
 
   void showShoppingHistoryModal(BuildContext context,
