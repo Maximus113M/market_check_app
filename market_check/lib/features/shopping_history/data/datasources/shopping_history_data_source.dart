@@ -22,12 +22,16 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
 
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
 
-      purhaseList = (jsonDecode(response.body)['closePurchases'] as List)
+      purhaseList = (jsonDecode(fixedResponse?? response.body)['closePurchases'] as List)
           .map((purchaseJson) => PurchaseModel.fromJson(purchaseJson))
           .toList();
 
@@ -55,12 +59,16 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
       final response =
           await ServerService.serverGet('${ServerUrls.purchaseUrl}$purchaseId');
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
 
-      registeredItems = (jsonDecode(response.body)['items'] as List)
+      registeredItems = (jsonDecode(fixedResponse?? response.body)['items'] as List)
           .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
           .toList();
 

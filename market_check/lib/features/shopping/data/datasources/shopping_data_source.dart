@@ -23,13 +23,17 @@ class PurchasesDataSourceImpl extends ShoppingDataSource {
         final response = await ServerService.serverGet(
             '${ServerUrls.purchaseUrl}${ServerUrls.createPurchaseUrl}${purchaseItems[0].product.storeId}');
 
-        if (response.statusCode >= 300) {
-          throw HttpException(
-              message: '${response.statusCode}, ${response.reasonPhrase}');
-        }
+        if (response.statusCode != 200 && response.statusCode != 201) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
 
-        final int pin = jsonDecode(response.body)["pin"];
-        final int purchaseId = jsonDecode(response.body)["id"];
+        final int pin = jsonDecode(fixedResponse?? response.body)["pin"];
+        final int purchaseId = jsonDecode(fixedResponse?? response.body)["id"];
 
         await Future.forEach(purchaseItems, (item) async {
           await addProductToPurchase(item, purchaseId);

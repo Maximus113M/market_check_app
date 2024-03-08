@@ -21,12 +21,17 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
 
       final response = await ServerService.serverGet(ServerUrls.listsUrl);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
-      userLists = (jsonDecode(response.body)['Listas del usuario'] as List)
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      userLists = (jsonDecode(fixedResponse?? response.body)['Listas del usuario'] as List)
           .map((jsonList) => ShoppingListsModel.fromJson(jsonList))
           .toList();
 
@@ -53,13 +58,18 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
       final response = await ServerService.serverPost(
           ServerUrls.listsUrl, newList.shoppingListToJson());
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
 
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
       final createdList =
-          ShoppingListsModel.fromJson(jsonDecode(response.body)['lista']);
+          ShoppingListsModel.fromJson(jsonDecode(fixedResponse?? response.body)['lista']);
 
       return createdList;
     } on HttpException catch (e) {
@@ -85,12 +95,16 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
       final response = await ServerService.serverPut(
           '${ServerUrls.listsUrl}/${newList.id}', newList.shoppingListToJson());
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
       final updateList =
-          ShoppingListsModel.fromJson(jsonDecode(response.body)['lista']);
+          ShoppingListsModel.fromJson(jsonDecode(fixedResponse?? response.body)['lista']);
 
       return updateList;
     } on HttpException catch (e) {
@@ -115,7 +129,7 @@ class ShoppingListsDatasorceImpl extends ShoppingListsDatasorce {
       final response =
           await ServerService.serverDelete('${ServerUrls.listsUrl}/$listId');
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }

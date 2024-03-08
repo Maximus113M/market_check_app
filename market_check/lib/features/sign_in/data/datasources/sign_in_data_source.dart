@@ -85,6 +85,13 @@ class SignInDataSourceImpl extends SignInDataSource {
         fixedResponse = response.body;
       }
 
+      if (jsonDecode(fixedResponse)["user"]["rol_id"] != 4) {
+        throw RolException(
+          message:
+              'El usuario no cuenta con los permisos para ingresar a la app',
+        );
+      }
+
       await flutterSecureStorage.write(
           key: 'id', value: jsonDecode(fixedResponse)["user"]["id"].toString());
       await flutterSecureStorage.write(
@@ -122,15 +129,24 @@ class SignInDataSourceImpl extends SignInDataSource {
       debugPrint('SignInDataSource, verifyLogIn HttpException: $e');
 
       throw RemoteException(
-          message:
-              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+        message:
+            "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+        type: ExceptionType.signIn,
+      );
+    } on RolException catch (e) {
+      debugPrint('SignInDataSource, verifyLogIn RolException: $e');
+
+      throw RemoteException(
+        message: e.message,
+        type: ExceptionType.signIn,
+      );
     } catch (e) {
       debugPrint('SignInDataSource, verifyLogIn Exception: $e');
       throw RemoteException(
-          message:
-              "Revisa tus credenciales y asegurate de confirmar la notificación enviada a tu correo",
-          type: ExceptionType.signIn);
+        message:
+            "Revisa tus credenciales y asegurate de confirmar la notificación enviada a tu correo",
+        type: ExceptionType.signIn,
+      );
     }
   }
 

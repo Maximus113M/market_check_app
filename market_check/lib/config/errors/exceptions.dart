@@ -18,6 +18,12 @@ class HttpException implements Exception {
   HttpException({required this.message});
 }
 
+class RolException implements Exception {
+  final String message;
+
+  RolException({required this.message});
+}
+
 enum ExceptionType {
   splash,
   signUp,

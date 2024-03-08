@@ -21,19 +21,23 @@ class PendingPurchasesDataSourceImpl extends PendingPurchasesDataSource {
 
       final response = await ServerService.serverGet(path);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
 
-      if (jsonDecode(response.body)['openPurchase'] == null) {
+      if (jsonDecode(fixedResponse?? response.body)['openPurchase'] == null) {
         AuthService.user!.isPurchaseOpen = false;
         AuthService.user!.purchasePin = null;
         return null;
       }
 
       openPurchase =
-          PurchaseModel.fromJson(jsonDecode(response.body)['openPurchase']);
+          PurchaseModel.fromJson(jsonDecode(fixedResponse?? response.body)['openPurchase']);
 
       AuthService.user!.isPurchaseOpen = true;
       AuthService.user!.purchasePin = openPurchase.pin;

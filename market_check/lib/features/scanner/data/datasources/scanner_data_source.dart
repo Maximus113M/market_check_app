@@ -26,12 +26,17 @@ class ScannerDataSourceImpl extends ScannerDataSource {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
       ProductModel? product;
-      if (jsonDecode(response.body)["product"] == null) {
+      if (jsonDecode(fixedResponse?? response.body)["product"] == null) {
         return product;
       }
 
-      return ProductModel.fromJson(jsonDecode(response.body)["product"]);
+      return ProductModel.fromJson(jsonDecode(fixedResponse?? response.body)["product"]);
     } on HttpException catch (e) {
       debugPrint('ScannerDatasource, getProductsByScanner HttpException: $e');
       throw RemoteException(

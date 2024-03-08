@@ -31,7 +31,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
         {'password': password},
       );
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
@@ -59,13 +59,17 @@ class ProfileDataSourceImpl extends ProfileDataSource {
         updatedData.userToJson(),
       );
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
 
       final User updatedUser = User.fromJson(
-        jsonDecode(response.body)['user'],
+        jsonDecode(fixedResponse ?? response.body)['user'],
       );
 
       AuthService.user = updatedUser;
@@ -76,7 +80,7 @@ class ProfileDataSourceImpl extends ProfileDataSource {
       await flutterSecureStorage.write(
           key: 'profile_image', value: ('${updatedUser.profileImage}'));
 
-      return jsonDecode(response.body)["message"];
+      return jsonDecode(fixedResponse ?? response.body)["message"];
     } on HttpException catch (e) {
       debugPrint('ProfileDataSource, updateAccountData HttpException: $e');
       throw RemoteException(
@@ -98,14 +102,18 @@ class ProfileDataSourceImpl extends ProfileDataSource {
 
       final response = await ServerService.serverDelete(path);
 
-      if (response.statusCode >= 300) {
+      if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
       }
 
       await flutterSecureStorage.deleteAll();
 
-      return jsonDecode(response.body)["message"];
+      return jsonDecode(fixedResponse ?? response.body)["message"];
     } on HttpException catch (e) {
       debugPrint('ProfileDataSource, deleteAccount HttpException: $e');
       throw RemoteException(
