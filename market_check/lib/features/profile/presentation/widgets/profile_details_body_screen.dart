@@ -129,11 +129,11 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
           Container(
             margin: EdgeInsets.symmetric(
               horizontal: ScreenSize.width * 0.05,
-              vertical: ScreenSize.absoluteHeight * 0.05,
+              vertical: ScreenSize.absoluteHeight * 0.045,
             ),
             padding: EdgeInsets.symmetric(
               horizontal: ScreenSize.width * 0.06,
-              vertical: ScreenSize.absoluteHeight * 0.02,
+              vertical: ScreenSize.absoluteHeight * 0.025,
             ).copyWith(bottom: ScreenSize.absoluteHeight * 0.05),
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.disabled, width: 2),
@@ -230,7 +230,7 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
     IconButton? showPassword,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

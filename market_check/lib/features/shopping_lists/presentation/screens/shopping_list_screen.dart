@@ -59,55 +59,60 @@ class ShoppingListScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: ScreenSize.absoluteHeight * 0.01),
-                    child: Text(
-                      'Mis listas',
-                      style: FontStyles.heading11(AppColors.appSecondary),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenSize.absoluteHeight * 0.01,
-                      horizontal: ScreenSize.width * 0.04,
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        context
-                            .read<ShoppingListsProvider>()
-                            .showCreateListDialog(context);
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.add,
-                            color: AppColors.appSecondary,
-                          ),
-                          SizedBox(
-                            width: ScreenSize.width * 0.025,
-                          ),
-                          Text(
-                            ' Crear nueva lista',
-                            style: FontStyles.body0(AppColors.text),
-                          )
-                        ],
+            : Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.05),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: ScreenSize.absoluteHeight * 0.01),
+                      child: Text(
+                        'Mis listas',
+                        style: FontStyles.heading11(AppColors.appSecondary),
                       ),
                     ),
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  SizedBox(
-                    height: ScreenSize.absoluteHeight * 0.68,
-                    child: ShoppingListName(
-                      shoppingList:
-                          context.watch<ShoppingListsProvider>().shoppingLists,
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenSize.absoluteHeight * 0.01,
+                        horizontal: ScreenSize.width * 0.02,
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          context
+                              .read<ShoppingListsProvider>()
+                              .showCreateListDialog(context);
+                        },
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.add,
+                              color: AppColors.appSecondary,
+                            ),
+                            SizedBox(
+                              width: ScreenSize.width * 0.025,
+                            ),
+                            Text(
+                              ' Crear nueva lista',
+                              style: FontStyles.body0(AppColors.text),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                      height: ScreenSize.absoluteHeight * 0.68,
+                      child: ShoppingListName(
+                        shoppingList: context
+                            .watch<ShoppingListsProvider>()
+                            .shoppingLists,
+                      ),
+                    ),
+                  ],
+                ),
               ),
       ),
     );

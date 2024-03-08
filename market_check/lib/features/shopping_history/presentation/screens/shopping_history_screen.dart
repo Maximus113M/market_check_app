@@ -22,13 +22,13 @@ class ShoppingHistoryScreen extends StatelessWidget {
           onPressed: () => context.pop(),
           icon: const Icon(
             Icons.arrow_back,
-            color: AppColors.white,
+            color: AppColors.appSecondary,
           ),
         ),
         isCartVisible: false,
         title: Text(
           "Historial de Compra",
-          style: FontStyles.subtitle0(AppColors.white),
+          style: FontStyles.subtitle0(AppColors.appSecondary),
         ),
       ),
       body: ShoppingHistoryScreenBody(

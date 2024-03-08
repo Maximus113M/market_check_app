@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
+import 'package:market_check/config/shared/widgets/loadings/not_found_placeholder.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:market_check/features/pending_purchases/presentation/widgets/pending_purchases_card.dart';
+import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
 import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
-import 'package:market_check/features/pending_purchases/presentation/widgets/pending_purchases_item.dart';
 
 import 'package:provider/provider.dart';
 
@@ -14,26 +16,43 @@ class PendingPurchasesBodyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Text(
-              'COMPRAS PENDIENTES',
-              style: FontStyles.subtitle0(AppColors.appPrimary),
+    return pendingPurchaseProvider.openPurchase != null
+        ? SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: ScreenSize.absoluteHeight * 0.025,
+                ),
+                if (pendingPurchaseProvider.openPurchase != null)
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenSize.width * 0.03,
+                    ),
+                    child: PendingPurchasesCard(
+                      products: context
+                          .watch<ShoppingHistoryProvider>()
+                          .registeredPurchaseItems,
+                      purchase: pendingPurchaseProvider.openPurchase!,
+                      store:
+                          context.watch<StoresProvider>().storeList.firstWhere(
+                                (store) =>
+                                    store.id ==
+                                    pendingPurchaseProvider
+                                        .openPurchase!.establecimientoId,
+                              ),
+                    ),
+                  ),
+              ],
             ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.03),
-          child: PendingPurchasesItem(
-            purchase: pendingPurchaseProvider.openPurchase,
-            stores: context.watch<StoresProvider>().storeList,
-          ),
-        ),
-      ],
-    );
+          )
+        : const Center(
+            heightFactor: 3,
+            child: NotFoundPlaceHolder(
+              text: 'No tienes compras\npendientes...',
+              bottomSpacing: 0,
+            ),
+          );
   }
 }

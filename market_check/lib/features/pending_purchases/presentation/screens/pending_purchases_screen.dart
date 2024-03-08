@@ -14,7 +14,7 @@ class PendingPurchasesScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(context: context),
       body: PendingPurchasesBodyScreen(
-        pendingPurchaseProvider: context.read(),
+        pendingPurchaseProvider: context.watch(),
       ),
     );
   }
