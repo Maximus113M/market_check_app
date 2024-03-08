@@ -79,7 +79,7 @@ class ShoppingListsProvider extends ChangeNotifier {
         InAppNotification.showAppNotification(
           context: context,
           title: 'Actualización Exitosa',
-          message: 'La lista se ha actualizado satisfactoriamente.',
+          message: '¡La lista se ha actualizado!',
           type: NotificationType.success,
         );
       },

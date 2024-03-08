@@ -102,6 +102,7 @@ class AddProductsListScreen extends StatelessWidget {
             ),
             SizedBox(height: ScreenSize.absoluteHeight * 0.13),
             CustomButton(
+              radius: 0.06,
               text: 'Guardar lista',
               color: AppColors.appPrimary, 
               action: () {

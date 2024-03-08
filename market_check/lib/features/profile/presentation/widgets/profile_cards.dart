@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/config/utils/constans/app_shadows.dart';
 
 class ProfileCards extends StatelessWidget {
   final String title;

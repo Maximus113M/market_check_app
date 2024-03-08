@@ -62,10 +62,13 @@ class BottomMenu extends StatelessWidget {
               label: 'Listas',
             ),
             BottomNavigationBarItem(
-              icon: CustomBadge(
-                  icon: Icons.shopping_bag,
-                  iconSize: 25,
-                  counter: AuthService.user!.isPurchaseOpen ? 1 : 0),
+              icon: Padding(
+                padding: EdgeInsets.only(left: ScreenSize.width * 0.02),
+                child: CustomBadge(
+                    icon: Icons.shopping_bag,
+                    iconSize: 25,
+                    counter: AuthService.user!.isPurchaseOpen ? 1 : 0),
+              ),
               label: 'Compras',
             ),
             const BottomNavigationBarItem(
