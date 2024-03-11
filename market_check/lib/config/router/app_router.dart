@@ -2,6 +2,7 @@ import 'package:market_check/features/screens.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
+import 'package:market_check/features/stores/presentation/screens/store/store_info_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -35,13 +36,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: "/store-view",
       name: StoreScreen.name,
-      builder: (context, state) => StoreScreen(storesProvider: sl()),
+      builder: (context, state) => StoreScreen(
+        storesProvider: sl(),
+      ),
     ),
-    /*GoRoute(
-      path: "/products-view",
-      name: ProductsScreen.name,
-      builder: (context, state) => ProductsScreen(productsList: sl()),
-    ),*/
     GoRoute(
       path: "/products-categories",
       name: ProductsByCategoryScreen.name,
@@ -49,10 +47,15 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: "/offers-m",
-      name: OfferScreeenM.name,
-      builder: (context, state) => OfferScreeenM(
+      name: OfferScreen.name,
+      builder: (context, state) => OfferScreen(
         productsProvider: sl(),
       ),
+    ),
+    GoRoute(
+      path: "/store-info",
+      name: StoreInfoScreen.name,
+      builder: (context, state) => const StoreInfoScreen(),
     ),
     GoRoute(
       path: "/shopping-cart",

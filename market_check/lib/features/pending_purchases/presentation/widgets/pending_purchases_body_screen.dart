@@ -23,26 +23,20 @@ class PendingPurchasesBodyScreen extends StatelessWidget {
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: ScreenSize.absoluteHeight * 0.025,
+                  height: ScreenSize.absoluteHeight * 0.02,
                 ),
                 if (pendingPurchaseProvider.openPurchase != null)
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenSize.width * 0.03,
-                    ),
-                    child: PendingPurchasesCard(
-                      products: context
-                          .watch<ShoppingHistoryProvider>()
-                          .registeredPurchaseItems,
-                      purchase: pendingPurchaseProvider.openPurchase!,
-                      store:
-                          context.watch<StoresProvider>().storeList.firstWhere(
-                                (store) =>
-                                    store.id ==
-                                    pendingPurchaseProvider
-                                        .openPurchase!.establecimientoId,
-                              ),
-                    ),
+                  PendingPurchasesCard(
+                    products: context
+                        .watch<ShoppingHistoryProvider>()
+                        .registeredPurchaseItems,
+                    purchase: pendingPurchaseProvider.openPurchase!,
+                    store: context.watch<StoresProvider>().storeList.firstWhere(
+                          (store) =>
+                              store.id ==
+                              pendingPurchaseProvider
+                                  .openPurchase!.establecimientoId,
+                        ),
                   ),
               ],
             ),

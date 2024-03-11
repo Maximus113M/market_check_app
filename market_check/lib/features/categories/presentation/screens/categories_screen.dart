@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
@@ -38,8 +36,8 @@ class CategoriesScreen extends StatelessWidget {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 5,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 10 / 3,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 10 / 3.8,
                       ),
                       itemCount: categoriesList.length,
                       itemBuilder: (context, index) {
@@ -89,7 +87,7 @@ class CategoriesListItem extends StatelessWidget {
         children: [
           Container(
             width: ScreenSize.width * 0.15,
-            height: ScreenSize.absoluteHeight * 0.066,
+            height: ScreenSize.absoluteHeight * 0.09,
             decoration: const BoxDecoration(
               color: AppColors.appSecondary,
               borderRadius: BorderRadius.only(
@@ -109,9 +107,10 @@ class CategoriesListItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 categorie.name,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 3,
               ),
             ),
           )

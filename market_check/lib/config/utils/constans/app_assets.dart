@@ -12,6 +12,8 @@ class AppAssets {
   static const String avatar4 = 'assets/Images/avatars/avatar4.jpeg';
   static const String avatar5 = 'assets/Images/avatars/avatar5.jpeg';
   static const String avatar6 = 'assets/Images/avatars/avatar6.jpeg';
+  static const String avatar7 = 'assets/Images/avatars/avatar7.jpeg';
+  static const String avatar8 = 'assets/Images/avatars/avatar8.jpeg';
 
   static const List<String> avatarList = [
     avatar,
@@ -21,6 +23,8 @@ class AppAssets {
     avatar4,
     avatar5,
     avatar6,
+    avatar7,
+    avatar8,
   ];
 //--------------------------Profile
   static const String shopping = 'assets/Images/profile/shoppings.webp';

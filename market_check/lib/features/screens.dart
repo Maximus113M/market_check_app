@@ -14,6 +14,6 @@ export 'package:market_check/features/shopping_history/presentation/screens/shop
 
 export 'package:market_check/features/sign_in/presentation/screens/splash/splash_screen.dart';
 export 'package:market_check/features/sign_in/presentation/screens/signup/sign_up_screen.dart';
-export 'package:market_check/features/stores/presentation/screens/offers/offer_view_m.dart';
+export 'package:market_check/features/stores/presentation/screens/offers/offer_screen.dart';
 export 'package:market_check/features/scanner/presentation/screens/scanner_screen.dart';
 export 'package:market_check/features/stores/presentation/screens/stores/stores_screen_m.dart';

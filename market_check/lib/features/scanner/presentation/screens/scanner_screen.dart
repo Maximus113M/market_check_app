@@ -28,7 +28,7 @@ class ScannerScreen extends StatelessWidget {
             )),
         context: context,
         title: Text(
-          'Escaneo de Productos',
+          'Escaneo de productos',
           style: FontStyles.subtitle0(AppColors.appSecondary),
         ),
       ),

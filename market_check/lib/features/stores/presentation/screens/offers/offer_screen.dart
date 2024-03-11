@@ -12,11 +12,11 @@ import 'package:market_check/features/categories/presentation/providers/categori
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
-class OfferScreeenM extends StatelessWidget {
+class OfferScreen extends StatelessWidget {
   static const name = "offers-m";
   final ProductsProvider productsProvider;
 
-  const OfferScreeenM({super.key, required this.productsProvider});
+  const OfferScreen({super.key, required this.productsProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -43,26 +43,22 @@ class OfferScreeenM extends StatelessWidget {
             const SizedBox(height: 5),
             context.watch<StoresProvider>().offerList.isNotEmpty
                 ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                       Text(
-                         'Descuentos',
-                         style: FontStyles.subtitle0(AppColors.appPrimary),
-                       ),
+                      Text(
+                        'Descuentos',
+                        style: FontStyles.subtitle0(AppColors.appPrimary),
+                      ),
                       OffersSwiper(
                         offerList: context.watch<StoresProvider>().offerList,
                       ),
                     ],
                   )
                 : const SizedBox(),
-
             TabBar(
               onTap: (value) {
                 if (value == 0) {
                   productsProvider.setCurrentSearchType(SearchType.categories);
-                } else {
-                  productsProvider.restartProductList();
-                  productsProvider.setCurrentSearchType(SearchType.products);
                 }
               },
               tabs: const [

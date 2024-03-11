@@ -33,23 +33,28 @@ class ProductsListItem extends StatelessWidget {
                 color: AppColors.appPrimary,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxHeight: ScreenSize.absoluteHeight * 0.048,
-                      maxWidth: ScreenSize.height * 0.15),
-                  child: Text(
-                    productModel.name,
-                    style: FontStyles.bodyBold3(AppColors.text),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+            Tooltip(
+              message: productModel.name.length > 32 ? productModel.name : '',
+              margin: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.1),
+              textAlign: TextAlign.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxHeight: ScreenSize.absoluteHeight * 0.048,
+                        maxWidth: ScreenSize.height * 0.15),
+                    child: Text(
+                      productModel.name,
+                      style: FontStyles.bodyBold3(AppColors.text),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   ),
-                ),
-                Text('\$ ${productModel.originalPrice}'),
-              ],
+                  Text('\$ ${productModel.originalPrice}'),
+                ],
+              ),
             )
           ],
         ),

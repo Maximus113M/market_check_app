@@ -118,6 +118,9 @@ class _ProfileDetailsBodyScreenState extends State<ProfileDetailsBodyScreen> {
     nameController.dispose();
     documentController.dispose();
     emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+
     super.dispose();
   }
 

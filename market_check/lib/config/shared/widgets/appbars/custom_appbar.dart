@@ -41,7 +41,7 @@ AppBar customAppBar({
           GestureDetector(
             onTap: () => context.pushNamed(ShoppingCartScreen.name),
             child: Padding(
-              padding: EdgeInsets.only(right: ScreenSize.width * 0.005),
+              padding: EdgeInsets.only(right: ScreenSize.width * 0.02),
               child: CustomBadge(
                 icon: Icons.shopping_cart_rounded,
                 iconSize: 30,
@@ -49,6 +49,6 @@ AppBar customAppBar({
                 color: AppColors.white,
               ),
             ),
-          )
+          ),
       ],
     );

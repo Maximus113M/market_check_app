@@ -27,8 +27,8 @@ class ScannerBodyScreen extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(
-                    top: ScreenSize.absoluteHeight * 0.05,
-                    bottom: ScreenSize.absoluteHeight * 0.2),
+              top: ScreenSize.absoluteHeight * 0.05,
+              bottom: ScreenSize.absoluteHeight * 0.2),
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -41,15 +41,17 @@ class ScannerBodyScreen extends StatelessWidget {
               Container(
                 height: ScreenSize.absoluteHeight * 0.35,
                 width: double.infinity,
-                color: AppColors.white.withOpacity(0.6),)
+                color: AppColors.white.withOpacity(0.6),
+              )
             ],
           ),
         ),
         CustomButton(
-          textStyle: FontStyles.subtitle1(AppColors.appPrimary),
-          horizontalMargin: 0.18,
+          textStyle: FontStyles.bodyBold0(AppColors.appPrimary),
+          horizontalMargin: 0.14,
           verticalSize: 0.065,
-          text: 'Escanear el Codigo',
+          text: 'ESCANEAR CÓDIGO',
+          radius: 0.07,
           action: () {
             scannerProvider.getProductByScanner(context);
           },
