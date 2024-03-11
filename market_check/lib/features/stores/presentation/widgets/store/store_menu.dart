@@ -37,7 +37,6 @@ class StoreMenu extends StatelessWidget {
               context.push('/offers-m');
             },
             child: listTileOption(
-              context: context,
               leading: Icons.category_rounded,
               title: 'Productos y Categorias',
               subtitle: 'Explora nuestras ofertas, productos y categorias.',
@@ -46,7 +45,6 @@ class StoreMenu extends StatelessWidget {
           GestureDetector(
             onTap: () => context.pushNamed(ScannerScreen.name),
             child: listTileOption(
-              context: context,
               leading: Icons.qr_code_scanner_rounded,
               title: 'Escanea productos',
               subtitle: '¡Consulta los productos antes de llevarlos!',
@@ -55,7 +53,6 @@ class StoreMenu extends StatelessWidget {
           GestureDetector(
             onTap: () => context.pushNamed(StoreInfoScreen.name),
             child: listTileOption(
-              context: context,
               leading: Icons.info_outlined,
               title: 'Acerca de nosotros',
               subtitle: 'Información legal y de contacto.',
@@ -67,7 +64,6 @@ class StoreMenu extends StatelessWidget {
   }
 
   ListTile listTileOption({
-    required BuildContext context,
     required IconData leading,
     required String title,
     required String subtitle,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 import 'package:market_check/features/pending_purchases/domain/use_cases/get_open_purchases_use_case.dart';
-import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
+import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
 import 'package:provider/provider.dart';
 
 class PendingPurchaseProvider with ChangeNotifier {
@@ -34,7 +34,7 @@ class PendingPurchaseProvider with ChangeNotifier {
   void getOpenPurchaseProductsFromHistoryProvider(BuildContext context) {
     if (openPurchase != null) {
       context
-          .read<ShoppingHistoryProvider>()
+          .read<ProfileCardsProvider>()
           .getPurchaseProducts(context, openPurchase!, showModal: false);
     }
   }

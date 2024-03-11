@@ -4,9 +4,10 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/loadings/loadings.dart';
 import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/config/shared/widgets/loadings/not_found_placeholder.dart';
-import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/products/presentation/widgets/product_list_item.dart';
+import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/stores/presentation/widgets/offers/search_product_offer.dart';
+
 import 'package:provider/provider.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -38,7 +39,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
         children: [
           const SearchProducts(),
           context.watch<ProductsProvider>().isLoading
-              ? Loadings.lottieLoading()
+              ? Expanded(
+                  child: SizedBox(
+                    child: Loadings.lottieLoading(),
+                  ),
+                )
               : Expanded(
                   child: SizedBox(
                     width: ScreenSize.width * 0.9,
@@ -48,6 +53,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             bottomSpacing: 0.2,
                           )
                         : GridView.builder(
+                            padding: EdgeInsets.symmetric(
+                              vertical: ScreenSize.absoluteHeight * 0.015,
+                            ),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,

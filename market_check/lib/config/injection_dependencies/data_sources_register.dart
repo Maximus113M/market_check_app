@@ -7,7 +7,7 @@ import 'package:market_check/features/scanner/data/datasources/scanner_data_sour
 import 'package:market_check/features/shopping/data/datasources/shopping_data_source.dart';
 import 'package:market_check/features/products/data/datasources/products_data_source.dart';
 import 'package:market_check/features/categories/data/datasource/categories_datasource.dart';
-import 'package:market_check/features/shopping_history/data/datasources/shopping_history_data_source.dart';
+import 'package:market_check/features/profile_cards/data/datasources/profile_cards_data_source.dart';
 import 'package:market_check/features/pending_purchases/data/datasources/pending_purchases_data_source.dart';
 
 void registerDataSources() {
@@ -30,7 +30,7 @@ void registerDataSources() {
       flutterSecureStorage: sl(),
     ),
   );
-  sl.registerLazySingleton<ShoppingHistoryDataSource>(
+  sl.registerLazySingleton<ProfileCardsDataSource>(
     () => ShoppingHistoryDataSourceImpl(),
   );
   sl.registerLazySingleton<ShoppingDataSource>(

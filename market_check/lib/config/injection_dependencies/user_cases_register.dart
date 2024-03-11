@@ -1,4 +1,4 @@
-import 'package:market_check/features/profile/domain/use_cases/get_stores_visited_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_stores_visited_use_case.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_up_use_case.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_out_use_case.dart';
@@ -19,8 +19,8 @@ import 'package:market_check/features/shopping_lists/domain/use_cases/create_sho
 import 'package:market_check/features/shopping_lists/domain/use_cases/delete_shopping_list_use_case.dart';
 import 'package:market_check/features/pending_purchases/domain/use_cases/get_open_purchases_use_case.dart';
 import 'package:market_check/features/scanner/domain/use_cases/get_store_product_by_scanner_use_case.dart';
-import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_history_use_case.dart';
-import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_products_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_history_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_products_use_case.dart';
 
 void registerUseCases() {
   sl.registerLazySingleton(

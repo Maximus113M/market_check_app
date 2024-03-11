@@ -81,7 +81,9 @@ class StoresProvider with ChangeNotifier {
 
     result.fold(
       (l) => null,
-      (r) => offerList = r,
+      (r) {
+        offerList = r;
+      },
     );
 
     loadingOffers = false;

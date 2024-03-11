@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 
 class ShoppingHistoryItem extends StatelessWidget {
   final PurchaseModel purchase;

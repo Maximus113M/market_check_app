@@ -38,23 +38,21 @@ class OfferScreen extends StatelessWidget {
           ),
         ),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 5),
-            context.watch<StoresProvider>().offerList.isNotEmpty
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Descuentos',
-                        style: FontStyles.subtitle0(AppColors.appPrimary),
-                      ),
-                      OffersSwiper(
-                        offerList: context.watch<StoresProvider>().offerList,
-                      ),
-                    ],
-                  )
-                : const SizedBox(),
+            if (context.watch<StoresProvider>().offerList.isNotEmpty)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Descuentos',
+                    style: FontStyles.subtitle0(AppColors.appPrimary),
+                  ),
+                  OffersSwiper(
+                    offerList: context.watch<StoresProvider>().offerList,
+                  ),
+                ],
+              ),
             TabBar(
               onTap: (value) {
                 if (value == 0) {

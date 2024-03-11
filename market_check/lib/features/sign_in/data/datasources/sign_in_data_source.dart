@@ -9,7 +9,7 @@ import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/features/sign_in/data/models/sign_in_data_model.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 
 abstract class SignInDataSource {
   Future<PurchaseModel?> verifyCurrentSession();

@@ -5,7 +5,7 @@ import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 
 abstract class PendingPurchasesDataSource {
   Future<PurchaseModel?> getOpenPurchase();

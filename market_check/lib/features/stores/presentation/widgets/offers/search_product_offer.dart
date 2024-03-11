@@ -12,7 +12,7 @@ class SearchProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.symmetric(horizontal:  18, vertical: 12).copyWith(bottom: 5),
       child: Stack(
         children: [
           CustomTextFormField(

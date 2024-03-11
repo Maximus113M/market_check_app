@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/config/shared/widgets/shared_widgets.dart';
 import 'package:market_check/config/utils/utils.dart';
-import 'package:market_check/features/stores_visited/presentation/widgets/stores_visited_screen_body.dart';
+import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
+import 'package:market_check/features/profile_cards/presentation/widgets/stores_visited/stores_visited_screen_body.dart';
+import 'package:provider/provider.dart';
 
 class StoresVisitedScreen extends StatelessWidget {
   static const String name = '/stores-visited';
@@ -26,7 +28,9 @@ class StoresVisitedScreen extends StatelessWidget {
         ),
         isCartVisible: false,
       ),
-      body: const StoresVisitedScreenBody(),
+      body: StoresVisitedScreenBody(
+        storesVisited: context.watch<ProfileCardsProvider>().storesVisited,
+      ),
     );
   }
 }

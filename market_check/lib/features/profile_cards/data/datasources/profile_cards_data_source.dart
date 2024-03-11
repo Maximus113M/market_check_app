@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:market_check/config/errors/exceptions.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
-import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 
-abstract class ShoppingHistoryDataSource {
+abstract class ProfileCardsDataSource {
   Future<List<PurchaseModel>> getShoppingHistory();
   Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(int purchaseId);
+  Future<List<StoreModel>> getStoresVisited();
+
 }
 
-class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
+class ShoppingHistoryDataSourceImpl extends ProfileCardsDataSource {
   @override
   Future<List<PurchaseModel>> getShoppingHistory() async {
     try {
@@ -87,6 +91,47 @@ class ShoppingHistoryDataSourceImpl extends ShoppingHistoryDataSource {
           message:
               'Ha ocurrido un error al obtener los productos de la compra.',
           type: ExceptionType.purchases);
+    }
+  }
+
+  @override
+  Future<List<StoreModel>> getStoresVisited() async {
+    try {
+      final String path =
+          '${ServerUrls.userUrl}userStores/${AuthService.user!.id}';
+
+      final response = await ServerService.serverGet(path);
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+      List<StoreModel> stores = [];
+
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      stores = (jsonDecode(fixedResponse ?? response.body)["establecimientos"]
+              as List)
+          .map((storeJson) {
+        return StoreModel.fromJson(storeJson);
+      }).toList();
+
+      return stores;
+    } on HttpException catch (e) {
+      debugPrint('ProfileDataSource, getStoresVisited HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.profile);
+    } catch (e) {
+      debugPrint('ProfileDataSource, getStoresVisited Exception: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",
+          type: ExceptionType.profile);
     }
   }
 }

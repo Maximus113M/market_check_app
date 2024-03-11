@@ -13,7 +13,7 @@ import 'package:market_check/features/shopping/presentation/providers/shopping_p
 import 'package:market_check/features/products/presentation/providers/products_provider.dart';
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
-import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
+import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,7 @@ void main() async {
         create: (context) => sl<ShoppingListsProvider>(),
       ),
       ChangeNotifierProvider(
-        create: (context) => sl<ShoppingHistoryProvider>(),
+        create: (context) => sl<ProfileCardsProvider>(),
       ),
       ChangeNotifierProvider(
         create: (context) => sl<ScannerProvider>(),

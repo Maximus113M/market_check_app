@@ -4,7 +4,7 @@ import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/loadings/not_found_placeholder.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/pending_purchases/presentation/widgets/purchases_card.dart';
-import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
+import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
 import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class PendingPurchasesBodyScreen extends StatelessWidget {
                 if (pendingPurchaseProvider.openPurchase != null)
                   PurchasesCard(
                     products: context
-                        .watch<ShoppingHistoryProvider>()
+                        .watch<ProfileCardsProvider>()
                         .registeredPurchaseItems,
                     purchase: pendingPurchaseProvider.openPurchase!,
                     store: context.watch<StoresProvider>().storeList.firstWhere(

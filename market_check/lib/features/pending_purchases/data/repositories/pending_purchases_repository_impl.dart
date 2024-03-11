@@ -1,6 +1,6 @@
 import 'package:market_check/config/errors/failures.dart';
 import 'package:market_check/config/errors/exceptions.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 import 'package:market_check/features/pending_purchases/data/datasources/pending_purchases_data_source.dart';
 import 'package:market_check/features/pending_purchases/domain/repositories/pending_purchases_repository.dart';
 

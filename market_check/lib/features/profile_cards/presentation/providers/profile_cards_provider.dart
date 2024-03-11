@@ -4,27 +4,37 @@ import 'package:go_router/go_router.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 import 'package:market_check/features/pending_purchases/presentation/widgets/purchases_card.dart';
-import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
-import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_products_use_case.dart';
+import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_products_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_stores_visited_use_case.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_history_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_history_use_case.dart';
 
 import 'package:provider/provider.dart';
 
-class ShoppingHistoryProvider with ChangeNotifier {
+class ProfileCardsProvider with ChangeNotifier {
   final GetShoppinHistoryUseCase getShoppinHistoryUseCase;
   final GetShoppingProductsUseCase getShoppingProductsUseCase;
+  final GetStoresVisitedUseCase getStoresVisitedUseCase;
 
   List<PurchaseModel> purchases = [];
   List<RegisteredPurchaseItemModel> registeredPurchaseItems = [];
+  List<StoreModel> storesVisited = [];
+  bool isLoading = false;
 
-  ShoppingHistoryProvider(
-      {required this.getShoppinHistoryUseCase,
-      required this.getShoppingProductsUseCase});
+  ProfileCardsProvider({
+    required this.getShoppinHistoryUseCase,
+    required this.getShoppingProductsUseCase,
+    required this.getStoresVisitedUseCase,
+  });
 
   void getPurchasesHistory(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
     final result = await getShoppinHistoryUseCase(NoParams());
     result.fold(
       (l) {
@@ -39,11 +49,15 @@ class ShoppingHistoryProvider with ChangeNotifier {
       },
     );
 
+    isLoading = false;
     notifyListeners();
   }
 
   void getPurchaseProducts(BuildContext context, PurchaseModel currentPurchase,
       {bool showModal = true}) async {
+    if (isLoading) return;
+    isLoading = true;
+
     final result = await getShoppingProductsUseCase(currentPurchase.id);
     result.fold(
         (l) => InAppNotification.showAppNotification(
@@ -59,6 +73,8 @@ class ShoppingHistoryProvider with ChangeNotifier {
         showShoppingHistoryModal(context, currentPurchase, totalProducts);
       }
     });
+
+    isLoading = false;
     notifyListeners();
   }
 
@@ -99,5 +115,23 @@ class ShoppingHistoryProvider with ChangeNotifier {
         totalProducts: totalProducts,
       ),*/
         );
+  }
+
+  void getVisitedStores(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+
+    final result = await getStoresVisitedUseCase(NoParams());
+
+    result.fold(
+        (l) => InAppNotification.serverFailure(
+              context: context,
+              message: l.message,
+            ), (r) {
+      storesVisited = r;
+    });
+    
+    isLoading = false;
+    notifyListeners();
   }
 }

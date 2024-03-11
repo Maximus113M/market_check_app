@@ -9,7 +9,7 @@ import 'package:market_check/features/shopping/presentation/providers/shopping_p
 import 'package:market_check/features/categories/presentation/providers/categories_provider.dart';
 import 'package:market_check/features/pending_purchases/presentation/providers/pending_provider.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
-import 'package:market_check/features/shopping_history/presentation/providers/shopping_history_porvider.dart';
+import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
 
 void registerProviders() {
   sl.registerLazySingleton(
@@ -51,13 +51,13 @@ void registerProviders() {
       deleteAccountUseCase: sl(),
       updateAccountDataUseCase: sl(),
       updatePasswordUseCase: sl(),
-      getStoresVisitedUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(
-    () => ShoppingHistoryProvider(
+    () => ProfileCardsProvider(
       getShoppinHistoryUseCase: sl(),
       getShoppingProductsUseCase: sl(),
+      getStoresVisitedUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

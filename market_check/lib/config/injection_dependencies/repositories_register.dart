@@ -17,8 +17,8 @@ import 'package:market_check/features/products/data/repositories/products_reposi
 import 'package:market_check/features/categories/domain/repositories/categories_repository.dart';
 import 'package:market_check/features/shopping/data/repositories/shopping_repository_impl.dart';
 import 'package:market_check/features/categories/data/repositories/categories_repository_impl.dart';
-import 'package:market_check/features/shopping_history/domain/repositories/shopping_history_repository.dart';
-import 'package:market_check/features/shopping_history/data/repositories/shopping_history_repository_impl.dart';
+import 'package:market_check/features/profile_cards/domain/repositories/shopping_history_repository.dart';
+import 'package:market_check/features/profile_cards/data/repositories/profile_cards_repository_impl.dart';
 
 void registerRepositories() {
   sl.registerLazySingleton<SignInRepostory>(
@@ -46,9 +46,9 @@ void registerRepositories() {
       profileDataSource: sl(),
     ),
   );
-  sl.registerLazySingleton<ShoppingHistoryRepository>(
-    () => ShoppingHistoryRepositoryImpl(
-      shoppingHistoryDataSource: sl(),
+  sl.registerLazySingleton<ProfileCardsRepository>(
+    () => ProfileCardsRepositoryImpl(
+      profileCardsDataSource: sl(),
     ),
   );
   sl.registerLazySingleton<ShoppingRepository>(
