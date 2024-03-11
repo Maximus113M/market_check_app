@@ -17,12 +17,17 @@ class ShoppingListProductsListview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01),
+      padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.01)
+          .copyWith(bottom: ScreenSize.absoluteHeight * 0.01),
       itemCount: productList.products.length,
       itemBuilder: (context, index) => Container(
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.04),
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.04)
+            .copyWith(bottom: ScreenSize.absoluteHeight * 0.008),
         width: double.infinity,
-        height: ScreenSize.absoluteHeight * 0.05,
+        constraints: BoxConstraints(
+          minHeight: ScreenSize.absoluteHeight * 0.05,
+          maxHeight: ScreenSize.absoluteHeight * 0.2,
+        ),
         child: Row(
           children: [
             Checkbox(
@@ -30,15 +35,12 @@ class ShoppingListProductsListview extends StatelessWidget {
               value: productList.products[index].isSelected,
               onChanged: (value) => shoppingListsProvider.selectCheckBox(index),
             ),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  minWidth: ScreenSize.width * 0.66,
-                  maxWidth: ScreenSize.width * 0.66,
-                  maxHeight: ScreenSize.absoluteHeight * 0.05),
+            SizedBox(
+              width: ScreenSize.width * 0.66,
               child: Text(
                 productList.products[index].itemName,
                 style: FontStyles.body1(AppColors.text),
-                maxLines: 2,
+                maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

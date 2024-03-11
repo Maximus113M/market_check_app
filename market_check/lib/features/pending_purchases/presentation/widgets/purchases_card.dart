@@ -6,12 +6,14 @@ import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
 import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
 
-class PendingPurchasesCard extends StatelessWidget {
+import 'package:animate_do/animate_do.dart';
+
+class PurchasesCard extends StatelessWidget {
   final PurchaseModel purchase;
   final StoreModel store;
   final List<RegisteredPurchaseItemModel> products;
 
-  const PendingPurchasesCard(
+  const PurchasesCard(
       {super.key,
       required this.purchase,
       required this.store,
@@ -38,6 +40,7 @@ class PendingPurchasesCard extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.02),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             storeInfoText(
               text: store.name,
@@ -61,17 +64,25 @@ class PendingPurchasesCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${AppFuntions.mothNameMap[purchase.date.month]!.substring(0, 3)}.${purchase.date.day} - ${purchase.date.year} ${purchase.hour}',
-                      style: FontStyles.body4(AppColors.text),
+                    storeInfoText(
+                      align: TextAlign.start,
+                      text:
+                          '${AppFuntions.mothNameMap[purchase.date.month]!.substring(0, 3)}.${purchase.date.day} - ${purchase.date.year} ${purchase.hour}',
+                    ),
+                    storeInfoText(
+                      align: TextAlign.start,
+                      text:
+                          '${AuthService.user!.name} - ${AuthService.user!.document}',
                     ),
                     Text(
-                      '${AuthService.user!.name} - ${AuthService.user!.document}',
-                      style: FontStyles.body4(AppColors.text),
-                    ),
-                    Text(
-                      'Pendiente de pago',
-                      style: FontStyles.body4(AppColors.errorText),
+                      purchase.state == 0
+                          ? 'Pendiente de pago'
+                          : 'Compra Finalizada',
+                      style: FontStyles.bodyBold4(
+                        purchase.state == 0
+                            ? AppColors.errorText
+                            : AppColors.successText,
+                      ),
                     ),
                   ],
                 ),
@@ -92,29 +103,31 @@ class PendingPurchasesCard extends StatelessWidget {
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(
                   vertical: ScreenSize.absoluteHeight * 0.015,
-                  horizontal: ScreenSize.width * 0.05,
+                  horizontal: ScreenSize.width * 0.04,
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenSize.width * 0.4,
-                        child: Text(
-                          '${products[index].quanty}x ${products[index].name}',
-                          style: FontStyles.body3(AppColors.text),
+                  return FadeIn(
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: ScreenSize.width * 0.45,
+                          child: Text(
+                            '${products[index].quanty}x  ${products[index].name}',
+                            style: FontStyles.body3(AppColors.text),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: ScreenSize.width * 0.24,
-                        child: Text(
-                          '${products[index].price}',
-                          style: FontStyles.body3(AppColors.text),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                        ),
-                      )
-                    ],
+                        SizedBox(
+                          width: ScreenSize.width * 0.24,
+                          child: Text(
+                            '${products[index].price}',
+                            style: FontStyles.body3(AppColors.text),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                          ),
+                        )
+                      ],
+                    ),
                   );
                 },
               ),
@@ -155,7 +168,10 @@ class PendingPurchasesCard extends StatelessWidget {
   }
 
   SizedBox storeInfoText(
-      {required String text, int maxLines = 1, TextStyle? style}) {
+      {required String text,
+      int maxLines = 1,
+      TextStyle? style,
+      TextAlign align = TextAlign.center}) {
     return SizedBox(
       width: ScreenSize.width * 0.78,
       child: Text(
@@ -163,7 +179,7 @@ class PendingPurchasesCard extends StatelessWidget {
         maxLines: maxLines,
         style: style ?? FontStyles.body4(AppColors.text),
         overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
+        textAlign: align,
       ),
     );
   }

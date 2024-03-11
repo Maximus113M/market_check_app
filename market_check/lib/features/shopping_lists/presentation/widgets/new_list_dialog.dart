@@ -39,6 +39,7 @@ class NewListDialog extends StatelessWidget {
             ),
             SizedBox(height: ScreenSize.absoluteHeight * 0.03),
             CustomButton(
+              verticalSize: 0.05,
               text: 'Crear lista',
               textStyle: FontStyles.bodyBold0(AppColors.appPrimary),
               color: AppColors.appPrimary,

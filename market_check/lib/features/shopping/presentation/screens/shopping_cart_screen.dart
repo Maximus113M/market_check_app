@@ -19,20 +19,20 @@ class ShoppingCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
-          context: context,
-          isCartVisible: false,
-          title: Text(
-            'Carrito de compras',
-            style: FontStyles.subtitle0(AppColors.appSecondary)
+        context: context,
+        isCartVisible: false,
+        title: Text('Carrito de compras',
+            style: FontStyles.subtitle0(AppColors.appSecondary)),
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.appSecondary,
           ),
-          leading: IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(
-              Icons.arrow_back,
-              color: AppColors.appSecondary,
-            ),
-          )),
-      /*appBar: AppBar(
+        ),
+      ),
+      /*appBar:
+          AppBar(
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(
@@ -69,7 +69,7 @@ class ShoppingCartBodyScreen extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: ScreenSize.width * 0.13,
+                left: ScreenSize.width * 0.03,
                 top: ScreenSize.absoluteHeight * 0.025,
                 bottom: ScreenSize.absoluteHeight * 0.020),
             child: Text(

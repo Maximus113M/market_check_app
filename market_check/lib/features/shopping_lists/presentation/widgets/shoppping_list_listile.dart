@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/shopping_lists/data/models/shopping_lists_model.dart';
 import 'package:market_check/features/shopping_lists/presentation/providers/shopping_list_provider.dart';
+
 import 'package:provider/provider.dart';
 
 class ShoppingListListile extends StatelessWidget {
@@ -19,10 +20,9 @@ class ShoppingListListile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
             shoppingListsModel.nameList,
-            style: FontStyles.body0(AppColors.text),
+            style: FontStyles.body1(AppColors.text),
           ),
           leading: const Icon(
             Icons.bookmark_added_outlined,
@@ -31,7 +31,9 @@ class ShoppingListListile extends StatelessWidget {
           ),
           trailing: IconButton(
             onPressed: () {
-              context.read<ShoppingListsProvider>().deleteList(context, index);
+              context
+                  .read<ShoppingListsProvider>()
+                  .deleteListDialog(context, index);
             },
             icon: const Icon(
               Icons.delete_forever_rounded,

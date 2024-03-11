@@ -51,6 +51,7 @@ void registerProviders() {
       deleteAccountUseCase: sl(),
       updateAccountDataUseCase: sl(),
       updatePasswordUseCase: sl(),
+      getStoresVisitedUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

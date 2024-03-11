@@ -16,14 +16,13 @@ class StoresDataSourceImpl extends StoresDataSource {
   @override
   Future<List<StoreModel>> getStores() async {
     try {
-      List<StoreModel> stores = [];
-
       final response = await ServerService.serverGet(ServerUrls.storesUrl);
 
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw HttpException(
             message: '${response.statusCode}, ${response.reasonPhrase}');
       }
+      List<StoreModel> stores = [];
 
       String? fixedResponse;
       if (!response.body.endsWith('}')) {

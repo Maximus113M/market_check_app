@@ -3,6 +3,7 @@ import 'package:market_check/features/screens.dart';
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_info_screen.dart';
+import 'package:market_check/features/stores_visited/presentation/screens/stores_visited_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -83,6 +84,11 @@ final appRouter = GoRouter(
       path: "/shopping-history",
       name: ShoppingHistoryScreen.name,
       builder: (context, state) => const ShoppingHistoryScreen(),
+    ),
+    GoRoute(
+      path: "/stores-visited",
+      name: StoresVisitedScreen.name,
+      builder: (context, state) => const StoresVisitedScreen(),
     ),
     GoRoute(
       path: "/scanner",

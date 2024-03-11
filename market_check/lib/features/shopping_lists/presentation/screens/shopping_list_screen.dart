@@ -75,7 +75,7 @@ class ShoppingListScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: ScreenSize.absoluteHeight * 0.01,
-                        horizontal: ScreenSize.width * 0.02,
+                        horizontal: ScreenSize.width * 0.04,
                       ),
                       child: GestureDetector(
                         onTap: () {

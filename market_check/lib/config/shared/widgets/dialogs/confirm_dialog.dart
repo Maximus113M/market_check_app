@@ -25,6 +25,7 @@ class ConfirmDialog extends StatelessWidget {
           Text(
             title,
             style: FontStyles.subtitle0(AppColors.appSecondary),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

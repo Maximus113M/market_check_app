@@ -8,11 +8,13 @@ import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 
 abstract class ProfileDataSource {
   Future<void> updatePasword(String password);
   Future<String> updateAccountData(SignUpDataModel updatedData);
   Future<String> deleteAccount();
+  Future<List<StoreModel>> getStoresVisited();
 }
 
 class ProfileDataSourceImpl extends ProfileDataSource {
@@ -122,6 +124,47 @@ class ProfileDataSourceImpl extends ProfileDataSource {
           type: ExceptionType.profile);
     } catch (e) {
       debugPrint('ProfileDataSource, deleteAccount Exception: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",
+          type: ExceptionType.profile);
+    }
+  }
+
+  @override
+  Future<List<StoreModel>> getStoresVisited() async {
+    try {
+      final String path =
+          '${ServerUrls.userUrl}userStores/${AuthService.user!.id}';
+
+      final response = await ServerService.serverGet(path);
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+      List<StoreModel> stores = [];
+
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      stores = (jsonDecode(fixedResponse ?? response.body)["establecimientos"]
+              as List)
+          .map((storeJson) {
+        return StoreModel.fromJson(storeJson);
+      }).toList();
+
+      return stores;
+    } on HttpException catch (e) {
+      debugPrint('ProfileDataSource, getStoresVisited HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.profile);
+    } catch (e) {
+      debugPrint('ProfileDataSource, getStoresVisited Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",

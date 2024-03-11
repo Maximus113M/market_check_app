@@ -8,10 +8,12 @@ import 'package:market_check/config/utils/constans/in_app_notification.dart';
 import 'package:market_check/config/shared/models/create_user_data_model.dart';
 import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 import 'package:market_check/features/profile/data/models/profile_cards_model.dart';
+import 'package:market_check/features/profile/domain/use_cases/get_stores_visited_use_case.dart';
 import 'package:market_check/features/sign_in/presentation/providers/sign_in_provider.dart';
 import 'package:market_check/features/profile/domain/use_cases/delete_account_use_case.dart';
 import 'package:market_check/features/profile/domain/use_cases/update_password_use_case.dart';
 import 'package:market_check/features/profile/domain/use_cases/update_account_data_use_case.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -20,18 +22,20 @@ class ProfileProvider with ChangeNotifier {
   final DeleteAccountUseCase deleteAccountUseCase;
   final UpdateAccountDataUseCase updateAccountDataUseCase;
   final UpdatePasswordUseCase updatePasswordUseCase;
+  final GetStoresVisitedUseCase getStoresVisitedUseCase;
   bool isLoading = false;
   final List<String> avatars = AppAssets.avatarList;
   int selectdAvatare = AuthService.user!.profileImage!;
+  int selectedIndex = AuthService.user!.profileImage ?? 0;
+  List<ProfileCardsModel> menuCards = ProfileCardsModel.profileCardsMenu;
+  List<StoreModel> storesVisited = [];
 
   ProfileProvider({
     required this.deleteAccountUseCase,
     required this.updateAccountDataUseCase,
     required this.updatePasswordUseCase,
+    required this.getStoresVisitedUseCase,
   });
-
-  int selectedIndex = AuthService.user!.profileImage ?? 0;
-  List<ProfileCardsModel> menuCards = ProfileCardsModel.profileCardsMenu;
 
   void setIndex(int index) {
     selectedIndex = index;
@@ -122,7 +126,6 @@ class ProfileProvider with ChangeNotifier {
       Future.delayed(const Duration(seconds: 3)).then(
         (value) => context.pushReplacement('/login-form'),
       );
-      //context.p
     });
     isLoading = false;
   }
@@ -139,6 +142,22 @@ class ProfileProvider with ChangeNotifier {
 
     result.fold((l) => null, (r) => null);
 
+    notifyListeners();
+  }
+
+  void getVisitedStores(BuildContext context) async {
+    if (isLoading) return;
+    isLoading = true;
+    final result = await getStoresVisitedUseCase(NoParams());
+
+    result.fold(
+        (l) => InAppNotification.serverFailure(
+              context: context,
+              message: l.message,
+            ), (r) {
+      storesVisited = r;
+    });
+    isLoading = false;
     notifyListeners();
   }
 }

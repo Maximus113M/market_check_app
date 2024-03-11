@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:market_check/config/shared/widgets/dialogs/confirm_dialog.dart';
 
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
@@ -90,6 +92,21 @@ class ShoppingListsProvider extends ChangeNotifier {
   void selectShoppingList(int selectedIndex) {
     currentShoppingList = shoppingLists[selectedIndex];
     notifyListeners();
+  }
+
+  void deleteListDialog(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (context) => ConfirmDialog(
+        title: '¿Deseas borrar la lista seleccionada?',
+        message:
+            'Esta acción no se puede revertir, ¿estás seguro de continuar?',
+        mainAction: () {
+          deleteList(context, index);
+          context.pop();
+        },
+      ),
+    );
   }
 
   void deleteList(BuildContext context, int index) async {

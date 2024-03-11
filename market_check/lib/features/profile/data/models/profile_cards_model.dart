@@ -17,7 +17,9 @@ class ProfileCardsModel {
         imagePath: AppAssets.shopping,
         route: '/shopping-history'),
     ProfileCardsModel(
-        title: 'Tiendas Visitadas', imagePath: AppAssets.stores, route: ''),
+        title: 'Tiendas Visitadas',
+        imagePath: AppAssets.stores,
+        route: '/stores-visited'),
     ProfileCardsModel(
         title: 'Productos Favoritos',
         imagePath: AppAssets.favoritesProducts,

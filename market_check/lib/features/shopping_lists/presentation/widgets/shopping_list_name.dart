@@ -19,14 +19,13 @@ class ShoppingListName extends StatelessWidget {
     return ListView.builder(
       itemCount: shoppingList.length,
       itemBuilder: (context, index) {
-        final list = shoppingList[index];
         return GestureDetector(
           onTap: () {
             context.push('/addProducts-lists');
             context.read<ShoppingListsProvider>().selectShoppingList(index);
           },
           child: ShoppingListListile(
-            shoppingListsModel: list,
+            shoppingListsModel: shoppingList[index],
             index: index,
           ),
         );

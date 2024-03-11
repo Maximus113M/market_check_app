@@ -5,8 +5,8 @@ import 'package:market_check/config/utils/constans/app_colors.dart';
 
 import 'package:go_router/go_router.dart';
 
-class EmptyShoppingListBodyScreen extends StatelessWidget {
-  const EmptyShoppingListBodyScreen({super.key});
+class EmptyShoppingLists extends StatelessWidget {
+  const EmptyShoppingLists({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -18,35 +18,6 @@ class AddProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton.filled(
-            style: ButtonStyle(
-              backgroundColor:
-                  const MaterialStatePropertyAll(AppColors.appPrimary),
-              shape: MaterialStatePropertyAll(
-                ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
-            onPressed: () {
-              shoppingListsProvider.updateShoppingList(context);
-            },
-            icon: Icon(
-              Icons.save,
-              size: ScreenSize.absoluteHeight * 0.053,
-            ),
-          )
-          /*FloatingActionButton(
-            onPressed: () {
-              shoppingListsProvider.getShoppingLists(context);
-            },
-            child: const Text('Listar'),
-          ),*/
-        ],
-      ),*/
       appBar: customAppBar(
         context: context,
         isCartVisible: false,
@@ -78,7 +49,6 @@ class AddProductsListScreen extends StatelessWidget {
                 },
                 textController:
                     context.read<ShoppingListsProvider>().productNameController,
-
                 hint: 'Ingresa el nombre del producto',
                 suffixIcon: IconButton(
                   onPressed: () {
@@ -93,18 +63,32 @@ class AddProductsListScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: ScreenSize.absoluteHeight * 0.6,
+              height: ScreenSize.absoluteHeight * 0.68,
               child: ShoppingListProductsListview(
                 shoppingListsProvider: context.read(),
                 productList:
                     context.watch<ShoppingListsProvider>().currentShoppingList!,
               ),
             ),
-            SizedBox(height: ScreenSize.absoluteHeight * 0.13),
+            Divider(
+              indent: ScreenSize.width * 0.05,
+              endIndent: ScreenSize.width * 0.05,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: ScreenSize.width * 0.08),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'Total: ${context.watch<ShoppingListsProvider>().currentShoppingList!.products.length}',
+                  style: FontStyles.bodyBold0(AppColors.text),
+                ),
+              ),
+            ),
+            SizedBox(height: ScreenSize.absoluteHeight * 0.015),
             CustomButton(
               radius: 0.06,
-              text: 'Guardar lista',
-              color: AppColors.appPrimary, 
+              text: 'GUARDAR CAMBIOS',
+              color: AppColors.appPrimary,
               action: () {
                 shoppingListsProvider.updateShoppingList(context);
               },

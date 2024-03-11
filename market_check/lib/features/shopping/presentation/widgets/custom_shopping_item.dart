@@ -57,9 +57,18 @@ class CustomShoppingItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text(
-                  '${item.product.description}',
-                  style: FontStyles.bodyBold4(AppColors.lightText),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: ScreenSize.absoluteHeight * 0.08,
+                    maxWidth: ScreenSize.width * 0.37,
+                    minWidth: ScreenSize.width * 0.37,
+                  ),
+                  child: Text(
+                    '${item.product.description}',
+                    style: FontStyles.bodyBold4(AppColors.lightText),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),

@@ -44,11 +44,18 @@ class ProfileBodyScreen extends StatelessWidget {
               itemCount: profileProvider.menuCards.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  if (index == 0) {
-                    context
-                        .read<ShoppingHistoryProvider>()
-                        .getPurchasesHistory(context);
-                    context.push(profileProvider.menuCards[index].route);
+                  switch (index) {
+                    case 0:
+                      context
+                          .read<ShoppingHistoryProvider>()
+                          .getPurchasesHistory(context);
+                      context.push(profileProvider.menuCards[index].route);
+                      break;
+                    case 1:
+                      profileProvider.getVisitedStores(context);
+                      context.push(profileProvider.menuCards[index].route);
+                      break;
+                    default:
                   }
                 },
                 child: ProfileCards(

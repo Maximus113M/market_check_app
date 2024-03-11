@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/use_case/use_case.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/shopping_history/data/models/purchase_model.dart';
+import 'package:market_check/features/pending_purchases/presentation/widgets/purchases_card.dart';
+import 'package:market_check/features/shopping_history/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_products_use_case.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/shopping_history/domain/use_cases/get_shopping_history_use_case.dart';
-import 'package:market_check/features/shopping_history/presentation/widgets/shopping_history_modal_details.dart';
 
 import 'package:provider/provider.dart';
 
@@ -63,13 +65,39 @@ class ShoppingHistoryProvider with ChangeNotifier {
   void showShoppingHistoryModal(BuildContext context,
       PurchaseModel currentPurchase, int totalProducts) async {
     showDialog(
-      context: context,
-      builder: (context) => ShoppingHistoryModalDetails(
+        barrierColor: AppColors.text.withOpacity(0.6),
+        context: context,
+        builder: (context) => Dialog(
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.004),
+              child: Stack(
+                children: [
+                  PurchasesCard(
+                    purchase: currentPurchase,
+                    store: context.watch<StoresProvider>().storeList.firstWhere(
+                          (store) =>
+                              store.id == currentPurchase.establecimientoId,
+                        ),
+                    products: registeredPurchaseItems,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: ScreenSize.width * 0.005,
+                    child: IconButton(
+                      onPressed: () => context.pop(),
+                      icon: const Icon(
+                        Icons.cancel,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ) /*ShoppingHistoryModalDetails(
         products: registeredPurchaseItems,
         currentPurchase: currentPurchase,
         stores: context.watch<StoresProvider>().storeList,
         totalProducts: totalProducts,
-      ),
-    );
+      ),*/
+        );
   }
 }
