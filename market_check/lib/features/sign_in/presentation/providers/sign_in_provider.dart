@@ -122,6 +122,7 @@ class SignInProvider with ChangeNotifier {
           message: 'Revise nuevamente los datos ingresados',
           type: NotificationType.error);
       isLoading = false;
+      notifyListeners();
       return;
     }
 
@@ -138,8 +139,8 @@ class SignInProvider with ChangeNotifier {
       (r) async {
         InAppNotification.showAppNotification(
             context: context,
-            title: 'Registro',
-            message: 'Registro Exitoso',
+            title: 'Registro Exitoso!',
+            message: r,
             type: NotificationType.success);
         await Future.delayed(const Duration(seconds: 2)).then(
           (value) => context.pushReplacement("/login-form"),
@@ -202,6 +203,8 @@ class SignInProvider with ChangeNotifier {
         );
       }
     });
+    
     isLoading = false;
+    notifyListeners();
   }
 }
