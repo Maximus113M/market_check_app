@@ -2,6 +2,7 @@ import 'package:market_check/features/screens.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
+import 'package:market_check/features/stores/presentation/screens/offers/offer_details_screen.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_info_screen.dart';
 import 'package:market_check/features/profile_cards/presentation/screens/stores_visited_screen.dart';
 
@@ -50,6 +51,13 @@ final appRouter = GoRouter(
       path: "/offers-m",
       name: OfferScreen.name,
       builder: (context, state) => OfferScreen(
+        productsProvider: sl(),
+      ),
+    ),
+    GoRoute(
+      path: "/offers-details",
+      name: OfferDetailsScreen.name,
+      builder: (context, state) => OfferDetailsScreen(
         productsProvider: sl(),
       ),
     ),

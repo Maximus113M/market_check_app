@@ -5,6 +5,7 @@ import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
+import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
@@ -13,10 +14,13 @@ abstract class ProfileCardsDataSource {
   Future<List<PurchaseModel>> getShoppingHistory();
   Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(int purchaseId);
   Future<List<StoreModel>> getStoresVisited();
+  Future<List<ProductModel>> getFavoriteProducts(int userId); 
 
 }
 
-class ShoppingHistoryDataSourceImpl extends ProfileCardsDataSource {
+class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
+  final String dataSourceName= 'ProfileCardsDataSourceImpl';
+
   @override
   Future<List<PurchaseModel>> getShoppingHistory() async {
     try {
@@ -42,13 +46,13 @@ class ShoppingHistoryDataSourceImpl extends ProfileCardsDataSource {
       return purhaseList;
     } on HttpException catch (e) {
       debugPrint(
-          'ShoppingHistoryDatasource, getShoppingHistory HttpException: $e');
+          '$dataSourceName, getShoppingHistory HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint('ShoppingHistoryDatasource, getShoppingHistory Exception: $e');
+      debugPrint('$dataSourceName, getShoppingHistory Exception: $e');
       throw RemoteException(
           message: 'No se pudo obtener la lista',
           type: ExceptionType.shoppingHistory);
@@ -79,14 +83,14 @@ class ShoppingHistoryDataSourceImpl extends ProfileCardsDataSource {
       return registeredItems;
     } on HttpException catch (e) {
       debugPrint(
-          'ShoppingHistoryDatasource, getShoppingProducts HttpException: $e');
+          '$dataSourceName, getShoppingProducts HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
       debugPrint(
-          'ShoppingHistoryDatasource, getShoppingProducts Exception: $e');
+          '$dataSourceName, getShoppingProducts Exception: $e');
       throw RemoteException(
           message:
               'Ha ocurrido un error al obtener los productos de la compra.',
@@ -121,16 +125,55 @@ class ShoppingHistoryDataSourceImpl extends ProfileCardsDataSource {
 
       return stores;
     } on HttpException catch (e) {
-      debugPrint('ProfileDataSource, getStoresVisited HttpException: $e');
+      debugPrint('$dataSourceName, getStoresVisited HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.profile);
     } catch (e) {
-      debugPrint('ProfileDataSource, getStoresVisited Exception: $e');
+      debugPrint('$dataSourceName, getStoresVisited Exception: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al eliminar la cuenta, por favor intentalo despues.",
+          type: ExceptionType.profile);
+    }
+  }
+  
+  @override
+  Future<List<ProductModel>> getFavoriteProducts(int userId) async{
+    try {
+      List<ProductModel> products = [];
+      if (AuthService.user != null) {
+        final response = await ServerService.serverGet(
+            '${ServerUrls.userUrl}${ServerUrls.userProductsUrl}$userId');
+
+        if (response.statusCode != 200 && response.statusCode != 201) {
+          throw HttpException(
+              message: '${response.statusCode}, ${response.reasonPhrase}');
+        }
+
+        String? fixedResponse;
+        if (!response.body.endsWith('}')) {
+          fixedResponse = '${response.body}}';
+        }
+
+        products =
+            (jsonDecode(fixedResponse ?? response.body)["productos_mas_comprados"] as List)
+                .map((productJson) => ProductModel.fromJson(productJson))
+                .toList();
+      }
+
+      return products;
+    } on HttpException catch (e) {
+      debugPrint('$dataSourceName, getFavoriteProducts httpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.profile);
+    } catch (e) {
+      debugPrint('$dataSourceName, getFavoriteProducts Exception: $e');
+      throw RemoteException(
+          message: 'Ha ocurrido un error al consultar los productos.',
           type: ExceptionType.profile);
     }
   }

@@ -17,6 +17,7 @@ abstract class ProductsDataSource {
 }
 
 class ProductsDataSourceImpl extends ProductsDataSource {
+  final String dataSourceName= 'ProductsDataSourceImpl';
   @override
   Future<List<ProductModel>> getStoreProducts(int storeId) async {
     try {
@@ -44,16 +45,16 @@ class ProductsDataSourceImpl extends ProductsDataSource {
 
       return products;
     } on HttpException catch (e) {
-      debugPrint('getStoreProducts httpException: $e');
+      debugPrint('$dataSourceName getStoreProducts httpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+          type: ExceptionType.products);
     } catch (e) {
-      debugPrint('getStoreProducts Exception: $e');
+      debugPrint('$dataSourceName getStoreProducts Exception: $e');
       throw RemoteException(
           message: 'Ha ocurrido un error al consultar los productos.',
-          type: ExceptionType.purchases);
+          type: ExceptionType.products);
     }
   }
 
@@ -83,13 +84,13 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       }
       return products;
     } on HttpException catch (e) {
-      debugPrint('getProductsByCategorie httpException: $e');
+      debugPrint('$dataSourceName getProductsByCategorie httpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
-          type: ExceptionType.signIn);
+          type: ExceptionType.products);
     } catch (e) {
-      debugPrint('getProductsByCategorie Exception: $e');
+      debugPrint('$dataSourceName getProductsByCategorie Exception: $e');
       throw RemoteException(
           message:
               "Ha ocurrido un error al traer los productos de la categoria",

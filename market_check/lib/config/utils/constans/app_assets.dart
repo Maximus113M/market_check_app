@@ -3,6 +3,7 @@ class AppAssets {
   static const String loadingImage = 'assets/Images/jar-loading.gif';
   static const String scanner = 'assets/Images/qr-scan.png';
   static const String scanner2 = 'assets/Images/icons/scanner.png';
+  static const String offers = 'assets/Images/stores/offers.jpg';
 
 //--------------------------avatars
   static const String avatar = 'assets/Images/avatars/fubiki.jpg';

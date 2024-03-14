@@ -21,6 +21,7 @@ class ServerUrls {
   static const String logOutUrl = "auth/logout/";
   static const String userUrl = "user/";
   static const String changePasswordUrl = "/change-password";
+  static const String userProductsUrl = "userProducts/";
 
   static const String imagesUrl = "images/";
   static const String offersUrl = "ofertas/mobile-app/";

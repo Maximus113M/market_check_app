@@ -31,7 +31,7 @@ void registerDataSources() {
     ),
   );
   sl.registerLazySingleton<ProfileCardsDataSource>(
-    () => ShoppingHistoryDataSourceImpl(),
+    () => ProfileCardsDataSourceImpl(),
   );
   sl.registerLazySingleton<ShoppingDataSource>(
     () => PurchasesDataSourceImpl(),

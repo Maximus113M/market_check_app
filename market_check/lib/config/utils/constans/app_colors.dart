@@ -35,22 +35,6 @@ class AppColors {
   static const blueButton2 = Color.fromARGB(255, 38, 109, 191);
   static const blueButton3 = Color.fromARGB(255, 55, 121, 197);
 
-  static final gradientColors = [
-    Colors.blue.shade900,
-    Colors.blue.shade500,
-    Colors.blue.shade400,
-    Colors.blue.shade200,
-    Colors.blue.shade50,
-  ];
-
-  static final gradientColorLogIn = [
-    Colors.blue.shade100,
-    Colors.blue.shade200,
-    Colors.blue.shade300,
-    Colors.lightBlueAccent,
-    Colors.blue.shade100,
-  ];
-
   static final gradientColors1 = [
     Colors.yellow.shade500,
     Colors.yellow.shade400,
