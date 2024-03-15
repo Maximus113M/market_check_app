@@ -6,10 +6,12 @@ import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
+import 'package:market_check/features/products/data/models/product_model.dart';
 
 abstract class StoresDataSource {
   Future<List<StoreModel>> getStores();
   Future<List<OfferModel>> getOffersByStore(int storeId);
+  Future<List<ProductModel>> getOfferProducts(int offerId);
 }
 
 class StoresDataSourceImpl extends StoresDataSource {
@@ -85,6 +87,48 @@ class StoresDataSourceImpl extends StoresDataSource {
           type: ExceptionType.offers);
     } catch (e) {
       debugPrint('StoresDatasource, getOffers Exception: $e');
+      throw RemoteException(
+          message: "Ha ocurrido un error al consultar los establecimientos",
+          type: ExceptionType.offers);
+    }
+  }
+  
+  @override
+  Future<List<ProductModel>> getOfferProducts(int offerId) async{
+    try {
+      List<ProductModel> products = [];
+
+      final response = await ServerService.serverGet(
+        'ofertas/$offerId/productos',
+      );
+
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        throw HttpException(
+            message: '${response.statusCode}, ${response.reasonPhrase}');
+      }
+
+      String? fixedResponse;
+      if (!response.body.endsWith('}')) {
+        fixedResponse = '${response.body}}';
+      }
+
+      products =
+          (jsonDecode(fixedResponse ?? response.body)['offerItems'] as List).map(
+        (offerJson) {
+          return ProductModel.fromJson(offerJson);
+        },
+      ).toList();
+
+      debugPrint("$products");
+      return products;
+    } on HttpException catch (e) {
+      debugPrint('StoresDatasource, getOffersProducts HttpException: $e');
+      throw RemoteException(
+          message:
+              "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
+          type: ExceptionType.offers);
+    } catch (e) {
+      debugPrint('StoresDatasource, getOffersProducts Exception: $e');
       throw RemoteException(
           message: "Ha ocurrido un error al consultar los establecimientos",
           type: ExceptionType.offers);

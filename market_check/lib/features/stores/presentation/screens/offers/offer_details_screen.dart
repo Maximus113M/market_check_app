@@ -3,36 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
+import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
 
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class OfferDetailsModal extends StatelessWidget {
-  static const name = "offer-details";
-  final ProfileCardsProvider profileCardsProvider;
-
-  const OfferDetailsModal({super.key, required this.profileCardsProvider});
+  const OfferDetailsModal({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.03),
       child: OfferDetailsModalContent(
-          offer: context.read<StoresProvider>().currentOffer!),
+        offer: context.read<StoresProvider>().currentOffer!,
+        offerProducts: context.watch<StoresProvider>().offerProducts,
+      ),
     );
   }
 }
 
 class OfferDetailsModalContent extends StatelessWidget {
   final OfferModel offer;
+  final List<ProductModel> offerProducts;
 
-  const OfferDetailsModalContent({super.key, required this.offer});
-
+  const OfferDetailsModalContent(
+      {super.key, required this.offer, required this.offerProducts});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: ScreenSize.absoluteHeight * 0.6,
+      height: ScreenSize.absoluteHeight * 0.55,
       child: Stack(
         children: [
           Container(
@@ -60,63 +63,61 @@ class OfferDetailsModalContent extends StatelessWidget {
                 top: BorderSide(width: 2, color: AppColors.disabled),
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(ScreenSize.width * 0.08),
+                Radius.circular(ScreenSize.width * 0.07),
               ),
               boxShadow: AppShadows.profileShadow,
-              color: AppColors.white,
+              color: const Color.fromARGB(255, 241, 239, 239),
             ),
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: ScreenSize.absoluteHeight * 0.01,
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.08),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: ScreenSize.absoluteHeight * 0.01,
+                    ),
+                    child: Text(
+                      offer.name,
+                      style: FontStyles.bodyBold0(AppColors.text),
+                    ),
                   ),
-                  child: Text(
-                    offer.name,
-                    style: FontStyles.heading8(AppColors.appSecondary),
+                  SizedBox(
+                    width: ScreenSize.width * 0.84,
+                    child: Text(
+                      offer.description,
+                      style: FontStyles.body4(AppColors.text),
+                    ),
                   ),
-                ),
-                Text(
-                  '${offer.dateStart} - ${offer.dateEnd}',
-                  style: FontStyles.bodyBold2(AppColors.text),
-                ),
-                SizedBox(
-                  width: ScreenSize.width * 0.84,
-                  child: Text(
-                    offer.description,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: ScreenSize.absoluteHeight * 0.01,
+                    ),
+                    child: Text(
+                      'Productos',
+                      style: FontStyles.bodyBold0(AppColors.text),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: ScreenSize.absoluteHeight * 0.01,
-                  ),
-                  child: Text(
-                    'Productos con descuento',
-                    style: FontStyles.subtitle1(AppColors.text),
-                  ),
-                ),
-                Wrap(
-                  children: [
-                    Text('Arroz '),
-                    Text('Arroz '),
-                    Text('Arroz '),
-                    Text('Arroz '),
-                    Text('Arroz '),
-                    Text('Arroz '),
-                    Text('Arroz '),
-                  ],
-                )
-              ],
+                  Wrap(
+                    children: List.generate(
+                      offerProducts.length,
+                      (index) => Text(
+                        offerProducts[index].name,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
-            top: ScreenSize.absoluteHeight * 0.02,
-            right: ScreenSize.width * 0.04,
+            top: ScreenSize.absoluteHeight * 0.015,
+            left: ScreenSize.width * 0.035,
             child: Container(
               decoration: BoxDecoration(
+                border: Border.all(color: AppColors.white),
                 borderRadius: BorderRadius.all(
                   Radius.circular(ScreenSize.width * 0.02),
                 ),
@@ -124,28 +125,48 @@ class OfferDetailsModalContent extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: ScreenSize.height * 0.005,
-                    horizontal: ScreenSize.width * 0.022),
+                    vertical: ScreenSize.height * 0.01,
+                    horizontal: ScreenSize.width * 0.035),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      '${offer.dateStart}',
-                      style: TextStyle(
-                        fontSize: ScreenSize.width * 0.038,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          '${offer.dateStart.day}',
+                          style: FontStyles.bodyBold1(AppColors.white)
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                        Text(
+                          ' - ${offer.dateEnd.day}',
+                          style: FontStyles.bodyBold1(AppColors.white)
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                      ],
                     ),
                     Text(
-                      AppFunctions.getMonthFormated(offer.dateStart),
-                      style: TextStyle(
-                        fontSize: ScreenSize.width * 0.028,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white,
-                      ),
+                      AppFunctions.mothNameMap[offer.dateEnd.month] ?? '',
+                      style: FontStyles.bodyBold3(AppColors.white)
+                          .copyWith(fontWeight: FontWeight.w900),
                     ),
                   ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: ScreenSize.absoluteHeight * 0.016,
+            right: ScreenSize.width * 0.038,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: AppColors.text,
+                shape: BoxShape.circle,
+              ),
+              child: GestureDetector(
+                onTap: () => context.pop(),
+                child: const Icon(
+                  Icons.close,
+                  color: AppColors.white,
                 ),
               ),
             ),

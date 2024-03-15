@@ -7,9 +7,9 @@ import 'package:market_check/features/profile_cards/presentation/widgets/favorit
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
-class StoresVisitedScreen extends StatelessWidget {
-  static const String name = '/stores-visited';
-  const StoresVisitedScreen({super.key});
+class FavoriteProductsScreen extends StatelessWidget {
+  static const String name = '/favorite-products';
+  const FavoriteProductsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

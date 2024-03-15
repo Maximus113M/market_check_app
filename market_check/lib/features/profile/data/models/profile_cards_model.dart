@@ -23,6 +23,6 @@ class ProfileCardsModel {
     ProfileCardsModel(
         title: 'Productos Favoritos',
         imagePath: AppAssets.favoritesProducts,
-        route: ''),
+        route: '/favorite-products'),
   ];
 }

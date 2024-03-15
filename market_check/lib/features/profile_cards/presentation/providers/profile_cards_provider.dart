@@ -3,17 +3,18 @@ import 'package:go_router/go_router.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/use_case/use_case.dart';
+import 'package:market_check/config/services/auth/auth_service.dart';
+import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/config/utils/constans/in_app_notification.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
-import 'package:market_check/features/pending_purchases/presentation/widgets/purchases_card.dart';
+import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
+import 'package:market_check/features/profile_cards/data/models/favorite_product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
+import 'package:market_check/features/pending_purchases/presentation/widgets/purchases_card.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_stores_visited_use_case.dart';
+import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_history_use_case.dart';
 import 'package:market_check/features/profile_cards/domain/use_cases/get_favorite_products_use_case.dart';
 import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_products_use_case.dart';
-import 'package:market_check/features/profile_cards/domain/use_cases/get_stores_visited_use_case.dart';
-import 'package:market_check/features/stores/data/models/store_model.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:market_check/features/profile_cards/domain/use_cases/get_shopping_history_use_case.dart';
 
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class ProfileCardsProvider with ChangeNotifier {
   List<PurchaseModel> purchases = [];
   List<RegisteredPurchaseItemModel> registeredPurchaseItems = [];
   List<StoreModel> storesVisited = [];
-  List<ProductModel> favoriteProducts = [];
+  List<FavoriteProductModel> favoriteProducts = [];
   bool isLoading = false;
 
   ProfileCardsProvider({
@@ -139,14 +140,11 @@ class ProfileCardsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFavoriteProducts(
-    BuildContext context,
-    int userId,
-  ) async {
+  void getFavoriteProducts(BuildContext context) async {
     if (isLoading) return;
     isLoading = true;
 
-    final result = await getFavoriteProductsUseCase(userId);
+    final result = await getFavoriteProductsUseCase(AuthService.user!.id!);
     result.fold(
         (l) => InAppNotification.showAppNotification(
               context: context,

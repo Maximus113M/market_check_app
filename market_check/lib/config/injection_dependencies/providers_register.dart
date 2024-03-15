@@ -24,6 +24,7 @@ void registerProviders() {
     () => StoresProvider(
       getStoresUseCase: sl(),
       getOffersUseCase: sl(),
+      getOfferProductsUseCase: sl(),
     ),
   );
 

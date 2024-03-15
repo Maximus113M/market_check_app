@@ -1,10 +1,10 @@
+import 'package:market_check/features/profile_cards/presentation/screens/favorite_products_screen.dart';
 import 'package:market_check/features/screens.dart';
-
-import 'package:go_router/go_router.dart';
-import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
-import 'package:market_check/features/stores/presentation/screens/offers/offer_details_screen.dart';
 import 'package:market_check/features/stores/presentation/screens/store/store_info_screen.dart';
 import 'package:market_check/features/profile_cards/presentation/screens/stores_visited_screen.dart';
+import 'package:market_check/features/shopping_lists/presentation/screens/add_products_list_screen.dart';
+
+import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -55,13 +55,6 @@ final appRouter = GoRouter(
       ),
     ),
     GoRoute(
-      path: "/offers-details",
-      name: OfferDetailsModal.name,
-      builder: (context, state) => OfferDetailsModal(
-        profileCardsProvider: sl(),
-      ),
-    ),
-    GoRoute(
       path: "/store-info",
       name: StoreInfoScreen.name,
       builder: (context, state) => const StoreInfoScreen(),
@@ -97,6 +90,11 @@ final appRouter = GoRouter(
       path: "/stores-visited",
       name: StoresVisitedScreen.name,
       builder: (context, state) => const StoresVisitedScreen(),
+    ),
+    GoRoute(
+      path: '/favorite-products',
+      name: FavoriteProductsScreen.name,
+      builder: (context, state) => const FavoriteProductsScreen(),
     ),
     GoRoute(
       path: "/scanner",

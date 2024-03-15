@@ -13,7 +13,7 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: ScreenSize.height * 0.70,
+        height: ScreenSize.height * 0.72,
         decoration: const BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
@@ -24,8 +24,9 @@ class SignUpForm extends StatelessWidget {
         child: Form(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.13)
-                .copyWith(top: ScreenSize.height * 0.07),
+                .copyWith(top: ScreenSize.height * 0.055),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 CustomTextFormField(
                   verticalPadding: 0.018,
@@ -35,7 +36,7 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.names = nameValue;
                   },
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
                 CustomTextFormField(
                   verticalPadding: 0.018,
                   horizontalPadding: 0.042,
@@ -45,7 +46,7 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.document = documentValue;
                   },
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
                 CustomTextFormField(
                   verticalPadding: 0.018,
                   horizontalPadding: 0.042,
@@ -54,7 +55,11 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.emailInput = emailValue;
                   },
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
+                _buildStateDropdown(),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
+                _buildCityDropdown(),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
                 CustomTextFormField(
                   verticalPadding: 0.018,
                   horizontalPadding: 0.042,
@@ -64,7 +69,7 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.passwordInput = passwordValue;
                   },
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.025),
                 CustomTextFormField(
                   verticalPadding: 0.018,
                   horizontalPadding: 0.042,
@@ -74,7 +79,7 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.confirmPassword = confirmPassword;
                   },
                 ),
-                const SizedBox(height: 45),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.035),
                 CustomButton(
                   radius: 0.5,
                   color: AppColors.appPrimary,
@@ -91,43 +96,42 @@ class SignUpForm extends StatelessWidget {
     );
   }
 
-  Container _buildCityDropdown() {
+  Container _buildStateDropdown() {
     return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: 8, horizontal: ScreenSize.width * 0.06),
       padding: EdgeInsets.symmetric(
-          vertical: ScreenSize.height * 0.009,
-          horizontal: ScreenSize.width * 0.06),
+        vertical: ScreenSize.height * 0.012,
+        horizontal: ScreenSize.width * 0.05,
+      ),
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.text),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(30),
-        ),
-      ),
+          border: Border.all(color: AppColors.disabled),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: AppColors.appMainInput2),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isDense: true,
           isExpanded: true,
-          value: registerProvider.state.city.isEmpty
-              ? null
-              : registerProvider.state.city,
+          menuMaxHeight: ScreenSize.height * 0.4,
+          value: signInProvider.state,
           icon: const Icon(
             Icons.arrow_drop_down,
-            color: AppColors.black,
+            color: AppColors.text,
           ),
           elevation: 16,
           dropdownColor: AppColors.white,
           style: TextStyle(
-            color: AppColors.text,
+            color: AppColors.appPrimary,
             fontSize: ScreenSize.width * 0.036,
           ),
           underline: null,
-          hint: const Text("Ciudad"),
+          hint: const Text("Departamento"),
           onChanged: (String? newValue) {
-            registerProvider.updateCityValue(newValue!);
+            signInProvider.updateStateValue(newValue!);
+            signInProvider.getCities(newValue);
           },
-          items: generalInfoProvider.currentCities
+          items: signInProvider.states
               .map(
                 (e) => DropdownMenuItem<String>(
                   value: e,
@@ -140,26 +144,24 @@ class SignUpForm extends StatelessWidget {
     );
   }
 
-  Container _buildStateDropdown() {
+  Container _buildCityDropdown() {
     return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: 8, horizontal: ScreenSize.width * 0.06),
       padding: EdgeInsets.symmetric(
-          vertical: ScreenSize.height * 0.009,
-          horizontal: ScreenSize.width * 0.06),
+        vertical: ScreenSize.height * 0.012,
+        horizontal: ScreenSize.width * 0.05,
+      ),
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.text),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(30),
-        ),
-      ),
+          border: Border.all(color: AppColors.disabled),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(30),
+          ),
+          color: AppColors.appMainInput2),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isDense: true,
           isExpanded: true,
-          menuMaxHeight: ScreenSize.height * 0.4,
-          value: registerProvider.state.state,
+          value: signInProvider.city.isEmpty ? null : signInProvider.city,
           icon: const Icon(
             Icons.arrow_drop_down,
             color: AppColors.text,
@@ -167,16 +169,15 @@ class SignUpForm extends StatelessWidget {
           elevation: 16,
           dropdownColor: AppColors.white,
           style: TextStyle(
-            color: AppColors.text,
+            color: AppColors.appPrimary,
             fontSize: ScreenSize.width * 0.036,
           ),
           underline: null,
-          hint: const Text("Departamento"),
+          hint: const Text("Ciudad"),
           onChanged: (String? newValue) {
-            registerProvider.updateStateValue(newValue!);
-            signInProvider.getCities(newValue);
+            signInProvider.updateCityValue(newValue!);
           },
-          items: generalInfoProvider.states
+          items: signInProvider.currentCities
               .map(
                 (e) => DropdownMenuItem<String>(
                   value: e,

@@ -15,18 +15,18 @@ class AppFunctions {
   }
 
   static const Map<int, String> mothNameMap = {
-    1: 'Enero',
-    2: 'Febrero',
-    3: 'Marzo',
-    4: 'Abril',
-    5: 'Mayo',
-    6: 'Junio',
-    7: 'Julio',
-    8: 'Agosto',
-    9: 'Septiembre',
-    10: 'Octubre',
-    11: 'Noviembre',
-    12: 'Diciembre',
+    1: 'ENE.',
+    2: 'FEB.',
+    3: 'MAR.',
+    4: 'ABR.',
+    5: 'MAYO',
+    6: 'JUN.',
+    7: 'JUL.',
+    8: 'AGOST.',
+    9: 'SEPT.',
+    10: 'OCT.',
+    11: 'NOV.',
+    12: 'DIC.',
   };
 
   static String getMonthFormated(DateTime date) {

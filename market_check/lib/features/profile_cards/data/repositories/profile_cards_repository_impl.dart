@@ -1,8 +1,8 @@
 import 'package:market_check/config/errors/failures.dart';
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/favorite_product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/profile_cards/data/datasources/profile_cards_data_source.dart';
 import 'package:market_check/features/profile_cards/domain/repositories/shopping_history_repository.dart';
@@ -63,7 +63,7 @@ class ProfileCardsRepositoryImpl extends ProfileCardsRepository {
   }
 
   @override
-  Future<Either<RemoteFailure, List<ProductModel>>> getFavoriteProducts(
+  Future<Either<RemoteFailure, List<FavoriteProductModel>>> getFavoriteProducts(
       int userId) async {
     try {
       return Right(

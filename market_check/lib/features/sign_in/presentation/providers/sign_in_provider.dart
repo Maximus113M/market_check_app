@@ -24,12 +24,14 @@ class SignInProvider with ChangeNotifier {
   final SignUpUseCase signUpUseCase;
   final SignOutUseCase signOutUseCase;
 
+  String names = '';
+  String document = '';
   String emailInput = '';
-  String passwordInput = '';
+  String city = '';
+  String state = 'Santander';
   bool obscureText = true;
-  String names = "";
-  String document = "";
-  String confirmPassword = "";
+  String passwordInput = '';
+  String confirmPassword = '';
   bool isLoading = false;
 
   List<Map> colombiaData = [];
@@ -241,15 +243,18 @@ class SignInProvider with ChangeNotifier {
     final List<Map<dynamic, dynamic>> department = colombiaData
         .where((element) => element["departamento"] == key)
         .toList();
-
+    print(department);
     currentCities = department.first["ciudades"];
+    print(currentCities);
   }
 
   void updateStateValue(String newValue) {
     state = newValue;
+    notifyListeners();
   }
 
   void updateCityValue(String newValue) {
     city = newValue;
+    notifyListeners();
   }
 }

@@ -5,16 +5,16 @@ import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
 import 'package:market_check/config/services/server/server_service.dart';
-import 'package:market_check/features/products/data/models/product_model.dart';
-import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
-import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
+import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
+import 'package:market_check/features/profile_cards/data/models/favorite_product_model.dart';
+import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
 
 abstract class ProfileCardsDataSource {
   Future<List<PurchaseModel>> getShoppingHistory();
   Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(int purchaseId);
   Future<List<StoreModel>> getStoresVisited();
-  Future<List<ProductModel>> getFavoriteProducts(int userId);
+  Future<List<FavoriteProductModel>> getFavoriteProducts(int userId);
 }
 
 class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
@@ -138,9 +138,9 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getFavoriteProducts(int userId) async {
+  Future<List<FavoriteProductModel>> getFavoriteProducts(int userId) async {
     try {
-      List<ProductModel> products = [];
+      List<FavoriteProductModel> products = [];
       if (AuthService.user != null) {
         final response = await ServerService.serverGet(
             '${ServerUrls.userUrl}${ServerUrls.userProductsUrl}$userId');
@@ -157,7 +157,7 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
 
         products = (jsonDecode(fixedResponse ?? response.body)[
                 "productos_mas_comprados"] as List)
-            .map((productJson) => ProductModel.fromJson(productJson))
+            .map((productJson) => FavoriteProductModel.fromJson(productJson))
             .toList();
       }
 

@@ -57,6 +57,12 @@ class ProfileBodyScreen extends StatelessWidget {
                           .getVisitedStores(context);
                       context.push(profileProvider.menuCards[index].route);
                       break;
+                    case 2:
+                      context
+                          .read<ProfileCardsProvider>()
+                          .getFavoriteProducts(context);
+                      context.push(profileProvider.menuCards[index].route);
+                      break;
                     default:
                   }
                 },

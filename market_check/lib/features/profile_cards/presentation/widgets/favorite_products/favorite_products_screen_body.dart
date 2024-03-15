@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/shared/widgets/loadings/not_found_placeholder.dart';
-import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
 import 'package:market_check/features/profile_cards/presentation/providers/profile_cards_provider.dart';
-import 'package:market_check/features/profile_cards/presentation/widgets/shopping_history/shopping_history_item.dart';
-
+import 'package:market_check/features/profile_cards/presentation/widgets/favorite_products/favorite_product_item.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteProductsScreenBody extends StatelessWidget {
@@ -16,23 +14,22 @@ class FavoriteProductsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return profileCardsProvider.purchases.isEmpty
+    return context.watch<ProfileCardsProvider>().favoriteProducts.isEmpty
         ? const Center(
-            child: NotFoundPlaceHolder(text: 'Aun no tienes productos\nfavoritos...'),
+            child: NotFoundPlaceHolder(
+                text: 'Aun no tienes productos\nfavoritos...'),
           )
-        : ListView.builder(
+        : GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.5,
+            ),
             padding: EdgeInsets.symmetric(
-                horizontal: ScreenSize.width * 0.05,
-                vertical: ScreenSize.absoluteHeight * 0.02),
-            itemCount: profileCardsProvider.purchases.length,
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
-                profileCardsProvider.getPurchaseProducts(
-                    context, profileCardsProvider.purchases[index]);
-              },
-              child: ShoppingHistoryItem(
-                  purchase: profileCardsProvider.purchases[index],
-                  stores: context.watch<StoresProvider>().storeList),
+                horizontal: ScreenSize.width * 0.015,
+                vertical: ScreenSize.absoluteHeight * 0.015),
+            itemCount: profileCardsProvider.favoriteProducts.length,
+            itemBuilder: (context, index) => FavoriteProductItem(
+              purchase: profileCardsProvider.favoriteProducts[index],
             ),
           );
   }
