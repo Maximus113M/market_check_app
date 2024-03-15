@@ -56,9 +56,9 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: "/offers-details",
-      name: OfferDetailsScreen.name,
-      builder: (context, state) => OfferDetailsScreen(
-        productsProvider: sl(),
+      name: OfferDetailsModal.name,
+      builder: (context, state) => OfferDetailsModal(
+        profileCardsProvider: sl(),
       ),
     ),
     GoRoute(

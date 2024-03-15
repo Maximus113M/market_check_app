@@ -55,7 +55,7 @@ class ShoppingHistoryItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${AppFuntions.mothNameMap[purchase.date.month]!.substring(0, 3)}-${purchase.date.day}-${purchase.date.year} ${purchase.hour}',
+                    '${AppFunctions.mothNameMap[purchase.date.month]!.substring(0, 3)}-${purchase.date.day}-${purchase.date.year} ${purchase.hour}',
                     style: FontStyles.bodyBold2(AppColors.text),
                   ),
                   Text(

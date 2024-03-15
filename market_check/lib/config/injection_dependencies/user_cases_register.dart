@@ -1,3 +1,4 @@
+import 'package:market_check/features/profile_cards/domain/use_cases/get_favorite_products_use_case.dart';
 import 'package:market_check/features/profile_cards/domain/use_cases/get_stores_visited_use_case.dart';
 import 'package:market_check/injection_container.dart';
 import 'package:market_check/features/sign_in/domain/use_cases/sign_up_use_case.dart';
@@ -91,6 +92,11 @@ void registerUseCases() {
   sl.registerLazySingleton(
     () => GetStoresVisitedUseCase(
       profileRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => GetFavoriteProductsUseCase(
+      profileCardsRepository: sl(),
     ),
   );
   sl.registerLazySingleton(

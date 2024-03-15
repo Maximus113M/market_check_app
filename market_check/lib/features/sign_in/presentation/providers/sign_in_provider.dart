@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
 
@@ -29,6 +31,10 @@ class SignInProvider with ChangeNotifier {
   String document = "";
   String confirmPassword = "";
   bool isLoading = false;
+
+  List<Map> colombiaData = [];
+  List<String> states = [];
+  List<dynamic> currentCities = [];
 
   SignInProvider({
     required this.verifyCurrentSessionUseCase,
@@ -68,7 +74,7 @@ class SignInProvider with ChangeNotifier {
     isLoading = true;
 
     if (emailInput.trim().isEmpty ||
-        !AppFuntions.emailRegExp.hasMatch(emailInput)) {
+        !AppFunctions.emailRegExp.hasMatch(emailInput)) {
       InAppNotification.showAppNotification(
           context: context,
           title: 'Email Invalido!',
@@ -162,7 +168,7 @@ class SignInProvider with ChangeNotifier {
 
   bool validateInputEmail() {
     if (emailInput.trim().isEmpty ||
-        !AppFuntions.emailRegExp.hasMatch(emailInput)) return false;
+        !AppFunctions.emailRegExp.hasMatch(emailInput)) return false;
     return true;
   }
 
@@ -203,8 +209,47 @@ class SignInProvider with ChangeNotifier {
         );
       }
     });
-    
+
     isLoading = false;
     notifyListeners();
+  }
+
+  getColombiaData(BuildContext context) async {
+    try {
+      colombiaData.clear();
+      states.clear();
+      String data = await DefaultAssetBundle.of(context)
+          .loadString("assets/col_data/col_data.json");
+      final jsonResult = json.decode(data) as List;
+      for (var result in jsonResult) {
+        Map newDepartmentMap = {
+          'departamento': result['departamento'],
+          'ciudades': result['ciudades'] as List,
+        };
+        colombiaData.add(newDepartmentMap);
+        states.add(result['departamento']);
+      }
+      debugPrint('colombia country data completada');
+    } catch (error) {
+      debugPrint(
+        'getColombiaData error : $error',
+      );
+    }
+  }
+
+  void getCities(String key) {
+    final List<Map<dynamic, dynamic>> department = colombiaData
+        .where((element) => element["departamento"] == key)
+        .toList();
+
+    currentCities = department.first["ciudades"];
+  }
+
+  void updateStateValue(String newValue) {
+    state = newValue;
+  }
+
+  void updateCityValue(String newValue) {
+    city = newValue;
   }
 }

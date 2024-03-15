@@ -6,8 +6,8 @@ import 'package:market_check/features/sign_in/presentation/providers/sign_in_pro
 import 'package:market_check/config/shared/widgets/text_form_fields/custom_text_form_field.dart';
 
 class SignUpForm extends StatelessWidget {
-  final SignInProvider signUpProvider;
-  const SignUpForm({super.key, required this.signUpProvider});
+  final SignInProvider signInProvider;
+  const SignUpForm({super.key, required this.signInProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class SignUpForm extends StatelessWidget {
                   horizontalPadding: 0.042,
                   label: 'Nombre y Apellido',
                   onChange: (nameValue) {
-                    signUpProvider.names = nameValue;
+                    signInProvider.names = nameValue;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -42,7 +42,7 @@ class SignUpForm extends StatelessWidget {
                   isNumeric: true,
                   label: 'Número de documento',
                   onChange: (documentValue) {
-                    signUpProvider.document = documentValue;
+                    signInProvider.document = documentValue;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -51,7 +51,7 @@ class SignUpForm extends StatelessWidget {
                   horizontalPadding: 0.042,
                   label: 'Correo electronico',
                   onChange: (emailValue) {
-                    signUpProvider.emailInput = emailValue;
+                    signInProvider.emailInput = emailValue;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -61,7 +61,7 @@ class SignUpForm extends StatelessWidget {
                   label: 'Contraseña',
                   obscureText: true,
                   onChange: (passwordValue) {
-                    signUpProvider.passwordInput = passwordValue;
+                    signInProvider.passwordInput = passwordValue;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -71,7 +71,7 @@ class SignUpForm extends StatelessWidget {
                   label: 'Nuevamente la contraseña',
                   obscureText: true,
                   onChange: (confirmPassword) {
-                    signUpProvider.confirmPassword = confirmPassword;
+                    signInProvider.confirmPassword = confirmPassword;
                   },
                 ),
                 const SizedBox(height: 45),
@@ -79,13 +79,111 @@ class SignUpForm extends StatelessWidget {
                   radius: 0.5,
                   color: AppColors.appPrimary,
                   text: 'REGISTRATE',
-                  action: () => signUpProvider.validateSingUp(context),
+                  action: () => signInProvider.validateSingUp(context),
                   horizontalMargin: 0,
                   verticalSize: 0.055,
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Container _buildCityDropdown() {
+    return Container(
+      margin: EdgeInsets.symmetric(
+          vertical: 8, horizontal: ScreenSize.width * 0.06),
+      padding: EdgeInsets.symmetric(
+          vertical: ScreenSize.height * 0.009,
+          horizontal: ScreenSize.width * 0.06),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.text),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isDense: true,
+          isExpanded: true,
+          value: registerProvider.state.city.isEmpty
+              ? null
+              : registerProvider.state.city,
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: AppColors.black,
+          ),
+          elevation: 16,
+          dropdownColor: AppColors.white,
+          style: TextStyle(
+            color: AppColors.text,
+            fontSize: ScreenSize.width * 0.036,
+          ),
+          underline: null,
+          hint: const Text("Ciudad"),
+          onChanged: (String? newValue) {
+            registerProvider.updateCityValue(newValue!);
+          },
+          items: generalInfoProvider.currentCities
+              .map(
+                (e) => DropdownMenuItem<String>(
+                  value: e,
+                  child: Text(e),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  Container _buildStateDropdown() {
+    return Container(
+      margin: EdgeInsets.symmetric(
+          vertical: 8, horizontal: ScreenSize.width * 0.06),
+      padding: EdgeInsets.symmetric(
+          vertical: ScreenSize.height * 0.009,
+          horizontal: ScreenSize.width * 0.06),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.text),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isDense: true,
+          isExpanded: true,
+          menuMaxHeight: ScreenSize.height * 0.4,
+          value: registerProvider.state.state,
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: AppColors.text,
+          ),
+          elevation: 16,
+          dropdownColor: AppColors.white,
+          style: TextStyle(
+            color: AppColors.text,
+            fontSize: ScreenSize.width * 0.036,
+          ),
+          underline: null,
+          hint: const Text("Departamento"),
+          onChanged: (String? newValue) {
+            registerProvider.updateStateValue(newValue!);
+            signInProvider.getCities(newValue);
+          },
+          items: generalInfoProvider.states
+              .map(
+                (e) => DropdownMenuItem<String>(
+                  value: e,
+                  child: Text(e),
+                ),
+              )
+              .toList(),
         ),
       ),
     );

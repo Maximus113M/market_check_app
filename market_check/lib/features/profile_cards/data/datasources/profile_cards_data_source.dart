@@ -14,12 +14,11 @@ abstract class ProfileCardsDataSource {
   Future<List<PurchaseModel>> getShoppingHistory();
   Future<List<RegisteredPurchaseItemModel>> getShoppingProducts(int purchaseId);
   Future<List<StoreModel>> getStoresVisited();
-  Future<List<ProductModel>> getFavoriteProducts(int userId); 
-
+  Future<List<ProductModel>> getFavoriteProducts(int userId);
 }
 
 class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
-  final String dataSourceName= 'ProfileCardsDataSourceImpl';
+  final String dataSourceName = 'ProfileCardsDataSourceImpl';
 
   @override
   Future<List<PurchaseModel>> getShoppingHistory() async {
@@ -39,14 +38,14 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
         fixedResponse = '${response.body}}';
       }
 
-      purhaseList = (jsonDecode(fixedResponse?? response.body)['closePurchases'] as List)
-          .map((purchaseJson) => PurchaseModel.fromJson(purchaseJson))
-          .toList();
+      purhaseList =
+          (jsonDecode(fixedResponse ?? response.body)['closePurchases'] as List)
+              .map((purchaseJson) => PurchaseModel.fromJson(purchaseJson))
+              .toList();
 
       return purhaseList;
     } on HttpException catch (e) {
-      debugPrint(
-          '$dataSourceName, getShoppingHistory HttpException: $e');
+      debugPrint('$dataSourceName, getShoppingHistory HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
@@ -55,7 +54,7 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
       debugPrint('$dataSourceName, getShoppingHistory Exception: $e');
       throw RemoteException(
           message: 'No se pudo obtener la lista',
-          type: ExceptionType.shoppingHistory);
+          type: ExceptionType.profileCards);
     }
   }
 
@@ -76,21 +75,20 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
         fixedResponse = '${response.body}}';
       }
 
-      registeredItems = (jsonDecode(fixedResponse?? response.body)['items'] as List)
-          .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
-          .toList();
+      registeredItems =
+          (jsonDecode(fixedResponse ?? response.body)['items'] as List)
+              .map((jsonItem) => RegisteredPurchaseItemModel.fromJson(jsonItem))
+              .toList();
 
       return registeredItems;
     } on HttpException catch (e) {
-      debugPrint(
-          '$dataSourceName, getShoppingProducts HttpException: $e');
+      debugPrint('$dataSourceName, getShoppingProducts HttpException: $e');
       throw RemoteException(
           message:
               "Ocurrio un error al conectarse al servidor, intente de nuevo mas tarde",
           type: ExceptionType.signIn);
     } catch (e) {
-      debugPrint(
-          '$dataSourceName, getShoppingProducts Exception: $e');
+      debugPrint('$dataSourceName, getShoppingProducts Exception: $e');
       throw RemoteException(
           message:
               'Ha ocurrido un error al obtener los productos de la compra.',
@@ -138,9 +136,9 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
           type: ExceptionType.profile);
     }
   }
-  
+
   @override
-  Future<List<ProductModel>> getFavoriteProducts(int userId) async{
+  Future<List<ProductModel>> getFavoriteProducts(int userId) async {
     try {
       List<ProductModel> products = [];
       if (AuthService.user != null) {
@@ -157,10 +155,10 @@ class ProfileCardsDataSourceImpl extends ProfileCardsDataSource {
           fixedResponse = '${response.body}}';
         }
 
-        products =
-            (jsonDecode(fixedResponse ?? response.body)["productos_mas_comprados"] as List)
-                .map((productJson) => ProductModel.fromJson(productJson))
-                .toList();
+        products = (jsonDecode(fixedResponse ?? response.body)[
+                "productos_mas_comprados"] as List)
+            .map((productJson) => ProductModel.fromJson(productJson))
+            .toList();
       }
 
       return products;
