@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:card_swiper/card_swiper.dart';
-import 'package:go_router/go_router.dart';
-import 'package:market_check/config/utils/screen_size.dart';
+import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/stores/data/models/offer_model.dart';
 import 'package:market_check/features/stores/presentation/providers/stores_provider.dart';
-import 'package:market_check/features/stores/presentation/screens/offers/offer_details_screen.dart';
 import 'package:market_check/features/stores/presentation/widgets/offers/offer_swiper_content.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +30,7 @@ class OffersSwiper extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               context.read<StoresProvider>().currentOffer = offerList[index];
-              context.pushNamed(OfferDetailsScreen.name);
+              context.read<StoresProvider>().showOfferDetailsModal(context);
             },
             child: OfferSwiperContent(
               offerModel: offerList[index],

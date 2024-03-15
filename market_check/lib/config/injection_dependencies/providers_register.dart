@@ -55,10 +55,10 @@ void registerProviders() {
   );
   sl.registerLazySingleton(
     () => ProfileCardsProvider(
-      getShoppinHistoryUseCase: sl(),
-      getShoppingProductsUseCase: sl(),
-      getStoresVisitedUseCase: sl(),
-    ),
+        getShoppinHistoryUseCase: sl(),
+        getShoppingProductsUseCase: sl(),
+        getStoresVisitedUseCase: sl(),
+        getFavoriteProductsUseCase: sl()),
   );
   sl.registerLazySingleton(
     () => ScannerProvider(

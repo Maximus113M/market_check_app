@@ -67,7 +67,7 @@ class PurchasesCard extends StatelessWidget {
                     storeInfoText(
                       align: TextAlign.start,
                       text:
-                          '${AppFuntions.mothNameMap[purchase.date.month]!.substring(0, 3)}.${purchase.date.day} - ${purchase.date.year} ${purchase.hour}',
+                          '${AppFunctions.mothNameMap[purchase.date.month]!.substring(0, 3)}.${purchase.date.day} - ${purchase.date.year} ${purchase.hour}',
                     ),
                     storeInfoText(
                       align: TextAlign.start,

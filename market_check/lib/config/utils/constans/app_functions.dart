@@ -1,7 +1,8 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
-class AppFuntions {
-  AppFuntions._();
+class AppFunctions {
+  AppFunctions._();
 
   static final RegExp emailRegExp = RegExp(
     r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
@@ -27,4 +28,14 @@ class AppFuntions {
     11: 'Noviembre',
     12: 'Diciembre',
   };
+
+  static String getMonthFormated(DateTime date) {
+    var formatter = DateFormat("MMM", "es_CO");
+    return formatter.format(date).toUpperCase();
+  }
+
+  static String getHourFormated(DateTime date) {
+    var formatter = DateFormat('hh:mm a');
+    return formatter.format(date).toLowerCase();
+  }
 }

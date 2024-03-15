@@ -65,7 +65,7 @@ class ShoppingHistoryModalDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${AppFuntions.mothNameMap[currentPurchase.date.month]!.substring(0, 3)}-${currentPurchase.date.day}-${currentPurchase.date.year} ${currentPurchase.hour}',
+                        '${AppFunctions.mothNameMap[currentPurchase.date.month]!.substring(0, 3)}-${currentPurchase.date.day}-${currentPurchase.date.year} ${currentPurchase.hour}',
                         style: FontStyles.bodyBold2(AppColors.text),
                       ),
                       Text(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/server/server_urls.dart';
@@ -84,7 +83,7 @@ class StoresItemTile extends StatelessWidget {
                   SizedBox(
                     width: ScreenSize.width * 0.52,
                     child: Text(
-                      storeModel.description?? '',
+                      storeModel.description ?? '',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,

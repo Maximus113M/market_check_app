@@ -34,7 +34,7 @@ enum ExceptionType {
   products,
   purchases,
   categories,
-  shoppingHistory,
+  profileCards,
   pendingPurchases,
   scanner,
   shoppingLists

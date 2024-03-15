@@ -1,8 +1,8 @@
 class OfferModel {
   final int? id;
   final int state;
-  final String dateStart; //Datetime
-  final String dateEnd; //Datetime
+  final DateTime dateStart; //Datetime
+  final DateTime dateEnd; //Datetime
   final String name;
   final String description;
   final String imagePath;
@@ -22,8 +22,8 @@ class OfferModel {
   factory OfferModel.fromJson(json) => OfferModel(
         id: json["id"],
         state: json["estado"],
-        dateStart: json["fecha_inicio"],
-        dateEnd: json["fecha_fin"],
+        dateStart: DateTime.parse(json["fecha_inicio"]),
+        dateEnd: DateTime.parse(json["fecha_fin"]),
         name: json["nombre"],
         description: json["descripcion"],
         imagePath: json["imagen"],

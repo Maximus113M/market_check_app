@@ -1,6 +1,7 @@
 import 'package:market_check/config/errors/failures.dart';
 import 'package:market_check/config/errors/exceptions.dart';
 import 'package:market_check/features/stores/data/models/store_model.dart';
+import 'package:market_check/features/products/data/models/product_model.dart';
 import 'package:market_check/features/profile_cards/data/models/purchase_model.dart';
 import 'package:market_check/features/profile_cards/data/models/registered_purchase_item.dart';
 import 'package:market_check/features/profile_cards/data/datasources/profile_cards_data_source.dart';
@@ -23,7 +24,7 @@ class ProfileCardsRepositoryImpl extends ProfileCardsRepository {
     } on RemoteException catch (e) {
       return Left(RemoteFailure(
         message: e.message,
-        type: ExceptionType.shoppingHistory,
+        type: ExceptionType.profileCards,
       ));
     }
   }
@@ -37,7 +38,10 @@ class ProfileCardsRepositoryImpl extends ProfileCardsRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(message: e.message, type: ExceptionType.shoppingHistory),
+        RemoteFailure(
+          message: e.message,
+          type: ExceptionType.profileCards,
+        ),
       );
     }
   }
@@ -50,7 +54,27 @@ class ProfileCardsRepositoryImpl extends ProfileCardsRepository {
       );
     } on RemoteException catch (e) {
       return Left(
-        RemoteFailure(message: e.message, type: ExceptionType.categories),
+        RemoteFailure(
+          message: e.message,
+          type: ExceptionType.profileCards,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<RemoteFailure, List<ProductModel>>> getFavoriteProducts(
+      int userId) async {
+    try {
+      return Right(
+        await profileCardsDataSource.getFavoriteProducts(userId),
+      );
+    } on RemoteException catch (e) {
+      return Left(
+        RemoteFailure(
+          message: e.message,
+          type: ExceptionType.profileCards,
+        ),
       );
     }
   }

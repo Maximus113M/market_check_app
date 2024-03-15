@@ -36,7 +36,7 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           SignUpForm(
-            signUpProvider: Provider.of<SignInProvider>(context),
+            signInProvider: Provider.of<SignInProvider>(context),
           )
         ]),
       ),
