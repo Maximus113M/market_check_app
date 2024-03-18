@@ -8,7 +8,7 @@ import 'package:market_check/features/stores/data/models/store_model.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_offer_products_use_case.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_offers_use_case.dart';
 import 'package:market_check/features/stores/domain/use_cases/get_stores_use_case.dart';
-import 'package:market_check/features/stores/presentation/screens/offers/offer_details_screen.dart';
+import 'package:market_check/features/stores/presentation/screens/offers/offer_details_modal.dart';
 
 import 'package:provider/provider.dart';
 
@@ -101,7 +101,7 @@ class StoresProvider with ChangeNotifier {
   }
 
   Future<void> getOfferProducts(int offerId) async {
-    if(loadingOffers) return;
+    if (loadingOffers) return;
     loadingOffers = true;
 
     final result = await getOfferProductsUseCase(offerId);

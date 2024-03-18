@@ -243,13 +243,13 @@ class SignInProvider with ChangeNotifier {
     final List<Map<dynamic, dynamic>> department = colombiaData
         .where((element) => element["departamento"] == key)
         .toList();
-    print(department);
     currentCities = department.first["ciudades"];
     print(currentCities);
   }
 
   void updateStateValue(String newValue) {
     state = newValue;
+    city = '';
     notifyListeners();
   }
 

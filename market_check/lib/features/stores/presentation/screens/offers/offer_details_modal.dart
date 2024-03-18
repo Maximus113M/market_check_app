@@ -56,11 +56,15 @@ class OfferDetailsModalContent extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: ScreenSize.absoluteHeight * 0.35),
+            padding: EdgeInsets.symmetric(
+              vertical: ScreenSize.absoluteHeight * 0.01,
+            ),
             height: ScreenSize.absoluteHeight * 0.25,
             width: double.infinity,
             decoration: BoxDecoration(
-              border: const Border(
-                top: BorderSide(width: 2, color: AppColors.disabled),
+              border: Border.all(
+                width: 2,
+                color: AppColors.disabled,
               ),
               borderRadius: BorderRadius.all(
                 Radius.circular(ScreenSize.width * 0.07),
@@ -68,47 +72,56 @@ class OfferDetailsModalContent extends StatelessWidget {
               boxShadow: AppShadows.profileShadow,
               color: const Color.fromARGB(255, 241, 239, 239),
             ),
-            child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.08),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: ScreenSize.absoluteHeight * 0.01,
-                    ),
-                    child: Text(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenSize.width * 0.08,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
                       offer.name,
                       style: FontStyles.bodyBold0(AppColors.text),
                     ),
-                  ),
-                  SizedBox(
-                    width: ScreenSize.width * 0.84,
-                    child: Text(
-                      offer.description,
-                      style: FontStyles.body4(AppColors.text),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenSize.absoluteHeight * 0.01,
-                    ),
-                    child: Text(
-                      'Productos',
-                      style: FontStyles.bodyBold0(AppColors.text),
-                    ),
-                  ),
-                  Wrap(
-                    children: List.generate(
-                      offerProducts.length,
-                      (index) => Text(
-                        offerProducts[index].name,
+                    SizedBox(
+                      width: ScreenSize.width * 0.84,
+                      child: Text(
+                        offer.description,
+                        style: FontStyles.body4(AppColors.text),
                       ),
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenSize.absoluteHeight * 0.01,
+                      ),
+                      child: Text(
+                        'Productos',
+                        style: FontStyles.bodyBold0(AppColors.text),
+                      ),
+                    ),
+                    Wrap(
+                      children: List.generate(
+                        offerProducts.length,
+                        (index) => Chip(
+                          padding: const EdgeInsets.all(6),
+                          side: const BorderSide(color: AppColors.appSecondary),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color: MaterialStatePropertyAll(
+                            AppColors.appSecondary.withOpacity(0.7),
+                          ),
+                          label: Text(
+                            offerProducts[index].name,
+                            style: FontStyles.bodyBold3(AppColors.text),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
