@@ -41,7 +41,7 @@ class ProductsProvider extends ChangeNotifier {
       ),
       (r) {
         products = [...r];
-        filteredProductsList = r;
+        filteredProductsList = [...r];
       },
     );
     isLoading = false;
@@ -60,8 +60,8 @@ class ProductsProvider extends ChangeNotifier {
       (l) =>
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
-        productsByCategorie = r;
-        filteredProductsList = r;
+        productsByCategorie = [...r];
+        filteredProductsList = [...r];
       },
     );
 
@@ -71,6 +71,7 @@ class ProductsProvider extends ChangeNotifier {
 
   void setCurrentSearchType(SearchType type) {
     currentSearchType = type;
+    notifyListeners();
   }
 
   //TODO REVISAR
@@ -84,9 +85,9 @@ class ProductsProvider extends ChangeNotifier {
       case SearchType.categories:
         if (name.isEmpty) {
           filteredProductsList.clear();
-          filteredProductsList.addAll(productsByCategorie);
+          filteredProductsList = [...productsByCategorie];
         }
-        currentList.addAll(productsByCategorie);
+        currentList = [...productsByCategorie];
         notifyListeners();
         break;
       case SearchType.products:

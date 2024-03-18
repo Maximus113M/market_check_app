@@ -51,7 +51,7 @@ class CategoriesScreen extends StatelessWidget {
                           child: CategoriesListItem(
                             categorie: categoriesList[index],
                             storeId:
-                                context.read<StoresProvider>().currentStore!.id,
+                                context.watch<StoresProvider>().currentStore!.id,
                           ),
                         );
                       },

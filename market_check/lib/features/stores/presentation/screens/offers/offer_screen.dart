@@ -57,6 +57,8 @@ class OfferScreen extends StatelessWidget {
               onTap: (value) {
                 if (value == 0) {
                   productsProvider.setCurrentSearchType(SearchType.categories);
+                } else {
+                  productsProvider.setCurrentSearchType(SearchType.products);
                 }
               },
               tabs: const [

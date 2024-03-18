@@ -21,13 +21,15 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
+  List<ProductModel> productsList= [];
+  
+  
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<ProductsProvider>().restartProductList();
-      context
-          .read<ProductsProvider>()
-          .setCurrentSearchType(SearchType.products);
+      context.read<ProductsProvider>().searchProducts('');
+      productsList= [...context.read<ProductsProvider>().filteredProductsList];
+
     });
     super.initState();
   }
@@ -47,7 +49,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               : Expanded(
                   child: SizedBox(
                     width: ScreenSize.width * 0.9,
-                    child: widget.productsList.isEmpty
+                    child: productsList.isEmpty
                         ? const NotFoundPlaceHolder(
                             text: 'No se encontraron\nproductos...',
                             bottomSpacing: 0.2,
@@ -63,10 +65,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               mainAxisSpacing: 8,
                               childAspectRatio: 7 / 3,
                             ),
-                            itemCount: widget.productsList.length,
+                            itemCount: productsList.length,
                             itemBuilder: (context, index) {
                               return ProductsListItem(
-                                productModel: widget.productsList[index],
+                                productModel: productsList[index],
                               );
                             },
                           ),
