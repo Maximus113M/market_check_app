@@ -77,8 +77,9 @@ class CustomTextFormField extends StatelessWidget {
                     horizontal: ScreenSize.absoluteHeight * 0.001),
                 child: Text(
                   label!,
-                  style: const TextStyle(
-                      color: AppColors.appPrimary, fontSize: 16),
+                  style: TextStyle(
+                      color: AppColors.appPrimary.withOpacity(0.6),
+                      fontSize: 16),
                 ),
               )
             : null,

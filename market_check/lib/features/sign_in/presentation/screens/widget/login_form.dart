@@ -20,9 +20,12 @@ class LogInForm extends StatelessWidget {
         height: ScreenSize.absoluteHeight * 0.43,
         margin: EdgeInsets.only(top: ScreenSize.height * 0.1),
         decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
         child: Form(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -76,7 +79,8 @@ class LogInForm extends StatelessWidget {
                       bottom: ScreenSize.absoluteHeight * 0.015),
                   child: GestureDetector(
                     onTap: () {
-                      launchUrlString("https://marketcheck.api.adsocidm.com/password/reset");
+                      launchUrlString(
+                          "https://marketcheck.api.adsocidm.com/password/reset");
                     },
                     child: const Text(
                       '¿Olvidaste la contraseña?',

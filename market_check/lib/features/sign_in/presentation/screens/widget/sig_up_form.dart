@@ -24,7 +24,7 @@ class SignUpForm extends StatelessWidget {
         child: Form(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenSize.width * 0.13)
-                .copyWith(top: ScreenSize.height * 0.055),
+                .copyWith(top: ScreenSize.height * 0.045),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -79,7 +79,7 @@ class SignUpForm extends StatelessWidget {
                     signInProvider.confirmPassword = confirmPassword;
                   },
                 ),
-                SizedBox(height: ScreenSize.absoluteHeight * 0.035),
+                SizedBox(height: ScreenSize.absoluteHeight * 0.045),
                 CustomButton(
                   radius: 0.5,
                   color: AppColors.appPrimary,
@@ -127,7 +127,7 @@ class SignUpForm extends StatelessWidget {
           ),
           underline: null,
           hint: const Text("Departamento"),
-          onChanged: (String? newValue) {
+          onChanged: (newValue) {
             signInProvider.updateStateValue(newValue!);
             signInProvider.getCities(newValue);
           },
