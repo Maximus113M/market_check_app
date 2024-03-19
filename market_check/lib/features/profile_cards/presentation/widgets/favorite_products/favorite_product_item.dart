@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/features/profile_cards/data/models/favorite_product_model.dart';
@@ -13,8 +12,8 @@ class FavoriteProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: ScreenSize.absoluteHeight * 0.01,
-          horizontal: ScreenSize.width * 0.02),
+        horizontal: ScreenSize.width * 0.02,
+      ),
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.disabled,
@@ -33,24 +32,38 @@ class FavoriteProductItem extends StatelessWidget {
             size: ScreenSize.absoluteHeight * 0.05,
           ),
           SizedBox(
-            width: ScreenSize.width * 0.32,
+            width: ScreenSize.width * 0.01,
+          ),
+          SizedBox(
+            width: ScreenSize.width * 0.31,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  decoration: BoxDecoration(border: Border.all()),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: ScreenSize.absoluteHeight * 0.01,
+                    maxHeight: ScreenSize.absoluteHeight * 0.05,
+                  ),
                   child: Text(
                     purchase.storeName,
+                    
                     maxLines: 2,
                     style: FontStyles.bodyBold1(AppColors.appSecondary),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text(
-                  purchase.productName,
-                  style: FontStyles.body4(AppColors.text),
-                  maxLines: 2,
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: ScreenSize.absoluteHeight * 0.01,
+                    maxHeight: ScreenSize.absoluteHeight * 0.044,
+                  ),
+                  child: Text(
+                    purchase.productName,
+                    style: FontStyles.body4(AppColors.text),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Text(
                   'Total: ${purchase.total}',

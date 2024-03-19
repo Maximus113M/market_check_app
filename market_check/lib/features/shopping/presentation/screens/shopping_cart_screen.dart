@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 
 import 'package:market_check/config/utils/utils.dart';
 import 'package:market_check/config/services/auth/auth_service.dart';
+import 'package:market_check/config/shared/widgets/appbars/custom_appbar.dart';
 import 'package:market_check/config/shared/widgets/buttons/custom_filled_button.dart';
 import 'package:market_check/features/shopping/presentation/widgets/custom_shopping_item.dart';
 import 'package:market_check/features/shopping/presentation/providers/shopping_provider.dart';
@@ -17,38 +17,26 @@ class ShoppingCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(
-        context: context,
-        isCartVisible: false,
-        title: Text('Carrito de compras',
-            style: FontStyles.subtitle0(AppColors.appSecondary)),
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.appSecondary,
+    return AbsorbPointer(
+      absorbing: context.watch<ShoppingProvider>().isLoading,
+      child: Scaffold(
+        appBar: customAppBar(
+          context: context,
+          isCartVisible: false,
+          title: Text('Carrito de compras',
+              style: FontStyles.subtitle0(AppColors.appSecondary)),
+          leading: IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.appSecondary,
+            ),
           ),
         ),
-      ),
-      /*appBar:
-          AppBar(
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.appSecondary,
+        body: SafeArea(
+          child: ShoppingCartBodyScreen(
+            shoppingCartProvider: Provider.of<ShoppingProvider>(context),
           ),
-        ),
-        title: Text(
-          'Carrito de Compras',
-          style: FontStyles.heading11(AppColors.appPrimary),
-        ),
-        toolbarHeight: 40,
-      ),*/
-      body: SafeArea(
-        child: ShoppingCartBodyScreen(
-          shoppingCartProvider: Provider.of<ShoppingProvider>(context),
         ),
       ),
     );
@@ -129,7 +117,6 @@ class ShoppingCartBodyScreen extends StatelessWidget {
                   radius: 0.03,
                   action: () => {
                     shoppingCartProvider.endShopping(context),
-                    print('Nel pa !!!')
                   },
                 ),
               ],

@@ -17,6 +17,7 @@ class ShoppingProvider with ChangeNotifier {
   int counter = 0;
   String code = '';
   bool isPurchasePending = false;
+  bool isLoading = false;
 
   ShoppingProvider({required this.createNewPurchaseUseCase});
 
@@ -57,6 +58,10 @@ class ShoppingProvider with ChangeNotifier {
       showRemainerDialog(context);
       return;
     }
+    if (isLoading) return;
+    isLoading = true;
+    notifyListeners();
+
     final result = await createNewPurchaseUseCase(shoppingList);
     result.fold((l) {
       debugPrint(l.message);
@@ -64,9 +69,11 @@ class ShoppingProvider with ChangeNotifier {
       if (r) {
         shoppingList.clear();
         showEndShoppingDialog(context);
-        notifyListeners();
       }
     });
+    
+    isLoading = false;
+    notifyListeners();
   }
 
   void showRemainerDialog(BuildContext context) {

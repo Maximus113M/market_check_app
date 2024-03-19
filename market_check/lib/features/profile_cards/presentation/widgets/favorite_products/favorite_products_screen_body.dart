@@ -25,8 +25,8 @@ class FavoriteProductsScreenBody extends StatelessWidget {
               childAspectRatio: 1.5,
             ),
             padding: EdgeInsets.symmetric(
-                horizontal: ScreenSize.width * 0.015,
-                vertical: ScreenSize.absoluteHeight * 0.015),
+                horizontal: ScreenSize.width * 0.02,
+                vertical: ScreenSize.absoluteHeight * 0.012),
             itemCount: profileCardsProvider.favoriteProducts.length,
             itemBuilder: (context, index) => FavoriteProductItem(
               purchase: profileCardsProvider.favoriteProducts[index],
