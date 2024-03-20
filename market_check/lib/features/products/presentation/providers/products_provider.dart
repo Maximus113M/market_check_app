@@ -14,8 +14,9 @@ class ProductsProvider extends ChangeNotifier {
   final GetStoreProductsUseCase getStoreProductsUseCase;
   final GetProductsByCategorie getProductsByCategorie;
   List<ProductModel> products = [];
+  List<ProductModel> filteredProducts = [];
   List<ProductModel> productsByCategorie = [];
-  List<ProductModel> filteredProductsList = [];
+  List<ProductModel> filteredCategoriesProducts = [];
   StreamSubscription? searchTimer;
   TextEditingController searchTextController = TextEditingController();
   bool isLoading = false;
@@ -31,7 +32,7 @@ class ProductsProvider extends ChangeNotifier {
     isLoading = true;
     final storeId = context.read<StoresProvider>().currentStore!.id;
 
-    filteredProductsList.clear();
+    filteredProducts.clear();
     final result = await getStoreProductsUseCase(storeId);
 
     result.fold(
@@ -41,7 +42,7 @@ class ProductsProvider extends ChangeNotifier {
       ),
       (r) {
         products = [...r];
-        filteredProductsList = [...r];
+        filteredProducts = [...r];
       },
     );
     isLoading = false;
@@ -53,7 +54,9 @@ class ProductsProvider extends ChangeNotifier {
     if (isLoading) return;
     isLoading = true;
 
-    filteredProductsList.clear();
+    filteredCategoriesProducts.clear();
+    notifyListeners();
+
     final result = await getProductsByCategorie(params);
 
     result.fold(
@@ -61,7 +64,7 @@ class ProductsProvider extends ChangeNotifier {
           InAppNotification.serverFailure(context: context, message: l.message),
       (r) {
         productsByCategorie = [...r];
-        filteredProductsList = [...r];
+        filteredCategoriesProducts = [...r];
       },
     );
 
@@ -80,38 +83,60 @@ class ProductsProvider extends ChangeNotifier {
   }*/
 
   void searchProducts(String name) async {
-    List<ProductModel> currentList = [];
+    searchTextController.text = name.toLowerCase();
+
     switch (currentSearchType) {
       case SearchType.categories:
         if (name.isEmpty) {
-          filteredProductsList.clear();
-          filteredProductsList = [...productsByCategorie];
+          filteredCategoriesProducts.clear();
+          filteredCategoriesProducts = [...productsByCategorie];
         }
-        currentList = [...productsByCategorie];
+
+        filterProducts(productsByCategorie);
         notifyListeners();
+
         break;
       case SearchType.products:
         if (name.isEmpty) {
-          filteredProductsList.clear();
-          filteredProductsList = [...products];
+          filteredProducts.clear();
+          filteredProducts = [...products];
         }
-        currentList = [...products];
-        notifyListeners();
+        filterProducts(products);
         break;
       default:
         return;
     }
+  }
 
-    searchTextController.text = name.toLowerCase();
+  void filterProducts(List<ProductModel> originalList) {
+    List<ProductModel> currentList = [...originalList];
     cancelSearchTimer();
+
     searchTimer = Stream<int>.periodic(
       const Duration(milliseconds: 500),
       (countValue) => 1,
     ).take(1).listen((event) {
-      filteredProductsList = currentList
-          .where((product) =>
-              product.name.toLowerCase().contains(searchTextController.text))
-          .toList();
+      switch (currentSearchType) {
+        case SearchType.categories:
+          filteredCategoriesProducts = currentList
+              .where((product) => product.name
+                  .toLowerCase()
+                  .contains(searchTextController.text))
+              .toList();
+
+          break;
+        case SearchType.products:
+          filteredProducts = currentList
+              .where((product) => product.name
+                  .toLowerCase()
+                  .contains(searchTextController.text))
+              .toList();
+
+          break;
+        default:
+          return;
+      }
+
       notifyListeners();
     });
   }
@@ -128,26 +153,34 @@ class ProductsProvider extends ChangeNotifier {
     cancelSearchTimer();
     switch (currentSearchType) {
       case SearchType.categories:
-        filteredProductsList = [...productsByCategorie];
+        filteredCategoriesProducts = [...productsByCategorie];
 
         notifyListeners();
         break;
       case SearchType.products:
-        filteredProductsList = [...products];
+        filteredProducts = [...products];
 
         notifyListeners();
         break;
       default:
-        filteredProductsList = [];
+        filteredProducts = [];
         return;
     }
   }
 
-  void restartProductList() {
-    filteredProductsList.clear();
-    filteredProductsList = [...products];
+  void clearSearchText() {
+    searchTextController.clear();
+    if (currentSearchType == SearchType.products) {
+      filteredProducts = [...products];
+    }
     notifyListeners();
   }
+
+  /*void restartProductList() {
+    filteredProducts.clear();
+    filteredProducts = [...products];
+    notifyListeners();
+  }*/
 }
 
 enum SearchType { categories, products }

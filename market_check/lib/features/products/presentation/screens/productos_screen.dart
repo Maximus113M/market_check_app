@@ -13,25 +13,22 @@ import 'package:provider/provider.dart';
 class ProductsScreen extends StatefulWidget {
   static const String name = 'products-view';
   final List<ProductModel> productsList;
+  final SearchType searchType;
 
-  const ProductsScreen({super.key, required this.productsList});
+  const ProductsScreen({super.key, required this.productsList, required this.searchType});
 
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  List<ProductModel> productsList= [];
-  
-  
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<ProductsProvider>().searchProducts('');
-      productsList= [...context.read<ProductsProvider>().filteredProductsList];
-
-    });
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<ProductsProvider>().currentSearchType= widget.searchType;
+      context.read<ProductsProvider>().clearSearchText();
+    });
   }
 
   @override
@@ -49,7 +46,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               : Expanded(
                   child: SizedBox(
                     width: ScreenSize.width * 0.9,
-                    child: productsList.isEmpty
+                    child: widget.productsList.isEmpty
                         ? const NotFoundPlaceHolder(
                             text: 'No se encontraron\nproductos...',
                             bottomSpacing: 0.2,
@@ -65,10 +62,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               mainAxisSpacing: 8,
                               childAspectRatio: 7 / 3,
                             ),
-                            itemCount: productsList.length,
+                            itemCount: widget.productsList.length,
                             itemBuilder: (context, index) {
                               return ProductsListItem(
-                                productModel: productsList[index],
+                                productModel: widget.productsList[index],
                               );
                             },
                           ),

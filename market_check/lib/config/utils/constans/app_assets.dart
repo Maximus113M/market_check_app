@@ -6,7 +6,6 @@ class AppAssets {
   static const String offers = 'assets/Images/stores/offers.jpg';
 
 //--------------------------avatars
-  static const String avatar = 'assets/Images/avatars/fubiki.jpg';
   static const String avatar1 = 'assets/Images/avatars/avatar1.jpeg';
   static const String avatar2 = 'assets/Images/avatars/avatar2.jpeg';
   static const String avatar3 = 'assets/Images/avatars/avatar3.jpeg';
@@ -15,9 +14,9 @@ class AppAssets {
   static const String avatar6 = 'assets/Images/avatars/avatar6.jpeg';
   static const String avatar7 = 'assets/Images/avatars/avatar7.jpeg';
   static const String avatar8 = 'assets/Images/avatars/avatar8.jpeg';
+  static const String avatar9 = 'assets/Images/avatars/avatar9.jpeg';
 
   static const List<String> avatarList = [
-    avatar,
     avatar1,
     avatar2,
     avatar3,
@@ -26,6 +25,7 @@ class AppAssets {
     avatar6,
     avatar7,
     avatar8,
+    avatar9,
   ];
 //--------------------------Profile
   static const String shopping = 'assets/Images/profile/shoppings.webp';

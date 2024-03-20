@@ -33,7 +33,8 @@ class ProductsByCategoryScreen extends StatelessWidget {
       ),
       body: ProductsScreen(
         productsList:
-            context.watch<ProductsProvider>().filteredProductsList,
+            context.watch<ProductsProvider>().filteredCategoriesProducts,
+        searchType: SearchType.categories,
       ),
     );
   }

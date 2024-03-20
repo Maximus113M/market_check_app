@@ -75,7 +75,8 @@ class OfferScreen extends StatelessWidget {
                   ),
                   ProductsScreen(
                     productsList:
-                        context.watch<ProductsProvider>().filteredProductsList,
+                        context.watch<ProductsProvider>().filteredProducts,
+                    searchType: SearchType.products,
                   ),
                 ],
               ),
